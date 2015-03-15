@@ -13,4 +13,10 @@ hs_err_pid*
 
 # Adam: temporary files e.g. gedit # 
 *~
+
+# NetBeans target dir # 
 /opw/target/
+
+# Adam: backup files e.g. MySQL Workbench # 
+*.bak
+

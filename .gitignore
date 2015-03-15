@@ -13,3 +13,6 @@ hs_err_pid*
 
 # Adam: temporary files e.g. gedit # 
 *~
+
+# Adam: backup files e.g. MySQL Workbench # 
+*.bak

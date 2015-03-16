@@ -18,11 +18,11 @@ Plan implementacji
   * kandydat
   * komisja okręgowa
   * komisja obwodowa
-* Generowanie hasła 
+
 
 ## Wersja 0.2
 * Wysyłanie E-Maili z loginem i hasłem
-* Konfiguracja Jenkins
+* Konfiguracja Jenkins i działający CI
 
 ## Wersja 0.3
 * Definicja interfejsu REST
@@ -31,6 +31,8 @@ Plan implementacji
 * Implementacja interfejsu REST
 * Dashboard
 
+## Wersja 0.6
+* Frontend bezpośrednio w HTML / JavaScript / REST
 
 ## Wersja 0.8
 * Aktualizacja Dashboard

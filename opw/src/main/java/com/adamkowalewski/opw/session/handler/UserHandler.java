@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.session.handler;
 
 import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.session.controller.MsgController;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;

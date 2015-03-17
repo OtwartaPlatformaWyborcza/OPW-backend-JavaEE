@@ -23,26 +23,17 @@
  */
 package com.adamkowalewski.opw.session;
 
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
 /**
- * Contain configuration settings which may not be changed.
- *
+ * TODO JAAS 
+ * 
  * @author Adam Kowalewski
- * @version 2015.03.15
  */
-public class OpwConfig {
-
-    /**
-     * Persistance unit name.
-     */
-    public static final String PU_OPW = "opwPU";
-
-    /**
-     * User ID for root access.
-     */
-    public static final int ROOT_ID = 1;
+@Named
+@SessionScoped
+public class Identity implements Serializable{
     
-    /**
-     * Application level salt 
-     */
-    public static final String APP_SALT = "Søägüąź.29";
 }

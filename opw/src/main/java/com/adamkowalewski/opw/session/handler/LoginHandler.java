@@ -21,28 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session;
+package com.adamkowalewski.opw.session.handler;
+
+import java.io.Serializable;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
- * Contain configuration settings which may not be changed.
+ * Handler for login and logout operations.
  *
  * @author Adam Kowalewski
- * @version 2015.03.15
  */
-public class OpwConfig {
+@Named
+@RequestScoped
+public class LoginHandler implements Serializable {
 
-    /**
-     * Persistance unit name.
-     */
-    public static final String PU_OPW = "opwPU";
+    private String login;
+    private String password;
 
-    /**
-     * User ID for root access.
-     */
-    public static final int ROOT_ID = 1;
-    
-    /**
-     * Application level salt 
-     */
-    public static final String APP_SALT = "Søägüąź.29";
+    public LoginHandler() {
+    }
+
+    public String authenticate() {
+        boolean result;
+
+        return "index";
+    }
+
 }

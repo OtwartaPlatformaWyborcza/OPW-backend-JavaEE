@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./WEB-INF/opwTemplate.xhtml">
+
+        <ui:define name="content">
+            <h1>#{messages.kandydatTitle}</h1>
+            #{kandydatHandler.prepareList()}
+
+            <p:dataTable id="tblKandydat" emptyMessage="#{messages.kandydatListEmpty}" 
+                         value="#{kandydatHandler.kandydatList}" var="k" >
+
+                <p:column headerText="#{messages.nr}" sortBy="pkwId">
+                    <h:outputText value="#{k.pkwId}"/>
+                </p:column>
+
+                <p:column headerText="#{messages.name}" sortBy="name">
+                    <h:outputText value="#{k.name}"/>
+                </p:column>
+
+                <p:column headerText="#{messages.action}">
+                    <h:commandLink id="btnView" value="#{messages.display}"
+                                   action="#{kandydatHandler.prepareView(k)}"/>
+                </p:column>
+
+            </p:dataTable>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

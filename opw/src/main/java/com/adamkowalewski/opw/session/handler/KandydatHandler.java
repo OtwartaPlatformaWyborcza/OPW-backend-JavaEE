@@ -24,11 +24,13 @@
 package com.adamkowalewski.opw.session.handler;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.session.controller.KandydatController;
 import com.adamkowalewski.opw.session.controller.MsgController;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -37,7 +39,7 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class KandydatHandler implements Serializable {
+public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements Serializable {
 
     private OpwKandydat kandydat;
     private List<OpwKandydat> kandydatList;
@@ -47,38 +49,38 @@ public class KandydatHandler implements Serializable {
 
     private boolean viewMode;
 
+    @Inject
+    KandydatController kandydatController;
+
     public KandydatHandler() {
     }
 
+    @Override
     public String create() {
-        MsgController.addErrorMessage("WiP");
+        kandydatController.create(kandydat);
+
         return "index";
     }
 
     public String prepareView(OpwKandydat k) {
         kandydat = k;
         viewMode = true;
-        
-        
+
         return VIEW_ID_EDIT;
     }
 
-    /**
-     * Creates all required instances.
-     *
-     * @author Adam Kowalewski
-     * @version 2015.03.18
-     */
+    @Override
     public void prepareCreate() {
         kandydat = new OpwKandydat();
     }
-    
-    public void prepareList(){
+
+    @Override
+    public void prepareList() {
         kandydatList = new ArrayList<>();
         kandydatList.add(new OpwKandydat(1));
         kandydatList.add(new OpwKandydat(2));
         kandydatList.add(new OpwKandydat(3));
-        
+
     }
 
     public OpwKandydat getKandydat() {
@@ -103,6 +105,17 @@ public class KandydatHandler implements Serializable {
 
     public void setKandydatList(List<OpwKandydat> kandydatList) {
         this.kandydatList = kandydatList;
+    }
+
+    @Override
+    public String edit() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    @Override
+    public void prepareView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

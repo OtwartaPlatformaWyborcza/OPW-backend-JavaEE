@@ -23,11 +23,9 @@
  */
 package com.adamkowalewski.opw.session.controller;
 
-import com.adamkowalewski.opw.entity.OpwUser;
-import com.adamkowalewski.opw.session.bean.UserBean;
+import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.session.bean.KandydatBean;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -38,35 +36,13 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class UserController implements Serializable {
+public class KandydatController implements Serializable {
 
     @EJB
-    private UserBean userBean;
-
-    public UserController() {
-    }
-
-    public OpwUser find(int id) {
-        return userBean.findUser(id);
-    }
-
-    public void create(OpwUser user) {
-        user.setPassword(generatePassword());
-        userBean.create(user);
-    }
-
-    /**
-     * Generates a random password with length 10.
-     *
-     * @return String random password.
-     * @author Adam Kowalewski
-     * @version 2015.03.15
-     */
-    private String generatePassword() {
-        SecureRandom random = new SecureRandom();
-        String result = new BigInteger(130, random).toString(32);;
-        result = result.substring(0, Math.min(result.length(), 10));
-        return result;
+    private KandydatBean kandydatBean;
+    
+    public void create(OpwKandydat kandydat){
+        kandydatBean.create(kandydat);
     }
 
 }

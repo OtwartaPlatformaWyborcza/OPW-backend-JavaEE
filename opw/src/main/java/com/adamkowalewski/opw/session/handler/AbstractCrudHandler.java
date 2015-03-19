@@ -21,24 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.adamkowalewski.opw.session.handler;
 
 /**
  *
  * @author Adam Kowalewski
+ * @param <T>
  */
-public abstract class AbstractCrudHandler<T> implements CrudHandler{
+public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
-    @Override
-    public void prepareView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void prepareList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private boolean viewMode = true;
+    private Class<T> instance;
+    
+    private String view_id;
+    private String view_id_edit;
     
     
+    /**
+     * TODO
+     * 
+     * @param r instance of an entity to view. 
+     * @return TODO
+     * @author Adam Kowalewski
+     * @version 2015.03.19
+     */
+    public String prepareView(Class<T> r){
+        instance = r;
+        viewMode = true;
+        return view_id_edit;
+    }
+    
+    @Override
+    public String cancel(){
+        viewMode = true;
+        return view_id;
+    }
+
+    public boolean isViewMode() {
+        return viewMode;
+    }
+
+    public void setViewMode(boolean viewMode) {
+        this.viewMode = viewMode;
+    }
+
+    public Class<T> getInstance() {
+        return instance;
+    }
+
+    public void setInstance(Class<T> instance) {
+        this.instance = instance;
+    }
+
 }

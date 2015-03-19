@@ -24,21 +24,42 @@
 package com.adamkowalewski.opw.session.handler;
 
 /**
+ * Represent common CRUD logic required for work with an entity.
  *
  * @author Adam Kowalewski
+ * @version 2015.03.19
  */
 public interface CrudHandler {
 
-    public void prepareView();    
-    
+    /**
+     * Retrieves current entity for viewing. 
+     */
+    public void prepareView();
+
+    /**
+     * Retrieves list of entities from database. 
+     */
     public void prepareList();
 
+    /**
+     * Creates a new empty instance to work with. 
+     */
     public void prepareCreate();
-
+    
+    /**
+     * Persists a new entity in the database.  
+     * 
+     * @return 
+     */
     public String create();
-    
+
     public String edit();
-    
+
+    /**
+     * Handles 'Cancel' button within editing form.
+     *
+     * @return name of list view.
+     */
     public String cancel();
-        
+
 }

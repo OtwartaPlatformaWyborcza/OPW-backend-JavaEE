@@ -1,6 +1,16 @@
 # Otwarta Platforma Wyborcza
 Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projekt OPW nie jest kompletna implementacja wymagań sprecyzowanych przez PKW w ramach projektu PW2 (Platforma Wyborcza 2).   
 
+# Quickstart
+
+
+##Wymagane oprogramowania
+* JDK7 (migracja na JDK8 ASAP)
+* IDE z obsługą Maven 3 ()
+* Kontener JEE (preferuje i polecam GlassFish 4, profil nie ma znaczenia, deploy działa w Web jak i Full)
+* MySQL 5 na localhost (w pliku .mwb jest ustawiona min. kompatybilność na 5.1) 
+* MySQL Workbench (baza danych jest definiowana jako diagram ERM,  synchronizacja poprzez opcje Forward Engineer CTRL+G)
+
 # Proces
 **Przygotowanie do wyborów**  
 1) Administrator definiuje / importuje komisje okręgowe i należące do nich komisje obwodowe.  

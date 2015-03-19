@@ -6,10 +6,15 @@ Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego po
 
 ##Wymagane oprogramowania
 * JDK7 (migracja na JDK8 ASAP)
-* IDE z obsługą Maven 3 ()
-* Kontener JEE (preferuje i polecam GlassFish 4, profil nie ma znaczenia, deploy działa w Web jak i Full)
+* IDE z obsługą Maven 3
+* Kontener JEE (preferuje i polecam GlassFish 4, profil nie ma znaczenia, aplikacja działa w Web jak i Full)
+  * aplikacja wymaga JNDI resource dla bazy danych, GlassFish pozwala na import definicji z pliku XML setup/glassfish-resources.xml 
 * MySQL 5 na localhost (w pliku .mwb jest ustawiona min. kompatybilność na 5.1) 
-* MySQL Workbench (baza danych jest definiowana jako diagram ERM,  synchronizacja poprzez opcje Forward Engineer CTRL+G)
+  * url, port, login i hasło są w pliku persistance.xml
+* MySQL Workbench
+  * baza danych jest definiowana jako diagram ERM
+  * synchronizacja z serwerem poprzez opcje Forward Engineer (CTRL+G)
+
 
 # Proces
 **Przygotowanie do wyborów**  

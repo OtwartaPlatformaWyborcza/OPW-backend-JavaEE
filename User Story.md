@@ -27,3 +27,6 @@ Jako administrator w roli gościa chcę zalogować się do systemu i uzyskać do
     * wpisuje wyniki 
     * walidacja dla bledow twardych 
     * opcja uploadu zdjecia 
+
+* gosc 
+  * dashboard 

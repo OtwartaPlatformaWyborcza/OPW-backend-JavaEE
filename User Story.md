@@ -18,3 +18,13 @@ Jako administrator w roli gościa chcę zalogować się do systemu i uzyskać do
   * na kandydatow 
 * admin robi wirtualny podzial panstwa 
 
+* user 
+  * aktywuje konto 
+  * logowanie sie 
+  * upload wynikow przez sms
+  * upload wynikow z komisji w przegladarce 
+    * wybiera komisje 
+    * dane komisji pobieraja sie autom i sa wyswietlane (pkwId, adres ipt.)
+    * wpisuje wyniki 
+    * walidacja dla bledow twardych 
+    * opcja uploadu zdjecia 

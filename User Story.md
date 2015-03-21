@@ -14,9 +14,8 @@ Jako administrator w roli gościa chcę zalogować się do systemu i uzyskać do
 
 * admin CRUD 
   * na users 
-  * na komisje 
+  * na komisje (admin robi wirtualny podzial panstwa )
   * na kandydatow 
-* admin robi wirtualny podzial panstwa 
 
 * user 
   * aktywuje konto 

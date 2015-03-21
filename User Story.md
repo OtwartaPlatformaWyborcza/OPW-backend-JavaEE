@@ -9,3 +9,12 @@ Jako administrator w roli gościa chcę zalogować się do systemu i uzyskać do
 2. Logowanie następuje tylko po podaniu poprawnych danych
 
 **Pytania i odpowiedzi**  
+
+
+
+* admin CRUD 
+  * na users 
+  * na komisje 
+  * na kandydatow 
+* admin robi wirtualny podzial panstwa 
+

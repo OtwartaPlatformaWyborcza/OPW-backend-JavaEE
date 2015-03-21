@@ -9,3 +9,4 @@ Jako administrator w roli gościa chcę zalogować się do systemu i uzyskać do
 2. Logowanie następuje tylko po podaniu poprawnych danych
 
 **Pytania i odpowiedzi**  
+todo

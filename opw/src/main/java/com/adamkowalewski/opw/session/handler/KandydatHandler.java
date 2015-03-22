@@ -75,12 +75,8 @@ public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements
     }
 
     @Override
-    public void prepareList() {
-        kandydatList = new ArrayList<>();
-        kandydatList.add(new OpwKandydat(1));
-        kandydatList.add(new OpwKandydat(2));
-        kandydatList.add(new OpwKandydat(3));
-
+    public void prepareList() {        
+        kandydatList = kandydatController.findAll();
     }
 
     public OpwKandydat getKandydat() {

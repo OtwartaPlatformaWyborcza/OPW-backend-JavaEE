@@ -9,24 +9,25 @@
         <ui:define name="content">
             <h1>#{messages.kandydatTitle}</h1>
             #{kandydatHandler.prepareList()}
+            <h:form id="frmKandList">
+                <p:dataTable id="tblKandydat" emptyMessage="#{messages.kandydatListEmpty}" 
+                             value="#{kandydatHandler.kandydatList}" var="k" >
 
-            <p:dataTable id="tblKandydat" emptyMessage="#{messages.kandydatListEmpty}" 
-                         value="#{kandydatHandler.kandydatList}" var="k" >
+                    <p:column headerText="#{messages.nr}" sortBy="pkwId">
+                        <h:outputText value="#{k.pkwId}"/>
+                    </p:column>
 
-                <p:column headerText="#{messages.nr}" sortBy="pkwId">
-                    <h:outputText value="#{k.pkwId}"/>
-                </p:column>
+                    <p:column headerText="#{messages.name}" sortBy="name">
+                        <h:outputText value="#{k.name}"/>
+                    </p:column>
 
-                <p:column headerText="#{messages.name}" sortBy="name">
-                    <h:outputText value="#{k.name}"/>
-                </p:column>
+                    <p:column headerText="#{messages.action}">
+                        <h:commandLink id="btnView" value="#{messages.display}"
+                                       action="#{kandydatHandler.prepareView(k)}"/>
+                    </p:column>
 
-                <p:column headerText="#{messages.action}">
-                    <h:commandLink id="btnView" value="#{messages.display}"
-                                   action="#{kandydatHandler.prepareView(k)}"/>
-                </p:column>
-
-            </p:dataTable>
+                </p:dataTable>
+            </h:form>
         </ui:define>
 
     </ui:composition>

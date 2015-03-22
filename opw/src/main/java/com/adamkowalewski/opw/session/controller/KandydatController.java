@@ -26,6 +26,7 @@ package com.adamkowalewski.opw.session.controller;
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.session.bean.KandydatBean;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -40,9 +41,14 @@ public class KandydatController implements Serializable {
 
     @EJB
     private KandydatBean kandydatBean;
-    
-    public void create(OpwKandydat kandydat){
+
+    public void create(OpwKandydat kandydat) {
         kandydatBean.create(kandydat);
+
+    }
+
+    public List<OpwKandydat> findAll() {
+        return kandydatBean.findAll();
     }
 
 }

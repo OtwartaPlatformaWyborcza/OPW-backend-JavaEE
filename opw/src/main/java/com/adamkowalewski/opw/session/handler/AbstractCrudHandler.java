@@ -34,7 +34,6 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
     boolean viewMode = true;
     T instance;
-    List<T> instanceList;
 
     String VIEW_ID;
     String VIEW_ID_EDIT;
@@ -59,12 +58,12 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
         viewMode = false;
         return VIEW_ID_EDIT;
     }
-    
+        
     @Override
-    public void prepareEdit(){
-       viewMode = false; 
+    public void prepareEdit() {
+        viewMode = false;
     }
-    
+
     @Override
     public String cancel() {
         viewMode = true;
@@ -85,14 +84,6 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
     public void setInstance(T instance) {
         this.instance = instance;
-    }
-
-    public List<T> getInstanceList() {
-        return instanceList;
-    }
-
-    public void setInstanceList(List<T> instanceList) {
-        this.instanceList = instanceList;
     }
 
 }

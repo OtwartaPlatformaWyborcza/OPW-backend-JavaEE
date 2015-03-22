@@ -28,6 +28,7 @@ import com.adamkowalewski.opw.session.bean.UserBean;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -49,10 +50,23 @@ public class UserController implements Serializable {
     public OpwUser find(int id) {
         return userBean.findUser(id);
     }
-
+    
+    /**
+     * Creates a new user within database and generates a random password. 
+     * 
+     * @param user 
+     */
     public void create(OpwUser user) {
         user.setPassword(generatePassword());
         userBean.create(user);
+    }
+    
+    public void edit(OpwUser user) {        
+        userBean.edit(user);
+    }
+    
+    public List<OpwUser> findAll(){
+        return userBean.findAll();
     }
 
     /**

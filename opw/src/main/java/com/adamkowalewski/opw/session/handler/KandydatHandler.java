@@ -26,7 +26,6 @@ package com.adamkowalewski.opw.session.handler;
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.session.controller.KandydatController;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -41,10 +40,9 @@ import javax.inject.Named;
 public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements Serializable {
 
     List<OpwKandydat> kandydatList;
-    
+
     @Inject
     KandydatController kandydatController;
-    
 
     public KandydatHandler() {
         VIEW_ID = "kandydat";
@@ -70,9 +68,7 @@ public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements
 
     @Override
     public void prepareList() {
-//        instanceList = kandydatController.findAll();
-        kandydatList= kandydatController.findAll();
-        System.out.println("lista " + kandydatList.size());
+        kandydatList = kandydatController.findAll();        
     }
 
     public List<OpwKandydat> getKandydatList() {

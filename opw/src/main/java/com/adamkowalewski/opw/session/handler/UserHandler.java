@@ -24,9 +24,11 @@
 package com.adamkowalewski.opw.session.handler;
 
 import com.adamkowalewski.opw.entity.OpwUser;
-import com.adamkowalewski.opw.session.controller.MsgController;
+import com.adamkowalewski.opw.session.Identity;
+import com.adamkowalewski.opw.session.controller.UserController;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -35,24 +37,45 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class UserHandler implements Serializable {
+public class UserHandler extends AbstractCrudHandler<OpwUser> implements Serializable {
 
-    private OpwUser user;
+    @Inject
+    Identity identity;
 
-    public OpwUser getUser() {
-        return user;
+    @Inject
+    UserController userController;
+
+    public UserHandler() {
+        VIEW_ID = "user";
+        VIEW_ID_EDIT = "userEdit";
+        VIEW_ID_CREATE = "userCreate";
     }
 
+    @Override
+    public String create() {
+        userController.create(instance);
+        return VIEW_ID;
+    }
+
+    @Override
+    public String edit() {
+        userController.edit(instance);
+        return VIEW_ID;
+    }
+
+    @Override
+    public void prepareList() {
+        userController.findAll();
+    }
+
+    @Override
     public void prepareCreate() {
-        user = new OpwUser();
+        instance = new OpwUser();
     }
 
-    public void setUser(OpwUser user) {
-        this.user = user;
-    }
-
-    public String createUser() {
-        return "index";
+    @Override
+    public void prepareView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

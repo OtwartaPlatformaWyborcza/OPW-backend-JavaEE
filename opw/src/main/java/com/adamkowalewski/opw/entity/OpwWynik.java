@@ -25,7 +25,9 @@
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,9 +37,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -54,7 +58,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OpwWynik.findByCardsValid", query = "SELECT o FROM OpwWynik o WHERE o.cardsValid = :cardsValid"),
     @NamedQuery(name = "OpwWynik.findByVotesInvalid", query = "SELECT o FROM OpwWynik o WHERE o.votesInvalid = :votesInvalid"),
     @NamedQuery(name = "OpwWynik.findByVotesValid", query = "SELECT o FROM OpwWynik o WHERE o.votesValid = :votesValid"),
-    @NamedQuery(name = "OpwWynik.findByFileOriginal", query = "SELECT o FROM OpwWynik o WHERE o.fileOriginal = :fileOriginal")})
+    @NamedQuery(name = "OpwWynik.findByFileOriginal", query = "SELECT o FROM OpwWynik o WHERE o.fileOriginal = :fileOriginal"),
+    @NamedQuery(name = "OpwWynik.findByActive", query = "SELECT o FROM OpwWynik o WHERE o.active = :active")})
 public class OpwWynik implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,9 +80,21 @@ public class OpwWynik implements Serializable {
     @Size(max = 128)
     @Column(name = "fileOriginal", length = 128)
     private String fileOriginal;
+    @Column(name = "active")
+    private Boolean active;
+    @OneToMany(mappedBy = "parentId")
+    private List<OpwWynik> opwWynikList;
+    @JoinColumn(name = "parentId", referencedColumnName = "id")
+    @ManyToOne
+    private OpwWynik parentId;
+    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private OpwUser opwUserId;
     @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private OpwObwodowaKomisja opwObwodowaKomisjaId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwWynikId")
+    private List<OpwWynikKandydat> opwWynikKandydatList;
 
     public OpwWynik() {
     }
@@ -142,12 +159,54 @@ public class OpwWynik implements Serializable {
         this.fileOriginal = fileOriginal;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    @XmlTransient
+    public List<OpwWynik> getOpwWynikList() {
+        return opwWynikList;
+    }
+
+    public void setOpwWynikList(List<OpwWynik> opwWynikList) {
+        this.opwWynikList = opwWynikList;
+    }
+
+    public OpwWynik getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(OpwWynik parentId) {
+        this.parentId = parentId;
+    }
+
+    public OpwUser getOpwUserId() {
+        return opwUserId;
+    }
+
+    public void setOpwUserId(OpwUser opwUserId) {
+        this.opwUserId = opwUserId;
+    }
+
     public OpwObwodowaKomisja getOpwObwodowaKomisjaId() {
         return opwObwodowaKomisjaId;
     }
 
     public void setOpwObwodowaKomisjaId(OpwObwodowaKomisja opwObwodowaKomisjaId) {
         this.opwObwodowaKomisjaId = opwObwodowaKomisjaId;
+    }
+
+    @XmlTransient
+    public List<OpwWynikKandydat> getOpwWynikKandydatList() {
+        return opwWynikKandydatList;
+    }
+
+    public void setOpwWynikKandydatList(List<OpwWynikKandydat> opwWynikKandydatList) {
+        this.opwWynikKandydatList = opwWynikKandydatList;
     }
 
     @Override

@@ -25,7 +25,9 @@
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,9 +35,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -51,7 +55,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OpwUser.findByLastname", query = "SELECT o FROM OpwUser o WHERE o.lastname = :lastname"),
     @NamedQuery(name = "OpwUser.findByEmail", query = "SELECT o FROM OpwUser o WHERE o.email = :email"),
     @NamedQuery(name = "OpwUser.findByPassword", query = "SELECT o FROM OpwUser o WHERE o.password = :password"),
-    @NamedQuery(name = "OpwUser.findByType", query = "SELECT o FROM OpwUser o WHERE o.type = :type")})
+    @NamedQuery(name = "OpwUser.findByType", query = "SELECT o FROM OpwUser o WHERE o.type = :type"),
+    @NamedQuery(name = "OpwUser.findBySalt", query = "SELECT o FROM OpwUser o WHERE o.salt = :salt"),
+    @NamedQuery(name = "OpwUser.findByActive", query = "SELECT o FROM OpwUser o WHERE o.active = :active"),
+    @NamedQuery(name = "OpwUser.findByToken", query = "SELECT o FROM OpwUser o WHERE o.token = :token")})
 public class OpwUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,6 +82,16 @@ public class OpwUser implements Serializable {
     @Size(max = 64)
     @Column(name = "type", length = 64)
     private String type;
+    @Size(max = 32)
+    @Column(name = "salt", length = 32)
+    private String salt;
+    @Column(name = "active")
+    private Boolean active;
+    @Size(max = 32)
+    @Column(name = "token", length = 32)
+    private String token;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
+    private List<OpwWynik> opwWynikList;
 
     public OpwUser() {
     }
@@ -129,6 +146,39 @@ public class OpwUser implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @XmlTransient
+    public List<OpwWynik> getOpwWynikList() {
+        return opwWynikList;
+    }
+
+    public void setOpwWynikList(List<OpwWynik> opwWynikList) {
+        this.opwWynikList = opwWynikList;
     }
 
     @Override

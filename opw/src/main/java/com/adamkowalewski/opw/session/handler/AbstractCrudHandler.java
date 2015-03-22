@@ -23,6 +23,8 @@
  */
 package com.adamkowalewski.opw.session.handler;
 
+import java.util.List;
+
 /**
  *
  * @author Adam Kowalewski
@@ -30,31 +32,43 @@ package com.adamkowalewski.opw.session.handler;
  */
 public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
-    private boolean viewMode = true;
-    private Class<T> instance;
-    
-    private String view_id;
-    private String view_id_edit;
-    
-    
+    boolean viewMode = true;
+    T instance;
+    List<T> instanceList;
+
+    String VIEW_ID;
+    String VIEW_ID_EDIT;
+    String VIEW_ID_CREATE;
+
     /**
      * TODO
-     * 
-     * @param r instance of an entity to view. 
+     *
+     * @param r instance of an entity to view.
      * @return TODO
      * @author Adam Kowalewski
      * @version 2015.03.19
      */
-    public String prepareView(Class<T> r){
+    public String prepareView(T r) {
         instance = r;
         viewMode = true;
-        return view_id_edit;
+        return VIEW_ID_EDIT;
+    }
+
+    public String prepareEdit(T r) {
+        instance = r;
+        viewMode = false;
+        return VIEW_ID_EDIT;
     }
     
     @Override
-    public String cancel(){
+    public void prepareEdit(){
+       viewMode = false; 
+    }
+    
+    @Override
+    public String cancel() {
         viewMode = true;
-        return view_id;
+        return VIEW_ID;
     }
 
     public boolean isViewMode() {
@@ -65,12 +79,20 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
         this.viewMode = viewMode;
     }
 
-    public Class<T> getInstance() {
+    public T getInstance() {
         return instance;
     }
 
-    public void setInstance(Class<T> instance) {
+    public void setInstance(T instance) {
         this.instance = instance;
+    }
+
+    public List<T> getInstanceList() {
+        return instanceList;
+    }
+
+    public void setInstanceList(List<T> instanceList) {
+        this.instanceList = instanceList;
     }
 
 }

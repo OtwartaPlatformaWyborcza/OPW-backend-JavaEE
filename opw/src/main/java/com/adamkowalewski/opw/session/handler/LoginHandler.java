@@ -53,11 +53,14 @@ public class LoginHandler implements Serializable {
     }
 
     public String authenticate() {
-        boolean result;
+        
         if (login.equals("admin") && password.equals("admin")) {
             identity.setLoggedin(true);
             identity.setFullname("Administrator");
-        }
+            MsgController.addSuccessMessage(MsgController.getLocalizedMessage("loginOk"));
+        }else{
+            MsgController.addErrorMessage(MsgController.getLocalizedMessage("loginFailed"));
+    }
 
         return "index";
     }

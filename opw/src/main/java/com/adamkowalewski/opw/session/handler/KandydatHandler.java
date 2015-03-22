@@ -25,7 +25,6 @@ package com.adamkowalewski.opw.session.handler;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.session.controller.KandydatController;
-import com.adamkowalewski.opw.session.controller.MsgController;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,58 +40,39 @@ import javax.inject.Named;
 @SessionScoped
 public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements Serializable {
 
-    private OpwKandydat kandydat;
-    private List<OpwKandydat> kandydatList;
-
-    private final String VIEW_ID = "kandydat";
-    private final String VIEW_ID_EDIT = "kandydatEdit";
-
-    private boolean viewMode;
-
+    List<OpwKandydat> kandydatList;
+    
     @Inject
     KandydatController kandydatController;
+    
 
     public KandydatHandler() {
+        VIEW_ID = "kandydat";
+        VIEW_ID_EDIT = "kandydatEdit";
     }
 
     @Override
     public String create() {
-        kandydatController.create(kandydat);
-
-        return "index";
+        kandydatController.create(instance);
+        return VIEW_ID;
     }
 
-    public String prepareView(OpwKandydat k) {
-        kandydat = k;
-        viewMode = true;
-
-        return VIEW_ID_EDIT;
+    @Override
+    public String edit() {
+        kandydatController.edit(instance);
+        return VIEW_ID;
     }
 
     @Override
     public void prepareCreate() {
-        kandydat = new OpwKandydat();
+        instance = new OpwKandydat();
     }
 
     @Override
-    public void prepareList() {        
-        kandydatList = kandydatController.findAll();
-    }
-
-    public OpwKandydat getKandydat() {
-        return kandydat;
-    }
-
-    public void setKandydat(OpwKandydat kandydat) {
-        this.kandydat = kandydat;
-    }
-
-    public boolean isViewMode() {
-        return viewMode;
-    }
-
-    public void setViewMode(boolean viewMode) {
-        this.viewMode = viewMode;
+    public void prepareList() {
+//        instanceList = kandydatController.findAll();
+        kandydatList= kandydatController.findAll();
+        System.out.println("lista " + kandydatList.size());
     }
 
     public List<OpwKandydat> getKandydatList() {
@@ -102,12 +82,6 @@ public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements
     public void setKandydatList(List<OpwKandydat> kandydatList) {
         this.kandydatList = kandydatList;
     }
-
-    @Override
-    public String edit() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 
     @Override
     public void prepareView() {

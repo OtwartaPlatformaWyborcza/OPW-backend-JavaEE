@@ -58,7 +58,7 @@ h1 {
 
 #logo-container{
     float:left;
-    padding:25px 25px;
+    padding:25px 25px 0px;
     margin-right:1px;
     font-size:18px;
     font-weight:bold;
@@ -117,6 +117,11 @@ h1 {
 
 #profile-nav a:hover {
     color:#b2d3d9;
+}
+
+.logo-text:link, .logo-text:visited{
+    color: #fff;
+    text-decoration: none;
 }
 
 /**

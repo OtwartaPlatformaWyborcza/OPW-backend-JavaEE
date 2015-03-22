@@ -27,32 +27,42 @@ package com.adamkowalewski.opw.session.handler;
  * Represent common CRUD logic required for work with an entity.
  *
  * @author Adam Kowalewski
- * @version 2015.03.19
+ * @version 2015.03.22
  */
 public interface CrudHandler {
 
     /**
-     * Retrieves current entity for viewing. 
+     * Retrieves current entity for viewing.
      */
     public void prepareView();
+    
+    /**
+     * Prepare current entity to be edited.
+     */
+    public void prepareEdit();
 
     /**
-     * Retrieves list of entities from database. 
+     * Retrieves list of entities from database.
      */
     public void prepareList();
 
     /**
-     * Creates a new empty instance to work with. 
+     * Creates a new empty instance to work with.
      */
     public void prepareCreate();
-    
+
     /**
-     * Persists a new entity in the database.  
-     * 
-     * @return 
+     * Persists a new entity in the database.
+     *
+     * @return JSF name of list page.
      */
     public String create();
 
+    /**
+     * Edits an entity in the database.
+     *
+     * @return JSF name of list page.
+     */
     public String edit();
 
     /**

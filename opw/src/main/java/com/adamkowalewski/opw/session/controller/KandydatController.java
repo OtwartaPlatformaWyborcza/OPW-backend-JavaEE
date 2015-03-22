@@ -44,7 +44,10 @@ public class KandydatController implements Serializable {
 
     public void create(OpwKandydat kandydat) {
         kandydatBean.create(kandydat);
+    }
 
+    public void edit(OpwKandydat kandydat) {
+        kandydatBean.edit(kandydat);
     }
 
     public List<OpwKandydat> findAll() {

@@ -48,9 +48,8 @@ perspektywa serwera
 
 ## Grupy użytkowników (docelowa architektura) 
 1. Administrator (admin) 
-2. Koordynator Wyborów ()
-2. Operator Wyborów (najczęściej informatyk, może być odpowiedzialny za kilka komisji)
-3. 
+2. Koordynator Wyborów (odpowiedzialny za operatorów)
+3. Operator Wyborów (najczęściej informatyk, może być odpowiedzialny za kilka komisji)
 4. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
 
 

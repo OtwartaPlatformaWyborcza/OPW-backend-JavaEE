@@ -3,6 +3,8 @@
   <persistence-unit name="opwPU" transaction-type="JTA">
     <jta-data-source>jdbc/opw</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+      <property name="eclipselink.query-results-cache" value="false"/>
+    </properties>
   </persistence-unit>
 </persistence>

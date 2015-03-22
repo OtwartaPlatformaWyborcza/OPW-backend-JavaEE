@@ -40,10 +40,19 @@ perspektywa serwera
 
 # Specyfikacja
 
-## Grupy użytkowników
+## Grupy użytkowników 
 1. Administrator (admin)
 2. Użytkownik (user)
 3. Gość (guest)
+
+
+## Grupy użytkowników (docelowa architektura) 
+1. Administrator (admin) 
+2. Koordynator Wyborów ()
+2. Operator Wyborów (najczęściej informatyk, może być odpowiedzialny za kilka komisji)
+3. 
+4. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
+
 
 ## Software stack
 1. Java EE 7 (GlassFish 4, JPA2, JSF 2.2, JAX-RS)

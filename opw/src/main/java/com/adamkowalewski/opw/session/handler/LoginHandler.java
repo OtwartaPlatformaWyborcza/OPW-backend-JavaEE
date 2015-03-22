@@ -23,9 +23,15 @@
  */
 package com.adamkowalewski.opw.session.handler;
 
+import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.session.Identity;
+import com.adamkowalewski.opw.session.controller.MsgController;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 /**
  * Handler for login and logout operations.
@@ -38,14 +44,48 @@ public class LoginHandler implements Serializable {
 
     private String login;
     private String password;
+    private OpwUser user;
+
+    @Inject
+    Identity identity;
 
     public LoginHandler() {
     }
 
     public String authenticate() {
         boolean result;
+        if (login.equals("admin") && password.equals("admin")) {
+            identity.setLoggedin(true);
+            identity.setFullname("Administrator");
+        }
 
         return "index";
+    }
+
+    public String logout() {
+        if (identity.isLoggedin()) {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            identity.setLoggedin(false);
+            session.invalidate();
+        }
+        MsgController.addSuccessMessage(MsgController.getLocalizedMessage("logoutInfo"));
+        return "index";
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

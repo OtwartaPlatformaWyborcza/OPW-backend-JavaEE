@@ -1,61 +1,237 @@
+@charset "utf-8";
+/* 
+    Document   : mum-ci style
+    Created on : 29.04.2014
+    Author     : IVANOVA, Lidia
+    Author     : KOWALEWSKI, Adam
+    Description: 
+*/
 
-#top {
-    position: relative;
-    background-color: #036fab;
-    color: white;
-    padding: 5px;
-    margin: 0px 0px 10px 0px;
+/**
+ * 1.GLOBAL
+*/
+* {
+    margin-bottom: 0px; 
+    padding: 0px;
 }
 
-#bottom {
-    position: relative;
-    background-color: #c2dfef;
-    padding: 5px;
-    margin: 10px 0px 0px 0px;
+body {
+    background: #e9eeef;
+    font-family: Calibry, Tahoma, Geneva, sans-serif;
+    color: #5e5e5e;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
 }
 
-#left {
+h1 {    
+    font-size:24px;
+    font-weight:normal;
+    line-height:normal;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+/**
+ * LAYOUT
+*/
+
+#main-wrapper{
+    margin: 0 auto;
+    min-width: 1200px;    
+    width: 1200px;   
+    display: block;
+    min-height: 500px;
+}
+
+
+#header-wrapper{
+    width: 1200px;
+    height: 90px;
+    background:#2b5464;
+    color: #FFF;
+    border-bottom: solid 10px #35aedb;
+}	
+
+
+#logo-container{
+    float:left;
+    padding:25px 25px;
+    margin-right:1px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+#content-wrapper{
+    background:#fff;
+    border:1px solid #cfcfcf;
+    padding:15px;
+}
+
+.left {
     float: left;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 150px;
 }
 
-#right {
+.right {
     float: right;
-    background-color: #ece3a5;
-    padding: 5px;
-    width: 150px;
 }
 
-.center_content {
-    position: relative;
-    background-color: #dddddd;
-    padding: 5px;
+.clear{
+    clear: both;
 }
 
-.left_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin-left: 170px;
+/**
+ * NAVIGATION
+*/
+
+#main-nav{ }
+
+#main-nav a, #main-nav a:link, #main-nav a:visited{
+    color:white;
+    text-decoration:none;
+    float:left;
+    display:block;
+    padding:5px 15px;
+    margin-top:12px;
 }
 
-.right_content {
-    background-color: #dddddd;
-    padding: 5px;
-    margin: 0px 170px 0px 170px;
+#main-nav a:hover{
+    background-color:#35aedb;
 }
 
-#top a:link, #top a:visited {
-  color: white;
-  font-weight : bold;
-  text-decoration: none;
+#profile-nav{
+    float:right;	
 }
 
-#top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
-  text-decoration : underline;
+#profile-nav a, #profile-nav a:link {
+    color:white;
+    text-decoration:none;
+    float:left;
+    display:block;
+    padding:2px 10px 2px 10px;
+    margin-top:9px;    
+    height:22px;
 }
 
+#profile-nav a:hover {
+    color:#b2d3d9;
+}
 
+/**
+ * BOXES
+*/
+.box {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    border-top: 4px solid;
+    margin: 10px 0 20px;
+    padding: 10px;
+}
+.box400 {
+    width: 400px;
+}
+.box520 {
+    width: 520px;
+}
+.box550 {
+    width: 550px;
+}
+.box650 {
+    width: 650px;
+}
+
+.box_blue_grey {
+    border-top-color: #aebabe;
+}
+
+.box_orange_dark {
+    border-top-color: #d28c5d;
+}
+
+.box_orange_light {
+    border-top-color: #ef9a61;
+}
+
+.box_green {
+    border-top-color: #7ec95c;
+}
+
+.box_blue {
+    border-top-color: #86b8d5;
+}
+
+.box_yellow {
+    border-top-color: #e6d145;
+}
+
+.box_red {
+    border-top-color: #e66b5b;
+}
+
+.box_violet_dark {
+    border-top-color: #a98181;
+}
+
+/**
+ * BUTTONS
+*/
+.btn {
+    margin: 20px 10px 20px 0px;   
+    color: #fff;    
+    display: inline-block;
+    padding: 8px 19px;
+    border: none;
+    border-radius: 6px;
+    background-color: #249dce;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn:link, .btn:visited {
+    color: #fff;
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: #1e82aa;
+}
+.btnred {
+    margin-top: 20px;
+    margin-right: 10px;
+    display: inline-block;
+    padding: 8px 19px;
+    border: none;
+    border-radius: 6px;
+    background-color: #C0392B;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btnred:link, .btnred:visited {
+    color: #fff;
+}
+
+.btnred:hover {
+    color: #fff;
+    background-color: #962D22;
+}
+
+.in120{width: 120px; margin-right: 5px;}
+.in150{width: 150px; margin-right: 5px;}
+.in200{width: 200px; margin-right: 5px;}
+.in230{width: 230px; margin-right: 5px;}
+.in250{width: 250px; margin-right: 5px;}
+.in350{width: 350px; margin-right: 5px;}
+
+.ml50{margin-left: 50px;}
+
+.mr50{margin-right: 50px;}
+
+label {
+    display: box;
+    margin: 5px;
+}

@@ -28,12 +28,43 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
- * TODO JAAS 
- * 
+ * TODO JAAS
+ *
  * @author Adam Kowalewski
  */
 @Named
 @SessionScoped
-public class Identity implements Serializable{
-    
+public class Identity implements Serializable {
+
+    private int userId;
+    private String fullname;
+    private boolean loggedin;
+
+    public Identity() {
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public boolean isLoggedin() {
+        return loggedin;
+    }
+
+    public void setLoggedin(boolean loggedin) {
+        this.loggedin = loggedin;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
 }

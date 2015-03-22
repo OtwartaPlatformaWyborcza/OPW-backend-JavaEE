@@ -1,26 +1,77 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
         <h:outputStylesheet name="./css/opw-style.css"/>        
-        
+
         <h:outputScript library="primefaces" name="jquery/jquery.js"/>
         <title>#{messages.appTitle} #{messages.appVersion}</title>
     </h:head>
 
     <h:body>
+        <div id="main-wrapper">
+            <div id="header-wrapper">
 
-        <div id="top" class="top">
-            <ui:insert name="top">Top</ui:insert>
+                <div id="logo-container">
+                    <span>#{messages.appTitle}</span>                    
+                </div>
+
+                <div id="profile-nav">
+                    <h:form id="frmUserMenu">
+                        <ui:fragment rendered="#{identity.loggedin}">                                                        
+                            <h:link id="profileEdit" outcome="/profileEdit"
+                                    style="color: #fff;" value="#{identity.fullname}" />                            
+                        </ui:fragment>
+
+                        <h:link style="color: #fff;" id="menuLoginId1" 
+                                outcome="/login" value="#{messages.loginTitle}" 
+                                rendered="#{not identity.loggedin}"/>
+                        <h:commandLink style="color: #fff; font-weight: bold;" 
+                                       id="menuLogoutId1" 
+                                       action="#{loginHandler.logout()}" 
+                                       value="#{messages.logout}" 
+                                       rendered="#{identity.loggedin}"/>
+                    </h:form>
+                </div>
+                <div class="clear"></div>
+
+                <div id="main-nav">
+                    <h:link outcome="/index" value="Start"  rendered="false" />
+<!--                    <h:link outcome="/dashboard" value="Dashboard"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/dashboardMp" value="#{messages.marktpartner}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/dashboardZp" value="#{messages.zp}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/stammdaten" value="#{messages.stammdaten}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/import" value="#{messages.mmImport}" rendered="#{identity.loggedin}" />
+                    <h:link outcome="/kontakt" value="Kontakt" rendered="false"/>-->
+                </div>
+
+            </div>
+
+            
+            <div id="content-wrapper">
+                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true"  />
+                <ui:insert name="content"></ui:insert>
+            </div>
+            
+
+            <div id="footer-wrapper">
+                <p style="text-align: right; font-size: 10px;">
+                    <!--<ui:fragment rendered="#{identity.userId == 1}">-->
+                    <h:link outcome="/debug" value="Debug" rendered="false"/>
+                    <h:outputText value=" | " rendered="false"/>
+                    #{view.viewId}
+                    <!--</ui:fragment>-->
+                    <h:outputText value=" 2015"/>
+                </p>  
+            </div>
         </div>
 
-        <div id="content" class="center_content">
-            <ui:insert name="content">Content</ui:insert>
-        </div>
+
+
 
     </h:body>
 

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./WEB-INF/opwTemplate.xhtml"                
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h1>#{messages.loginTitle}</h1>
+
+            <div class="box box400 box_blue left">
+                <h:form id="frmLogin">
+                    <br/>
+                    <h:panelGrid columns="2" cellspacing="7">
+                        <h:outputLabel id="labelLogin" for="login" value="#{messages.username}" />
+                        <p:inputText id="login" styleClass="in200" 
+                                     value="#{loginHandler.login}"/>
+
+                        <h:outputLabel id="labelPassword" for="password" value="#{messages.password}" />
+                        <p:password id="password"  styleClass="in200"  
+                                    value="#{loginHandler.password}" />
+                    </h:panelGrid>    
+
+                    <h:commandButton id="submit" class="btn"                                       
+                                     value="#{messages.loginSubmit}" 
+                                     action="#{loginHandler.authenticate()}" />                                                     
+                </h:form>                    
+            </div>
+        <div class="clear"></div>
+
+    </ui:define>
+
+</ui:composition>

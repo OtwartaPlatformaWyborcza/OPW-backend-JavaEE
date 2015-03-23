@@ -18,24 +18,49 @@ Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego po
 
 # Proces
 **Przygotowanie do wyborów**  
-1) Administrator definiuje / importuje komisje okręgowe i należące do nich komisje obwodowe.  
-2) Administrator zakłada konta użytkownikom i łączy je z odpowiednimi komisjami  
-2.1) System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres E-Mail  
-2.2) Użytkownik aktywuje konto w OPW  
+1) Administrator definiuje / importuje komisje okręgowe i należące do nich komisje obwodowe (nr komisji oraz adresy)
+
+2) Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane obwody  najczesciej gmina badz dzielnica ) 
+
+3) Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
+
+4) Administrator zakłada konta operatorom
+
+5) Administrator zaklada konta użytkownikom (przewodniczącym komisji obwodowych badz/i wolentariuszom, męzom zaufania)
+
+6) Operatorzy zbierają dane od uzytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel,    Czy nie kandydują, nr Komisji ,Adres komisji)
+
+7) Koordynator  wyborów definiuje/importuje składy komisji lokalnych otrzymanych od operatorów (przypisuje użytkownków  do komisji
+
+7.1) System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres E-Mail 
+
+7.2) Użytkownik aktywuje konto w OPW  
+
+PERSPEKTYWA KOORDYNATORA
+
+8) Koordynator wprowadza i importuje do systemu informacje o operatorach. Najlepiej import z XLS ( imie, nazwisko,  telefon,mail, uwagi )
+
+8.1) Koordynator przekazuje operatorom otrzymane od Administratora hasła dostepów dla uzytkowków 
+
+PERSPEKTYWA OPERATORA
+
+9) Koordynator wprowadza i importuje do  systemu informacje o użytkownkach. Najlepiej import z XLS ( imie, nazwisko, telefon,mail, uwagi )
 
 **Dzień wyborczy import danych**  
-perspektywa użytkownika  
-3) Użytkownik loguje się na stronie (maski w paper browser)  
-4) Użytkownik wpisuje dane z protokołu (maski w paper browser)  
-5) Użytkownik wysyła dane  
-5.1) Walidacja po stronie klienta (JavaScript/HTML5) dla błędów twardych  
+PERSPEKTYWA UŻYTKOWNIKA
+
+10) Użytkownik loguje się na stronie (maski w paper browser)  
+11) Użytkownik wpisuje dane z protokołu (maski w paper browser)  
+12) Użytkownik wysyła dane  
+12.1) Walidacja po stronie klienta (JavaScript/HTML5) dla błędów twardych  
  
-perspektywa serwera  
-5.2) Walidacja po stronie serwera JSR323 m.in. dla błędów miękkich i tagowanie protokołów  
-6) Import danych  
+PERSPEKTYWA SERWERA  
+13) Walidacja po stronie serwera JSR323 m.in. dla błędów miękkich i tagowanie protokołów  
+14) Import danych  
 
 **Dzień wyborczy wyniki**  
-7) Użytkownik bądź gość wchodzi na stronę główną, aktualne wyniki (agregowane np. co 5min) są widoczne
+15) Użytkownik bądź gość wchodzi na stronę główną, aktualne wyniki (agregowane np. co 5min) są widoczne
+16. Uzytkownik po wysłaniu protokołu musi zostać poinformowany o przesyłaniu go i odebraniu przez serwer.
 
 
 # Specyfikacja
@@ -50,7 +75,11 @@ perspektywa serwera
 1. Administrator (admin) 
 2. Koordynator Wyborów (odpowiedzialny za operatorów)
 3. Operator Wyborów (najczęściej informatyk, może być odpowiedzialny za kilka komisji)
-4. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
+4. Użytkownik (mąz zaufania, wolentariusz bądz/i przewodniczący
+5. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
+
+## Risk & Issue Logs
+1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min. Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net)
 
 
 ## Software stack

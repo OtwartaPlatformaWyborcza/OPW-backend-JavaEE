@@ -8,25 +8,27 @@
         <h1>#{messages.okregowaCreateTitle}</h1>
         #{okregowaHandler.prepareCreate()}
 
-        <h:form id="frmOkregowaCreate">
-            <h:panelGrid columns="2" cellspacing="7">
+        <div class="left box box_blue box550">
+            <h:form id="frmOkregowaCreate">
+                <h:panelGrid columns="2" cellspacing="7">
 
-                <h:outputLabel for="pkwId" id="pkwIdL" value="#{messages.nr}*" />
-                <p:inputText id="pkwId" value="#{okregowaHandler.instance.pkwId}" required="true"/>
+                    <h:outputLabel for="pkwId" id="pkwIdL" value="#{messages.nr}*" />
+                    <p:inputText id="pkwId" value="#{okregowaHandler.instance.pkwId}" required="true"/>
 
-                <h:outputLabel for="name" id="nameL" value="#{messages.name}*" />
-                <p:inputText id="name" value="#{okregowaHandler.instance.name}" required="true" />
-                
-                <h:outputLabel for="address" id="addressL" value="#{messages.address}*" />
-                <p:inputText id="address" value="#{okregowaHandler.instance.address}" required="true" />
+                    <h:outputLabel for="name" id="nameL" value="#{messages.name}*" />
+                    <p:inputText id="name" value="#{okregowaHandler.instance.name}" required="true" />
 
-            </h:panelGrid>
+                    <h:outputLabel for="address" id="addressL" value="#{messages.address}*" />
+                    <p:inputText id="address" value="#{okregowaHandler.instance.address}" required="true" />
 
-            <h:commandLink id="btnSave" class="btn" 
-                           value="#{messages.submit}" 
-                           action="#{okregowaHandler.create()}"/>
+                </h:panelGrid>
 
-        </h:form>
+                <h:commandLink id="btnSave" class="btn" 
+                               value="#{messages.submit}" 
+                               action="#{okregowaHandler.create()}"/>
+
+            </h:form>
+        </div>
     </ui:define>
 
 </ui:composition>

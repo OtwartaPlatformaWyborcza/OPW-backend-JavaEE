@@ -64,8 +64,8 @@ public class OpwOkregowaKomisja implements Serializable {
     @Size(max = 64)
     @Column(name = "pkwId", length = 64)
     private String pkwId;
-    @Size(max = 64)
-    @Column(name = "name", length = 64)
+    @Size(max = 128)
+    @Column(name = "name", length = 128)
     private String name;
     @Size(max = 128)
     @Column(name = "address", length = 128)

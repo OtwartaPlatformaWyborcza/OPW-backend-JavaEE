@@ -7,39 +7,72 @@
     <ui:define name="content">
         <h1>#{messages.okregowaEditTitle}</h1>        
 
-        <h:form id="frmOkregowaEdit">
-            <h:panelGrid columns="2" cellspacing="7">
+        <div class="left box box_blue box550">
+            <h:form id="frmEdit">
+                <h:panelGrid columns="2" cellspacing="7">
 
-                <h:outputLabel for="pkwId" id="pkwIdL" value="#{messages.nr}*" />
-                <p:inputText id="pkwId" value="#{okregowaHandler.instance.pkwId}" 
-                             disabled="#{okregowaHandler.viewMode}" required="true" />
+                    <h:outputLabel for="pkwId" id="pkwIdL" value="#{messages.nr}*" />
+                    <p:inputText id="pkwId" value="#{okregowaHandler.instance.pkwId}" 
+                                 disabled="#{okregowaHandler.viewMode}" required="true" />
 
-                <h:outputLabel for="name" id="nameL" value="#{messages.name}*" />
-                <p:inputText id="name" value="#{okregowaHandler.instance.name}" 
-                             disabled="#{okregowaHandler.viewMode}" required="true" />
+                    <h:outputLabel for="name" id="nameL" value="#{messages.name}*" />
+                    <p:inputText id="name" value="#{okregowaHandler.instance.name}" 
+                                 disabled="#{okregowaHandler.viewMode}" required="true" />
 
-                <h:outputLabel for="address" id="addressL" value="#{messages.address}*" />
-                <p:inputText id="address" value="#{okregowaHandler.instance.address}" 
-                             disabled="#{okregowaHandler.viewMode}" required="true" />
+                    <h:outputLabel for="address" id="addressL" value="#{messages.address}*" />
+                    <p:inputText id="address" value="#{okregowaHandler.instance.address}" 
+                                 disabled="#{okregowaHandler.viewMode}" required="true" />
 
-            </h:panelGrid>
+                </h:panelGrid>
 
-            <h:commandLink id="btnSave" class="btn" 
-                           value="#{messages.submit}" 
-                           action="#{okregowaHandler.edit()}"
-                           rendered="#{not okregowaHandler.viewMode}"/>
+                <h:commandLink id="btnSave" class="btn" 
+                               value="#{messages.submit}" 
+                               action="#{okregowaHandler.edit()}"
+                               rendered="#{not okregowaHandler.viewMode}"/>
 
-            <h:commandLink id="btnCancel" class="btn" immediate="true"
-                           value="#{messages.cancel}" 
-                           action="#{okregowaHandler.cancel()}" 
-                           rendered="#{not okregowaHandler.viewMode}"/>
+                <h:commandLink id="btnCancel" class="btn" immediate="true"
+                               value="#{messages.cancel}" 
+                               action="#{okregowaHandler.cancel()}" 
+                               rendered="#{not okregowaHandler.viewMode}"/>
 
-            <h:commandLink id="btnEdit" class="btn" 
-                           value="#{messages.edit}"
-                           action="#{okregowaHandler.prepareEdit()}"
-                           rendered="#{okregowaHandler.viewMode}"/>
+                <h:commandLink id="btnEdit" class="btn" 
+                               value="#{messages.edit}"
+                               action="#{okregowaHandler.prepareEdit()}"
+                               rendered="#{okregowaHandler.viewMode}"/>
 
-        </h:form>
+            </h:form>
+        </div>
+        <div class="left box box_green">
+            <h2>Komisje obwodowe</h2>
+            <h:form id="frmObwList">
+                <p:dataTable id="tblOkr" emptyMessage="#{messages.obwodowaListEmpty}" 
+                             value="#{okregowaHandler.instance.opwObwodowaKomisjaList}" var="i" 
+                             sortBy="#{i.pkwId}">
+
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
+                        <h:outputText value="#{i.pkwId}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.name}" sortBy="#{i.name}">
+                        <h:outputText value="#{i.name}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.address}" sortBy="#{i.address}">
+                        <h:outputText value="#{i.address}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.okregowaEditTitle}" sortBy="#{i.opwOkregowaKomisjaId.name}">
+                        <h:outputText value="#{i.opwOkregowaKomisjaId.pkwId}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.action}">
+                        <h:commandLink id="btnView" value="#{messages.display}"
+                                       action="#{obwodowaHandler.prepareView(i)}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
     </ui:define>
 
 </ui:composition>

@@ -5,18 +5,18 @@
                 template="./WEB-INF/opwTemplate.xhtml">
 
     <ui:define name="content">
-        <h1>#{messages.okregowaListTitle}</h1>
-        #{okregowaHandler.prepareList()}
+        <h1>#{messages.obwodowaListTitle}</h1>
+        #{obwodowaHandler.prepareList()}
         
         <div class="left box box_blue">
             <div class="left"></div>
-            <div class="right"><h:link outcome="/okregowaCreate" value="#{messages.okregowaCreate}"/></div>
+            <div class="right"><h:link outcome="/obwodowaCreate" value="#{messages.obwodowaCreate}"/></div>
             <div class="clear"></div>
             <br/>
             
             <h:form id="frmList">
-                <p:dataTable id="tblOkr" emptyMessage="#{messages.okregowaListEmpty}" 
-                             value="#{okregowaHandler.okregowaList}" var="i" 
+                <p:dataTable id="tblOkr" emptyMessage="#{messages.obwodowaListEmpty}" 
+                             value="#{obwodowaHandler.obwodowaList}" var="i" 
                              sortBy="#{i.pkwId}">
 
                     <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
@@ -30,15 +30,20 @@
                     <p:column headerText="#{messages.address}" sortBy="#{i.address}">
                         <h:outputText value="#{i.address}"/>
                     </p:column>
+                    
+                    <p:column headerText="#{messages.okregowaEditTitle}" sortBy="#{i.opwOkregowaKomisjaId.name}">
+                        <h:outputText value="#{i.opwOkregowaKomisjaId.name}"/>
+                    </p:column>
 
                     <p:column headerText="#{messages.action}">
                         <h:commandLink id="btnView" value="#{messages.display}"
-                                       action="#{okregowaHandler.prepareView(i)}"/>
+                                       action="#{obwodowaHandler.prepareView(i)}"/>
                     </p:column>
 
                 </p:dataTable>
             </h:form>
-        </div>                
+        </div>
+        
     </ui:define>
 
 </ui:composition>

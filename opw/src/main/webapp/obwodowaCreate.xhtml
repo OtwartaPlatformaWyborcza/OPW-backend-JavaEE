@@ -34,7 +34,7 @@
                                      value="#{obwodowaHandler.instance.opwOkregowaKomisjaId}" 
                                      required="true" >
                         <f:selectItems value="#{okregowaHandler.okregowaList}"
-                                       var="itemRolle" itemLabel="#{itemRolle.address}"/>
+                                       var="itemRolle" itemLabel="#{itemRolle.pkwId} - #{itemRolle.name}"/>
                     </h:selectOneMenu>
 
                 </h:panelGrid>

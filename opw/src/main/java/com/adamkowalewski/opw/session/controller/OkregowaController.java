@@ -23,8 +23,8 @@
  */
 package com.adamkowalewski.opw.session.controller;
 
-import com.adamkowalewski.opw.entity.OpwKandydat;
-import com.adamkowalewski.opw.session.bean.KandydatBean;
+import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import com.adamkowalewski.opw.session.bean.OkregowaBean;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -37,20 +37,20 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class KandydatController implements Serializable {
+public class OkregowaController implements Serializable {
 
     @EJB
-    private KandydatBean bean;
+    OkregowaBean bean;
 
-    public void create(OpwKandydat kandydat) {
-        bean.create(kandydat);
+    public void create(OpwOkregowaKomisja okregowa) {
+        bean.create(okregowa);
     }
 
-    public void edit(OpwKandydat kandydat) {
-        bean.edit(kandydat);
+    public void edit(OpwOkregowaKomisja okregowa) {
+        bean.edit(okregowa);
     }
 
-    public List<OpwKandydat> findAll() {
+    public List<OpwOkregowaKomisja> findAll() {
         return bean.findAll();
     }
 

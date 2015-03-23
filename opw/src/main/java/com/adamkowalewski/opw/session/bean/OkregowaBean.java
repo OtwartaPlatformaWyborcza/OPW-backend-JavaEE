@@ -21,37 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
+package com.adamkowalewski.opw.session.bean;
 
-import com.adamkowalewski.opw.entity.OpwKandydat;
-import com.adamkowalewski.opw.session.bean.KandydatBean;
-import java.io.Serializable;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author Adam Kowalewski
  */
-@Named
-@SessionScoped
-public class KandydatController implements Serializable {
+@Stateless
+public class OkregowaBean extends AbstractOpwFacade<OpwOkregowaKomisja> {
 
-    @EJB
-    private KandydatBean bean;
+    @PersistenceContext(unitName = PU_OPW)
+    private EntityManager em;
 
-    public void create(OpwKandydat kandydat) {
-        bean.create(kandydat);
+    public OkregowaBean() {
+        super(OpwOkregowaKomisja.class);
     }
 
-    public void edit(OpwKandydat kandydat) {
-        bean.edit(kandydat);
-    }
-
-    public List<OpwKandydat> findAll() {
-        return bean.findAll();
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
     }
 
 }

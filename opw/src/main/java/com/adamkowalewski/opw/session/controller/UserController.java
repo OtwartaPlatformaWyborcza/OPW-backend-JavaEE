@@ -42,13 +42,13 @@ import javax.inject.Named;
 public class UserController implements Serializable {
 
     @EJB
-    private UserBean userBean;
+    private UserBean bean;
 
     public UserController() {
     }
 
     public OpwUser find(int id) {
-        return userBean.findUser(id);
+        return bean.findUser(id);
     }
     
     /**
@@ -58,15 +58,15 @@ public class UserController implements Serializable {
      */
     public void create(OpwUser user) {
         user.setPassword(generatePassword());
-        userBean.create(user);
+        bean.create(user);
     }
     
     public void edit(OpwUser user) {        
-        userBean.edit(user);
+        bean.edit(user);
     }
     
     public List<OpwUser> findAll(){
-        return userBean.findAll();
+        return bean.findAll();
     }
 
     /**

@@ -59,8 +59,9 @@ PERSPEKTYWA SERWERA
 14) Import danych  
 
 **Dzień wyborczy wyniki**  
-15) Użytkownik bądź gość wchodzi na stronę główną, aktualne wyniki (agregowane np. co 5min) są widoczne
-16. Uzytkownik po wysłaniu protokołu musi zostać poinformowany o przesyłaniu go i odebraniu przez serwer.
+15) Użytkownik bądź/igość wchodzi na stronę główną, aktualne wyniki (agregowane np. co 5min) są widoczne
+
+16)Uzytkownik po wysłaniu protokołu musi zostać poinformowany o przesyłaniu go i odebraniu przez serwer.
 
 
 # Specyfikacja
@@ -80,6 +81,11 @@ PERSPEKTYWA SERWERA
 
 ## Risk & Issue Logs
 1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min. Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net)
+
+## Appendix Features
+1. Moduł Generowania  umów zleceń z operatorami oraz diet dla członków komisji wraz z wstepnie wypełnionym PIT-R
+2. Imort/Export Danych operatorów i członków komisji z Pliku XLS 
+3. Moduł Przypominajek dla operatorów i czlonków komisji  wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczen, Wydrukowaniu w nalezytej ilosci kopii protokołow, Zabezpieczeniu Brudnopisów, Zgraniu na zew nosnik elektronicznej wersji protokolu, Przekazanie protokolu fizcznie po wydrukowaniu do KBW itp itd etc.   
 
 
 ## Software stack

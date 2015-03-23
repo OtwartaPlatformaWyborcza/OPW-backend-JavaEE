@@ -5,7 +5,41 @@
                 template="./WEB-INF/opwTemplate.xhtml">
 
     <ui:define name="content">
-        content
+        <h1>#{messages.okregowaEditTitle}</h1>        
+
+        <h:form id="frmOkregowaEdit">
+            <h:panelGrid columns="2" cellspacing="7">
+
+                <h:outputLabel for="pkwId" id="pkwIdL" value="#{messages.nr}*" />
+                <p:inputText id="pkwId" value="#{okregowaHandler.instance.pkwId}" 
+                             disabled="#{okregowaHandler.viewMode}" required="true" />
+
+                <h:outputLabel for="name" id="nameL" value="#{messages.name}*" />
+                <p:inputText id="name" value="#{okregowaHandler.instance.name}" 
+                             disabled="#{okregowaHandler.viewMode}" required="true" />
+
+                <h:outputLabel for="address" id="addressL" value="#{messages.address}*" />
+                <p:inputText id="address" value="#{okregowaHandler.instance.address}" 
+                             disabled="#{okregowaHandler.viewMode}" required="true" />
+
+            </h:panelGrid>
+
+            <h:commandLink id="btnSave" class="btn" 
+                           value="#{messages.submit}" 
+                           action="#{okregowaHandler.edit()}"
+                           rendered="#{not okregowaHandler.viewMode}"/>
+
+            <h:commandLink id="btnCancel" class="btn" immediate="true"
+                           value="#{messages.cancel}" 
+                           action="#{okregowaHandler.cancel()}" 
+                           rendered="#{not okregowaHandler.viewMode}"/>
+
+            <h:commandLink id="btnEdit" class="btn" 
+                           value="#{messages.edit}"
+                           action="#{okregowaHandler.prepareEdit()}"
+                           rendered="#{okregowaHandler.viewMode}"/>
+
+        </h:form>
     </ui:define>
 
 </ui:composition>

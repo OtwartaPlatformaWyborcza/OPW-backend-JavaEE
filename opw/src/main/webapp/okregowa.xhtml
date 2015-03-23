@@ -5,7 +5,41 @@
                 template="./WEB-INF/opwTemplate.xhtml">
 
     <ui:define name="content">
-        <h1></h1>
+        <h1>#{messages.okregowaListTitle}</h1>
+        #{okregowaHandler.prepareList()}
+        
+        <div class="left box box_blue box550">
+            <div class="left"></div>
+            <div class="right"><h:link outcome="/okregowaCreate" value="#{messages.okregowaCreate}"/></div>
+            <div class="clear"></div>
+            <br/>
+            
+            <h:form id="frmOkregowaList">
+                <p:dataTable id="tblOkr" emptyMessage="#{messages.okregowaListEmpty}" 
+                             value="#{okregowaHandler.okregowaList}" var="i" 
+                             sortBy="#{i.pkwId}">
+
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
+                        <h:outputText value="#{i.pkwId}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.name}" sortBy="#{i.name}">
+                        <h:outputText value="#{i.name}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{messages.address}" sortBy="#{i.address}">
+                        <h:outputText value="#{i.address}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.action}">
+                        <h:commandLink id="btnView" value="#{messages.display}"
+                                       action="#{okregowaHandler.prepareView(i)}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+        
     </ui:define>
 
 </ui:composition>

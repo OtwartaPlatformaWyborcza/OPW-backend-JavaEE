@@ -28,13 +28,17 @@ import com.adamkowalewski.opw.session.Identity;
 import com.adamkowalewski.opw.session.controller.OkregowaController;
 import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * CRUD backing bean / handler for all CRUD related JSF sites.
  *
  * @author Adam Kowalewski
  */
+@Named
+@SessionScoped
 public class OkregowaHandler extends AbstractCrudHandler<OpwOkregowaKomisja> implements Serializable {
 
     private List<OpwOkregowaKomisja> okregowaList;

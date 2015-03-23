@@ -27,6 +27,7 @@ import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.session.Identity;
 import com.adamkowalewski.opw.session.controller.UserController;
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,6 +39,8 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class UserHandler extends AbstractCrudHandler<OpwUser> implements Serializable {
+
+    private List<OpwUser> userList;
 
     @Inject
     Identity identity;
@@ -65,12 +68,20 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
 
     @Override
     public void prepareList() {
-        userController.findAll();
+        userList = userController.findAll();
     }
 
     @Override
     public void prepareCreate() {
         instance = new OpwUser();
+    }
+
+    public List<OpwUser> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<OpwUser> userList) {
+        this.userList = userList;
     }
 
     @Override

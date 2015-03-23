@@ -1,5 +1,5 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"                
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 template="./WEB-INF/opwTemplate.xhtml">
@@ -11,7 +11,7 @@
         <h:form id="frmKandCreate">
             <h:panelGrid columns="2" cellspacing="7">
 
-                <h:outputLabel for="knr" id="knrL" value="#{messages.nr}*" />                    
+                <h:outputLabel for="knr" id="knrL" value="#{messages.nr}*" />
                 <p:inputText id="knr" value="#{kandydatHandler.instance.pkwId}" required="true"/>
 
                 <h:outputLabel for="kn" id="knL" value="#{messages.fullname}*" />

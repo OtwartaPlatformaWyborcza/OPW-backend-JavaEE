@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./WEB-INF/opwTemplate.xhtml"                
+                template="./WEB-INF/opwTemplate.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui">
 
@@ -18,12 +18,12 @@
                         <h:outputLabel id="labelPassword" for="password" value="#{messages.password}" />
                         <p:password id="password"  styleClass="in200"  
                                     value="#{loginHandler.password}" />
-                    </h:panelGrid>    
+                    </h:panelGrid>
 
-                    <h:commandButton id="submit" class="btn"                                       
+                    <h:commandButton id="submit" class="btn"
                                      value="#{messages.loginSubmit}" 
-                                     action="#{loginHandler.authenticate()}" />                                                     
-                </h:form>                    
+                                     action="#{loginHandler.authenticate()}" />
+                </h:form>
             </div>
         <div class="clear"></div>
 

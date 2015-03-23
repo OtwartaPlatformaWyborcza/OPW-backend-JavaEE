@@ -1,11 +1,44 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"                
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 template="./WEB-INF/opwTemplate.xhtml">
 
     <ui:define name="content">
-        <h1>[WiP] list user </h1>
+        <h1>#{messages.kandydatTitle}</h1>
+        #{userHandler.prepareList()}
+
+        <div class="left box box_blue box550">
+            <div class="left"></div>
+            <div class="right"><h:link outcome="/userCreate" value="#{messages.userCreateTitle}"/></div>
+            <div class="clear"></div>
+            <br/>
+
+            <h:form id="frmKandList">
+                <p:dataTable id="tblKandydat" emptyMessage="#{messages.userListEmpty}" 
+                             value="#{userHandler.userList}" var="u" 
+                             sortBy="#{u.lastname}">
+
+                    <p:column headerText="#{messages.firstname}" sortBy="#{u.firstname}" >
+                        <h:outputText value="#{u.firstname}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.lastname}" sortBy="#{u.lastname}">
+                        <h:outputText value="#{u.lastname}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{messages.email}" sortBy="#{u.email}">
+                        <h:outputText value="#{u.email}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.action}">
+                        <h:commandLink id="btnView" value="#{messages.display}"
+                                       action="#{userHandler.prepareView(k)}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
     </ui:define>
 
 </ui:composition>

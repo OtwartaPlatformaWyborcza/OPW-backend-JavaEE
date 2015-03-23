@@ -22,9 +22,9 @@
 
                 <div id="profile-nav">
                     <h:form id="frmUserMenu">
-                        <ui:fragment rendered="#{identity.loggedin}">                                                        
+                        <ui:fragment rendered="#{identity.loggedin}">
                             <h:link id="profileEdit" outcome="/profileEdit"
-                                    style="color: #fff;" value="#{identity.fullname}" />                            
+                                    style="color: #fff;" value="#{identity.fullname}" />
                         </ui:fragment>
 
                         <h:link style="color: #fff;" id="menuLoginId1" 
@@ -41,12 +41,7 @@
 
                 <div id="main-nav">
                     <h:link outcome="/index" value="Start" />
-<!--                    <h:link outcome="/dashboard" value="Dashboard"  rendered="#{identity.loggedin}" />
-                    <h:link outcome="/dashboardMp" value="#{messages.marktpartner}"  rendered="#{identity.loggedin}" />
-                    <h:link outcome="/dashboardZp" value="#{messages.zp}"  rendered="#{identity.loggedin}" />
-                    <h:link outcome="/stammdaten" value="#{messages.stammdaten}"  rendered="#{identity.loggedin}" />
-                    <h:link outcome="/import" value="#{messages.mmImport}" rendered="#{identity.loggedin}" />
-                    <h:link outcome="/kontakt" value="Kontakt" rendered="false"/>-->
+                    <h:link outcome="/dashboard" value="Dashboard"  rendered="#{identity.loggedin}" />
                 </div>
 
             </div>
@@ -55,16 +50,12 @@
             <div id="content-wrapper">
                 <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true"  />
                 <ui:insert name="content"></ui:insert>
+                <div class="clear"></div>
             </div>
             
 
             <div id="footer-wrapper">
                 <p style="text-align: right; font-size: 10px;">
-                    <!--<ui:fragment rendered="#{identity.userId == 1}">-->
-                    <h:link outcome="/debug" value="Debug" rendered="false"/>
-                    <h:outputText value=" | " rendered="false"/>
-                    #{view.viewId}
-                    <!--</ui:fragment>-->
                     <h:outputText value=" 2015"/>
                 </p>  
             </div>

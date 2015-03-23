@@ -16,20 +16,20 @@
             
             <h:form id="frmKandList">
                 <p:dataTable id="tblKandydat" emptyMessage="#{messages.kandydatListEmpty}" 
-                             value="#{kandydatHandler.kandydatList}" var="k" 
-                             sortBy="#{k.pkwId}">
+                             value="#{kandydatHandler.kandydatList}" var="i" 
+                             sortBy="#{i.pkwId}">
 
-                    <p:column headerText="#{messages.nr}" sortBy="#{k.pkwId}" >
-                        <h:outputText value="#{k.pkwId}"/>
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
+                        <h:outputText value="#{i.pkwId}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.name}" sortBy="#{k.name}">
-                        <h:outputText value="#{k.name}"/>
+                    <p:column headerText="#{messages.name}" sortBy="#{i.name}">
+                        <h:outputText value="#{i.name}"/>
                     </p:column>
 
                     <p:column headerText="#{messages.action}">
                         <h:commandLink id="btnView" value="#{messages.display}"
-                                       action="#{kandydatHandler.prepareView(k)}"/>
+                                       action="#{kandydatHandler.prepareView(i)}"/>
                     </p:column>
 
                 </p:dataTable>

@@ -33,7 +33,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
+ * CRUD backing bean / handler for all CRUD related JSF sites. 
+ * 
  * @author Adam Kowalewski
  */
 @Named

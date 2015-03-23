@@ -32,6 +32,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
+ * CRUD backing bean / handler for all CRUD related JSF sites.
  *
  * @author Adam Kowalewski
  */
@@ -68,7 +69,7 @@ public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements
 
     @Override
     public void prepareList() {
-        kandydatList = kandydatController.findAll();        
+        kandydatList = kandydatController.findAll();
     }
 
     public List<OpwKandydat> getKandydatList() {

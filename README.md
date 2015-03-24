@@ -5,10 +5,9 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Quickstart
 1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    
-```default-storage-engine = InnoDB```  
-```collation-server = utf8_general_ci```  
-```character-set-server = utf8```
-
+  * ```default-storage-engine = InnoDB```  
+  * ```collation-server = utf8_general_ci```  
+  * ```character-set-server = utf8```  
 2. MySQL dodaj użytkownika opw zgodnie z definicją w glassfish-resources.xml
 3. MySQL Workbench wykonaj import bazy (opcja Forward Engineer)
 4. GlassFish wykonaj import glassfish-resources.xml 

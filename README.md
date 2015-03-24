@@ -1,7 +1,10 @@
 # Otwarta Platforma Wyborcza
 Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projekt OPW nie jest kompletna implementacja wymagań sprecyzowanych przez PKW w ramach projektu PW2 (Platforma Wyborcza 2).   
 
+Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
+
 # Quickstart
+
 
 
 ##Wymagane oprogramowania
@@ -99,25 +102,25 @@ PERSPEKTYWA SERWERA
 ## Roadmap
 Plan implementacji
 
-### Wersja 0.1
+### Wersja 0.1 [wydana 2015.03.24] 
 * Definicja bazy danych
-* Funkcjonalność CRUD w przeglądarce dla obiektów
+* Funkcjonalność CRUD(Create Remove Update Delete) w przeglądarce dla obiektów
   * user (+ generowanie hasła )
   * kandydat
   * komisja okręgowa
   * komisja obwodowa
 
-
 ### Wersja 0.2
 * Wysyłanie E-Maili z loginem i hasłem
 * Konfiguracja Jenkins i działający CI
+* Definicja i implementacja interfejsu REST
+* Import CSV dla następujących encji: user, komisja obwodowa, komisja okręgowa. 
 
 ### Wersja 0.3
-* Definicja interfejsu REST
+* Możliwość zamknięcia listy kandydatów. 
 
 ### Wersja 0.5
-* Implementacja interfejsu REST
-* Dashboard
+* Aktualne wyniki wyborów są dostępne na stronie.
 
 ### Wersja 0.6
 * Frontend bezpośrednio w HTML / JavaScript / REST

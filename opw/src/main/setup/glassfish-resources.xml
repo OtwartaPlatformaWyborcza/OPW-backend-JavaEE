@@ -7,7 +7,7 @@
         <property name="databaseName" value="opw"/>
         <property name="User" value="opw"/>
         <property name="Password" value="Lc4!_-f4FjmypLDRHW."/>
-        <property name="URL" value="jdbc:mysql://localhost:3306/opw?zeroDateTimeBehavior=convertToNull"/>
+        <property name="URL" value="jdbc:mysql://localhost:3306/opw?zeroDateTimeBehavior=convertToNull&useUnicode=true&connectionCollation=utf8_general_ci&characterSetResults=utf8"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="jdbc/opw" object-type="user" pool-name="mysql_opw_opwPool"/>

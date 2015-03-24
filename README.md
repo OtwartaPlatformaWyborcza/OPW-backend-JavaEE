@@ -25,50 +25,57 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Proces
 **Przygotowanie do wyborów**  
-1) Administrator definiuje / importuje komisje okręgowe i należące do nich komisje obwodowe (nr komisji oraz adresy)
+1) Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
 
-2) Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane obwody  najczesciej gmina badz dzielnica ) 
+2) Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczesciej gmina badz dzielnica ) - funkcja docelowa zaplanowa w przyszlosci.
 
-3) Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
+3) Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami - funkcja docelowa zaplanowa w przyszlosci.
 
-4) Administrator zakłada konta operatorom
+4) Koordynator wyborów zakłada konta operatorom -  funkcja docelowa zaplanowa w przyszlosci.
 
-5) Administrator zaklada konta użytkownikom (przewodniczącym komisji obwodowych badz/i wolentariuszom, męzom zaufania)
+5) Administrator zaklada konta użytkownikom (wolentariusz bądz/i męzom zaufania)
+5a) Kordynator wybórów zaklada konta operatorom i przewodniczącemu komisji - funkcja docelowa zaplanowa w przyszlosci. 
+6)  Administrator rozsyła hasła uzytkowikom. 
+6a) Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom - funkcja docelowa zaplanowa w przyszlosci.
 
-6) Operatorzy zbierają dane od uzytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel,    Czy nie kandydują, nr Komisji ,Adres komisji)
+7)  Administrator zbiera dane  uzytkownika badz/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji ) 
+7a) Koordynator zbiera dane od uzytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel,     Walidacja Czy nie kandydują, nr Komisji ,Adres komisji) - - funkcja docelowa zaplanowa w przyszlosci.
 
-7) Koordynator  wyborów definiuje/importuje składy komisji lokalnych otrzymanych od operatorów (przypisuje użytkownków  do komisji
+8) Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji - funkcja docelowa w przyszlosci
+8a) Koordynator wyborów definiuje/importuje operatorów informatycznnych funkcja docelowa w przyszlosci
 
-7.1) System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres E-Mail 
+9) System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres E-Mail
+9a) System generuje hasła dostepu dla operatorow i przewodniczących komisji którzy proszą po zalogowaniu sie o wydanie certyfikatu -  funkcja docelowa w przyszlosci
+9b)  System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszlosci
 
-7.2) Użytkownik aktywuje konto w OPW  
+10) Administrator systemu ma mozliwosc edycji, weryfikacji kont uzytkownków wraz ich danymi.
 
-PERSPEKTYWA KOORDYNATORA
 
-8) Koordynator wprowadza i importuje do systemu informacje o operatorach. Najlepiej import z XLS ( imie, nazwisko,  telefon,mail, uwagi )
+**Dzień wyborczy**
 
-8.1) Koordynator przekazuje operatorom otrzymane od Administratora hasła dostepów dla uzytkowków 
+11) Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidlowej komisji
+12) Uzytkownik drukuje pusty nie wypełniony protokól - funkcja docelowa w przyszlosci
+13) Użytkownik wpisuje dane z protokołu (maski w paper browser)
+14) Uzytkownik ma mozliwosc poprawienia protokołu 
+15) Uzytkownik ma mozliwosc wydrukowania protokolu
+15) Uzytkownik ma mozliwosc zapisania/wczytania protokolu na zewnetrznym nosniku. 
+16) Użytkownik wysyła dane  
+17) Walidacja po stronie klienta (JavaScript/HTML5) dla błędów twardych i miekkich. 
+18) Raport błedów/ostrzezen dla przewodniczacych komisji - funkcja docelowa w przyszlosci. 
 
-PERSPEKTYWA OPERATORA
-
-9) Koordynator wprowadza i importuje do  systemu informacje o użytkownkach. Najlepiej import z XLS ( imie, nazwisko, telefon,mail, uwagi )
-
-**Dzień wyborczy import danych**  
-PERSPEKTYWA UŻYTKOWNIKA
-
-10) Użytkownik loguje się na stronie (maski w paper browser)  
-11) Użytkownik wpisuje dane z protokołu (maski w paper browser)  
-12) Użytkownik wysyła dane  
-12.1) Walidacja po stronie klienta (JavaScript/HTML5) dla błędów twardych  
  
 PERSPEKTYWA SERWERA  
-13) Walidacja po stronie serwera JSR323 m.in. dla błędów miękkich i tagowanie protokołów  
-14) Import danych  
+  
+18) Import/ otrzymanie danych.
+19) Sprawdzenia certyfikatów i uwierzytelnien - funcja docelowa w przyszlosci
+20) Potwierdzenie otrzymania danych dla uzytkownika (np mail)
+21) Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami. 
 
 **Dzień wyborczy wyniki**  
-15) Użytkownik bądź/igość wchodzi na stronę główną, aktualne wyniki (agregowane np. co 5min) są widoczne
+22) Użytkownik wchodzi na stronę główną, dostaje aktualne wyniki  w podziale na komisje (agregowane np. co 5min)
+22) Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
+23) Frekwencja - wysalnie liczby osob uprawnonych i wydanych kart. 
 
-16)Uzytkownik po wysłaniu protokołu musi zostać poinformowany o przesyłaniu go i odebraniu przez serwer.
 
 
 # Specyfikacja
@@ -81,9 +88,9 @@ PERSPEKTYWA SERWERA
 
 ## Grupy użytkowników (docelowa architektura) 
 1. Administrator (admin) 
-2. Koordynator Wyborów (odpowiedzialny za operatorów)
-3. Operator Wyborów (najczęściej informatyk, może być odpowiedzialny za kilka komisji)
-4. Użytkownik (mąz zaufania, wolentariusz bądz/i przewodniczący
+2. Koordynator Gminy  (odpowiedzialny za operatorów)
+3. Operator Informatyczny  (najczęściej informatyk, może być odpowiedzialny za kilka komisji)
+4. Przewodniczący Komisji 
 5. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
 
 ## Risk & Issue Logs

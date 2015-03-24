@@ -74,6 +74,7 @@ PERSPEKTYWA SERWERA
 **Dzień wyborczy wyniki**  
 22) Użytkownik wchodzi na stronę główną, dostaje aktualne wyniki  w podziale na komisje (agregowane np. co 5min)
 22) Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
+23) Frekwencja - wysalnie liczby osob uprawnonych i wydanych kart. 
 
 
 

@@ -4,16 +4,22 @@
 ### Administrator 
 1. Jako administrator moge zalogować się do systemu i uzyskać dostęp do stron administracyjnych.  
 2. Jako administrator po poprawnym zalogowaniu sie otrzymuje mozliwość:
-   Generowania haseł dla Koordynatórów Wyborów, Operatorów i Uzytkowników oraz ich usuwania bądz reedytowania
-4. Jako administrator definiuje / importuje komisje okręgowe i należące do nich komisje obwodowe (nr komisji oraz adresy)
-5. Jako administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane obwody najczesciej gmina badz dzielnica ) - Import XLS
-6. Jako administrator zakładam konta koordynatorom i łącze je z odpowiednimi komisjami i obwodami
-7.  Jako administrator zakładam konta operatorom i użytkownikom (przewodniczącym komisji obwodowych badz/i wolentariuszom, męzom zaufania) i takze łacze je z  odpowiednimi komisjami
-8.  
+   Generowania haseł dla Koordynatórów Gminnych, Operatorów i Przewodniczących oraz ich usuwania bądz reedytowania
+3. Jako administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy)
+5. Jako administrator definiuje/ importuje koordynatorów gminnych (imie, nazwisko, telefon, mail, przypisane obwody najczesciej gmina badz dzielnica ) - Import XLS
+6. Jako administrator zakładam konta  uzytwkonom  i łącze je z odpowiednimi komisjami
+6a  Jako administrator zakładam konta koordynatorom gminy  i łącze je z odpowiednimi gminami/zestawami komisji - funkcja docelowa w przyszlosci. 
+
+7. Jako administrator zatwierdzam requesty certyfikatów imienienych dla przewodniczych i operatorów informatycznych - funkcja docelowa w przyszlosci. 
+8. Jako administrator wysyłam hasła uzytkownikom 
+9. Jako administrator wysyłam hasła koordynatorom - funkcja docelowa w przyszlosci
+10. Jako administrator wprowadzam kandydatów i mam mozliwosc ich edycji  
+11. Jako administrator mam narzedzie do weryfikacji spływajacych danych ( protokołow z konkretnych komisji wraz z warningami ) 
+12. 
 
 
 
-### Koordynator Wyborów (rola docelowa jesli bedziemy integrowac sie z PKW)
+### Koordynator Gminy  (rola docelowa jesli bedziemy integrowac sie z PKW)
 1. Jako koordynator wprowadzam zatwierdzam i edytuje składy komisji lokalnych dostarczonych przez operatorów importując dane z / do XLS  oraz systemu (Imie, Nazwisko, Pesel, mail, telefon, funkcja czlonka komisji)
 2. Jako koordynator wprowadzam nadmiarową ilość członków komisji dla danej komisji, i mam mozliwość w przeddzień wyborów zatwierdzić ostateczny sklad komisji. 
 3. Jako koordynator mam dostęp do częsci systemu który waliduje członków komisji i ich poprawność przed ostatecznym zaakceptowaniem składu komisji ( walidacja po PESEL, zameldowaniu, czy wystepuje dany członek komisji tylko w jednej komisji)
@@ -42,18 +48,17 @@
 
 
 ### Użytkownik
-1. Jako użytkownik jestem wstanie zalogować sie loginem i hasłem otrzymanym od administratora.
-2. Jako użytkownik jestem wstanie w systemie wypełnić elektroniczny formularz protokołu wraz z załaczeniem 3 zdjęc protokołu. 
-3. Jako użytkownik mam dostęp do formularza protokłółu który uzupeniany jest automatycznie o podstawowe dane takie jak. data, godzina protokołu, adres komisji, numer komisji
+1. Jako użytkownik jestem w stanie zalogować sie loginem i hasłem otrzymanym od administratora.
+2. Jako użytkownik jestem w stanie w systemie wypełnić elektroniczny formularz protokołu wraz z załaczeniem 3 zdjęc protokołu. 
+3. Jako użytkownik mam dostęp do formularza protokłółu który uzupeniany jest automatycznie o podstawowe dane takie jak. data, godzina protokołu, data otwarcia lokalu i zamkniecia ( podpowiedzi do zaakceptowania) 
 4. Jako uzytkownik mam mozliwosc wydrukowania pustego i wypełnionego formularza protokołu
-5. Jako uzytkownik przy wpisywaniu formularza protokołu - formularz zostaje walidowany ( do wyspecyfikowania ) Twarde błedy od razu, Miekkie Pozniej ( np po stronie serwera)
-6. Jako uzytkownik wysyłam podpisany i uwierzytelniony protokół i otrzymuje raport błedów protokołu ( przetworzonego przez serwer )
-7. Jako uzytkownik mam mozliwosć poprawiania protokołu wraz z wyjasnieniem poprawki i  naniesieniem nowej wersji ptotokołu.
+5. Jako uzytkownik przy wpisywaniu formularza protokołu - formularz zostaje walidowany ( do wyspecyfikowania ) Twarde i miekkie błedy. 
+6. Jako uzytkownik wysyłam podpisany i uwierzytelniony protokół i otrzymuje raport błedów protokołu - funkcja docelowa w przyszlosci 
+7. Jako uzytkownik mam mozliwosć poprawiania protokołu wraz z wyjasnieniem poprawki i  naniesieniem nowej wersji protokołu.
 8.  Jako uzytkownik otrzymuje komunikat i potwierdzenie wysłania i odebrania przez serwer protokołu
-3. Jako użytkownik jestem wstanie zapisac elektroniczny formularz protokołu na zewnetrzym nosniku w postaci pliku
-4. Jako uzytkownik mam mozliwosc "zgrania" protokołu na nosnik CD badz pendrive i przekazuje go w postaci fizycznej do koordynatora
-4. Jako uzytkownik jestem wstanie wysłac wypełnony formularz na serwer
-5. Jako uzytkownik otrzymuje komunikat i potwierdzenie o wysłaniu protokołu i odebraniu go przez serwer.
+9. Jako użytkownik jestem wstanie zapisac/odczytac elektroniczny formularz protokołu na zewnetrzym nosniku w postaci pliku
+10. Jako uzytkownik jestem wstanie wysłac wypełnony formularz na serwer
+
 
 
 ### Gość

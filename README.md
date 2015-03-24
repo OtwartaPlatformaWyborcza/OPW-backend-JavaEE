@@ -4,7 +4,11 @@ Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego po
 Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Quickstart
-
+1. MySQL skonfiguruj serwer do pracy w trybie UTF8, jako engine InnoDB
+2. MySQL dodaj użytkownika opw zgodnie z definicją w persistence.xml
+3. MySQL Workbench wykonaj import bazy (opcja Forward Engineer)
+4. GlassFish wykonaj import glassfish-resources.xml 
+5. mvn clean install i deploy na serwer
 
 
 ##Wymagane oprogramowania
@@ -87,13 +91,13 @@ PERSPEKTYWA SERWERA
 
 ## Appendix Features
 1. Moduł Generowania  umów zleceń z operatorami oraz diet dla członków komisji wraz z wstepnie wypełnionym PIT-R
-2. Imort/Export Danych operatorów i członków komisji z Pliku XLS 
-3. Moduł Przypominajek dla operatorów i czlonków komisji  wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczen, Wydrukowaniu w nalezytej ilosci kopii protokołow, Zabezpieczeniu Brudnopisów, Zgraniu na zew nosnik elektronicznej wersji protokolu, Przekazanie protokolu fizcznie po wydrukowaniu do KBW itp itd etc.   
+2. Import / eksport danych operatorów i członków komisji z pliku XLS 
+3. Moduł Przypominajek dla operatorów i czlonków komisji wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczen, Wydrukowaniu w nalezytej ilosci kopii protokołow, Zabezpieczeniu Brudnopisów, Zgraniu na zew nosnik elektronicznej wersji protokolu, Przekazanie protokolu fizcznie po wydrukowaniu do KBW itp itd etc.   
 
 
 ## Software stack
-1. Java EE 7 (GlassFish 4, JPA2, JSF 2.2, JAX-RS)
-2. MySQL 5
+1. Java EE 7 (GlassFish 4, JPA2, CDI, EJB, JSF 2.2 (PrimeFaces 5.1), JAX-RS, JAAS, JavaMail)
+2. MySQL 5.5 (UTF8, InnoDB, MySQL Workbench)
 3. REST
 4. HTML5 
 5. CSS3
@@ -112,15 +116,30 @@ Plan implementacji
 
 ### Wersja 0.2
 * Wysyłanie E-Maili z loginem i hasłem
-* Konfiguracja Jenkins i działający CI
-* Definicja i implementacja interfejsu REST
-* Import CSV dla następujących encji: user, komisja obwodowa, komisja okręgowa. 
+* Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
+* [DONE] Konfiguracja Jenkins i działający CI
+* Definicja i implementacja interfejsu REST 
+* Import CSV/KLK dla następujących encji: user, komisja obwodowa, komisja okręgowa 
+* Kolejne funkcje dla administratora 
+  * reset hasła użytkownika 
+  * aktywowanie i deaktywowanie konta użytkownika
+* Definicja szablonu SMS
+* Definicja szablonu EMail
+* Definicja masek UI dla klienta HTML5/CSS3 
 
 ### Wersja 0.3
 * Możliwość zamknięcia listy kandydatów. 
+* Autoryzacja i autentyfikacja na bazie JAAS
+* Podbieranie protokołów przesłanych na skrzynke pocztową
+* Automatyczne parsowanie protokołów ze skrzynki pocztowej
+  * import poprawnych protokołów
+  * tagowanie błędnych protokołów  
+Definicja architektury na nadchodzące wybory
+
 
 ### Wersja 0.5
 * Aktualne wyniki wyborów są dostępne na stronie.
+
 
 ### Wersja 0.6
 * Frontend bezpośrednio w HTML / JavaScript / REST

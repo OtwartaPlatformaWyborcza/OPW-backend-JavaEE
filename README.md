@@ -25,17 +25,21 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Proces
 **Przygotowanie do wyborów**  
-1) Administrator definiuje / importuje komisje okręgowe i należące do nich komisje obwodowe (nr komisji oraz adresy)
+1) Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
 
-2) Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane obwody  najczesciej gmina badz dzielnica ) 
+2) Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczesciej gmina badz dzielnica ) - funkcja docelowa zaplanowa w przyszlosci.
 
-3) Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
+3) Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami - funkcja docelowa zaplanowa w przyszlosci.
 
-4) Administrator zakłada konta operatorom
+4) Administrator zakłada konta operatorom -  funkcja docelowa zaplanowa w przyszlosci.
 
-5) Administrator zaklada konta użytkownikom (przewodniczącym komisji obwodowych badz/i wolentariuszom, męzom zaufania)
+5) Administrator zaklada konta użytkownikom (wolentariusz bądz/i męzom zaufania)
+5a) Kordynator wybórów zaklada konta operatorom i przewodniczącemu komisji - funkcja docelowa zaplanowa w przyszlosci. 
+6)  Administrator rozsyła hasła uzytkowikom. 
+6a) Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom - funkcja docelowa zaplanowa w przyszlosci.
 
-6) Operatorzy zbierają dane od uzytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel,    Czy nie kandydują, nr Komisji ,Adres komisji)
+
+7)  zbierają dane od uzytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel,    Czy nie kandydują, nr Komisji , Adres komisji)
 
 7) Koordynator  wyborów definiuje/importuje składy komisji lokalnych otrzymanych od operatorów (przypisuje użytkownków  do komisji
 

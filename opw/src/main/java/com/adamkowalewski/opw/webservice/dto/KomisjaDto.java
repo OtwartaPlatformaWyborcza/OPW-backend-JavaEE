@@ -21,32 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.webservice;
+package com.adamkowalewski.opw.webservice.dto;
 
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
-import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
-import java.util.List;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import java.io.Serializable;
 
 /**
  *
  * @author Adam Kowalewski
  */
-@Path("")
-public class RestService {
-
-    @GET
-    @Path("")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<KomisjaShortDto> loadObwodowaShort(int userId) {
-        return null;
-    }
-
-    public OpwObwodowaKomisja loadObwodowa() {
-        return null;
-    }
-
+public class KomisjaDto  implements Serializable{
+    
 }

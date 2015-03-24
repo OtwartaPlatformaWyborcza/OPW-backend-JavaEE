@@ -26,26 +26,31 @@ package com.adamkowalewski.opw.webservice.dto;
 import java.io.Serializable;
 
 /**
- * DTO Represents payload for Komisja selection.
  *
  * @author Adam Kowalewski
  */
-public class KomisjaShortDto implements Serializable {
+public class UserDto implements Serializable {
 
     private int id;
-    private String pkwId;
-    private String name;
-    private String address;
+    private String fullname;
+    private String token;
+    private boolean activeSession;
 
-    public KomisjaShortDto() {
+    public UserDto() {
     }
 
-    public KomisjaShortDto(int id, String pkwId, String name, String address) {
+    public UserDto(int id, String fullname, String token, boolean activeSession) {
         this.id = id;
-        this.pkwId = pkwId;
-        this.name = name;
-        this.address = address;
+        this.fullname = fullname;
+        this.token = token;
+        this.activeSession = activeSession;
     }
+
+    public UserDto(boolean activeSession) {
+        this.activeSession = activeSession;
+    }
+
+
 
     public int getId() {
         return id;
@@ -55,28 +60,28 @@ public class KomisjaShortDto implements Serializable {
         this.id = id;
     }
 
-    public String getPkwId() {
-        return pkwId;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setPkwId(String pkwId) {
-        this.pkwId = pkwId;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
-    public String getName() {
-        return name;
+    public String getToken() {
+        return token;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public String getAddress() {
-        return address;
+    public boolean isActiveSession() {
+        return activeSession;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setActiveSession(boolean activeSession) {
+        this.activeSession = activeSession;
     }
 
 }

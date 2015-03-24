@@ -26,57 +26,9 @@ package com.adamkowalewski.opw.webservice.dto;
 import java.io.Serializable;
 
 /**
- * DTO Represents payload for Komisja selection.
  *
  * @author Adam Kowalewski
  */
-public class KomisjaShortDto implements Serializable {
-
-    private int id;
-    private String pkwId;
-    private String name;
-    private String address;
-
-    public KomisjaShortDto() {
-    }
-
-    public KomisjaShortDto(int id, String pkwId, String name, String address) {
-        this.id = id;
-        this.pkwId = pkwId;
-        this.name = name;
-        this.address = address;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPkwId() {
-        return pkwId;
-    }
-
-    public void setPkwId(String pkwId) {
-        this.pkwId = pkwId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+public class KandydatDto implements Serializable {
 
 }

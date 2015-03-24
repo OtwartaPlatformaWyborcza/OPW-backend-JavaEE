@@ -21,62 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.webservice.dto;
+package com.adamkowalewski.opw.webservice;
 
+import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 import java.io.Serializable;
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
- * DTO Represents payload for Komisja selection.
- *
+ * Represents komisja perspective. 
+ * 
  * @author Adam Kowalewski
  */
-public class KomisjaShortDto implements Serializable {
+@Path("/komisja")
+public class KomisjaService {
 
-    private int id;
-    private String pkwId;
-    private String name;
-    private String address;
 
-    public KomisjaShortDto() {
-    }
 
-    public KomisjaShortDto(int id, String pkwId, String name, String address) {
-        this.id = id;
-        this.pkwId = pkwId;
-        this.name = name;
-        this.address = address;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPkwId() {
-        return pkwId;
-    }
-
-    public void setPkwId(String pkwId) {
-        this.pkwId = pkwId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    @GET
+    @Path("/{pkwId}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public OpwObwodowaKomisja loadObwodowa(@PathParam("pkwId") String pkwId) {
+        return null;
     }
 
 }

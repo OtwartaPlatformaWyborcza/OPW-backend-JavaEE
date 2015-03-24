@@ -21,62 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.webservice.dto;
+package com.adamkowalewski.opw.webservice;
 
-import java.io.Serializable;
+import java.util.Set;
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 
 /**
- * DTO Represents payload for Komisja selection.
- *
+ * REST configuration. 
+ * 
  * @author Adam Kowalewski
  */
-public class KomisjaShortDto implements Serializable {
+@ApplicationPath("service")
+public class RestConfig extends Application {
 
-    private int id;
-    private String pkwId;
-    private String name;
-    private String address;
-
-    public KomisjaShortDto() {
+    @Override
+    public Set<Class<?>> getClasses() {
+        Set<Class<?>> resources = new java.util.HashSet<>();
+        addRestResourceClasses(resources);
+        return resources;
     }
 
-    public KomisjaShortDto(int id, String pkwId, String name, String address) {
-        this.id = id;
-        this.pkwId = pkwId;
-        this.name = name;
-        this.address = address;
+    private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.adamkowalewski.opw.webservice.KomisjaService.class);        
+        resources.add(com.adamkowalewski.opw.webservice.UserService.class);        
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPkwId() {
-        return pkwId;
-    }
-
-    public void setPkwId(String pkwId) {
-        this.pkwId = pkwId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
 }

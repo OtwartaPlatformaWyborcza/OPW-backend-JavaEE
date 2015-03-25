@@ -1,12 +1,36 @@
 # User story - kompletna lista 
+Rozróżniamy dwa warianty OPW: prosty (na wybory prezydenckie 2015) i rozszeżony. Pojedyńcze user story organizujemy z perspektywy użytkownika.  
+Schemant nazewnictwa: OPW-{perspektywa: A, U, G}-{numer}. 
 
+
+## Wariant prosty Prezydent 2015 
+Jest to lista minimalnych wymagan by obsluzyc nadchodzace wybory. 
+
+### Administrator
+* OPW-A-1 : Jako administrator moge zalogować się do systemu i uzyskać dostęp do stron administracyjnych.
+* OPW-A-2 : Jako administrator definiuje / importuje komisje obwodowe (nr komisji, adres, przynależność do komisji okręgowej).
+* OPW-A-3 : Jako administrator definiuje / importuje komisje okręgowe (nr komisji oraz adresy).
+* OPW-A-4 : Jako administrator jestem w stanie dokonać wirtualnego podziału państwa na okręgi i obwody wyborcze. 
+* OPW-A-5 : Jako administrator jestem w stanie dodać pojedyńcze konto użytkownika w przeglądarce. 
+* OPW-A-6 : Jako administrator jestem w stanie wykonać import listy użytkowników z pliu CSV.
+* OPW-A-7 : 
+* OPW-A-8 : 
+* OPW-A-9 : 
+* OPW-A-10 : 
+
+
+### Użytkownik 
+
+
+
+
+## Wariant rozszeżony
+ 
 
 ### Administrator 
-1. Jako administrator moge zalogować się do systemu i uzyskać dostęp do stron administracyjnych.  
-2. Jako administrator po poprawnym zalogowaniu sie otrzymuje mozliwość:
-   Generowania haseł dla Koordynatórów Gminnych, Operatorów i Przewodniczących oraz ich usuwania bądz reedytowania
-3. Jako administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy)
-5. Jako administrator definiuje/ importuje koordynatorów gminnych (imie, nazwisko, telefon, mail, przypisane obwody najczesciej gmina badz dzielnica ) - Import XLS
+* Jako administrator po poprawnym zalogowaniu sie otrzymuje mozliwość:
+  * Generowania haseł dla Koordynatórów Gminnych, Operatorów i Przewodniczących oraz ich usuwania bądz reedytowania
+* Jako administrator definiuje/ importuje koordynatorów gminnych (imie, nazwisko, telefon, mail, przypisane obwody najczesciej gmina badz dzielnica ) - Import XLS
 6. Jako administrator zakładam konta  uzytwkonom  i łącze je z odpowiednimi komisjami
 6a  Jako administrator zakładam konta koordynatorom gminy  i łącze je z odpowiednimi gminami/zestawami komisji - funkcja docelowa w przyszlosci. 
 

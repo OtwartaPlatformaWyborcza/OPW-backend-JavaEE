@@ -28,6 +28,6 @@ package com.adamkowalewski.opw.session.dto;
  * 
  * @author Adam Kowalewski
  */
-public class ImportCsvDto {
+public class ImportObwodowaCsvDto {
     
 }

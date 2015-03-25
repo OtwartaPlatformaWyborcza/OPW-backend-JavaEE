@@ -63,8 +63,8 @@ Jest to lista minimalnych wymagan by obsłużyc nadchodzace wybory.
 7. Jako operator przy wpisywaniu formularza protokołu - formularz zostaje walidowany ( do wyspecyfikowania ) Twarde błedy od razu, Miekkie Pozniej ( np po stronie serwera)
 8.  Jako operator przedstawiam wypełniony protokół do podpisania i uwiezytelnienia dla przewodniczącego komisji.(uzytkownika)
 9. Jako operator wysyłam podpisany i uwierzytelniony protokół i otrzymuje raport błedów protokołu ( przetworzonego przez serwer )
-10. Jako operator mam mozliwosć poprawiania protokołu wraz z wyjasnieniem poprawki i  naniesieniem nowej wersji ptotokołu.
-11. Jako Operator mam mozliwosc "zgrania" protokołu na nosnik CD badz pendrive i przekazuje go w postaci fizycznej do koordynatora
+10. Jako operator mam możliwosć poprawiania protokołu wraz z wyjasnieniem poprawki i  naniesieniem nowej wersji ptotokołu.
+11. Jako Operator mam możliwosc "zgrania" protokołu na nosnik CD badz pendrive i przekazuje go w postaci fizycznej do koordynatora
 12. Jako operator otrzymuje komunikat i potwierdzenie wysłania i odebrania przez serwer protokołu. 
 13. Jako operator chce miec mozliowść po przez telefon komórkowy i barcode sprawdzenia dostarczonych protokołow na serwer ( z kilku podleglych dla mnie komisji )
 14. Jako operator instaluje w systemie certyfikat imienny SSL dla przewodniczacego komisji 

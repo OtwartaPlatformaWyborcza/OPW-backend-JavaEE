@@ -24,30 +24,34 @@
 package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
-import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
-import java.io.Serializable;
-import java.util.List;
+import com.adamkowalewski.opw.webservice.dto.UploadWynikDto;
+import com.adamkowalewski.opw.webservice.dto.UploadWynikResultDto;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Represents komisja perspective. 
- * 
+ * Represents komisja perspective.
+ *
  * @author Adam Kowalewski
  */
 @Path("/komisja")
 public class KomisjaService {
-
-
 
     @GET
     @Path("/{pkwId}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public OpwObwodowaKomisja loadObwodowa(@PathParam("pkwId") String pkwId) {
         return null;
+    }
+    
+    @POST
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public UploadWynikResultDto uploadWyniki(UploadWynikDto wynik){
+        return new UploadWynikResultDto();
     }
 
 }

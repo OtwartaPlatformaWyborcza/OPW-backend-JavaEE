@@ -13,7 +13,7 @@ Jest to lista minimalnych wymagan by obsłużyc nadchodzace wybory.
 * OPW-A-4 : Jako administrator jestem w stanie dokonać wirtualnego podziału państwa na okręgi i obwody wyborcze. 
 * OPW-A-5 : Jako administrator jestem w stanie dodać pojedyńcze konto użytkownika w przeglądarce. 
 * OPW-A-6 : Jako administrator jestem w stanie wykonać import listy użytkowników z pliu CSV.
-* OPW-A-7 : 
+* OPW-A-7 : Jako administrator chcę wykonać import komisji okręgowych bezpośrednio z pliku CSV. 
 * OPW-A-8 : 
 * OPW-A-9 : 
 * OPW-A-10 : 

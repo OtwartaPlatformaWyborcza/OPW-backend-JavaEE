@@ -110,6 +110,16 @@ PERSPEKTYWA SERWERA
 5. CSS3
 6. Maven 3
 
+
+## REST 
+u GET login 
+u GET obwodowaList
+GET obwodowa(id)
+	+ kandydaci
+	+ lista protokołow
+ 
+POST	uploadWyniki
+
 ## Roadmap
 Plan implementacji
 

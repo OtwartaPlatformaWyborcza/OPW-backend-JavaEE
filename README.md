@@ -1,10 +1,10 @@
 # Otwarta Platforma Wyborcza
-Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projekt OPW nie jest kompletna implementacja wymagań sprecyzowanych przez PKW w ramach projektu PW2 (Platforma Wyborcza 2).   
+Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projektu OPW nie jest kompletna implementacja wymagań sprecyzowanych przez PKW w ramach projektu PW2 (Platforma Wyborcza 2).   
 
 Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Quickstart
-1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    
+1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB  
   * ```default-storage-engine = InnoDB```  
   * ```collation-server = utf8_general_ci```  
   * ```character-set-server = utf8```  
@@ -28,11 +28,9 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Proces
 **Przygotowanie do wyborów**  
-1) Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
-
-2) Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczesciej gmina badz dzielnica ) - funkcja docelowa zaplanowa w przyszlosci.
-
-3) Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami - funkcja docelowa zaplanowa w przyszlosci.
+1. Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
+2. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczesciej gmina badz dzielnica ) - funkcja docelowa zaplanowa w przyszlosci.
+3. Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami - funkcja docelowa zaplanowa w przyszlosci.
 
 4) Koordynator wyborów zakłada konta operatorom -  funkcja docelowa zaplanowa w przyszlosci.
 
@@ -56,7 +54,7 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 **Dzień wyborczy**
 
-11) Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidlowej komisji
+11 Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidlowej komisji
 12) Uzytkownik drukuje pusty nie wypełniony protokól - funkcja docelowa w przyszlosci
 13) Użytkownik wpisuje dane z protokołu (maski w paper browser)
 14) Uzytkownik ma mozliwosc poprawienia protokołu 
@@ -125,7 +123,7 @@ Plan implementacji
   * komisja obwodowa
 
 ### Wersja 0.2
-* Wysyłanie E-Maili z loginem i hasłem
+* Wysyłanie E-Maili z loginem i hasłem 
 * Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
 * [DONE] Konfiguracja Jenkins i działający CI
 * Definicja i implementacja interfejsu REST 

@@ -1,10 +1,10 @@
 # Otwarta Platforma Wyborcza
-Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projektu OPW nie jest kompletna implementacja wymagań sprecyzowanych przez PKW w ramach projektu PW2 (Platforma Wyborcza 2).   
+Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projektu OPW **nie jest kompletna implementacja wymagań sprecyzowanych przez PKW** w ramach projektu PW2 (Platforma Wyborcza 2).   
 
 Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Quickstart
-1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB  
+1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    
   * ```default-storage-engine = InnoDB```  
   * ```collation-server = utf8_general_ci```  
   * ```character-set-server = utf8```  
@@ -27,56 +27,55 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 
 # Proces
-**Przygotowanie do wyborów**  
+
+**Przygotowanie wyborów**
+
 1. Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
-2. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczesciej gmina badz dzielnica ) - funkcja docelowa zaplanowa w przyszlosci.
-3. Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami - funkcja docelowa zaplanowa w przyszlosci.
+2. Administrator zakłada konta użytkownikom (wolentariuszom bądz/i mężom zaufania)
+3. Administrator rozsyła hasła użytkowikom 
+4. Administrator zbiera dane  użytkownika bądź/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji ) 
+5. System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres e-mail
+6. Administrator systemu ma możliwosc edycji i weryfikacji kont użytkownków wraz ich danymi.(duża fluktuacja użytkownków przed wyborami)
 
-4) Koordynator wyborów zakłada konta operatorom -  funkcja docelowa zaplanowa w przyszlosci.
+**Przygotowanie wyborów ( funkcjonalnoć docelowa )**
 
-5) Administrator zaklada konta użytkownikom (wolentariusz bądz/i męzom zaufania)
-5a) Kordynator wybórów zaklada konta operatorom i przewodniczącemu komisji - funkcja docelowa zaplanowa w przyszlosci. 
-6)  Administrator rozsyła hasła uzytkowikom. 
-6a) Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom - funkcja docelowa zaplanowa w przyszlosci.
-
-7)  Administrator zbiera dane  uzytkownika badz/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji ) 
-7a) Koordynator zbiera dane od uzytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel,     Walidacja Czy nie kandydują, nr Komisji ,Adres komisji) - - funkcja docelowa zaplanowa w przyszlosci.
-
-8) Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji - funkcja docelowa w przyszlosci
-8a) Koordynator wyborów definiuje/importuje operatorów informatycznnych funkcja docelowa w przyszlosci
-
-9) System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres E-Mail
-9a) System generuje hasła dostepu dla operatorow i przewodniczących komisji którzy proszą po zalogowaniu sie o wydanie certyfikatu -  funkcja docelowa w przyszlosci
-9b)  System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszlosci
-
-10) Administrator systemu ma mozliwosc edycji, weryfikacji kont uzytkownków wraz ich danymi.
+1. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczęsciej gminne bądź dzielnicowe )
+2. Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
+4. Kordynator wybórów zakłada konta operatorom i przewodniczącemu komisji - Import XLS
+5. Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom
+6. Koordynator zbiera dane od użytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel, Walidacja Czy nie kandydują, nr Komisji , Adres komisji)
+7. Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji
+8. System generuje hasła dostepu dla operatorow i przewodniczących komisji którzy proszą po zalogowaniu sie o wydanie certyfikatu 
 
 
 **Dzień wyborczy**
 
-11 Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidlowej komisji
-12) Uzytkownik drukuje pusty nie wypełniony protokól - funkcja docelowa w przyszlosci
-13) Użytkownik wpisuje dane z protokołu (maski w paper browser)
-14) Uzytkownik ma mozliwosc poprawienia protokołu 
-15) Uzytkownik ma mozliwosc wydrukowania protokolu
-15) Uzytkownik ma mozliwosc zapisania/wczytania protokolu na zewnetrznym nosniku. 
-16) Użytkownik wysyła dane  
-17) Walidacja po stronie klienta (JavaScript/HTML5) dla błędów twardych i miekkich. 
-18) Raport błedów/ostrzezen dla przewodniczacych komisji - funkcja docelowa w przyszlosci. 
 
- 
+1.  ***System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszlosci***
+2.  Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidlowej komisji
+3.  Użytkownik wpisuje dane do/z protokołu (maski w paper browser)
+4.  Użytkownik ma możliwość wydrukowania protokołu (nie wypełnionego także )
+5.  Użytkownik ma możliwosc zapisania/wczytania protokolu na/z zewnetrznego nośnika (CD, USB)
+6.  Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych i miekkich.
+7.  Użytkownik wysyła dane ( protokół)
+8.  Użytkownik otrzymuje powiadomienie o odebraniu protokołu przez serwer np mail
+9.  ***Raport błedów/ostrzeżen dla przewodniczacych komisji - funkcja docelowa w przyszlosci.***
+
+
+
 PERSPEKTYWA SERWERA  
-  
-18) Import/ otrzymanie danych.
-19) Sprawdzenia certyfikatów i uwierzytelnien - funcja docelowa w przyszlosci
-20) Potwierdzenie otrzymania danych dla uzytkownika (np mail)
-21) Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami. 
+
+
+1. Import Danych do serwera
+2. ***Sprawdzenie certyfikatów i uwierzytelnień operatorów i przewodniczących - funcja docelowa w przyszlosci***
+3. Potwierdzenie otrzymania danych dla użytkownika (np mail)
+4. Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami ( selecty SQL + maski w paper browser ) 
 
 **Dzień wyborczy wyniki**  
-22) Użytkownik wchodzi na stronę główną, dostaje aktualne wyniki  w podziale na komisje (agregowane np. co 5min)
-22) Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
-23) Frekwencja - wysalnie liczby osob uprawnonych i wydanych kart. 
 
+1. Użytkownik wchodzi na stronę główną www, dostaje aktualne wyniki (agregowane np. co 5 min)
+2.  Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
+3.  Frekwencja - wysyłanie liczby osób uprawnionych do głosowania i wydanych kart. 
 
 
 # Specyfikacja
@@ -123,7 +122,7 @@ Plan implementacji
   * komisja obwodowa
 
 ### Wersja 0.2
-* Wysyłanie E-Maili z loginem i hasłem 
+* Wysyłanie E-Maili z loginem i hasłem
 * Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
 * [DONE] Konfiguracja Jenkins i działający CI
 * Definicja i implementacja interfejsu REST 

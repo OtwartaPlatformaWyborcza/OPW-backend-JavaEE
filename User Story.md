@@ -1,10 +1,10 @@
 # User story - kompletna lista 
-Rozróżniamy dwa warianty OPW: prosty (na wybory prezydenckie 2015) i rozszeżony. Pojedyńcze user story organizujemy z perspektywy użytkownika.  
+Rozróżniamy dwa warianty OPW: prosty (na wybory prezydenckie 2015) i rozszerzony. Pojedyńcze user story organizujemy z perspektywy użytkownika.  
 Schemant nazewnictwa: OPW-{perspektywa: A, U, G}-{numer}. 
 
 
 ## Wariant prosty Prezydent 2015 
-Jest to lista minimalnych wymagan by obsluzyc nadchodzace wybory. 
+Jest to lista minimalnych wymagan by obsłużyc nadchodzace wybory. 
 
 ### Administrator
 * OPW-A-1 : Jako administrator moge zalogować się do systemu i uzyskać dostęp do stron administracyjnych.

@@ -60,6 +60,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwUser.findByActive", query = "SELECT o FROM OpwUser o WHERE o.active = :active"),
     @NamedQuery(name = "OpwUser.findByToken", query = "SELECT o FROM OpwUser o WHERE o.token = :token")})
 public class OpwUser implements Serializable {
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 32)
+    @Column(name = "phone", length = 32)
+    private String phone;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -204,6 +208,14 @@ public class OpwUser implements Serializable {
     @Override
     public String toString() {
         return "com.adamkowalewski.opw.entity.OpwUser[ id=" + id + " ]";
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     
 }

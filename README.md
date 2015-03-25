@@ -33,47 +33,48 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 1. Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
 2. Administrator zakłada konta użytkownikom (wolentariuszom bądz/i mężom zaufania)
 3. Administrator rozsyła hasła użytkowikom 
-4. Administrator zbiera dane  użytkownika bądź/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji ) 
+4. Administrator zbiera dane  użytkownika bądź/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji) 
 5. System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres e-mail
-6. Administrator systemu ma możliwosc edycji i weryfikacji kont użytkownków wraz ich danymi.(duża fluktuacja użytkownków przed wyborami)
+6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (duża fluktuacja użytkownków przed wyborami)
+7. Administrator ma możliwość weryfikacji i podglądu, który użytkownik odebrał hasła i poprawnie przeszedł procedurę testowego logowania do systemu
 
 **Przygotowanie wyborów ( funkcjonalnoć docelowa )**
 
-1. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczęsciej gminne bądź dzielnicowe )
+1. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczęsciej gminne bądź dzielnicowe)
 2. Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
 4. Kordynator wybórów zakłada konta operatorom i przewodniczącemu komisji - Import XLS
 5. Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom
-6. Koordynator zbiera dane od użytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel, Walidacja Czy nie kandydują, nr Komisji , Adres komisji)
+6. Koordynator zbiera dane od członków komisji ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel, Walidacja Czy nie kandydują, nr Komisji , Adres komisji)
 7. Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji
-8. System generuje hasła dostepu dla operatorow i przewodniczących komisji którzy proszą po zalogowaniu sie o wydanie certyfikatu 
+8. System generuje hasła dostepu dla operatorow i przewodniczących komisji, którzy proszą po zalogowaniu się o wydanie certyfikatu 
 
 
 **Dzień wyborczy**
 
 
-1.  ***System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszlosci***
-2.  Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidlowej komisji
+1.  ***System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszłośći***
+2.  Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidłowej komisji
 3.  Użytkownik wpisuje dane do/z protokołu (maski w paper browser)
-4.  Użytkownik ma możliwość wydrukowania protokołu (nie wypełnionego także )
-5.  Użytkownik ma możliwosc zapisania/wczytania protokolu na/z zewnetrznego nośnika (CD, USB)
+4.  Użytkownik ma możliwość wydrukowania protokołu (nie wypełnionego także)
+5.  Użytkownik ma możliwość zapisania/wczytania protokołu na/z zewnetrznego nośnika (CD, USB)
 6.  Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych i miekkich.
-7.  Użytkownik wysyła dane ( protokół)
-8.  Użytkownik otrzymuje powiadomienie o odebraniu protokołu przez serwer np mail
-9.  ***Raport błedów/ostrzeżen dla przewodniczacych komisji - funkcja docelowa w przyszlosci.***
+7.  Użytkownik wysyła dane (protokół)
+8.  Użytkownik otrzymuje powiadomienie o odebraniu protokołu przez serwer np po przez mail
+9.  ***Raport błedów/ostrzeżeń dla przewodniczacych komisji - funkcja docelowa w przyszlości.***
 
 
 
 PERSPEKTYWA SERWERA  
 
 
-1. Import Danych do serwera
-2. ***Sprawdzenie certyfikatów i uwierzytelnień operatorów i przewodniczących - funcja docelowa w przyszlosci***
-3. Potwierdzenie otrzymania danych dla użytkownika (np mail)
-4. Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami ( selecty SQL + maski w paper browser ) 
+1. ***Sprawdzenie certyfikatów i uwierzytelnień operatorów i przewodniczących - funcja docelowa w przyszłości***
+2. Import Danych do serwera (protokołów)
+3. Potwierdzenie otrzymania danych dla użytkownika (np wysłanie maila)
+4. Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami (selecty SQL + maski w paper browser ) 
 
 **Dzień wyborczy wyniki**  
 
-1. Użytkownik wchodzi na stronę główną www, dostaje aktualne wyniki (agregowane np. co 5 min)
+1.  Gość wchodzi na stronę główną www, dostaje aktualne wyniki (agregowane np. co 5 min)
 2.  Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
 3.  Frekwencja - wysyłanie liczby osób uprawnionych do głosowania i wydanych kart. 
 
@@ -94,12 +95,14 @@ PERSPEKTYWA SERWERA
 5. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
 
 ## Risk & Issue Logs
-1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min. Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net)
+1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min w przypadku prostych wyborów jakimi są Wybory Prezydenckie Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net). Zastanowić się nad modułem synchronizacji otrzymywania wyników.
+2.
+2. Goście (wyborcy), którzy będą chcieli sprawdzić niezależne wyniki na stronie www - mogą spowodować zawieszenie się wydajnościowe serwera, gdy usługa będzie cieszyć sie bardzo dużą popularnoscią. Do rozważenia wprowadzenie modułu logowania na gości i ograniczenie ilości połaczeń dla danego gościa.   
 
 ## Appendix Features
-1. Moduł Generowania  umów zleceń z operatorami oraz diet dla członków komisji wraz z wstepnie wypełnionym PIT-R
-2. Import / eksport danych operatorów i członków komisji z pliku XLS 
-3. Moduł Przypominajek dla operatorów i czlonków komisji wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczen, Wydrukowaniu w nalezytej ilosci kopii protokołow, Zabezpieczeniu Brudnopisów, Zgraniu na zew nosnik elektronicznej wersji protokolu, Przekazanie protokolu fizcznie po wydrukowaniu do KBW itp itd etc.   
+1. Moduł generowania umów zleceń z operatorami oraz wypaty diet dla członków komisji wraz z wstępnie wypełnionym PIT-R
+2. Import / eksport danych operatorów i członków komisji z/do pliku XLS 
+3. Moduł "Przypominajek" dla operatorów i członków komisji wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczeń, Wydrukowaniu w należytej ilosci kopii protokołów, Zabezpieczeniu Brudnopisów, Zgraniu na zewnętrzny nośnik elektronicznej wersji protokołu, Przekazanie protokołu fizcznie po wydrukowaniu do KBW itp itd etc.   
 
 
 ## Software stack

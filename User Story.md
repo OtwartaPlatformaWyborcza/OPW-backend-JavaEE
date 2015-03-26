@@ -20,10 +20,10 @@ Jest to lista minimalnych wymagan by obsłużyc nadchodzace wybory.
 
 
 ### Użytkownik 
-* OPW-U-1 :  
-* OPW-U-2 :  
-* OPW-U-3 :  
-* OPW-U-4 :  
+* OPW-U-1 : Jako użytkownik mogę się zalogować i wylogować.
+* OPW-U-2 : Jako użytkownik widzę po zalogowaniu się listę moich komisji obwodowych.
+* OPW-U-3 : Jako użytkownik widzę po wybraniu komisji: podstawowe informacje, listę kandydatów, listę protokołów jak i formularz liczb wyborczych.
+* OPW-U-4 : Bezpośrednia walidacja błędów twardych w przeglądarce.
 * OPW-U-5 :  
 * OPW-U-6 :  
 

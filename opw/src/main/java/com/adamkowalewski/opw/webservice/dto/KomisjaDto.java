@@ -24,11 +24,70 @@
 package com.adamkowalewski.opw.webservice.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author Adam Kowalewski
  */
-public class KomisjaDto  implements Serializable{
-    
+public class KomisjaDto implements Serializable {
+
+    private String pkwId;
+    private String name;
+    private String address;
+    private OkregowaDto okregowa;
+    private List<KandydatDto> kandydatList;
+    private List<WynikDto> wynikList;
+
+    public KomisjaDto() {
+    }
+
+    public String getPkwId() {
+        return pkwId;
+    }
+
+    public void setPkwId(String pkwId) {
+        this.pkwId = pkwId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public OkregowaDto getOkregowa() {
+        return okregowa;
+    }
+
+    public void setOkregowa(OkregowaDto okregowa) {
+        this.okregowa = okregowa;
+    }
+
+    public List<KandydatDto> getKandydatList() {
+        return kandydatList;
+    }
+
+    public void setKandydatList(List<KandydatDto> kandydatList) {
+        this.kandydatList = kandydatList;
+    }
+
+    public List<WynikDto> getWynikList() {
+        return wynikList;
+    }
+
+    public void setWynikList(List<WynikDto> wynikList) {
+        this.wynikList = wynikList;
+    }
+
 }

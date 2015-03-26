@@ -20,7 +20,12 @@ Jest to lista minimalnych wymagan by obsłużyc nadchodzace wybory.
 
 
 ### Użytkownik 
-
+* OPW-U-1 :  
+* OPW-U-2 :  
+* OPW-U-3 :  
+* OPW-U-4 :  
+* OPW-U-5 :  
+* OPW-U-6 :  
 
 
 

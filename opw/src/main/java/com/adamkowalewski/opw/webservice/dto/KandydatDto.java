@@ -26,7 +26,7 @@ package com.adamkowalewski.opw.webservice.dto;
 import java.io.Serializable;
 
 /**
- *
+ * DTO
  * @author Adam Kowalewski
  */
 public class KandydatDto implements Serializable {

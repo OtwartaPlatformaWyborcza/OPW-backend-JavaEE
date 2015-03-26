@@ -31,4 +31,35 @@ import java.io.Serializable;
  */
 public class KandydatDto implements Serializable {
 
+    private int pkwId;
+    private String fullname;
+    private int glosow;
+
+    public KandydatDto() {
+    }
+
+    public int getPkwId() {
+        return pkwId;
+    }
+
+    public void setPkwId(int pkwId) {
+        this.pkwId = pkwId;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public int getGlosow() {
+        return glosow;
+    }
+
+    public void setGlosow(int glosow) {
+        this.glosow = glosow;
+    }
+
 }

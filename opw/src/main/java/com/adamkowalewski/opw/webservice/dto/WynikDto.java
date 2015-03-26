@@ -23,10 +23,71 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
+import java.util.List;
+
 /**
  *
  * @author Adam Kowalewski
  */
 public class WynikDto {
-    
+
+    private int uprawnionych;
+    private int glosujacych;
+    private int kartWarznych;
+    private int kartNieWarznych;
+    private int glosowWarznych;
+
+    private List<KandydatDto> kandydatList;
+
+    public WynikDto() {
+    }
+
+    public int getUprawnionych() {
+        return uprawnionych;
+    }
+
+    public void setUprawnionych(int uprawnionych) {
+        this.uprawnionych = uprawnionych;
+    }
+
+    public int getGlosujacych() {
+        return glosujacych;
+    }
+
+    public void setGlosujacych(int glosujacych) {
+        this.glosujacych = glosujacych;
+    }
+
+    public int getKartWarznych() {
+        return kartWarznych;
+    }
+
+    public void setKartWarznych(int kartWarznych) {
+        this.kartWarznych = kartWarznych;
+    }
+
+    public int getKartNieWarznych() {
+        return kartNieWarznych;
+    }
+
+    public void setKartNieWarznych(int kartNieWarznych) {
+        this.kartNieWarznych = kartNieWarznych;
+    }
+
+    public int getGlosowWarznych() {
+        return glosowWarznych;
+    }
+
+    public void setGlosowWarznych(int glosowWarznych) {
+        this.glosowWarznych = glosowWarznych;
+    }
+
+    public List<KandydatDto> getKandydatList() {
+        return kandydatList;
+    }
+
+    public void setKandydatList(List<KandydatDto> kandydatList) {
+        this.kandydatList = kandydatList;
+    }
+
 }

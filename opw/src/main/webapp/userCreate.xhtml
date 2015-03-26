@@ -23,6 +23,10 @@
                     <h:outputLabel for="mail" id="mailL" value="#{messages.email}*" />
                     <p:inputText id="mail" value="#{userHandler.instance.email}"
                                  required="true" requiredMessage="#{messages.validEmail}"/>
+                    
+                    <h:outputLabel for="tel" id="telL" value="#{messages.phone}" />
+                    <p:inputText id="tel" value="#{userHandler.instance.phone}"
+                                 requiredMessage="#{messages.validPhone}"/>
 
                     <h:outputLabel for="pwd" id="pwdL" value="#{messages.password}" />
                     <p:inputText id="pwd" value="#{messages.generated}" disabled="true" />

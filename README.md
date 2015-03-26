@@ -1,11 +1,14 @@
 # Otwarta Platforma Wyborcza
-Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projekt OPW nie jest kompletna implementacja wymagań sprecyzowanych przez PKW w ramach projektu PW2 (Platforma Wyborcza 2).   
+Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projektu OPW **nie jest kompletna implementacja wymagań sprecyzowanych przez PKW** w ramach projektu PW2 (Platforma Wyborcza 2).   
 
 Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Quickstart
-1. MySQL skonfiguruj serwer do pracy w trybie UTF8, jako engine InnoDB
-2. MySQL dodaj użytkownika opw zgodnie z definicją w persistence.xml
+1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    
+  * ```default-storage-engine = InnoDB```  
+  * ```collation-server = utf8_general_ci```  
+  * ```character-set-server = utf8```  
+2. MySQL dodaj użytkownika opw zgodnie z definicją w glassfish-resources.xml
 3. MySQL Workbench wykonaj import bazy (opcja Forward Engineer)
 4. GlassFish wykonaj import glassfish-resources.xml 
 5. mvn clean install i deploy na serwer
@@ -24,58 +27,56 @@ Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 
 # Proces
-**Przygotowanie do wyborów**  
-1) Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
 
-2) Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczesciej gmina badz dzielnica ) - funkcja docelowa zaplanowa w przyszlosci.
+**Przygotowanie wyborów**
 
-3) Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami - funkcja docelowa zaplanowa w przyszlosci.
+1. Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
+2. Administrator zakłada konta użytkownikom (wolentariuszom bądz/i mężom zaufania)
+3. Administrator rozsyła hasła użytkowikom 
+4. Administrator zbiera dane  użytkownika bądź/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji) 
+5. System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres e-mail
+6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (duża fluktuacja użytkownków przed wyborami)
+7. Administrator ma możliwość weryfikacji i podglądu, który użytkownik odebrał hasła i poprawnie przeszedł procedurę testowego logowania do systemu
 
-4) Koordynator wyborów zakłada konta operatorom -  funkcja docelowa zaplanowa w przyszlosci.
+**Przygotowanie wyborów ( funkcjonalnoć docelowa )**
 
-5) Administrator zaklada konta użytkownikom (wolentariusz bądz/i męzom zaufania)
-5a) Kordynator wybórów zaklada konta operatorom i przewodniczącemu komisji - funkcja docelowa zaplanowa w przyszlosci. 
-6)  Administrator rozsyła hasła uzytkowikom. 
-6a) Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom - funkcja docelowa zaplanowa w przyszlosci.
-
-7)  Administrator zbiera dane  uzytkownika badz/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji ) 
-7a) Koordynator zbiera dane od uzytkownków ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel,     Walidacja Czy nie kandydują, nr Komisji ,Adres komisji) - - funkcja docelowa zaplanowa w przyszlosci.
-
-8) Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji - funkcja docelowa w przyszlosci
-8a) Koordynator wyborów definiuje/importuje operatorów informatycznnych funkcja docelowa w przyszlosci
-
-9) System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres E-Mail
-9a) System generuje hasła dostepu dla operatorow i przewodniczących komisji którzy proszą po zalogowaniu sie o wydanie certyfikatu -  funkcja docelowa w przyszlosci
-9b)  System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszlosci
-
-10) Administrator systemu ma mozliwosc edycji, weryfikacji kont uzytkownków wraz ich danymi.
+1. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczęsciej gminne bądź dzielnicowe)
+2. Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
+4. Kordynator wybórów zakłada konta operatorom i przewodniczącemu komisji - Import XLS
+5. Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom
+6. Koordynator zbiera dane od członków komisji ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel, Walidacja Czy nie kandydują, nr Komisji , Adres komisji)
+7. Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji
+8. System generuje hasła dostepu dla operatorow i przewodniczących komisji, którzy proszą po zalogowaniu się o wydanie certyfikatu 
 
 
 **Dzień wyborczy**
 
-11) Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidlowej komisji
-12) Uzytkownik drukuje pusty nie wypełniony protokól - funkcja docelowa w przyszlosci
-13) Użytkownik wpisuje dane z protokołu (maski w paper browser)
-14) Uzytkownik ma mozliwosc poprawienia protokołu 
-15) Uzytkownik ma mozliwosc wydrukowania protokolu
-15) Uzytkownik ma mozliwosc zapisania/wczytania protokolu na zewnetrznym nosniku. 
-16) Użytkownik wysyła dane  
-17) Walidacja po stronie klienta (JavaScript/HTML5) dla błędów twardych i miekkich. 
-18) Raport błedów/ostrzezen dla przewodniczacych komisji - funkcja docelowa w przyszlosci. 
 
- 
+1.  ***System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszłośći***
+2.  Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidłowej komisji
+3.  Użytkownik wpisuje dane do/z protokołu (maski w paper browser)
+4.  Użytkownik ma możliwość wydrukowania protokołu (nie wypełnionego także)
+5.  Użytkownik ma możliwość zapisania/wczytania protokołu na/z zewnetrznego nośnika (CD, USB)
+6.  Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych i miekkich.
+7.  Użytkownik wysyła dane (protokół)
+8.  Użytkownik otrzymuje powiadomienie o odebraniu protokołu przez serwer np po przez mail
+9.  ***Raport błedów/ostrzeżeń dla przewodniczacych komisji - funkcja docelowa w przyszlości.***
+
+
+
 PERSPEKTYWA SERWERA  
-  
-18) Import/ otrzymanie danych.
-19) Sprawdzenia certyfikatów i uwierzytelnien - funcja docelowa w przyszlosci
-20) Potwierdzenie otrzymania danych dla uzytkownika (np mail)
-21) Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami. 
+
+
+1. ***Sprawdzenie certyfikatów i uwierzytelnień operatorów i przewodniczących - funcja docelowa w przyszłości***
+2. Import Danych do serwera (protokołów)
+3. Potwierdzenie otrzymania danych dla użytkownika (np wysłanie maila)
+4. Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami (selecty SQL + maski w paper browser ) 
 
 **Dzień wyborczy wyniki**  
-22) Użytkownik wchodzi na stronę główną, dostaje aktualne wyniki  w podziale na komisje (agregowane np. co 5min)
-22) Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
-23) Frekwencja - wysalnie liczby osob uprawnonych i wydanych kart. 
 
+1.  Gość wchodzi na stronę główną www, dostaje aktualne wyniki (agregowane np. co 5 min)
+2.  Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
+3.  Frekwencja - wysyłanie liczby osób uprawnionych do głosowania i wydanych kart. 
 
 
 # Specyfikacja
@@ -94,12 +95,14 @@ PERSPEKTYWA SERWERA
 5. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
 
 ## Risk & Issue Logs
-1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min. Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net)
+1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min w przypadku prostych wyborów jakimi są Wybory Prezydenckie Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net). Zastanowić się nad modułem synchronizacji otrzymywania wyników.
+2.
+2. Goście (wyborcy), którzy będą chcieli sprawdzić niezależne wyniki na stronie www - mogą spowodować zawieszenie się wydajnościowe serwera, gdy usługa będzie cieszyć sie bardzo dużą popularnoscią. Do rozważenia wprowadzenie modułu logowania na gości i ograniczenie ilości połaczeń dla danego gościa.   
 
 ## Appendix Features
-1. Moduł Generowania  umów zleceń z operatorami oraz diet dla członków komisji wraz z wstepnie wypełnionym PIT-R
-2. Import / eksport danych operatorów i członków komisji z pliku XLS 
-3. Moduł Przypominajek dla operatorów i czlonków komisji wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczen, Wydrukowaniu w nalezytej ilosci kopii protokołow, Zabezpieczeniu Brudnopisów, Zgraniu na zew nosnik elektronicznej wersji protokolu, Przekazanie protokolu fizcznie po wydrukowaniu do KBW itp itd etc.   
+1. Moduł generowania umów zleceń z operatorami oraz wypaty diet dla członków komisji wraz z wstępnie wypełnionym PIT-R
+2. Import / eksport danych operatorów i członków komisji z/do pliku XLS 
+3. Moduł "Przypominajek" dla operatorów i członków komisji wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczeń, Wydrukowaniu w należytej ilosci kopii protokołów, Zabezpieczeniu Brudnopisów, Zgraniu na zewnętrzny nośnik elektronicznej wersji protokołu, Przekazanie protokołu fizcznie po wydrukowaniu do KBW itp itd etc.   
 
 
 ## Software stack
@@ -109,6 +112,16 @@ PERSPEKTYWA SERWERA
 4. HTML5 
 5. CSS3
 6. Maven 3
+
+
+## REST 
+u GET login 
+u GET obwodowaList
+GET obwodowa(id)
+	+ kandydaci
+	+ lista protokołow
+ 
+POST	uploadWyniki
 
 ## Roadmap
 Plan implementacji

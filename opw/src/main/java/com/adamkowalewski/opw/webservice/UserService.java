@@ -66,4 +66,12 @@ public class UserService {
         return new UserDto(false);
     }
 
+    @GET
+    @Path("/logout")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public UserDto logout(@NotNull @HeaderParam("login") String login,
+            @NotNull @HeaderParam("token") String token) {
+        return new UserDto(false);
+    }
+
 }

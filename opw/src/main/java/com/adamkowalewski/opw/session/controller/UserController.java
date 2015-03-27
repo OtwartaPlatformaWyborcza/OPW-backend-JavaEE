@@ -58,25 +58,56 @@ public class UserController implements Serializable {
      * @param user
      */
     public void create(OpwUser user) {
-        user.setPassword(generatePassword());
+        user.setPassword(generatePassword(DEFAULT_PWD_LENGTH));
         bean.create(user);
     }
+
     // TODO
-    public void sendWelcomeMail(){
-        
+    public void sendWelcomeMail() {
+
     }
 
     /**
-     * Generates a random password with length 10.
+     * Generates salted password.
+     *
+     * @param appSalt application level salt.
+     * @param userSalt user level salt.
+     * @param password password in plaintext.
+     * @return salted password.
+     * @author Adam Kowalewski
+     * @version 2015.03.27
+     */
+    public String generatePasswordSalted(String appSalt, String userSalt, String password) {
+        return encryptSHA(appSalt + password + userSalt);
+    }
+
+    /**
+     * Generates a random password with default length.
      *
      * @return String random password.
      * @author Adam Kowalewski
      * @version 2015.03.27
      */
     public String generatePassword() {
+        return getPassword(DEFAULT_PWD_LENGTH);
+    }
+
+    /**
+     * Generates a random password.
+     *
+     * @param length length for password.
+     * @return String random password.
+     * @author Adam Kowalewski
+     * @version 2015.03.27
+     */
+    public String generatePassword(int length) {
+        return getPassword(length);
+    }
+
+    private String getPassword(int length) {
         SecureRandom random = new SecureRandom();
         String result = new BigInteger(130, random).toString(32);;
-        result = result.substring(0, Math.min(result.length(), DEFAULT_PWD_LENGTH));
+        result = result.substring(0, Math.min(result.length(), length));
         return result;
     }
 
@@ -85,7 +116,7 @@ public class UserController implements Serializable {
      *
      * @param value plain text password to be encrypted.
      * @return String hashed text.
-     * @author KOWALEWSKI Adam
+     * @author Adam Kowalewski
      * @version 2015.03.27
      */
     public String encryptSHA(String value) {

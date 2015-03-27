@@ -61,7 +61,7 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
     public void resetPassword(){
         
         
-        userController.generatePassword();
+        
     }
 
     @Override

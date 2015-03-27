@@ -54,6 +54,15 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
         VIEW_ID_EDIT = "userEdit";
         VIEW_ID_CREATE = "userCreate";
     }
+    
+    /**
+     * WiP 
+     */
+    public void resetPassword(){
+        
+        
+        userController.generatePassword();
+    }
 
     @Override
     public String create() {

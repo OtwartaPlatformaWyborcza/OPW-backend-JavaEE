@@ -27,6 +27,8 @@ import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.session.bean.UserBean;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.List;
 import javax.ejb.EJB;
@@ -41,32 +43,27 @@ import javax.inject.Named;
 @SessionScoped
 public class UserController implements Serializable {
 
+    // ToDo extract to properties 
+    private final int DEFAULT_PWD_LENGTH = 10;
+
     @EJB
     private UserBean bean;
 
     public UserController() {
     }
 
-    public OpwUser find(int id) {
-        return bean.findUser(id);
-    }
-    
     /**
-     * Creates a new user within database and generates a random password. 
-     * 
-     * @param user 
+     * Creates a new user within database and generates a random password.
+     *
+     * @param user
      */
     public void create(OpwUser user) {
         user.setPassword(generatePassword());
         bean.create(user);
     }
-    
-    public void edit(OpwUser user) {        
-        bean.edit(user);
-    }
-    
-    public List<OpwUser> findAll(){
-        return bean.findAll();
+    // TODO
+    public void sendWelcomeMail(){
+        
     }
 
     /**
@@ -74,13 +71,52 @@ public class UserController implements Serializable {
      *
      * @return String random password.
      * @author Adam Kowalewski
-     * @version 2015.03.15
+     * @version 2015.03.27
      */
-    private String generatePassword() {
+    public String generatePassword() {
         SecureRandom random = new SecureRandom();
         String result = new BigInteger(130, random).toString(32);;
-        result = result.substring(0, Math.min(result.length(), 10));
+        result = result.substring(0, Math.min(result.length(), DEFAULT_PWD_LENGTH));
         return result;
     }
 
+    /**
+     * Generates a SHA-256 hash from the given String.
+     *
+     * @param value plain text password to be encrypted.
+     * @return String hashed text.
+     * @author KOWALEWSKI Adam
+     * @version 2015.03.27
+     */
+    public String encryptSHA(String value) {
+        StringBuilder encrypted = new StringBuilder();
+        String algorithm = "SHA-256";
+        byte[] passwordArray = value.getBytes();
+
+        try {
+            MessageDigest md = MessageDigest.getInstance(algorithm);
+            md.reset();
+            md.update(passwordArray);
+            byte[] encryptedArray = md.digest();
+
+            for (int i = 0; i < encryptedArray.length; i++) {
+                encrypted.append(Integer.toHexString(0xFF & encryptedArray[i]));
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
+        return encrypted.toString();
+    }
+
+    public OpwUser find(int id) {
+        return bean.findUser(id);
+    }
+
+    public void edit(OpwUser user) {
+        bean.edit(user);
+    }
+
+    public List<OpwUser> findAll() {
+        return bean.findAll();
+    }
 }

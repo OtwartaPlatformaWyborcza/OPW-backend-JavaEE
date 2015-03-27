@@ -19,14 +19,14 @@
 
                 </h:panelGrid>
 
-                <h:commandLink id="btnSave" class="btn" 
-                               value="#{messages.submit}" 
-                               action="#{kandydatHandler.edit()}"
-                               rendered="#{not kandydatHandler.viewMode}"/>
-
                 <h:commandLink id="btnCancel" class="btn" immediate="true"
                                value="#{messages.cancel}" 
                                action="#{kandydatHandler.cancel()}" 
+                               rendered="#{not kandydatHandler.viewMode}"/>
+
+                <h:commandLink id="btnSave" class="btn" 
+                               value="#{messages.submit}" 
+                               action="#{kandydatHandler.edit()}"
                                rendered="#{not kandydatHandler.viewMode}"/>
 
                 <h:commandLink id="btnEdit" class="btn" 

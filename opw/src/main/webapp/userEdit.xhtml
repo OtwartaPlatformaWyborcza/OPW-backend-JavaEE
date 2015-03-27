@@ -24,32 +24,32 @@
                     <h:outputLabel for="mail" id="mailL" value="#{messages.email}*" />
                     <p:inputText id="mail" value="#{userHandler.instance.email}"
                                  disabled="#{userHandler.viewMode}" required="true" />
-                    
-                    
+
+
                     <h:outputLabel for="tel" id="telL" value="#{messages.phone}" />
                     <p:inputText id="tel" value="#{userHandler.instance.phone}"
                                  disabled="#{userHandler.viewMode}" 
                                  requiredMessage="#{messages.validPhone}"/>
-                    
+
                     <h:outputLabel for="type" id="typeL" value="#{messages.userType}" />
                     <p:inputText id="type" value="#{userHandler.instance.type}"
                                  disabled="#{userHandler.viewMode}" required="true" />
-                    
+
                     <h:outputLabel for="act" id="actL" value="#{messages.userActiveLabel}" />
-                    <p:inputText id="act" value="#{userHandler.instance.active}"
-                                 disabled="true" />
-
-
+                    <p:inputSwitch id="act" value="#{userHandler.instance.active}" 
+                                   onLabel="#{messages.userAccountActive}" 
+                                   offLabel="#{messages.userAccountInactive}" 
+                                   disabled="#{userHandler.viewMode}" />
                 </h:panelGrid>
-
+                
+                <h:commandLink id="btnCancel" class="btn btn" immediate="true"
+                               value="#{messages.cancel}" 
+                               action="#{userHandler.cancel()}" 
+                               rendered="#{not userHandler.viewMode}"/>
+                
                 <h:commandLink id="btnSave" class="btn" 
                                value="#{messages.submit}" 
                                action="#{userHandler.edit()}"
-                               rendered="#{not userHandler.viewMode}"/>
-
-                <h:commandLink id="btnCancel" class="btn" immediate="true"
-                               value="#{messages.cancel}" 
-                               action="#{userHandler.cancel()}" 
                                rendered="#{not userHandler.viewMode}"/>
 
                 <h:commandLink id="btnEdit" class="btn" 

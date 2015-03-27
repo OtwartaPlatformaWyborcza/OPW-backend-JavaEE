@@ -44,14 +44,13 @@
 
                 </h:panelGrid>
 
-                <h:commandLink id="btnSave" class="btn" 
-                               value="#{messages.submit}" 
-                               action="#{obwodowaHandler.edit()}"
-                               rendered="#{not obwodowaHandler.viewMode}"/>
-
                 <h:commandLink id="btnCancel" class="btn" immediate="true"
                                value="#{messages.cancel}" 
                                action="#{obwodowaHandler.cancel()}" 
+                               rendered="#{not obwodowaHandler.viewMode}"/>
+                <h:commandLink id="btnSave" class="btn" 
+                               value="#{messages.submit}" 
+                               action="#{obwodowaHandler.edit()}"
                                rendered="#{not obwodowaHandler.viewMode}"/>
 
                 <h:commandLink id="btnEdit" class="btn" 

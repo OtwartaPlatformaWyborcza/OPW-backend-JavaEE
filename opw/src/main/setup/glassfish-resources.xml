@@ -7,8 +7,36 @@
         <property name="databaseName" value="opw"/>
         <property name="User" value="opw"/>
         <property name="Password" value="Lc4!_-f4FjmypLDRHW."/>
-        <property name="URL" value="jdbc:mysql://localhost:3306/opw?zeroDateTimeBehavior=convertToNull&useUnicode=true&connectionCollation=utf8_general_ci&characterSetResults=utf8"/>
+        <property name="URL" value="jdbc:mysql://localhost:3306/opw"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="characterEncoding" value="UTF-8"></property>
+        <property name="characterSetResults" value="UTF-8"></property>
+        <property name="useUnicode" value="true"></property>
+        <property name="zeroDateTimeBehavior" value="convertToNull"></property>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="jdbc/opw" object-type="user" pool-name="mysql_opw_opwPool"/>
+    
+    <mail-resource enabled="true" 
+                   from="changeme@localhost" 
+                   host="changeme" 
+                   jndi-name="mail/opw" 
+                   object-type="user" 
+                   store-protocol="imap" 
+                   store-protocol-class="com.sun.mail.imap.IMAPStore" 
+                   transport-protocol="smtps" 
+                   transport-protocol-class="com.sun.mail.smtp.SMTPSSLTransport" 
+                   user="changeme"
+                   debug="false" >
+        
+        <description>OPW E-Mail resource</description>            
+        <property name="mail-imap-auth" value="true"/>    
+        <property name="mail-imap-host" value="changeme"/>            
+        <property name="mail-imap-password" value="changeme"/>    
+        <property name="mail-imap-port" value="143"/>    
+        
+        <property name="mail-smtp-auth" value="true"/>
+        <property name="mail-smtp-host" value="changeme"/>            
+        <property name="mail-smtp-password" value="changeme"/>   
+        <property name="mail-smtp-port" value="25"/>                     
+    </mail-resource>
 </resources>

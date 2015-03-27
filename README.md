@@ -2,6 +2,12 @@
 Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projektu OPW **nie jest kompletna implementacja wymagań sprecyzowanych przez PKW** w ramach projektu PW2 (Platforma Wyborcza 2).   
 
 # Linki
+Tablica Trello 
+backend daily
+frontend daily 
+
+
+
 Wersja daily OPW jest dostępna tutaj http://91.250.114.134:8080/opw/
 
 # Quickstart
@@ -97,7 +103,7 @@ PERSPEKTYWA SERWERA
 
 ## Risk & Issue Logs
 1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min w przypadku prostych wyborów jakimi są Wybory Prezydenckie Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net). Zastanowić się nad modułem synchronizacji otrzymywania wyników.
-2.
+
 2. Goście (wyborcy), którzy będą chcieli sprawdzić niezależne wyniki na stronie www - mogą spowodować zawieszenie się wydajnościowe serwera, gdy usługa będzie cieszyć sie bardzo dużą popularnoscią. Do rozważenia wprowadzenie modułu logowania na gości i ograniczenie ilości połaczeń dla danego gościa.   
 
 ## Appendix Features
@@ -106,13 +112,20 @@ PERSPEKTYWA SERWERA
 3. Moduł "Przypominajek" dla operatorów i członków komisji wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczeń, Wydrukowaniu w należytej ilosci kopii protokołów, Zabezpieczeniu Brudnopisów, Zgraniu na zewnętrzny nośnik elektronicznej wersji protokołu, Przekazanie protokołu fizcznie po wydrukowaniu do KBW itp itd etc.   
 
 
-## Software stack
+## Software stack 
+### Backend 
 1. Java EE 7 (GlassFish 4, JPA2, CDI, EJB, JSF 2.2 (PrimeFaces 5.1), JAX-RS, JAAS, JavaMail)
 2. MySQL 5.5 (UTF8, InnoDB, MySQL Workbench)
 3. REST
 4. HTML5 
 5. CSS3
 6. Maven 3
+
+### Frontend 
+1. HTML5
+2. JavaScript (AngularJS)
+3. CSS3
+4. Bootstrap 
 
 
 ## REST 
@@ -137,16 +150,16 @@ Plan implementacji
 
 ### Wersja 0.2
 * Wysyłanie E-Maili z loginem i hasłem
-* Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
+* [DONE] Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
 * [DONE] Konfiguracja Jenkins i działający CI
-* Definicja i implementacja interfejsu REST 
-* Import CSV/KLK dla następujących encji: user, komisja obwodowa, komisja okręgowa 
+* [WiP] Definicja i implementacja interfejsu REST 
+* [WiP] Import CSV/KLK dla następujących encji: user, komisja obwodowa, komisja okręgowa 
 * Kolejne funkcje dla administratora 
   * reset hasła użytkownika 
   * aktywowanie i deaktywowanie konta użytkownika
-* Definicja szablonu SMS
+* [WiP] Definicja szablonu SMS
 * Definicja szablonu EMail
-* Definicja masek UI dla klienta HTML5/CSS3 
+* [WiP] Definicja masek UI dla klienta HTML5/CSS3 
 
 ### Wersja 0.3
 * Możliwość zamknięcia listy kandydatów. 

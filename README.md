@@ -171,17 +171,17 @@ Plan implementacji
 * Wysyłanie E-Maili z loginem i hasłem
 * [DONE] Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
 * [DONE] Konfiguracja Jenkins i działający CI
-* [WiP] Definicja i implementacja interfejsu REST 
-* [WiP] Import CSV/KLK dla następujących encji: user, komisja obwodowa, komisja okręgowa 
+* [DONE] Definicja i implementacja interfejsu REST 
 * Kolejne funkcje dla administratora 
   * reset hasła użytkownika 
   * aktywowanie i deaktywowanie konta użytkownika
 * [WiP] Definicja szablonu SMS
-* Definicja szablonu EMail
+* Definicja szablonu E-Mail
 * [WiP] Definicja masek UI dla klienta HTML5/CSS3 
 
 ### Wersja 0.3
 * Możliwość zamknięcia listy kandydatów. 
+* [WiP] Import CSV/KLK dla następujących encji: user, komisja obwodowa, komisja okręgowa 
 * Autoryzacja i autentyfikacja na bazie JAAS
 * Podbieranie protokołów przesłanych na skrzynke pocztową
 * Automatyczne parsowanie protokołów ze skrzynki pocztowej

@@ -1,8 +1,28 @@
 # Otwarta Platforma Wyborcza
 Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projektu OPW **nie jest kompletna implementacja wymagań sprecyzowanych przez PKW** w ramach projektu PW2 (Platforma Wyborcza 2).   
 
+# Członkowie
+Sortowanie alfabetyczne po imieniu.  
+
+| Członek  | Rola  |
+| ------------- | ------------- |
+| AdamK | Architektura, Java  |
+| PrzemekJ | Analiza |
+| RafałR | Analiza i Organizacja |
+| RobertG | Java |
+| RobertP | Analiza |
+
+**Jak do nas dołączyć?**  
+Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja odbywa się poprzez E-Mail i Skype. 
+
+**Aktualnie poszukujemy**  
+1. Doświadczonego architekta REST, który pomoże nam ulepszyć aktualny serwis (security, best practices ipt.).  
+2. Doświadczonego administratora Jenkins. Mamy aktualnie skonfigurowany CI pipeline dla 3 projektów (OPW, [OPW AngularJS](https://github.com/marcintokarski/OtwartaPlatformaWyborczaFronted) jak i [OpenPKW POC_Kalkulator](https://github.com/openpkw/PocKalkulatorWyborczyHtml)) ale na pewno da się to zrobić o wiele lepiej.  
+3. Doświadczonego administratora kontenera Java EE GlassFish 4.1 bądź WildFly 8.2.0. Celem jest konfiguracja produkcyjnego clustera.  
+
+
 # Linki
-Tablica Trello 
+Tablica Trello  https://trello.com/b/hKes4OCP/otwarta-platforma-wyborcza
 backend daily
 frontend daily 
 

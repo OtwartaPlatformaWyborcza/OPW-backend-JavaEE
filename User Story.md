@@ -28,6 +28,13 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-U-6 :  
 
 
+### Technologia
+* OPW-T-1 : Wykonanie dokumentacji REST API w swagger.io 
+* OPW-T-2 : 
+* OPW-T-3
+* OPW-T-4
+* OPW-T-5
+
 
 ## Wariant rozszeżony
  

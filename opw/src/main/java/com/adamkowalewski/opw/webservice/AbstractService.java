@@ -23,37 +23,26 @@
  */
 package com.adamkowalewski.opw.webservice;
 
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
-import com.adamkowalewski.opw.webservice.dto.UploadWynikDto;
-import com.adamkowalewski.opw.webservice.dto.UploadWynikResultDto;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
- * Represents komisja perspective.
- *
+ * Common logic for REST services. 
+ * 
  * @author Adam Kowalewski
  */
-@Path("/komisja")
-public class KomisjaService extends AbstractService {
+public abstract class AbstractService {
 
-    @GET
-    @Path("/{pkwId}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public OpwObwodowaKomisja loadObwodowa(@PathParam("pkwId") String pkwId) {
-        
-        
-        return null;
-    }
-
-    @POST
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public UploadWynikResultDto uploadWyniki(UploadWynikDto wynik) {
-        return new UploadWynikResultDto();
+    /**
+     * Attach CORS header to response.
+     *
+     * @param response Response without CROS.
+     * @return Response with CORS.
+     * @version 2015.03.28
+     * @author Adam Kowalewski
+     */
+    public Response addCorsHeaders(Response response) {
+        response.getHeaders().add("Access-Control-Allow-Origin", "*");
+        return response;
     }
 
 }

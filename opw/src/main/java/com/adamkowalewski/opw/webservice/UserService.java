@@ -34,6 +34,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Represents user perspective.
@@ -41,37 +42,60 @@ import javax.ws.rs.core.MediaType;
  * @author Adam Kowalewski
  */
 @Path("/user")
-public class UserService {
+public class UserService extends AbstractService {
 
     @GET
     @Path("/{userId}/obwodowa")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public List<KomisjaShortDto> loadObwodowaShortList(@PathParam("userId") int userId) {
+    public Response loadObwodowaShortList(@PathParam("userId") int userId) {
+
         List<KomisjaShortDto> result = new ArrayList<>();
         result.add(new KomisjaShortDto());
         result.add(new KomisjaShortDto());
         result.add(new KomisjaShortDto());
-        return result;
+
+        Response response = Response.ok()
+                .entity(result)
+                .build();
+
+        response = addCorsHeaders(response);
+        return response;
     }
 
     @GET
     @Path("/login")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public UserDto login(@NotNull @HeaderParam("login") String login,
+    public Response login(@NotNull @HeaderParam("login") String login,
             @NotNull @HeaderParam("password") String password) {
 
         if (login.equals("admin") && password.equals("admin")) {
-            return new UserDto(1, "Mock admina", "token123", true);
+
+            Response response = Response.ok()
+                    .entity(new UserDto(1, "Mock admina", "token1234", true))
+                    .build();
+
+            response = addCorsHeaders(response);
+            return response;
         }
-        return new UserDto(false);
+        Response response = Response.status(Response.Status.UNAUTHORIZED)
+                .build();
+
+        response = addCorsHeaders(response);
+        return response;
     }
 
     @GET
     @Path("/logout")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public UserDto logout(@NotNull @HeaderParam("login") String login,
+    public Response logout(@NotNull @HeaderParam("login") String login,
             @NotNull @HeaderParam("token") String token) {
-        return new UserDto(false);
+
+        Response response = Response.ok()
+                .entity(new UserDto(false))
+                .build();
+
+        response = addCorsHeaders(response);
+        return response;
     }
 
 }

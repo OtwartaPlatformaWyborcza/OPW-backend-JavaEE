@@ -25,11 +25,16 @@ package com.adamkowalewski.opw.webservice.dto;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Adam Kowalewski
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class KomisjaDto implements Serializable {
 
     private String pkwId;

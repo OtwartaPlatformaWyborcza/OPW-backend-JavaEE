@@ -24,11 +24,16 @@
 package com.adamkowalewski.opw.webservice.dto;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Adam Kowalewski
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UserDto implements Serializable {
 
     private int id;

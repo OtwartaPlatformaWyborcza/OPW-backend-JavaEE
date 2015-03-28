@@ -24,12 +24,17 @@
 package com.adamkowalewski.opw.webservice.dto;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * DTO Represents payload for Komisja selection.
  *
  * @author Adam Kowalewski
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class KomisjaShortDto implements Serializable {
 
     private int id;

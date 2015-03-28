@@ -19,7 +19,7 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 1. Doświadczonego architekta REST, który pomoże nam ulepszyć aktualny serwis (security, best practices ipt.).  
 2. Doświadczonego administratora Jenkins. Mamy aktualnie skonfigurowany CI pipeline dla 3 projektów (OPW, [OPW AngularJS](https://github.com/marcintokarski/OtwartaPlatformaWyborczaFronted) jak i [OpenPKW POC_Kalkulator](https://github.com/openpkw/PocKalkulatorWyborczyHtml)) ale na pewno da się to zrobić o wiele lepiej.  
 3. Doświadczonego administratora kontenera Java EE GlassFish 4.1 bądź WildFly 8.2.0. Celem jest konfiguracja produkcyjnego clustera.  
-
+4. Grafika do opracowania ikonografiki (przyciski) programu, tła, liternictwa, oraz głównego symbolu znaku graficznego / logo programu.  
 
 # Linki
 Tablica Trello  https://trello.com/b/hKes4OCP/otwarta-platforma-wyborcza

@@ -171,18 +171,18 @@ Plan implementacji
   * komisja obwodowa
 
 ### Wersja 0.2
-* Wysyłanie E-Maili z loginem i hasłem
+* [DONE] Wysyłanie E-Maili z loginem i hasłem
 * [DONE] Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
 * [DONE] Konfiguracja Jenkins i działający CI
 * [DONE] Definicja i implementacja interfejsu REST 
-* Kolejne funkcje dla administratora 
+* [DONE] Kolejne funkcje dla administratora 
   * reset hasła użytkownika 
   * aktywowanie i deaktywowanie konta użytkownika
-* [WiP] Definicja szablonu SMS
-* Definicja szablonu E-Mail
-* [WiP] Definicja masek UI dla klienta HTML5/CSS3 
+* [DONE] Definicja szablonu E-Mail
 
 ### Wersja 0.3
+* [WiP] Definicja szablonu SMS
+* [WiP] Definicja masek UI dla klienta HTML5/CSS3 
 * Możliwość zamknięcia listy kandydatów. 
 * [WiP] Import CSV/KLK dla następujących encji: user, komisja obwodowa, komisja okręgowa 
 * Autoryzacja i autentyfikacja na bazie JAAS

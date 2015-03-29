@@ -170,7 +170,7 @@ Plan implementacji
   * komisja okręgowa
   * komisja obwodowa
 
-### Wersja 0.2
+### Wersja 0.2 [wydana 2015.03.29] 
 * [DONE] Wysyłanie E-Maili z loginem i hasłem
 * [DONE] Użytkownik może zarejestrować numer telefonu dla funkcji protokół SMS
 * [DONE] Konfiguracja Jenkins i działający CI

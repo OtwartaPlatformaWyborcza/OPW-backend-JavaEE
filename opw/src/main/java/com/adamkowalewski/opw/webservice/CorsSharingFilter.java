@@ -23,28 +23,23 @@
  */
 package com.adamkowalewski.opw.webservice;
 
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
+import javax.ws.rs.ext.Provider;
 
 /**
- * REST configuration. 
- * 
+ *
  * @author Adam Kowalewski
  */
-@ApplicationPath("service")
-public class RestConfig extends Application {
+@Provider
+public class CorsSharingFilter implements ContainerResponseFilter {
 
     @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new java.util.HashSet<>();
-        addRestResourceClasses(resources);
-        return resources;
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext response) {
+        response.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
+        response.getHeaders().putSingle("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
+        response.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type");
     }
-
-    private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.adamkowalewski.opw.webservice.CorsSharingFilter.class);        
-        resources.add(com.adamkowalewski.opw.webservice.KomisjaService.class);        
-        resources.add(com.adamkowalewski.opw.webservice.UserService.class);        
-    }
+    
 }

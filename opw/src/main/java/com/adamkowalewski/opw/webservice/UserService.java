@@ -62,7 +62,7 @@ public class UserService extends AbstractService {
                 .entity(result)
                 .build();
 
-        response = addCorsHeaders(response);
+        
         return response;
     }
 
@@ -78,13 +78,13 @@ public class UserService extends AbstractService {
                     .entity(new UserDto(1, "Mock admina", "token1234", true))
                     .build();
 
-            response = addCorsHeaders(response);
+            
             return response;
         }
         Response response = Response.status(Response.Status.UNAUTHORIZED)
                 .build();
 
-        response = addCorsHeaders(response);
+        
         return response;
     }
 
@@ -98,7 +98,7 @@ public class UserService extends AbstractService {
                 .entity(new UserDto(false))
                 .build();
 
-        response = addCorsHeaders(response);
+        
         return response;
     }
     

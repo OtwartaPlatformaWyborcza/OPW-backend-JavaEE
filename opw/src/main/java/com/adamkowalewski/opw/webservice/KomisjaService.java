@@ -58,11 +58,11 @@ public class KomisjaService extends AbstractService {
 
             KomisjaDto komisja = new KomisjaDto("1212-12", "Koisja obowdow 22", "szkola 11 Liswøł", new OkregowaDto("1212", "Komisja Wawa", "ul. wiejska 11"), kandydatList);
             Response result = Response.ok().entity(komisja).build();
-            result = addCorsHeaders(result);
+            
             return result;
         }
         Response result = Response.noContent().build();
-        result = addCorsHeaders(result);
+        
         return result;
 
     }

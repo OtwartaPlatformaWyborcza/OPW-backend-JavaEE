@@ -23,10 +23,51 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Adam Kowalewski
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class OkregowaDto {
-    
+
+    private String pkwId, name, address;
+
+    public OkregowaDto() {
+    }
+
+    public OkregowaDto(String pkwId, String name, String address) {
+        this.pkwId = pkwId;
+        this.name = name;
+        this.address = address;
+    }
+
+    public String getPkwId() {
+        return pkwId;
+    }
+
+    public void setPkwId(String pkwId) {
+        this.pkwId = pkwId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
 }

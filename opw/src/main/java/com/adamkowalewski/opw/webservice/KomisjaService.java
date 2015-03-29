@@ -23,15 +23,19 @@
  */
 package com.adamkowalewski.opw.webservice;
 
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import com.adamkowalewski.opw.webservice.dto.KandydatDto;
+import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
+import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
 import com.adamkowalewski.opw.webservice.dto.UploadWynikDto;
-import com.adamkowalewski.opw.webservice.dto.UploadWynikResultDto;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Represents komisja perspective.
@@ -44,16 +48,30 @@ public class KomisjaService extends AbstractService {
     @GET
     @Path("/{pkwId}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public OpwObwodowaKomisja loadObwodowa(@PathParam("pkwId") String pkwId) {
-        
-        
-        return null;
+    public Response loadObwodowa(@PathParam("pkwId") String pkwId) {
+
+        if (pkwId.equals("1212-01")) {
+            List<KandydatDto> kandydatList = new ArrayList<>();
+            kandydatList.add(new KandydatDto(1, "Bolek"));
+            kandydatList.add(new KandydatDto(2, "Lolek"));
+            kandydatList.add(new KandydatDto(3, "Kaczor"));
+
+            KomisjaDto komisja = new KomisjaDto("1212-12", "Koisja obowdow 22", "szkola 11 Liswøł", new OkregowaDto("1212", "Komisja Wawa", "ul. wiejska 11"), kandydatList);
+            Response result = Response.ok().entity(komisja).build();
+            result = addCorsHeaders(result);
+            return result;
+        }
+        Response result = Response.noContent().build();
+        result = addCorsHeaders(result);
+        return result;
+
     }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public UploadWynikResultDto uploadWyniki(UploadWynikDto wynik) {
-        return new UploadWynikResultDto();
+    public Response uploadWyniki(UploadWynikDto wynik) {
+//        UploadWynikResultDto
+        return null;
     }
 
 }

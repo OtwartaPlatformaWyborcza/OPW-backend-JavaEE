@@ -47,6 +47,15 @@ public class KomisjaDto implements Serializable {
     public KomisjaDto() {
     }
 
+    public KomisjaDto(String pkwId, String name, String address, OkregowaDto okregowa, List<KandydatDto> kandydatList) {
+        this.pkwId = pkwId;
+        this.name = name;
+        this.address = address;
+        this.okregowa = okregowa;
+        this.kandydatList = kandydatList;
+    }
+    
+
     public String getPkwId() {
         return pkwId;
     }

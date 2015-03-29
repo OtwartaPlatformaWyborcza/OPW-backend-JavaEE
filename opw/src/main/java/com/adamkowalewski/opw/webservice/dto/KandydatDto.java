@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * DTO
+ *
  * @author Adam Kowalewski
  */
 @XmlRootElement
@@ -41,6 +42,11 @@ public class KandydatDto implements Serializable {
     private int glosow;
 
     public KandydatDto() {
+    }
+
+    public KandydatDto(int pkwId, String fullname) {
+        this.pkwId = pkwId;
+        this.fullname = fullname;
     }
 
     public int getPkwId() {

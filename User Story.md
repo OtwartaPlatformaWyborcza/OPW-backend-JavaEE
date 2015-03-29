@@ -32,8 +32,8 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 
 ### Technologia
 * OPW-T-1 : Wykonanie dokumentacji REST API w swagger.io 
-* OPW-T-2 : 
-* OPW-T-3
+* OPW-T-2 : Integracja SFL4J jako loggera
+* OPW-T-3 : Migracja z EclipseLink na Hibernate +envers 
 * OPW-T-4
 * OPW-T-5
 

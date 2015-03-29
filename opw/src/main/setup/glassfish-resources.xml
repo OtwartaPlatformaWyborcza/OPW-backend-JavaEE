@@ -32,11 +32,11 @@
         <property name="mail-imap-auth" value="true"/>    
         <property name="mail-imap-host" value="changeme"/>            
         <property name="mail-imap-password" value="changeme"/>    
-        <property name="mail-imap-port" value="143"/>    
+        <property name="mail-imap-port" value="changeme"/>    
         
         <property name="mail-smtp-auth" value="true"/>
         <property name="mail-smtp-host" value="changeme"/>            
         <property name="mail-smtp-password" value="changeme"/>   
-        <property name="mail-smtp-port" value="25"/>                     
+        <property name="mail-smtp-port" value="changeme"/>                     
     </mail-resource>
 </resources>

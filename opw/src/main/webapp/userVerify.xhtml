@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="./WEB-INF/opwTemplate.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h1>user verify</h1>
+        <f:view>
+            <f:metadata>
+                <f:viewParam name="email" value="#{verifyHandler.email}" />            
+                <f:viewAction  action="#{verifyHandler.verifyAccount()}" />
+            </f:metadata>
+        </f:view>
+
+    </ui:define>
+
+</ui:composition>

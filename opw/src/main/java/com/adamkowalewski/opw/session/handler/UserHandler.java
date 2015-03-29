@@ -25,6 +25,7 @@ package com.adamkowalewski.opw.session.handler;
 
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.session.Identity;
+import com.adamkowalewski.opw.session.controller.MsgController;
 import com.adamkowalewski.opw.session.controller.UserController;
 import java.io.Serializable;
 import java.util.List;
@@ -33,8 +34,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * CRUD backing bean / handler for all CRUD related JSF sites. 
- * 
+ * CRUD backing bean / handler for all CRUD related JSF sites.
+ *
  * @author Adam Kowalewski
  */
 @Named
@@ -55,13 +56,10 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
         VIEW_ID_CREATE = "userCreate";
     }
     
-    /**
-     * WiP 
-     */
-    public void resetPassword(){
-        
-        
-        
+    public String resetPassword() {
+        userController.resetPassword(instance);
+        MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userResetPwdMailSend") + " ["+instance.getEmail()+"]");
+        return VIEW_ID;
     }
 
     @Override
@@ -73,6 +71,11 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
     @Override
     public String edit() {
         userController.edit(instance);
+        return VIEW_ID;
+    }
+
+    public String delete() {
+        userController.delete(instance);
         return VIEW_ID;
     }
 

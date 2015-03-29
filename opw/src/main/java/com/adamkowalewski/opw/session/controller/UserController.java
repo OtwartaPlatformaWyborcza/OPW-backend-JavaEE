@@ -33,6 +33,7 @@ import java.security.SecureRandom;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -49,6 +50,9 @@ public class UserController implements Serializable {
     @EJB
     private UserBean bean;
 
+    @Inject
+    private MailController mailController;
+
     public UserController() {
     }
 
@@ -58,13 +62,21 @@ public class UserController implements Serializable {
      * @param user
      */
     public void create(OpwUser user) {
-        user.setPassword(generatePassword(DEFAULT_PWD_LENGTH));
+        String passwordPlain = generatePassword();
+        mailController.sendMailWelcome(user, passwordPlain);
+        user.setPassword(encryptSHA(passwordPlain));
         bean.create(user);
     }
-
-    // TODO
-    public void sendWelcomeMail() {
-
+    
+    public void resetPassword(OpwUser user){
+        String passwordPlain = generatePassword();
+        mailController.sendMailPasswordNew(user, passwordPlain);
+        user.setPassword(encryptSHA(passwordPlain));
+        bean.edit(user);
+    }
+    
+    public void delete(OpwUser user){
+        bean.remove(user);
     }
 
     /**

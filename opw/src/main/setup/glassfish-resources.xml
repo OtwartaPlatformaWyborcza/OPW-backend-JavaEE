@@ -34,9 +34,9 @@
         <property name="mail-imap-password" value="changeme"/>    
         <property name="mail-imap-port" value="changeme"/>    
         
-        <property name="mail-smtp-auth" value="true"/>
-        <property name="mail-smtp-host" value="changeme"/>            
-        <property name="mail-smtp-password" value="changeme"/>   
-        <property name="mail-smtp-port" value="changeme"/>                     
+        <property name="mail-smtps-auth" value="true"/>
+        <property name="mail-smtps-host" value="changeme"/>            
+        <property name="mail-smtps-password" value="changeme"/>   
+        <property name="mail-smtps-port" value="changeme"/>                     
     </mail-resource>
 </resources>

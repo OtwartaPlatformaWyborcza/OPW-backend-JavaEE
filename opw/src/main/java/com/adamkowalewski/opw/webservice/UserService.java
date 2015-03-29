@@ -33,6 +33,7 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -49,10 +50,13 @@ public class UserService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response loadObwodowaShortList(@PathParam("userId") int userId) {
 
-        List<KomisjaShortDto> result = new ArrayList<>();
-        result.add(new KomisjaShortDto());
-        result.add(new KomisjaShortDto());
-        result.add(new KomisjaShortDto());
+        List<KomisjaShortDto> resultList = new ArrayList<>();
+        resultList.add(new KomisjaShortDto(1, "1212-01", "Komisja 1", "adres 1"));
+        resultList.add(new KomisjaShortDto(2, "1212-02", "Komisja 2", "adres 2"));
+        resultList.add(new KomisjaShortDto(3, "1212-03", "Komisja 3", "adres 3"));
+        
+        GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
+        };
 
         Response response = Response.ok()
                 .entity(result)
@@ -97,5 +101,5 @@ public class UserService extends AbstractService {
         response = addCorsHeaders(response);
         return response;
     }
-
+    
 }

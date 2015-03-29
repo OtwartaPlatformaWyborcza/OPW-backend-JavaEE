@@ -56,6 +56,17 @@
                                value="#{messages.edit}"
                                action="#{userHandler.prepareEdit()}"
                                rendered="#{userHandler.viewMode}"/>
+                
+                <h:commandLink id="btnNewPwd" class="btn" immediate="true"
+                               value="#{messages.userResetPwd}"
+                               action="#{userHandler.resetPassword()}"
+                               rendered="#{not userHandler.viewMode}"/>
+                <br/>
+                
+                <h:commandLink id="btnDel" class="btn btnred" immediate="true"
+                               value="#{messages.delete}"
+                               action="#{userHandler.delete()}"
+                               rendered="#{not userHandler.viewMode}"/>
 
             </h:form>
         </div>

@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.mail.Address;
@@ -59,15 +61,10 @@ public class MailController {
         Message message = new MimeMessage(mailSession);
         String subject = "Otwarta Platforma Wyborcza - rejestracja";
 
-        // Prepare E-Mail content
-        String activationLink = "http://CHANGEME/userVerify.xhtml"
-                + "?login=" + user.getEmail()
-                + "&code=" + user.getToken();
-
-        MailWelcomeDto payload = new MailWelcomeDto(user.getEmail(), passwordPlain, activationLink);
+        MailWelcomeDto payload = new MailWelcomeDto(user.getEmail(), passwordPlain, prepareActivationLink(user));
 
         try {
-            String content = getContentWelcomeHardcoded(payload);
+            String content = getContentWelcome(payload);
 
             Address singleReceiver = new InternetAddress(user.getEmail());
             message.setFrom(new InternetAddress("opw@adamkowalewski.com", "Otwarta Platforma Wyborcza"));
@@ -75,12 +72,15 @@ public class MailController {
 
             message.setSubject(subject);
             message.setContent(content, "text/plain; charset=UTF-8");
-            Transport.send(message);
+            System.out.println("contenr " + content);
+//            Transport.send(message);
 
         } catch (UnsupportedEncodingException | MessagingException ex) {
             System.out.println(ex);
             System.out.println("failed");
             return false;
+        } catch (IOException | TemplateException ex) {
+            Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("nowe haslo");
         return true;
@@ -163,19 +163,35 @@ public class MailController {
      * @author Adam Kowalewski
      * @version 2015.03.29
      */
-    private String getContent(MailWelcomeDto payload) throws IOException, TemplateException {
-        // currently off gets IO ex when accesing template dir :( 
-        String path = "src/main/resources/templates";
-
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
-        cfg.setDirectoryForTemplateLoading(new File(path));
-        cfg.setDefaultEncoding("UTF-8");
-
+    public String getContentWelcome(MailWelcomeDto payload) throws IOException, TemplateException {
+        Configuration cfg = prepareFreemarkerConfig();
         Template templ = cfg.getTemplate("welcome_plain.ftl");
         Writer out = new StringWriter();
         templ.process(payload, out);
 
         return out.toString();
+    }
+
+    /**
+     * Creates default FreeMarker configuration instance.
+     *
+     * @return FreeMarker instance.
+     * @author Adam Kowalewski
+     * @version 2015.03.30
+     */
+    private Configuration prepareFreemarkerConfig() {
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
+        cfg.setDefaultEncoding("UTF-8");
+        cfg.setClassForTemplateLoading(MailController.class, "templates");
+        return cfg;
+    }
+
+    private String prepareActivationLink(OpwUser user) {
+        String result = "http://CHANGEME/userVerify.xhtml" 
+                + "?login=" + user.getEmail()
+                + "&code=" + user.getToken();
+        
+        return result;
     }
 
 }

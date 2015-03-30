@@ -21,49 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
-
-import com.adamkowalewski.opw.session.dto.ConfigMailDto;
-import java.io.Serializable;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+package com.adamkowalewski.opw.session.dto;
 
 /**
- * Unified configuration. TODO load from database TODO load from properties
  *
  * @author Adam Kowalewski
  */
-@Named
-@SessionScoped
-public class ConfigController implements Serializable {
+public class MailContentDto {
 
-    /**
-     * Application salt may not be changed and is therefore hardcoded.
-     */
-    private final String APP_SALT = "abc";
+    private String login, password, link;
 
-    private ConfigMailDto configMail;
-
-    public ConfigController() {
-
+    public MailContentDto() {
     }
 
-    @PostConstruct
-    public void initConfigController() {
-        configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", "opw@adamkowalewski.com", "http://91.250.114.134:8080/opw");
+    public MailContentDto(String login, String password, String link) {
+        this.login = login;
+        this.password = password;
+        this.link = link;
     }
 
-    public String getAPP_SALT() {
-        return APP_SALT;
+    public String getLogin() {
+        return login;
     }
 
-    public ConfigMailDto getConfigMail() {
-        return configMail;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public void setConfigMail(ConfigMailDto configMail) {
-        this.configMail = configMail;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
 }

@@ -24,11 +24,11 @@
 package com.adamkowalewski.opw.session.controller;
 
 import com.adamkowalewski.opw.entity.OpwUser;
-import com.adamkowalewski.opw.session.dto.MailWelcomeDto;
+import com.adamkowalewski.opw.session.dto.ConfigMailDto;
+import com.adamkowalewski.opw.session.dto.MailContentDto;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
@@ -37,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -56,49 +57,43 @@ public class MailController {
     @Resource(name = "mail/opw")
     private Session mailSession;
 
+    @Inject
+    private ConfigController configController;
+
     public boolean sendMailWelcome(OpwUser user, String passwordPlain) {
-        // TODO refactoring needed !
-        Message message = new MimeMessage(mailSession);
-        String subject = "Otwarta Platforma Wyborcza - rejestracja";
-
-        MailWelcomeDto payload = new MailWelcomeDto(user.getEmail(), passwordPlain, prepareActivationLink(user));
-
+        String subject = MsgController.getLocalizedMessage("mailWelcomeTitle");
+        String actLink = prepareActivationLink(user, configController.getConfigMail().getHostname());
+        MailContentDto payload = new MailContentDto(user.getEmail(), passwordPlain, actLink);
         try {
-            String content = getContentWelcome(payload);
-
-            Address singleReceiver = new InternetAddress(user.getEmail());
-            message.setFrom(new InternetAddress("opw@adamkowalewski.com", "Otwarta Platforma Wyborcza"));
-            message.setRecipient(Message.RecipientType.TO, singleReceiver);
-
-            message.setSubject(subject);
-            message.setContent(content, "text/plain; charset=UTF-8");
-            System.out.println("contenr " + content);
-//            Transport.send(message);
-
-        } catch (UnsupportedEncodingException | MessagingException ex) {
-            System.out.println(ex);
-            System.out.println("failed");
-            return false;
+            String content = getMailContent(payload, "welcome_plain.ftl");
+            sendMail(user, subject, content, configController.getConfigMail());
+            return true;
         } catch (IOException | TemplateException ex) {
             Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        System.out.println("nowe haslo");
-        return true;
     }
 
     public boolean sendMailPasswordNew(OpwUser user, String passwordPlain) {
-        // TODO refactoring needed !
-        Message message = new MimeMessage(mailSession);
-        String subject = "Otwarta Platforma Wyborcza - nowe hasło";
-        MailWelcomeDto payload = new MailWelcomeDto(user.getEmail(), passwordPlain, "");
-
+        String subject = MsgController.getLocalizedMessage("mailNewPasswordTitle");
+        String actLink = prepareActivationLink(user, configController.getConfigMail().getHostname());
+        MailContentDto payload = new MailContentDto(user.getEmail(), passwordPlain, actLink);
         try {
-            String content = getContentNewPwdHardcoded(payload);
+            String content = getMailContent(payload, "passwordNew_plain.ftl");
+            sendMail(user, subject, content, configController.getConfigMail());
+            return true;
+        } catch (IOException | TemplateException ex) {
+            Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 
+    private boolean sendMail(OpwUser user, String subject, String content, ConfigMailDto configMailDto) {
+        Message message = new MimeMessage(mailSession);
+        try {
             Address singleReceiver = new InternetAddress(user.getEmail());
-            message.setFrom(new InternetAddress("opw@adamkowalewski.com", "Otwarta Platforma Wyborcza"));
+            message.setFrom(new InternetAddress(configMailDto.getFromAddress(), configMailDto.getFromLabel()));
             message.setRecipient(Message.RecipientType.TO, singleReceiver);
-
             message.setSubject(subject);
             message.setContent(content, "text/plain; charset=UTF-8");
             Transport.send(message);
@@ -108,64 +103,24 @@ public class MailController {
             System.out.println("failed");
             return false;
         }
+        System.out.println("email send");
         return true;
-    }
-
-    /**
-     * Ugly but works for now.
-     *
-     * @param payload
-     * @return
-     */
-    private String getContentWelcomeHardcoded(MailWelcomeDto payload) {
-
-        String content = "Witaj w Otwartej Platformie Wyborczej (OPW)!\n"
-                + "\n"
-                + "Oto twoje dane dostępowe: \n"
-                + "Login: " + payload.getLogin() + "\n"
-                + "Hasło: " + payload.getPassword() + "\n"
-                + "\n"
-                + "\n"
-                + "Kliknij w poniższy link lub skopiuj go do okna przeglądarki, aby potwierdźić adres E-Mail i aktywować konto:\n"
-                + payload.getLink() + "\n"
-                + "\n"
-                + "Możesz kliknąć na powyższy adres lub skopiować go do przeglądarki - w drugim przypadku zrób to dokładnie i upewnij się, że nie ma w adresie dodatkowych spacji.\n"
-                + "\n"
-                + "\n"
-                + "Pozdrawiamy\n"
-                + "Zespół OPW\n"
-                + "";
-        return content;
-    }
-
-    private String getContentNewPwdHardcoded(MailWelcomeDto payload) {
-        String content = "Witaj!\n"
-                + "\n"
-                + "Oto nowe dane dostępowe: \n"
-                + "Login: " + payload.getLogin() + "\n"
-                + "Hasło: " + payload.getPassword() + "\n"
-                + "\n"
-                + "\n"
-                + "Pozdrawiamy\n"
-                + "Zespół OPW\n"
-                + "\n"
-                + "";
-        return content;
     }
 
     /**
      * Returns E-Mail content generated with FreeMarker template.
      *
      * @param payload DTO instance.
+     * @param templateName name of template to use.
      * @return String representation of content.
      * @throws IOException
      * @throws TemplateException
      * @author Adam Kowalewski
      * @version 2015.03.29
      */
-    public String getContentWelcome(MailWelcomeDto payload) throws IOException, TemplateException {
+    public String getMailContent(MailContentDto payload, String templateName) throws IOException, TemplateException {
         Configuration cfg = prepareFreemarkerConfig();
-        Template templ = cfg.getTemplate("welcome_plain.ftl");
+        Template templ = cfg.getTemplate(templateName);
         Writer out = new StringWriter();
         templ.process(payload, out);
 
@@ -186,11 +141,10 @@ public class MailController {
         return cfg;
     }
 
-    private String prepareActivationLink(OpwUser user) {
-        String result = "http://CHANGEME/userVerify.xhtml" 
+    private String prepareActivationLink(OpwUser user, String hostname) {
+        String result = hostname + "/userVerify.xhtml"
                 + "?login=" + user.getEmail()
                 + "&code=" + user.getToken();
-        
         return result;
     }
 

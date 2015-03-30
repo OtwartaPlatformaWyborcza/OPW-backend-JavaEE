@@ -24,44 +24,46 @@
 package com.adamkowalewski.opw.session.dto;
 
 /**
+ * DTO represents E-Mail configuration.
  *
  * @author Adam Kowalewski
  */
-public class MailWelcomeDto {
+public class ConfigMailDto {
 
-    private String login, password, link;
+    private String fromLabel, fromAddress;
+    private String hostname;
 
-    public MailWelcomeDto() {
+    public ConfigMailDto() {
     }
 
-    public MailWelcomeDto(String login, String password, String link) {
-        this.login = login;
-        this.password = password;
-        this.link = link;
+    public ConfigMailDto(String fromLabel, String fromAddress, String hostname) {
+        this.fromLabel = fromLabel;
+        this.fromAddress = fromAddress;
+        this.hostname = hostname;
     }
 
-    public String getLogin() {
-        return login;
+    public String getFromLabel() {
+        return fromLabel;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setFromLabel(String fromLabel) {
+        this.fromLabel = fromLabel;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFromAddress() {
+        return fromAddress;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFromAddress(String fromAddress) {
+        this.fromAddress = fromAddress;
     }
 
-    public String getLink() {
-        return link;
+    public String getHostname() {
+        return hostname;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
     }
 
 }

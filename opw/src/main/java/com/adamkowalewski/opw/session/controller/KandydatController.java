@@ -32,6 +32,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
+ * Provides reusable logic around Kandydat. 
  *
  * @author Adam Kowalewski
  */

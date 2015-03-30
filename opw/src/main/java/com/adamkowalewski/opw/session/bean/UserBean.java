@@ -31,6 +31,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
+ * Provides access to user.
  *
  * @author Adam Kowalewski
  */
@@ -56,7 +57,7 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @return full instance of OpwUser or null if no record was found.
      * @author Adam Kowalewski
      * @version 2015.03.15
-     * @TODO add exception handling 
+     * @TODO add exception handling
      */
     public OpwUser findUser(String login) {
         Query q = em.createNamedQuery("OpwUser.findByEmail");
@@ -77,7 +78,7 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @return full instance of OpwUser.
      * @author Adam Kowalewski
      * @version 2015.03.15
-     * @TODO add exception handling 
+     * @TODO add exception handling
      */
     public OpwUser findUser(int id) {
         Query q = em.createNamedQuery("OpwUser.findById");

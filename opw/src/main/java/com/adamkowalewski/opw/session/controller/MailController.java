@@ -44,7 +44,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
+ * Provides reusable logic related to E-Mail in- and outbound.
  *
  * @author Adam Kowalewski
  */
@@ -91,7 +91,7 @@ public class MailController {
         Message message = new MimeMessage(mailSession);
         String subject = "Otwarta Platforma Wyborcza - nowe hasło";
         MailWelcomeDto payload = new MailWelcomeDto(user.getEmail(), passwordPlain, "");
-        
+
         try {
             String content = getContentNewPwdHardcoded(payload);
 

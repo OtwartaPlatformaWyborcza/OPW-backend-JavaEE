@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.adamkowalewski.opw.session.bean;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
@@ -30,11 +29,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
+ * Poovides access to Kandydat.
  *
  * @author Adam Kowalewski
  */
 @Stateless
-public class KandydatBean extends AbstractOpwFacade<OpwKandydat>{
+public class KandydatBean extends AbstractOpwFacade<OpwKandydat> {
 
     @PersistenceContext(unitName = PU_OPW)
     private EntityManager em;
@@ -47,5 +47,5 @@ public class KandydatBean extends AbstractOpwFacade<OpwKandydat>{
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

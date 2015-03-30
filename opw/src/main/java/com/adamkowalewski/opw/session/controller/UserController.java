@@ -37,6 +37,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
+ * Provides reusable logic around User.
  *
  * @author Adam Kowalewski
  */
@@ -59,7 +60,9 @@ public class UserController implements Serializable {
     /**
      * Creates a new user within database and generates a random password.
      *
-     * @param user
+     * @param user instance of user.
+     * @author Adam Kowalewski
+     * @version 2015.03.29
      */
     public void create(OpwUser user) {
         String passwordPlain = generatePassword();
@@ -67,16 +70,21 @@ public class UserController implements Serializable {
         user.setPassword(encryptSHA(passwordPlain));
         bean.create(user);
     }
-    
-    public void resetPassword(OpwUser user){
+
+    /**
+     * Generates and persists a new password for user as well as triggers E-Mail
+     * notification.
+     *
+     * @param user instance of user.
+     *
+     * @author Adam Kowalewski
+     * @version 2015.03.29
+     */
+    public void resetPassword(OpwUser user) {
         String passwordPlain = generatePassword();
         mailController.sendMailPasswordNew(user, passwordPlain);
         user.setPassword(encryptSHA(passwordPlain));
         bean.edit(user);
-    }
-    
-    public void delete(OpwUser user){
-        bean.remove(user);
     }
 
     /**
@@ -149,6 +157,10 @@ public class UserController implements Serializable {
             return null;
         }
         return encrypted.toString();
+    }
+
+    public void delete(OpwUser user) {
+        bean.remove(user);
     }
 
     public OpwUser find(int id) {

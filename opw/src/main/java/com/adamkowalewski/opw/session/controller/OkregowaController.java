@@ -36,6 +36,7 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Named;
 
 /**
+ * Provides reusable logic around Komisja Okregowa. 
  *
  * @author Adam Kowalewski
  */
@@ -62,6 +63,9 @@ public class OkregowaController implements Serializable {
         return bean.find(id);
     }
     
+    /**
+     * Converter required for dynamic list selection within JSF. 
+     */
     @FacesConverter(forClass = OpwOkregowaKomisja.class)
     public static class OpwOkregowaKomisjaControllerConverter implements Converter {
 

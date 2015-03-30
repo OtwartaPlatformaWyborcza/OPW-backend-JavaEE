@@ -29,6 +29,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
+ * Provides access to Komisja Okregowa.
  *
  * @author Adam Kowalewski
  */

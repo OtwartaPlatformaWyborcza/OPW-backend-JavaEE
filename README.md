@@ -188,19 +188,21 @@ Plan implementacji
 * Możliwość zamknięcia listy kandydatów. 
 * [WiP] Import CSV/KLK dla następujących encji: komisja obwodowa, komisja okręgowa 
 * Autoryzacja i autentyfikacja na bazie JAAS
-* Podbieranie protokołów przesłanych na skrzynke pocztową
-* Automatyczne parsowanie protokołów ze skrzynki pocztowej
-  * import poprawnych protokołów
-  * tagowanie błędnych protokołów  
 Definicja architektury na nadchodzące wybory
 
 
 ### Wersja 0.5
-* Aktualne wyniki wyborów są dostępne na stronie.
+* Podbieranie protokołów przesłanych na skrzynke pocztową
+* Automatyczne parsowanie protokołów ze skrzynki pocztowej
+  * import poprawnych protokołów
+  * tagowanie błędnych protokołów  
+
 
 
 ### Wersja 0.6
 * Frontend bezpośrednio w HTML / JavaScript / REST
+* Aktualne wyniki wyborów są dostępne na stronie.
+
 
 ### Wersja 0.8
 * Aktualizacja Dashboard

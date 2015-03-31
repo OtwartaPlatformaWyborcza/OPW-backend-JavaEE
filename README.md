@@ -151,20 +151,20 @@ PERSPEKTYWA SERWERA
 
 
 ## REST 
-u GET login 
-u GET obwodowaList
-GET obwodowa(id)
-	+ kandydaci
-	+ lista protokołow
- 
-POST	uploadWyniki
+Proces wgrywania protokołu z perspektywy.  
+1. GET Zalogowanie
+2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny 
+3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów) 
+4. POST Upload liczb wyborczych 
+5. GET Wylogowanie
+
 
 ## Roadmap
 Plan implementacji
 
 ### Wersja 0.1 [wydana 2015.03.24] 
-* Definicja bazy danych
-* Funkcjonalność CRUD(Create Remove Update Delete) w przeglądarce dla obiektów
+* [DONE] Definicja bazy danych
+* [DONE] Funkcjonalność CRUD(Create Remove Update Delete) w przeglądarce dla obiektów
   * user (+ generowanie hasła )
   * kandydat
   * komisja okręgowa
@@ -181,10 +181,12 @@ Plan implementacji
 * [DONE] Definicja szablonu E-Mail
 
 ### Wersja 0.3
+* [DONE] OPW-T-4 : Generowanie E-Mail poprzez szablony FreeMarker
+* OPW-A-6 : import kont użytkowników z pliku CSV
 * [WiP] Definicja szablonu SMS
 * [WiP] Definicja masek UI dla klienta HTML5/CSS3 
 * Możliwość zamknięcia listy kandydatów. 
-* [WiP] Import CSV/KLK dla następujących encji: user, komisja obwodowa, komisja okręgowa 
+* [WiP] Import CSV/KLK dla następujących encji: komisja obwodowa, komisja okręgowa 
 * Autoryzacja i autentyfikacja na bazie JAAS
 * Podbieranie protokołów przesłanych na skrzynke pocztową
 * Automatyczne parsowanie protokołów ze skrzynki pocztowej

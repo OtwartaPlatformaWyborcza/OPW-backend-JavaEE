@@ -23,29 +23,13 @@
  */
 package com.adamkowalewski.opw.webservice;
 
-import java.util.Set;
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.Path;
 
 /**
- * REST configuration. 
- * 
+ *
  * @author Adam Kowalewski
  */
-@ApplicationPath("service")
-public class RestConfig extends Application {
-
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> resources = new java.util.HashSet<>();
-        addRestResourceClasses(resources);
-        return resources;
-    }
-
-    private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.adamkowalewski.opw.webservice.CorsSharingFilter.class);        
-        resources.add(com.adamkowalewski.opw.webservice.KomisjaService.class);        
-        resources.add(com.adamkowalewski.opw.webservice.UserService.class);        
-        resources.add(com.adamkowalewski.opw.webservice.WynikService.class);
-    }
+@Path("/wynik")
+public class WynikService {
+    
 }

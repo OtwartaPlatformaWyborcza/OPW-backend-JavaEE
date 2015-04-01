@@ -14,7 +14,7 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-A-5 : Jako administrator jestem w stanie dodać pojedyncze konto użytkownika w przeglądarce 
 * OPW-A-6 : Jako administrator jestem w stanie wykonać import listy użytkowników z pliku CSV
 * OPW-A-7 : Jako administrator chcę wykonać import komisji okręgowych bezpośrednio z pliku CSV 
-
+* OPW-A-8 : Jako administrator chcę, po opublikowaniu przez PKW oficjalnej listy kandydatów, zamknąć listę kandydatów (przejść w tryb read-only) w OPW. 
 
 
 ### Użytkownik 

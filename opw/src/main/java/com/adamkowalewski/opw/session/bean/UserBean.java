@@ -24,7 +24,6 @@
 package com.adamkowalewski.opw.session.bean;
 
 import com.adamkowalewski.opw.entity.OpwUser;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -57,18 +56,11 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @return full instance of OpwUser or null if no record was found.
      * @author Adam Kowalewski
      * @version 2015.03.15
-     * @TODO add exception handling
      */
     public OpwUser findUser(String login) {
         Query q = em.createNamedQuery("OpwUser.findByEmail");
         q.setParameter("login", login);
-        List<OpwUser> resultList = q.getResultList();
-        if (resultList.isEmpty()) {
-            //@ToDo throw an exception
-            return null;
-        } else {
-            return resultList.get(0);
-        }
+        return (OpwUser) q.getSingleResult();
     }
 
     /**
@@ -78,7 +70,6 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @return full instance of OpwUser.
      * @author Adam Kowalewski
      * @version 2015.03.15
-     * @TODO add exception handling
      */
     public OpwUser findUser(int id) {
         Query q = em.createNamedQuery("OpwUser.findById");

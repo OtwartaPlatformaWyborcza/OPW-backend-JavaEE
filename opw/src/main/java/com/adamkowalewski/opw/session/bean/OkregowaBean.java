@@ -24,9 +24,11 @@
 package com.adamkowalewski.opw.session.bean;
 
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Provides access to Komisja Okregowa.
@@ -46,6 +48,18 @@ public class OkregowaBean extends AbstractOpwFacade<OpwOkregowaKomisja> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public OpwOkregowaKomisja findOkregowa(String pkwId) {
+        Query q = em.createNamedQuery("OpwOkregowaKomisja.findByPkwId");
+        q.setParameter("pkwId", pkwId);
+        return (OpwOkregowaKomisja) q.getSingleResult();
+    }
+
+    public List<OpwOkregowaKomisja> findOkregowaLike(String pkwId) {
+        Query q = em.createQuery("SELECT o FROM OpwOkregowaKomisja o WHERE o.pkwId like :pkwId");
+        q.setParameter("pkwId", pkwId);
+        return q.getResultList();
     }
 
 }

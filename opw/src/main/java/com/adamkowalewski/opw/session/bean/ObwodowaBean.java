@@ -24,9 +24,11 @@
 package com.adamkowalewski.opw.session.bean;
 
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Provides access to Komisja Obwodowa.
@@ -46,6 +48,18 @@ public class ObwodowaBean extends AbstractOpwFacade<OpwObwodowaKomisja> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public OpwObwodowaKomisja findObwodowa(String pkwId) {
+        Query q = em.createNamedQuery("OpwObwodowaKomisja.findByPkwId");
+        q.setParameter("pkwId", pkwId);
+        return (OpwObwodowaKomisja) q.getSingleResult();
+    }
+
+    public List<OpwObwodowaKomisja> findObwodowaLike(String pkwId) {
+        Query q = em.createQuery("SELECT o FROM OpwObwodowaKomisja o WHERE o.pkwId like :pkwId");
+        q.setParameter("pkwId", "%" + pkwId + "%");
+        return q.getResultList();
     }
 
 }

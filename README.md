@@ -158,6 +158,12 @@ Proces wgrywania protokołu z perspektywy.
 4. POST Upload liczb wyborczych 
 5. GET Wylogowanie
 
+### Headers 
+Jako prefix `X-OPW`  
+`X-OPW-login`  
+`X-OPW-password`  
+`X-OPW-token`  
+
 
 ## Roadmap
 Plan implementacji
@@ -185,10 +191,11 @@ Plan implementacji
 * OPW-A-6 : import kont użytkowników z pliku CSV
 * [WiP] Definicja szablonu SMS
 * [WiP] Definicja masek UI dla klienta HTML5/CSS3 
-* Możliwość zamknięcia listy kandydatów. 
-* [WiP] Import CSV/KLK dla następujących encji: komisja obwodowa, komisja okręgowa 
+* OPW-A-8 Możliwość zamknięcia listy kandydatów. 
+* OPW-A-2 Import CSV/KLK dla encji: komisja obwodowa, 
+* OPW-A-3 [WiP] Import CSV/KLK dla encji: komisja okręgowa 
 * Autoryzacja i autentyfikacja na bazie JAAS
-Definicja architektury na nadchodzące wybory
+* [WiP] Definicja architektury na nadchodzące wybory
 
 
 ### Wersja 0.5

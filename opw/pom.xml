@@ -120,4 +120,9 @@
             <name>Repository for library PrimeFaces-maven-lib</name>
         </repository>
     </repositories>    
+    <scm>
+        <connection>scm:git:git@github.com:adamkowalewski/OtwartaPlatformaWyborcza.git</connection>
+        <url>scm:git:git@github.com:adamkowalewski/OtwartaPlatformaWyborcza.git</url>
+        <developerConnection>scm:git:git@github.com:adamkowalewski/OtwartaPlatformaWyborcza.git</developerConnection>
+    </scm>
 </project>

@@ -188,6 +188,7 @@ Plan implementacji
 
 ### Wersja 0.3.0 [wydana 2015.04.03] 
 * [DONE] OPW-T-4 : Generowanie E-Mail poprzez szablony FreeMarker
+* [DONE] Integracja TestNG i Mockito 
 * [DONE] Integracja mvn release 
 
 ### Wersja 0.4.0

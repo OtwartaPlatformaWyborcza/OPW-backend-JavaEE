@@ -57,6 +57,11 @@ public class UserController implements Serializable {
     public UserController() {
     }
 
+    public UserController(UserBean bean, MailController mailController) {
+        this.bean = bean;
+        this.mailController = mailController;
+    }
+
     /**
      * Creates a new user within database and generates a random password.
      *

@@ -186,8 +186,11 @@ Plan implementacji
   * aktywowanie i deaktywowanie konta użytkownika
 * [DONE] Definicja szablonu E-Mail
 
-### Wersja 0.3
+### Wersja 0.3.0 [wydana 2015.04.03] 
 * [DONE] OPW-T-4 : Generowanie E-Mail poprzez szablony FreeMarker
+* [DONE] Integracja mvn release 
+
+### Wersja 0.4.0
 * OPW-A-6 : import kont użytkowników z pliku CSV
 * [WiP] Definicja szablonu SMS
 * [WiP] Definicja masek UI dla klienta HTML5/CSS3 

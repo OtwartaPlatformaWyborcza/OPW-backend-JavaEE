@@ -38,7 +38,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Represents komisja perspective.
+ * REST SErvice represents komisja perspective.
  *
  * @author Adam Kowalewski
  */

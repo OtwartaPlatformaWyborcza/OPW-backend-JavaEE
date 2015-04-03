@@ -7,13 +7,17 @@
     <ui:define name="content">
         <h1>#{messages.okregowaListTitle}</h1>
         #{okregowaHandler.prepareList()}
-        
+
         <div class="left box box_blue">
             <div class="left"></div>
-            <div class="right"><h:link outcome="/okregowaCreate" value="#{messages.okregowaCreate}"/></div>
+            <div class="right">
+                <h:link outcome="/okregowaCreate" value="#{messages.okregowaCreate}"/>
+                <h:outputText value=" | "/>
+                <h:link outcome="/okregowaImport" value="#{messages.importFile}"/>
+            </div>
             <div class="clear"></div>
             <br/>
-            
+
             <h:form id="frmList">
                 <p:dataTable id="tblOkr" emptyMessage="#{messages.okregowaListEmpty}" 
                              value="#{okregowaHandler.okregowaList}" var="i" 
@@ -26,7 +30,7 @@
                     <p:column headerText="#{messages.name}" sortBy="#{i.name}">
                         <h:outputText value="#{i.name}"/>
                     </p:column>
-                    
+
                     <p:column headerText="#{messages.address}" sortBy="#{i.address}">
                         <h:outputText value="#{i.address}"/>
                     </p:column>

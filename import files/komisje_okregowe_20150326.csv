@@ -1,0 +1,52 @@
+pkwId;numer i siedziba;województwo;powiaty;Miasta na prawach powiatu
+1;Okręgowa Komisja Wyborcza Nr 1 we Wrocławiu;dolnośląskie;milicki,oleśnicki,oławski,strzeliński,średzki,trzebnicki,wołowski,wrocławski;Wrocław
+2;Okręgowa Komisja Wyborcza Nr 2 w Jeleniej Górze;dolnośląskie;bolesławiecki,jeleniogórski,kamiennogórski,lubański,lwówecki,zgorzelecki;Jelenia Góra
+3;Okręgowa Komisja Wyborcza Nr 3 w Legnicy;dolnośląskie;głogowski,górowski,jaworski,legnicki,lubiński,polkowicki,złotoryjski;Legnica
+4;Okręgowa Komisja Wyborcza Nr 4 w Wałbrzychu;dolnośląskie;dzierżoniowski,kłodzki,świdnicki,wałbrzyski,ząbkowicki;Wałbrzych
+5;Okręgowa Komisja Wyborcza Nr 5 w Bydgoszczy;kujawsko-pomorskie;bydgoski,inowrocławski,mogileński,nakielski,sępoleński,świecki,tucholski,żniński;Bydgoszcz
+6;Okręgowa Komisja Wyborcza Nr 6 w Toruniu;kujawsko-pomorskie;brodnicki,chełmiński,golubsko-dobrzyński,grudziądzki,toruński,wąbrzeski;Grudziądz,Toruń
+7;Okręgowa Komisja Wyborcza Nr 7 we Włocławku;kujawsko-pomorskie;aleksandrowski,lipnowski,radziejowski,rypiński,włocławski;Włocławek
+8;Okręgowa Komisja Wyborcza Nr 8 w Lublinie;lubelskie;kraśnicki,lubartowski,lubelski,łęczyński,opolski,puławski,rycki,świdnicki;Lublin
+9;Okręgowa Komisja Wyborcza Nr 9 w Białej Podlaskiej;lubelskie;bialski,łukowski,parczewski,radzyński;Biała Podlaska
+10;Okręgowa Komisja Wyborcza Nr 10 w Chełmie;lubelskie;chełmski,krasnostawski,włodawski;Chełm
+11;Okręgowa Komisja Wyborcza Nr 11 w Zamościu;lubelskie;biłgorajski,hrubieszowski,janowski,tomaszowski,zamojski;Zamość
+12;Okręgowa Komisja Wyborcza Nr 12 w Zielonej Górze;lubuskie;krośnieński,nowosolski,świebodziński,wschowski,zielonogórski,żagański,żarski;Zielona Góra
+13;Okręgowa Komisja Wyborcza Nr 13 w Gorzowie Wielkopolskim;lubuskie;gorzowski,międzyrzecki,słubicki,strzelecko-drezdenecki,sulęciński;Gorzów Wielkopolski
+14;Okręgowa Komisja Wyborcza Nr 14 w Łodzi;łódzkie;brzeziński,łódzki wschodni,pabianicki,zgierski;Łódź
+15;Okręgowa Komisja Wyborcza Nr 15 w Piotrkowie Trybunalskim;łódzkie;bełchatowski,opoczyński,piotrkowski,radomszczański,tomaszowski;Piotrków Trybunalski
+16;Okręgowa Komisja Wyborcza Nr 16 w Sieradzu;łódzkie;łaski,pajęczański,poddębicki,sieradzki,wieluński,wieruszowski,zduńskowolski;
+17;Okręgowa Komisja Wyborcza Nr 17 w Skierniewicach;łódzkie;kutnowski,łęczycki,łowicki,rawski,skierniewicki;Skierniewice
+18;Okręgowa Komisja Wyborcza Nr 18 w Krakowie;małopolskie;chrzanowski,krakowski,miechowski,myślenicki,olkuski,oświęcimski,proszowicki,wadowicki,wielicki;Kraków
+19;Okręgowa Komisja Wyborcza Nr 19 w Nowym Sączu;małopolskie;gorlicki,limanowski,nowosądecki,nowotarski,suski,tatrzański;Nowy Sącz
+20;Okręgowa Komisja Wyborcza Nr 20 w Tarnowie;małopolskie;bocheński,brzeski,dąbrowski,tarnowski;Tarnów
+21;Okręgowa Komisja Wyborcza Nr 21 w Warszawie;mazowieckie;grodziski,legionowski,nowodworski,otwocki,piaseczyński,pruszkowski,warszawski zachodni,wołomiński;Miasto stołeczne Warszawa
+22;Okręgowa Komisja Wyborcza Nr 22 w Ciechanowie;mazowieckie;ciechanowski,mławski,płoński,pułtuski,żuromiński;
+23;Okręgowa Komisja Wyborcza Nr 23 w Ostrołęce;mazowieckie;makowski,ostrołęcki,ostrowski,przasnyski,wyszkowski;Ostrołęka
+24;Okręgowa Komisja Wyborcza Nr 24 w Płocku;mazowieckie;gostyniński,płocki,sierpecki,sochaczewski,żyrardowski;Płock
+25;Okręgowa Komisja Wyborcza Nr 25 w Radomiu;mazowieckie;białobrzeski,grójecki,kozienicki,lipski,przysuski,radomski,szydłowiecki,zwoleński;Radom
+26;Okręgowa Komisja Wyborcza Nr 26 w Siedlcach;mazowieckie;garwoliński,łosicki,miński,siedlecki,sokołowski,węgrowski;Siedlce
+27;Okręgowa Komisja Wyborcza Nr 27 w Opolu;opolskie;;
+28;Okręgowa Komisja Wyborcza Nr 28 w Rzeszowie;podkarpackie;dębicki,leżajski,łańcucki,ropczycko-sędziszowski,rzeszowski,strzyżowski;Rzeszów
+29;Okręgowa Komisja Wyborcza Nr 29 w Krośnie;podkarpackie;bieszczadzki,brzozowski,jasielski,krośnieński,leski,sanocki;Krosno
+30;Okręgowa Komisja Wyborcza Nr 30 w Przemyślu;podkarpackie;jarosławski,lubaczowski,przemyski,przeworski;Przemyśl
+31;Okręgowa Komisja Wyborcza Nr 31 w Tarnobrzegu;podkarpackie;kolbuszowski,mielecki,niżański,stalowowolski,tarnobrzeski;Tarnobrzeg
+32;Okręgowa Komisja Wyborcza Nr 32 w Białymstoku;podlaskie;białostocki,bielski,hajnowski,moniecki,siemiatycki;Białystok
+33;Okręgowa Komisja Wyborcza Nr 33 w Łomży;podlaskie;grajewski,kolneński,łomżyński,wysokomazowiecki,zambrowski;Łomża
+34;Okręgowa Komisja Wyborcza Nr 34 w Suwałkach;podlaskie;augustowski,sejneński,sokólski,suwalski;Suwałki
+35;Okręgowa Komisja Wyborcza Nr 35 w Gdańsku;pomorskie;gdański,kartuski,kościerski,kwidzyński,malborski,nowodworski,starogardzki,sztumski,tczewski;Sopot
+36;Okręgowa Komisja Wyborcza Nr 36 w Gdańsku;pomorskie;;Gdańsk
+37;Okręgowa Komisja Wyborcza Nr 37 w Gdyni;pomorskie;pucki,wejherowski;Gdynia
+38;Okręgowa Komisja Wyborcza Nr 38 w Słupsku;pomorskie;bytowski,chojnicki,człuchowski,lęborski,słupski;Słupsk
+39;Okręgowa Komisja Wyborcza Nr 39 w Katowicach;śląskie;będziński,bieruńsko-lędziński,gliwicki,mikołowski,raciborski,rybnicki,tarnogórski;Bytom,Chorzów,Dąbrowa Górnicza,Gliwice,Jaworzno,Katowice,Mysłowice,Piekary Śląskie,Ruda Śląska,Rybnik,Siemianowice Śląskie,Sosnowiec,Świętochłowice,Tychy,Zabrze
+40;Okręgowa Komisja Wyborcza Nr 40 w Bielsku-Białej;śląskie;bielski,cieszyński,pszczyński,wodzisławski,żywiecki;Bielsko-Biała,Jastrzębie-Zdrój,Żory
+41;Okręgowa Komisja Wyborcza Nr 41 w Częstochowie;śląskie;częstochowski,kłobucki,lubliniecki,myszkowski,zawierciański;Częstochowa
+42;Okręgowa Komisja Wyborcza Nr 42 w Kielcach;świętokrzyskie;;
+43;Okręgowa Komisja Wyborcza Nr 43 w Olsztynie;warmińsko-mazurskie;ełcki,giżycki,gołdapski,kętrzyński,mrągowski,nidzicki,olecki,olsztyński,piski,szczycieński,węgorzewski;Olsztyn
+44;Okręgowa Komisja Wyborcza Nr 44 w Elblągu;warmińsko-mazurskie;bartoszycki,braniewski,działdowski,elbląski,iławski,lidzbarski,nowomiejski,ostródzki;Elbląg
+45;Okręgowa Komisja Wyborcza Nr 45 w Poznaniu;wielkopolskie;gnieźnieński,międzychodzki,poznański;Poznań
+46;Okręgowa Komisja Wyborcza Nr 46 w Kaliszu;wielkopolskie;jarociński,kaliski,kępiński,krotoszyński,ostrowski,ostrzeszowski,pleszewski;Kalisz
+47;Okręgowa Komisja Wyborcza Nr 47 w Koninie;wielkopolskie;kolski,koniński,słupecki,średzki,turecki,wrzesiński;Konin
+48;Okręgowa Komisja Wyborcza Nr 48 w Lesznie;wielkopolskie;gostyński,grodziski,kościański,leszczyński,nowotomyski,rawicki,śremski,wolsztyński;Leszno
+49;Okręgowa Komisja Wyborcza Nr 49 w Pile;wielkopolskie;chodzieski,czarnkowsko-trzcianecki,obornicki,pilski,szamotulski,wągrowiecki,złotowski;
+50;Okręgowa Komisja Wyborcza Nr 50 w Szczecinie;zachodniopomorskie;choszczeński,goleniowski,gryficki,gryfiński,kamieński,łobeski,myśliborski,policki,pyrzycki,stargardzki;Szczecin,Świnoujście
+51;Okręgowa Komisja Wyborcza Nr 51 w Koszalinie;zachodniopomorskie;białogardzki,drawski,kołobrzeski,koszaliński,sławieński,szczecinecki,świdwiński,wałecki;Koszalin

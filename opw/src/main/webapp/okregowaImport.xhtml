@@ -5,7 +5,31 @@
                 template="./WEB-INF/opwTemplate.xhtml">
 
     <ui:define name="content">
-        <h1>Okregowa CSV import</h1>
+        <h1>#{messages.okregowaImportTitle}</h1>
+        <div class="left box box520 box_blue">
+            <h2>#{messages.importFileTitle}</h2>
+            <h:form id="frmImpConf">
+                <h:panelGrid columns="2" cellspacing="7">
+                    <h:outputText value="#{messages.importFileType}"/>
+                    <h:outputText value=""/>
+                    <p:fileUpload fileUploadListener="#{okregowaImportHandler.file}" mode="simple"
+                                  multiple="false" sizeLimit="100000" allowTypes="/(\.|\/)csv$/" />
+                    
+                    <p:commandLink id="btnUpload" styleClass="btn"
+                                   value="#{messages.upload}" ajax="false"  
+                                   actionListener="#{okregowaImportHandler.upload}"/> 
+
+                </h:panelGrid>
+
+            </h:form>
+
+        </div>
+
+        <div class="right box box520 box_orange_dark">
+            <h2>#{messages.importFileStatusTitle}</h2>
+        </div>
+        <div class="clear"></div>
+
     </ui:define>
 
 </ui:composition>

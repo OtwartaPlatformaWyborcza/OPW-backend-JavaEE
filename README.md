@@ -152,17 +152,17 @@ PERSPEKTYWA SERWERA
 
 ## REST 
 Proces wgrywania protokołu z perspektywy.  
-1. GET Zalogowanie
-2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny 
-3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów) 
-4. POST Upload liczb wyborczych 
-5. GET Wylogowanie
+1. GET Zalogowanie  
+2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny  
+3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów)  
+4. POST Upload liczb wyborczych  
+5. GET Wylogowanie  
 
 ### Headers 
 Jako prefix `X-OPW`  
-`X-OPW-login`  
-`X-OPW-password`  
-`X-OPW-token`  
+* `X-OPW-login`  
+* `X-OPW-password`  
+* `X-OPW-token`  
 
 
 ## Roadmap

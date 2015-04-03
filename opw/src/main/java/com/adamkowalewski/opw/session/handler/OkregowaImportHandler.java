@@ -23,17 +23,41 @@
  */
 package com.adamkowalewski.opw.session.handler;
 
+import com.adamkowalewski.opw.session.controller.MsgController;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.model.UploadedFile;
 
 /**
- * Handler for CSV import of Komisja Okregowa. 
- * 
+ * Handler for CSV import of Komisja Okregowa.
+ *
  * @author Adam Kowalewski
  */
 @Named
 @SessionScoped
-public class OkregowaImportHandler implements Serializable{
-    
+public class OkregowaImportHandler implements Serializable {
+
+    private final String formatCsv = "CSV";
+    private final String formatXml = "XML";
+
+    private UploadedFile file;
+
+    private String importFormat;
+
+    public void upload() {
+        MsgController.addErrorMessage("WiP");
+        
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
+    }
+
 }

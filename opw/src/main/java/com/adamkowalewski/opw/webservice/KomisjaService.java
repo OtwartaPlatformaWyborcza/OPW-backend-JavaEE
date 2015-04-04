@@ -50,14 +50,14 @@ public class KomisjaService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response loadObwodowa(@PathParam("pkwId") String pkwId) {
 
-        if (pkwId.equals("1212-01")) {
+        if (pkwId.equals("1212-1")) {
             List<KandydatDto> kandydatList = new ArrayList<>();
             kandydatList.add(new KandydatDto(1, "Bolek"));
             kandydatList.add(new KandydatDto(2, "Lolek"));
             kandydatList.add(new KandydatDto(3, "Jacek"));
             kandydatList.add(new KandydatDto(4, "Placek"));
 
-            KomisjaDto komisja = new KomisjaDto("1212-12", "Koisja obowdow 22", "szkola 11 Liswøł", new OkregowaDto("1212", "Komisja Wawa", "ul. wiejska 11"), kandydatList);
+            KomisjaDto komisja = new KomisjaDto("1212-1", "Koisja obowdow 22", "szkola 11 Liswøł", new OkregowaDto("OKR-ABCD", "Komisja Wawa", "ul. wiejska 11"), kandydatList);
             Response result = Response.ok().entity(komisja).build();
             
             return result;

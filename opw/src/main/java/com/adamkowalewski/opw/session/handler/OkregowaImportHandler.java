@@ -26,8 +26,6 @@ package com.adamkowalewski.opw.session.handler;
 import com.adamkowalewski.opw.session.controller.MsgController;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.primefaces.model.UploadedFile;
 

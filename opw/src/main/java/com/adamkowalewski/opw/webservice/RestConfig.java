@@ -46,6 +46,6 @@ public class RestConfig extends Application {
         resources.add(com.adamkowalewski.opw.webservice.CorsSharingFilter.class);        
         resources.add(com.adamkowalewski.opw.webservice.KomisjaService.class);        
         resources.add(com.adamkowalewski.opw.webservice.UserService.class);        
-        resources.add(com.adamkowalewski.opw.webservice.WynikService.class);
+        resources.add(com.adamkowalewski.opw.webservice.WynikService.class);        
     }
 }

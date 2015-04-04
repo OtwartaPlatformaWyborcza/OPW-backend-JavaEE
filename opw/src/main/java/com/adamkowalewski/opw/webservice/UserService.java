@@ -50,8 +50,8 @@ public class UserService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response loadObwodowaShortList(
             @NotNull @PathParam("userId") int userId,
-            @NotNull @HeaderParam("X-OPW-login") String login,
-            @NotNull @HeaderParam("X-OPW-token") String token) {
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
 
         List<KomisjaShortDto> resultList = new ArrayList<>();
 
@@ -73,8 +73,8 @@ public class UserService extends AbstractService {
     @Path("/login")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response login(
-            @NotNull @HeaderParam("X-OPW-login") String login,
-            @NotNull @HeaderParam("X-OPW-password") String password) {
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_PASSWORD) String password) {
 
         if (login.equals("admin") && password.equals("admin")) {
 

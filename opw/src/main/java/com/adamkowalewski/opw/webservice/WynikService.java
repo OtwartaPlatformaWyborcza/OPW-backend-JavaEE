@@ -23,13 +23,28 @@
  */
 package com.adamkowalewski.opw.webservice;
 
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
+ * Represents wynik perspective. Main service for all OPW dashboard
+ * applications.
  *
  * @author Adam Kowalewski
  */
 @Path("/wynik")
-public class WynikService {
-    
+public class WynikService extends AbstractService {
+
+    @GET
+    @Path("")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response wynik(@NotNull @HeaderParam(OPW_HEADER_LOGIN) String login ) {
+        return Response.ok().build();
+    }
+
 }

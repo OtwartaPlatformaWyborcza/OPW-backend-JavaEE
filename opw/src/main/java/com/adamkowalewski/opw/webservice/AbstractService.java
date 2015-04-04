@@ -23,26 +23,15 @@
  */
 package com.adamkowalewski.opw.webservice;
 
-import javax.ws.rs.core.Response;
-
 /**
- * Common logic for REST services. 
- * 
+ * Common logic for REST services.
+ *
  * @author Adam Kowalewski
  */
 public abstract class AbstractService {
 
-    /**
-     * Attach CORS header to response.
-     *
-     * @param response Response without CROS.
-     * @return Response with CORS.
-     * @version 2015.03.28
-     * @author Adam Kowalewski
-     */
-    public Response addCorsHeaders(Response response) {
-        response.getHeaders().add("Access-Control-Allow-Origin", "*");
-        return response;
-    }
+    public static final String OPW_HEADER_LOGIN = "X-OPW-login";
+    public static final String OPW_HEADER_PASSWORD = "X-OPW-password";
+    public static final String OPW_HEADER_TOKEN = "X-OPW-token";
 
 }

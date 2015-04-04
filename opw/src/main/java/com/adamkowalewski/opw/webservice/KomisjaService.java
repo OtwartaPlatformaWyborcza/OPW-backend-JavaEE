@@ -29,6 +29,7 @@ import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
 import com.adamkowalewski.opw.webservice.dto.UploadWynikDto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -43,7 +44,7 @@ import javax.ws.rs.core.Response;
  * @author Adam Kowalewski
  */
 @Path("/komisja")
-public class KomisjaService extends AbstractService {
+public class KomisjaService extends AbstractService{
 
     @GET
     @Path("/{pkwId}")
@@ -69,6 +70,8 @@ public class KomisjaService extends AbstractService {
     }
 
     @POST
+    @Path("/{pkwId}/protokol")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response uploadWyniki(UploadWynikDto wynik) {
 //        UploadWynikResultDto

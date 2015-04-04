@@ -45,6 +45,8 @@ public class ConfigController implements Serializable {
 
     private ConfigMailDto configMail;
 
+    private boolean configMailOutboundActive;
+
     public ConfigController() {
 
     }
@@ -52,6 +54,8 @@ public class ConfigController implements Serializable {
     @PostConstruct
     public void initConfigController() {
         configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", "opw@adamkowalewski.com", "http://91.250.114.134:8080/opw");
+        // ToDo enable when JAAS active 
+        configMailOutboundActive = false;
     }
 
     public String getAPP_SALT() {
@@ -64,6 +68,14 @@ public class ConfigController implements Serializable {
 
     public void setConfigMail(ConfigMailDto configMail) {
         this.configMail = configMail;
+    }
+
+    public boolean isConfigMailOutboundActive() {
+        return configMailOutboundActive;
+    }
+
+    public void setConfigMailOutboundActive(boolean configMailOutboundActive) {
+        this.configMailOutboundActive = configMailOutboundActive;
     }
 
 }

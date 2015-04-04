@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.session.controller;
 
+import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.session.dto.ConfigMailDto;
 import com.adamkowalewski.opw.session.dto.MailContentDto;
@@ -43,6 +44,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -68,10 +70,10 @@ public class MailController {
             String content = getMailContent(payload, "welcome_plain.ftl");
             sendMail(user, subject, content, configController.getConfigMail());
             return true;
-        } catch (IOException | TemplateException ex) {
+        } catch (IOException | TemplateException | MessagingException | OpwException ex) {
             Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
+        return false;
     }
 
     public boolean sendMailPasswordNew(OpwUser user, String passwordPlain) {
@@ -82,28 +84,26 @@ public class MailController {
             String content = getMailContent(payload, "passwordNew_plain.ftl");
             sendMail(user, subject, content, configController.getConfigMail());
             return true;
-        } catch (IOException | TemplateException ex) {
+        } catch (IOException | TemplateException | MessagingException | OpwException ex) {
             Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
         }
+        return false;
     }
 
-    private boolean sendMail(OpwUser user, String subject, String content, ConfigMailDto configMailDto) {
-        Message message = new MimeMessage(mailSession);
-        try {
-            Address singleReceiver = new InternetAddress(user.getEmail());
-            message.setFrom(new InternetAddress(configMailDto.getFromAddress(), configMailDto.getFromLabel()));
-            message.setRecipient(Message.RecipientType.TO, singleReceiver);
-            message.setSubject(subject);
-            message.setContent(content, "text/plain; charset=UTF-8");
-            Transport.send(message);
+    private boolean sendMail(OpwUser user, String subject, String content, ConfigMailDto configMailDto) throws AddressException, MessagingException, UnsupportedEncodingException, OpwException {
 
-        } catch (UnsupportedEncodingException | MessagingException ex) {
-            System.out.println(ex);
-            System.out.println("failed");
-            return false;
+        if (!configController.isConfigMailOutboundActive()) {
+            throw new OpwException("E-Mail outbound disabled.");
         }
-        System.out.println("email send");
+
+        Message message = new MimeMessage(mailSession);
+
+        Address singleReceiver = new InternetAddress(user.getEmail());
+        message.setFrom(new InternetAddress(configMailDto.getFromAddress(), configMailDto.getFromLabel()));
+        message.setRecipient(Message.RecipientType.TO, singleReceiver);
+        message.setSubject(subject);
+        message.setContent(content, "text/plain; charset=UTF-8");
+        Transport.send(message);
         return true;
     }
 

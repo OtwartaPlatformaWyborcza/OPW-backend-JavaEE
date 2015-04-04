@@ -54,7 +54,8 @@ public class KomisjaService extends AbstractService {
             List<KandydatDto> kandydatList = new ArrayList<>();
             kandydatList.add(new KandydatDto(1, "Bolek"));
             kandydatList.add(new KandydatDto(2, "Lolek"));
-            kandydatList.add(new KandydatDto(3, "Kaczor"));
+            kandydatList.add(new KandydatDto(3, "Jacek"));
+            kandydatList.add(new KandydatDto(4, "Placek"));
 
             KomisjaDto komisja = new KomisjaDto("1212-12", "Koisja obowdow 22", "szkola 11 Liswøł", new OkregowaDto("1212", "Komisja Wawa", "ul. wiejska 11"), kandydatList);
             Response result = Response.ok().entity(komisja).build();

@@ -49,15 +49,16 @@ public class UserService extends AbstractService {
     @Path("/{userId}/obwodowa")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response loadObwodowaShortList(
-            @NotNull @PathParam("userId") int userId, 
+            @NotNull @PathParam("userId") int userId,
             @NotNull @HeaderParam("X-OPW-login") String login,
             @NotNull @HeaderParam("X-OPW-token") String token) {
 
         List<KomisjaShortDto> resultList = new ArrayList<>();
-        resultList.add(new KomisjaShortDto(1, "1212-01", "Komisja 1", "adres 1"));
-        resultList.add(new KomisjaShortDto(2, "1212-02", "Komisja 2", "adres 2"));
-        resultList.add(new KomisjaShortDto(3, "1212-03", "Komisja 3", "adres 3"));
-        
+
+        for (int i = 1; i < 30; i++) {
+            resultList.add(new KomisjaShortDto(i, "1212-" + i, "Komisja " + i, "adres " + i));
+        }
+
         GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
         };
 
@@ -65,7 +66,6 @@ public class UserService extends AbstractService {
                 .entity(result)
                 .build();
 
-        
         return response;
     }
 
@@ -82,13 +82,11 @@ public class UserService extends AbstractService {
                     .entity(new UserDto(1, "Mock admina", "token1234", true))
                     .build();
 
-            
             return response;
         }
         Response response = Response.status(Response.Status.UNAUTHORIZED)
                 .build();
 
-        
         return response;
     }
 
@@ -103,8 +101,7 @@ public class UserService extends AbstractService {
                 .entity(new UserDto(false))
                 .build();
 
-        
         return response;
     }
-    
+
 }

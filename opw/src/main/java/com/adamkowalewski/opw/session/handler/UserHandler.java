@@ -25,7 +25,6 @@ package com.adamkowalewski.opw.session.handler;
 
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.session.Identity;
-import com.adamkowalewski.opw.session.controller.MsgController;
 import com.adamkowalewski.opw.session.controller.UserController;
 import java.io.Serializable;
 import java.util.List;
@@ -57,8 +56,7 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
     }
     
     public String resetPassword() {
-        userController.resetPassword(instance);
-        MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userResetPwdMailSend") + " ["+instance.getEmail()+"]");
+        userController.resetPassword(instance);        
         return VIEW_ID;
     }
 

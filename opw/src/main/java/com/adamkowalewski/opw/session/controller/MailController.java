@@ -69,9 +69,13 @@ public class MailController {
         try {
             String content = getMailContent(payload, "welcome_plain.ftl");
             sendMail(user, subject, content, configController.getConfigMail());
+            MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdNewMailSend") + " [" + user.getEmail() + "]");
             return true;
-        } catch (IOException | TemplateException | MessagingException | OpwException ex) {
+        } catch (IOException | TemplateException | MessagingException ex) {
             Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (OpwException ex) {
+            MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
+            Logger.getLogger(MailController.class.getName()).log(Level.WARNING, null, ex.getMessage());
         }
         return false;
     }
@@ -83,9 +87,13 @@ public class MailController {
         try {
             String content = getMailContent(payload, "passwordNew_plain.ftl");
             sendMail(user, subject, content, configController.getConfigMail());
+            MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdResetMailSend") + " [" + user.getEmail() + "]");
             return true;
-        } catch (IOException | TemplateException | MessagingException | OpwException ex) {
+        } catch (IOException | TemplateException | MessagingException ex) {
             Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (OpwException ex) {
+            MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
+            Logger.getLogger(MailController.class.getName()).log(Level.WARNING, null, ex.getMessage());
         }
         return false;
     }

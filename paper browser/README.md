@@ -6,6 +6,10 @@ Do modelowania wykorzystujemy aplikacje [draw.io](http://draw.io) która działa
   * 10 Tips (5min) https://www.youtube.com/watch?v=hxTTQJ5a-zI
 
 
+## Linki do diagramów
+* [OPW_client](https://www.draw.io/?url=https%3A%2F%2Fraw.githubusercontent.com%2Fadamkowalewski%2FOtwartaPlatformaWyborcza%2Fmaster%2Fpaper%2520browser%2FOPW_client.xml)
+
+
 ## Przykład 1: otwarcie pliku 
 * otwieram draw.io w przeglądarce
 * klikam ESC 

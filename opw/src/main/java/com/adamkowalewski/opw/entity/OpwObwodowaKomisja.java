@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
@@ -34,6 +33,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -79,6 +80,11 @@ public class OpwObwodowaKomisja implements Serializable {
     private String type;
     @Column(name = "allowedToVote")
     private Integer allowedToVote;
+    @JoinTable(name = "opw_user_has_opw_obwodowa_komisja", joinColumns = {
+        @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+        @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)})
+    @ManyToMany
+    private List<OpwUser> opwUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwObwodowaKomisjaId")
     private List<OpwWynik> opwWynikList;
     @JoinColumn(name = "opw_okregowa_komisja_id", referencedColumnName = "id", nullable = false)
@@ -138,6 +144,15 @@ public class OpwObwodowaKomisja implements Serializable {
 
     public void setAllowedToVote(Integer allowedToVote) {
         this.allowedToVote = allowedToVote;
+    }
+
+    @XmlTransient
+    public List<OpwUser> getOpwUserList() {
+        return opwUserList;
+    }
+
+    public void setOpwUserList(List<OpwUser> opwUserList) {
+        this.opwUserList = opwUserList;
     }
 
     @XmlTransient

@@ -21,13 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,11 +32,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -65,8 +60,6 @@ public class OpwKandydat implements Serializable {
     @Size(max = 128)
     @Column(name = "name", length = 128)
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwKandydatId")
-    private List<OpwWynikKandydat> opwWynikKandydatList;
 
     public OpwKandydat() {
     }
@@ -97,15 +90,6 @@ public class OpwKandydat implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @XmlTransient
-    public List<OpwWynikKandydat> getOpwWynikKandydatList() {
-        return opwWynikKandydatList;
-    }
-
-    public void setOpwWynikKandydatList(List<OpwWynikKandydat> opwWynikKandydatList) {
-        this.opwWynikKandydatList = opwWynikKandydatList;
     }
 
     @Override

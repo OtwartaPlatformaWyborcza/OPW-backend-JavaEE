@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
@@ -33,10 +32,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -46,7 +47,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Adam Kowalewski
  */
 @Entity
-@Table(name = "opw_user", catalog = "opw", schema = "")
+@Table(name = "opw_user", catalog = "opw", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"email"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OpwUser.findAll", query = "SELECT o FROM OpwUser o"),
@@ -58,12 +60,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwUser.findByType", query = "SELECT o FROM OpwUser o WHERE o.type = :type"),
     @NamedQuery(name = "OpwUser.findBySalt", query = "SELECT o FROM OpwUser o WHERE o.salt = :salt"),
     @NamedQuery(name = "OpwUser.findByActive", query = "SELECT o FROM OpwUser o WHERE o.active = :active"),
-    @NamedQuery(name = "OpwUser.findByToken", query = "SELECT o FROM OpwUser o WHERE o.token = :token")})
+    @NamedQuery(name = "OpwUser.findByToken", query = "SELECT o FROM OpwUser o WHERE o.token = :token"),
+    @NamedQuery(name = "OpwUser.findByPhone", query = "SELECT o FROM OpwUser o WHERE o.phone = :phone")})
 public class OpwUser implements Serializable {
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
-    @Size(max = 32)
-    @Column(name = "phone", length = 32)
-    private String phone;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -94,6 +93,12 @@ public class OpwUser implements Serializable {
     @Size(max = 32)
     @Column(name = "token", length = 32)
     private String token;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 32)
+    @Column(name = "phone", length = 32)
+    private String phone;
+    @ManyToMany(mappedBy = "opwUserList")
+    private List<OpwObwodowaKomisja> opwObwodowaKomisjaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
     private List<OpwWynik> opwWynikList;
 
@@ -176,6 +181,23 @@ public class OpwUser implements Serializable {
         this.token = token;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @XmlTransient
+    public List<OpwObwodowaKomisja> getOpwObwodowaKomisjaList() {
+        return opwObwodowaKomisjaList;
+    }
+
+    public void setOpwObwodowaKomisjaList(List<OpwObwodowaKomisja> opwObwodowaKomisjaList) {
+        this.opwObwodowaKomisjaList = opwObwodowaKomisjaList;
+    }
+
     @XmlTransient
     public List<OpwWynik> getOpwWynikList() {
         return opwWynikList;
@@ -208,14 +230,6 @@ public class OpwUser implements Serializable {
     @Override
     public String toString() {
         return "com.adamkowalewski.opw.entity.OpwUser[ id=" + id + " ]";
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
     
 }

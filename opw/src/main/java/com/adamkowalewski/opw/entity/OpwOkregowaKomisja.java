@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
@@ -53,7 +52,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwOkregowaKomisja.findById", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.id = :id"),
     @NamedQuery(name = "OpwOkregowaKomisja.findByPkwId", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.pkwId = :pkwId"),
     @NamedQuery(name = "OpwOkregowaKomisja.findByName", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.name = :name"),
-    @NamedQuery(name = "OpwOkregowaKomisja.findByAddress", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.address = :address")})
+    @NamedQuery(name = "OpwOkregowaKomisja.findByAddress", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.address = :address"),
+    @NamedQuery(name = "OpwOkregowaKomisja.findByPowiaty", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.powiaty = :powiaty"),
+    @NamedQuery(name = "OpwOkregowaKomisja.findByMiasta", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.miasta = :miasta")})
 public class OpwOkregowaKomisja implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -61,15 +62,20 @@ public class OpwOkregowaKomisja implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Size(max = 64)
-    @Column(name = "pkwId", length = 64)
-    private String pkwId;
+    @Column(name = "pkwId")
+    private Integer pkwId;
     @Size(max = 128)
     @Column(name = "name", length = 128)
     private String name;
     @Size(max = 128)
     @Column(name = "address", length = 128)
     private String address;
+    @Size(max = 128)
+    @Column(name = "powiaty", length = 128)
+    private String powiaty;
+    @Size(max = 128)
+    @Column(name = "miasta", length = 128)
+    private String miasta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwOkregowaKomisjaId")
     private List<OpwObwodowaKomisja> opwObwodowaKomisjaList;
 
@@ -88,11 +94,11 @@ public class OpwOkregowaKomisja implements Serializable {
         this.id = id;
     }
 
-    public String getPkwId() {
+    public Integer getPkwId() {
         return pkwId;
     }
 
-    public void setPkwId(String pkwId) {
+    public void setPkwId(Integer pkwId) {
         this.pkwId = pkwId;
     }
 
@@ -110,6 +116,22 @@ public class OpwOkregowaKomisja implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getPowiaty() {
+        return powiaty;
+    }
+
+    public void setPowiaty(String powiaty) {
+        this.powiaty = powiaty;
+    }
+
+    public String getMiasta() {
+        return miasta;
+    }
+
+    public void setMiasta(String miasta) {
+        this.miasta = miasta;
     }
 
     @XmlTransient

@@ -29,5 +29,6 @@ package com.adamkowalewski.opw.session.dto;
  * @author Adam Kowalewski
  */
 public class ImportObwodowaCsvDto {
-    
+    private int pkwId;
+    private String name;
 }

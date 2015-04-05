@@ -26,7 +26,10 @@ package com.adamkowalewski.opw.session.handler;
 import com.adamkowalewski.opw.session.controller.MsgController;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -46,9 +49,13 @@ public class OkregowaImportHandler implements Serializable {
     private String importFormat;
 
     public void upload() {
+        if (file != null) {
+            System.out.println("file " + file.getFileName());
+        }
         MsgController.addErrorMessage("WiP");
-        
+
     }
+    
 
     public UploadedFile getFile() {
         return file;

@@ -19,7 +19,7 @@ public class WynikServiceTest extends JerseyTestNg.ContainerPerMethodTest {
         return new ResourceConfig(WynikService.class);
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldFetchWynik() {
         // given
         String login = "login";

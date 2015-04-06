@@ -23,15 +23,20 @@
  */
 package com.adamkowalewski.opw.webservice;
 
-import javax.validation.constraints.NotNull;
+import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.session.controller.KandydatController;
+import com.adamkowalewski.opw.webservice.dto.DashboardDto;
+import com.adamkowalewski.opw.webservice.dto.KandydatDto;
+import java.util.List;
+
+import java.util.Random;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Represents wynik perspective. Main service for all OPW dashboard
@@ -40,14 +45,28 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Adam Kowalewski
  */
 @Path("/wynik")
+@RequestScoped
 public class WynikService extends AbstractService {
 
+    @Inject
+    KandydatController kandydatController;
+    
     @GET
-    @Path("/")
+    @Path("/complete")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response wynik(@NotNull @HeaderParam(OPW_HEADER_LOGIN) String login ) {
-        checkArgument(login != null, "Expected non-null login argument");
-        return Response.ok().build();
+    public Response wynik() {
+
+        DashboardDto result = new DashboardDto(24500, new Random().nextInt(20000));
+        
+        List<OpwKandydat> kandydatList = kandydatController.findAll();
+        
+        for (OpwKandydat kandydat : kandydatList) {
+            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());           
+            k.setGlosow(new Random().nextInt(1000));                        
+            result.getKandydatList().add(k);
+        }
+
+        return Response.ok().entity(result).build();
     }
 
 }

@@ -25,17 +25,14 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 import com.adamkowalewski.opw.webservice.dto.UserDto;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents user perspective.
@@ -94,8 +91,8 @@ public class UserService extends AbstractService {
     @Path("/logout")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response logout(
-            @NotNull @HeaderParam("X-OPW-login") String login,
-            @NotNull @HeaderParam("X-OPW-token") String token) {
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
 
         Response response = Response.ok()
                 .entity(new UserDto(false))

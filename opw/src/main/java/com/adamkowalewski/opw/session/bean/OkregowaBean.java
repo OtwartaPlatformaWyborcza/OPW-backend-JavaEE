@@ -50,12 +50,13 @@ public class OkregowaBean extends AbstractOpwFacade<OpwOkregowaKomisja> {
         return em;
     }
 
-    public OpwOkregowaKomisja findOkregowa(String pkwId) {
+    public OpwOkregowaKomisja findOkregowa(int pkwId) {
         Query q = em.createNamedQuery("OpwOkregowaKomisja.findByPkwId");
         q.setParameter("pkwId", pkwId);
         return (OpwOkregowaKomisja) q.getSingleResult();
     }
 
+    @Deprecated
     public List<OpwOkregowaKomisja> findOkregowaLike(String pkwId) {
         Query q = em.createQuery("SELECT o FROM OpwOkregowaKomisja o WHERE o.pkwId like :pkwId");
         q.setParameter("pkwId", pkwId);

@@ -21,14 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.dto;
+package com.adamkowalewski.opw.session.controller;
 
 /**
- * DTO used for CSV import preview preview 
- * 
+ * ToDo reconsider, could be usefull.
+ *
  * @author Adam Kowalewski
  */
-public class ImportObwodowaCsvDto {
-    private int pkwId;
-    private String name;
+public class FileController {
+
 }

@@ -8,16 +8,17 @@
         <h1>#{messages.okregowaImportTitle}</h1>
         <div class="left box box520 box_blue">
             <h2>#{messages.importFileTitle}</h2>
-            <h:form id="frmImpConf">
+
+            <h:form id="frmImpConf" enctype="multipart/form-data"   >
                 <h:panelGrid columns="2" cellspacing="7">
                     <h:outputText value="#{messages.importFileType}"/>
                     <h:outputText value=""/>
-                    <p:fileUpload fileUploadListener="#{okregowaImportHandler.file}" mode="simple"
-                                  multiple="false" sizeLimit="100000" allowTypes="/(\.|\/)csv$/" />
-                    
+                    <p:fileUpload value="#{okregowaImportHandler.file}" mode="simple"
+                                  multiple="false" />
+
                     <p:commandLink id="btnUpload" styleClass="btn"
                                    value="#{messages.upload}" ajax="false"  
-                                   actionListener="#{okregowaImportHandler.upload}"/> 
+                                   actionListener="#{okregowaImportHandler.upload()}"/>  
 
                 </h:panelGrid>
 
@@ -27,8 +28,36 @@
 
         <div class="right box box520 box_orange_dark">
             <h2>#{messages.importFileStatusTitle}</h2>
+
         </div>
         <div class="clear"></div>
+
+        <ui:fragment rendered="#{not empty okregowaImportHandler.okregowaList}">
+            <p:dataTable id="tblOkrImp" rowIndexVar="rowIndex" resizableColumns="true"
+                         rendered="#{not empty okregowaImportHandler.okregowaList}"
+                         value="#{okregowaImportHandler.okregowaList}" var="i" >
+                <p:column headerText="#">
+                    #{rowIndex+1}
+                </p:column>
+                <p:column headerText="#{messages.pkwId}">
+                    <h:outputText value="#{i.pkwId}"/>
+                </p:column>
+                <p:column headerText="#{messages.name}">
+                    <h:outputText value="#{i.name}"/>
+                </p:column>
+                <p:column headerText="#{messages.entityStatus}">                    
+                    <h:outputText value="#{messages.entityNew}" rendered="#{not i.duplicate}"/>
+                    <h:outputText value="#{messages.entityDuplicate}" rendered="#{i.duplicate}"/>
+                </p:column>
+            </p:dataTable>
+            
+            <h:form id="frmImpOkr">
+                <h:commandLink id="btnImport" styleClass="btn"
+                               value="#{messages.importSubmit}"
+                               action="#{okregowaImportHandler.performImport()}"/>
+            </h:form> 
+
+        </ui:fragment>
 
     </ui:define>
 

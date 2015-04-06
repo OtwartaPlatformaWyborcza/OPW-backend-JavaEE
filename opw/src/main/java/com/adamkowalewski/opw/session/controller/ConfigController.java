@@ -47,6 +47,8 @@ public class ConfigController implements Serializable {
 
     private boolean configMailOutboundActive;
 
+    private boolean configImportDuplicatesAllowed;
+
     public ConfigController() {
 
     }
@@ -56,6 +58,7 @@ public class ConfigController implements Serializable {
         configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", "opw@adamkowalewski.com", "http://91.250.114.134:8080/opw");
         // ToDo enable when JAAS active 
         configMailOutboundActive = false;
+        configImportDuplicatesAllowed = false;
     }
 
     public String getAPP_SALT() {
@@ -76,6 +79,14 @@ public class ConfigController implements Serializable {
 
     public void setConfigMailOutboundActive(boolean configMailOutboundActive) {
         this.configMailOutboundActive = configMailOutboundActive;
+    }
+
+    public boolean isConfigImportDuplicatesAllowed() {
+        return configImportDuplicatesAllowed;
+    }
+
+    public void setConfigImportDuplicatesAllowed(boolean configImportDuplicatesAllowed) {
+        this.configImportDuplicatesAllowed = configImportDuplicatesAllowed;
     }
 
 }

@@ -23,13 +23,21 @@
  */
 package com.adamkowalewski.opw.session.handler;
 
+import com.adamkowalewski.opw.session.controller.ImportController;
 import com.adamkowalewski.opw.session.controller.MsgController;
+import com.adamkowalewski.opw.session.controller.OkregowaController;
+import com.adamkowalewski.opw.session.dto.ImportOkregowaCsvDto;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.PatternSyntaxException;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -45,17 +53,36 @@ public class OkregowaImportHandler implements Serializable {
     private final String formatXml = "XML";
 
     private UploadedFile file;
+    private List<ImportOkregowaCsvDto> okregowaList;
+
+    @Inject
+    ImportController importController;   
 
     private String importFormat;
 
+    public OkregowaImportHandler() {
+        okregowaList = new ArrayList<>();
+    }
+
+    public void performImport() {
+        if (okregowaList != null && !okregowaList.isEmpty()) {
+            importController.performImport(okregowaList);
+        }
+    }
+
     public void upload() {
         if (file != null) {
-            System.out.println("file " + file.getFileName());
+            okregowaList = new ArrayList<>();
+            try {
+                InputStream is = file.getInputstream();
+                okregowaList = importController.parseOkregowa(is);
+                System.out.println("x");
+            } catch (IOException | IndexOutOfBoundsException | NumberFormatException | PatternSyntaxException ex) {
+                Logger.getLogger(OkregowaImportHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         MsgController.addErrorMessage("WiP");
-
     }
-    
 
     public UploadedFile getFile() {
         return file;
@@ -63,6 +90,14 @@ public class OkregowaImportHandler implements Serializable {
 
     public void setFile(UploadedFile file) {
         this.file = file;
+    }
+
+    public List<ImportOkregowaCsvDto> getOkregowaList() {
+        return okregowaList;
+    }
+
+    public void setOkregowaList(List<ImportOkregowaCsvDto> okregowaList) {
+        this.okregowaList = okregowaList;
     }
 
 }

@@ -9,11 +9,11 @@ import org.testng.annotations.Test;
 
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 import static com.cedarsoftware.util.DeepEquals.deepEquals;
 import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.String.format;
+import static org.eclipse.jetty.http.HttpStatus.NO_CONTENT_204;
 import static org.eclipse.jetty.http.HttpStatus.OK_200;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -29,12 +29,6 @@ public class KomisjaServiceTest extends JerseyTestNg.ContainerPerMethodTest {
     public void shouldLoadObwodowa() throws Exception {
         // given
         String pkwId = "1212-1";
-        List<KandydatDto> ecpectedKandydatList = newArrayList(
-                new KandydatDto(1, "Bolek"),
-                new KandydatDto(2, "Lolek"),
-                new KandydatDto(3, "Jacek"),
-                new KandydatDto(4, "Placek")
-        );
         KomisjaDto ecpectedKomisja = new KomisjaDto(
                 pkwId,
                 "Koisja obowdow 22",
@@ -43,7 +37,12 @@ public class KomisjaServiceTest extends JerseyTestNg.ContainerPerMethodTest {
                         "OKR-ABCD",
                         "Komisja Wawa",
                         "ul. wiejska 11"),
-                ecpectedKandydatList
+                newArrayList(
+                        new KandydatDto(1, "Bolek"),
+                        new KandydatDto(2, "Lolek"),
+                        new KandydatDto(3, "Jacek"),
+                        new KandydatDto(4, "Placek")
+                )
         );
 
         // when
@@ -53,6 +52,20 @@ public class KomisjaServiceTest extends JerseyTestNg.ContainerPerMethodTest {
         // then
         assertEquals(response.getStatus(), OK_200);
         assertTrue(deepEquals(actualKomisja, ecpectedKomisja));
+    }
+
+    @Test
+    public void shouldNotLoadObwodowa() throws Exception {
+        // given
+        String pkwId = "unknown";
+
+        // when
+        Response response = target(format("komisja/%s", pkwId)).request().get();
+        String content = response.readEntity(String.class);
+
+        // then
+        assertEquals(response.getStatus(), NO_CONTENT_204);
+        assertTrue(content.isEmpty());
     }
 
     @Test(enabled = false)

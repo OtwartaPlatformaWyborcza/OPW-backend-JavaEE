@@ -30,8 +30,8 @@ package com.adamkowalewski.opw.webservice;
  */
 public abstract class AbstractService {
 
-    public static final String OPW_HEADER_LOGIN = "X-OPW-login";
-    public static final String OPW_HEADER_PASSWORD = "X-OPW-password";
-    public static final String OPW_HEADER_TOKEN = "X-OPW-token";
+    protected static final String OPW_HEADER_LOGIN = "X-OPW-login";
+    protected static final String OPW_HEADER_PASSWORD = "X-OPW-password";
+    protected static final String OPW_HEADER_TOKEN = "X-OPW-token";
 
 }

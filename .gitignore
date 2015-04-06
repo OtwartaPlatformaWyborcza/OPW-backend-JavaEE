@@ -20,4 +20,7 @@ hs_err_pid*
 # Adam: backup files e.g. MySQL Workbench # 
 *.bak
 
+# IDE files
 /.project
+.idea/
+*.iml

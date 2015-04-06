@@ -31,6 +31,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * Represents wynik perspective. Main service for all OPW dashboard
  * applications.
@@ -41,9 +43,10 @@ import javax.ws.rs.core.Response;
 public class WynikService extends AbstractService {
 
     @GET
-    @Path("")
+    @Path("/")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response wynik(@NotNull @HeaderParam(OPW_HEADER_LOGIN) String login ) {
+        checkArgument(login != null, "Expected non-null login argument");
         return Response.ok().build();
     }
 

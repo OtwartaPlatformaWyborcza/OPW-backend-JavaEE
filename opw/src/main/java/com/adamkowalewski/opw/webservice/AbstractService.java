@@ -23,6 +23,8 @@
  */
 package com.adamkowalewski.opw.webservice;
 
+import com.google.common.annotations.VisibleForTesting;
+
 /**
  * Common logic for REST services.
  *
@@ -30,8 +32,11 @@ package com.adamkowalewski.opw.webservice;
  */
 public abstract class AbstractService {
 
-    protected static final String OPW_HEADER_LOGIN = "X-OPW-login";
-    protected static final String OPW_HEADER_PASSWORD = "X-OPW-password";
-    protected static final String OPW_HEADER_TOKEN = "X-OPW-token";
+    @VisibleForTesting
+    static final String OPW_HEADER_LOGIN = "X-OPW-login";
+    @VisibleForTesting
+    static final String OPW_HEADER_PASSWORD = "X-OPW-password";
+    @VisibleForTesting
+    static final String OPW_HEADER_TOKEN = "X-OPW-token";
 
 }

@@ -17,7 +17,7 @@
             <h:form id="frmList">
                 <p:dataTable id="tblKandydat" emptyMessage="#{messages.kandydatListEmpty}" 
                              value="#{kandydatHandler.kandydatList}" var="i" 
-                             sortBy="#{i.pkwId}">
+                             sortBy="#{i.pkwId}" tableStyle="width:auto">
 
                     <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
                         <h:outputText value="#{i.pkwId}"/>

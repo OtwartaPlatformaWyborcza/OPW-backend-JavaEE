@@ -21,7 +21,7 @@
             <h:form id="frmList">
                 <p:dataTable id="tblOkr" emptyMessage="#{messages.okregowaListEmpty}" 
                              value="#{okregowaHandler.okregowaList}" var="i" 
-                             sortBy="#{i.pkwId}">
+                             sortBy="#{i.pkwId}" tableStyle="width:auto">
 
                     <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
                         <h:outputText value="#{i.pkwId}"/>

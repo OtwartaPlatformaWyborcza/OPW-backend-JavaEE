@@ -49,6 +49,9 @@ public class ConfigController implements Serializable {
 
     private boolean configImportDuplicatesAllowed;
 
+    private boolean listKandydatOpen;
+    private boolean listOkregowaOpen;
+
     public ConfigController() {
 
     }
@@ -59,6 +62,8 @@ public class ConfigController implements Serializable {
         // ToDo enable when JAAS active 
         configMailOutboundActive = false;
         configImportDuplicatesAllowed = false;
+        listKandydatOpen = false;
+        listOkregowaOpen = false;
     }
 
     public String getAPP_SALT() {
@@ -87,6 +92,22 @@ public class ConfigController implements Serializable {
 
     public void setConfigImportDuplicatesAllowed(boolean configImportDuplicatesAllowed) {
         this.configImportDuplicatesAllowed = configImportDuplicatesAllowed;
+    }
+
+    public boolean isListKandydatOpen() {
+        return listKandydatOpen;
+    }
+
+    public void setListKandydatOpen(boolean listKandydatOpen) {
+        this.listKandydatOpen = listKandydatOpen;
+    }
+
+    public boolean isListOkregowaOpen() {
+        return listOkregowaOpen;
+    }
+
+    public void setListOkregowaOpen(boolean listOkregowaOpen) {
+        this.listOkregowaOpen = listOkregowaOpen;
     }
 
 }

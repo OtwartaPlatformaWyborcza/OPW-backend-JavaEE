@@ -29,10 +29,11 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Provides reusable logic around Kandydat. 
+ * Provides reusable logic around Kandydat.
  *
  * @author Adam Kowalewski
  */
@@ -43,12 +44,23 @@ public class KandydatController implements Serializable {
     @EJB
     private KandydatBean bean;
 
+    @Inject
+    ConfigController configController;
+
     public void create(OpwKandydat kandydat) {
-        bean.create(kandydat);
+        if (configController.isListKandydatOpen()) {
+            bean.create(kandydat);
+        } else {
+            MsgController.addErrorMessage(MsgController.getLocalizedMessage("configListKandydatClosed"));
+        }
     }
 
     public void edit(OpwKandydat kandydat) {
-        bean.edit(kandydat);
+        if (configController.isListKandydatOpen()) {
+            bean.edit(kandydat);
+        } else {
+            MsgController.addErrorMessage(MsgController.getLocalizedMessage("configListKandydatClosed"));
+        }
     }
 
     public List<OpwKandydat> findAll() {

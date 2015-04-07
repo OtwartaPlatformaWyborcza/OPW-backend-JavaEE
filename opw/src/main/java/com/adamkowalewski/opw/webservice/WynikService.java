@@ -24,9 +24,14 @@
 package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.session.controller.KandydatController;
+import com.adamkowalewski.opw.session.controller.OkregowaController;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
+import com.adamkowalewski.opw.webservice.dto.WynikOkregowaDto;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import java.util.Random;
@@ -51,20 +56,33 @@ public class WynikService extends AbstractService {
     @Inject
     KandydatController kandydatController;
     
+    @Inject
+    OkregowaController okregowaController;
+
     @GET
     @Path("/complete")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response wynik() {
 
-        DashboardDto result = new DashboardDto(24500, new Random().nextInt(20000));
-        
+        DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
+
         List<OpwKandydat> kandydatList = kandydatController.findAll();
-        
+       
         for (OpwKandydat kandydat : kandydatList) {
-            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());           
-            k.setGlosow(new Random().nextInt(1000));                        
+            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
+            k.setGlosow(new Random().nextInt(1000));
             result.getKandydatList().add(k);
         }
+        
+        List<OpwOkregowaKomisja> okregowaList = okregowaController.findAll();
+        for (OpwOkregowaKomisja okregowa : okregowaList) {
+            WynikOkregowaDto o = new WynikOkregowaDto(
+                    okregowa.getName(), 
+                    new Random().nextInt(750000), 750000, 
+                    new Random().nextInt(800), 800);
+            result.getOkregowaList().add(o);
+        }
+        
 
         return Response.ok().entity(result).build();
     }

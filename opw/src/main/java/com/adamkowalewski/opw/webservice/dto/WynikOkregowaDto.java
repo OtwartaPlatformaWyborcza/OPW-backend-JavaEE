@@ -23,64 +23,46 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * DTO for all dashboard clients.
+ * DTO represents all relevant numbers related to one Komisja Okregowa.
  *
  * @author Adam Kowalewski
+ * @version 2015.04.07
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DashboardDto {
+public class WynikOkregowaDto implements Serializable {
 
-    private int obwodowa, obwodowaAll;
+    private String okregowaName;
     private int frekwencja, frekwencjaAll;
-    private Date exportDate;
+    private int obwodowa, obwodowaAll;
 
-    private List<KandydatDto> kandydatList;
-    private List<WynikOkregowaDto> okregowaList;
-
-    public DashboardDto() {
+    public WynikOkregowaDto() {
     }
 
-    public DashboardDto(Date exportDate, int obwodowaAll, int obwodowa, int frekwencjaAll, int frekwencja) {
-        this.exportDate = exportDate;
-        this.obwodowaAll = obwodowaAll;
-        this.obwodowa = obwodowa;
+    public WynikOkregowaDto(String okregowaName) {
+        this.okregowaName = okregowaName;
+    }
+
+    public WynikOkregowaDto(String okregowaName, int frekwencja, int frekwencjaAll, int obwodowa, int obwodowaAll) {
+        this.okregowaName = okregowaName;
         this.frekwencja = frekwencja;
         this.frekwencjaAll = frekwencjaAll;
-        kandydatList = new ArrayList<>();
-        okregowaList = new ArrayList<>();
-    }
-
-    public int getObwodowaAll() {
-        return obwodowaAll;
-    }
-
-    public void setObwodowaAll(int obwodowaAll) {
+        this.obwodowa = obwodowa;
         this.obwodowaAll = obwodowaAll;
     }
 
-    public int getObwodowa() {
-        return obwodowa;
+    public String getOkregowaName() {
+        return okregowaName;
     }
 
-    public void setObwodowa(int obwodowa) {
-        this.obwodowa = obwodowa;
-    }
-
-    public List<KandydatDto> getKandydatList() {
-        return kandydatList;
-    }
-
-    public void setKandydatList(List<KandydatDto> kandydatList) {
-        this.kandydatList = kandydatList;
+    public void setOkregowaName(String okregowaName) {
+        this.okregowaName = okregowaName;
     }
 
     public int getFrekwencja() {
@@ -99,20 +81,20 @@ public class DashboardDto {
         this.frekwencjaAll = frekwencjaAll;
     }
 
-    public Date getExportDate() {
-        return exportDate;
+    public int getObwodowa() {
+        return obwodowa;
     }
 
-    public void setExportDate(Date exportDate) {
-        this.exportDate = exportDate;
+    public void setObwodowa(int obwodowa) {
+        this.obwodowa = obwodowa;
     }
 
-    public List<WynikOkregowaDto> getOkregowaList() {
-        return okregowaList;
+    public int getObwodowaAll() {
+        return obwodowaAll;
     }
 
-    public void setOkregowaList(List<WynikOkregowaDto> okregowaList) {
-        this.okregowaList = okregowaList;
+    public void setObwodowaAll(int obwodowaAll) {
+        this.obwodowaAll = obwodowaAll;
     }
 
 }

@@ -192,20 +192,15 @@ Plan implementacji
 
 ### Wersja 0.4.0
 * OPW-A-6 : import kont użytkowników z pliku CSV
-* [WiP] Definicja szablonu SMS
 * [WiP] Definicja masek UI dla klienta HTML5/CSS3 
-* OPW-A-8 Możliwość zamknięcia listy kandydatów. 
+* [DONE] OPW-A-8 Możliwość zamknięcia listy kandydatów. 
 * OPW-A-2 Import CSV/KLK dla encji: komisja obwodowa, 
-* OPW-A-3 [WiP] Import CSV/KLK dla encji: komisja okręgowa 
-* Autoryzacja i autentyfikacja na bazie JAAS
-* [WiP] Definicja architektury na nadchodzące wybory
+* [DONE] OPW-A-3 Import CSV/KLK dla encji: komisja okręgowa 
 
 
 ### Wersja 0.5
-* Podbieranie protokołów przesłanych na skrzynke pocztową
-* Automatyczne parsowanie protokołów ze skrzynki pocztowej
-  * import poprawnych protokołów
-  * tagowanie błędnych protokołów  
+* Autoryzacja i autentyfikacja na bazie JAAS
+* [WiP] Definicja architektury na nadchodzące wybory
 
 
 
@@ -215,6 +210,11 @@ Plan implementacji
 
 
 ### Wersja 0.8
+* Podbieranie protokołów przesłanych na skrzynke pocztową
+* Automatyczne parsowanie protokołów ze skrzynki pocztowej
+  * import poprawnych protokołów
+  * tagowanie błędnych protokołów  
+* [WiP] Definicja szablonu SMS
 * Aktualizacja Dashboard
 
 ### Wersja 1.0

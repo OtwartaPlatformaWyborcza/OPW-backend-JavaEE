@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.handler;
+package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
-import com.adamkowalewski.opw.session.Identity;
-import com.adamkowalewski.opw.session.controller.ObwodowaController;
+import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.view.Identity;
+import com.adamkowalewski.opw.view.controller.UserController;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -39,54 +39,65 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class ObwodowaHandler extends AbstractCrudHandler<OpwObwodowaKomisja> implements Serializable {
+public class UserHandler extends AbstractCrudHandler<OpwUser> implements Serializable {
 
-    private List<OpwObwodowaKomisja> okregowaList;
+    private List<OpwUser> userList;
 
     @Inject
     Identity identity;
 
     @Inject
-    ObwodowaController obwodowaController;
+    UserController userController;
 
-    public ObwodowaHandler() {
-        VIEW_ID = "obwodowa";
-        VIEW_ID_EDIT = "obwodowaEdit";
-        VIEW_ID_CREATE = "obwodowaCreate";
+    public UserHandler() {
+        VIEW_ID = "user";
+        VIEW_ID_EDIT = "userEdit";
+        VIEW_ID_CREATE = "userCreate";
+    }
+    
+    public String resetPassword() {
+        userController.resetPassword(instance);        
+        return VIEW_ID;
     }
 
     @Override
     public String create() {
-        obwodowaController.create(instance);
+        userController.create(instance);
         return VIEW_ID;
     }
 
     @Override
     public String edit() {
-        obwodowaController.edit(instance);
+        userController.edit(instance);
+        return VIEW_ID;
+    }
+
+    public String delete() {
+        userController.delete(instance);
         return VIEW_ID;
     }
 
     @Override
     public void prepareList() {
-        okregowaList = obwodowaController.findAll();
+        userList = userController.findAll();
     }
 
     @Override
     public void prepareCreate() {
-        instance = new OpwObwodowaKomisja();
+        instance = new OpwUser();
     }
 
-    public List<OpwObwodowaKomisja> getObwodowaList() {
-        return okregowaList;
+    public List<OpwUser> getUserList() {
+        return userList;
     }
 
-    public void setObwodowaList(List<OpwObwodowaKomisja> okregowaList) {
-        this.okregowaList = okregowaList;
+    public void setUserList(List<OpwUser> userList) {
+        this.userList = userList;
     }
 
     @Override
     public void prepareView() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

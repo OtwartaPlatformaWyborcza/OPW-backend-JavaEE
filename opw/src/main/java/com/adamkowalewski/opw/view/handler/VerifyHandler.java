@@ -21,47 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.dto;
+package com.adamkowalewski.opw.view.handler;
+
+import com.adamkowalewski.opw.view.controller.UserController;
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author Adam Kowalewski
  */
-public class MailContentDto {
+@Named
+@SessionScoped
+public class VerifyHandler implements Serializable {
+    
+    private String email;
+    private String code;
+    
+    @Inject 
+    private UserController userController;
 
-    private String login, password, link;
-
-    public MailContentDto() {
+    public VerifyHandler() {
+    }    
+    
+    public String verifyAccount(){
+        System.out.println("mail " + email);
+        System.out.println("code " + code);
+        return "index";
     }
 
-    public MailContentDto(String login, String password, String link) {
-        this.login = login;
-        this.password = password;
-        this.link = link;
+    public String getEmail() {
+        return email;
     }
 
-    public String getLogin() {
-        return login;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public String getCode() {
+        return code;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
+    public void setCode(String code) {
+        this.code = code;
     }
 
 }

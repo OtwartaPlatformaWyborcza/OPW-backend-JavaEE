@@ -21,55 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.handler;
+package com.adamkowalewski.opw.view;
+
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
- * Represent common CRUD logic required for work with an entity.
+ * TODO JAAS
  *
  * @author Adam Kowalewski
- * @version 2015.03.22
  */
-public interface CrudHandler {
+@Named
+@SessionScoped
+public class Identity implements Serializable {
 
-    /**
-     * Retrieves current entity for viewing.
-     */
-    public void prepareView();
-    
-    /**
-     * Prepare current entity to be edited.
-     */
-    public void prepareEdit();
+    private int userId;
+    private String fullname;
+    private boolean loggedin;
 
-    /**
-     * Retrieves list of entities from database.
-     */
-    public void prepareList();
+    public Identity() {
+    }
 
-    /**
-     * Creates a new empty instance to work with.
-     */
-    public void prepareCreate();
+    public int getUserId() {
+        return userId;
+    }
 
-    /**
-     * Persists a new entity in the database.
-     *
-     * @return JSF name of list page.
-     */
-    public String create();
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-    /**
-     * Edits an entity in the database.
-     *
-     * @return JSF name of list page.
-     */
-    public String edit();
+    public boolean isLoggedin() {
+        return loggedin;
+    }
 
-    /**
-     * Handles 'Cancel' button within editing form.
-     *
-     * @return name of list view.
-     */
-    public String cancel();
+    public void setLoggedin(boolean loggedin) {
+        this.loggedin = loggedin;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
 
 }

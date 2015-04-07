@@ -21,69 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.handler;
+package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import com.adamkowalewski.opw.bean.ObwodowaBean;
+import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
+ * Provides reusable logic around Komisja Obwodowa. 
  *
  * @author Adam Kowalewski
- * @param <T>
  */
-public abstract class AbstractCrudHandler<T> implements CrudHandler {
+@Named
+@SessionScoped
+public class ObwodowaController implements Serializable {
 
-    boolean viewMode = true;
-    T instance;
+    @EJB
+    ObwodowaBean bean;
 
-    String VIEW_ID;
-    String VIEW_ID_EDIT;
-    String VIEW_ID_CREATE;
-
-    /**
-     * TODO
-     *
-     * @param r instance of an entity to view.
-     * @return TODO
-     * @author Adam Kowalewski
-     * @version 2015.03.19
-     */
-    public String prepareView(T r) {
-        instance = r;
-        viewMode = true;
-        return VIEW_ID_EDIT;
+    public void create(OpwObwodowaKomisja okregowa) {
+        bean.create(okregowa);
     }
 
-    public String prepareEdit(T r) {
-        instance = r;
-        viewMode = false;
-        return VIEW_ID_EDIT;
-    }
-        
-    @Override
-    public void prepareEdit() {
-        viewMode = false;
+    public void edit(OpwObwodowaKomisja okregowa) {
+        bean.edit(okregowa);
     }
 
-    @Override
-    public String cancel() {
-        viewMode = true;
-        return VIEW_ID;
-    }
-
-    public boolean isViewMode() {
-        return viewMode;
-    }
-
-    public void setViewMode(boolean viewMode) {
-        this.viewMode = viewMode;
-    }
-
-    public T getInstance() {
-        return instance;
-    }
-
-    public void setInstance(T instance) {
-        this.instance = instance;
+    public List<OpwObwodowaKomisja> findAll() {
+        return bean.findAll();
     }
 
 }

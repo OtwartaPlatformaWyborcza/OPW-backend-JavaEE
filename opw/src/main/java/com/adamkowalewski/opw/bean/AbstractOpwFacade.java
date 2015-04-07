@@ -24,7 +24,7 @@
 
 package com.adamkowalewski.opw.bean;
 
-import com.adamkowalewski.opw.session.OpwConfig;
+import com.adamkowalewski.opw.view.OpwConfig;
 import java.util.List;
 import javax.persistence.EntityManager;
 

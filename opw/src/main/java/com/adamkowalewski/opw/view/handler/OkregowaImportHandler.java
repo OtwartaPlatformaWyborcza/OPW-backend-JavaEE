@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.handler;
+package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.session.controller.ImportController;
-import com.adamkowalewski.opw.session.controller.MsgController;
-import com.adamkowalewski.opw.session.controller.OkregowaController;
-import com.adamkowalewski.opw.session.dto.ImportOkregowaCsvDto;
+import com.adamkowalewski.opw.view.controller.ImportController;
+import com.adamkowalewski.opw.view.controller.MsgController;
+import com.adamkowalewski.opw.view.controller.OkregowaController;
+import com.adamkowalewski.opw.view.dto.ImportOkregowaCsvDto;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;

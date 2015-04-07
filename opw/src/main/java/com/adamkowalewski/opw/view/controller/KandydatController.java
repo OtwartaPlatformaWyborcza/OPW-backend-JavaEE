@@ -21,13 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
+package com.adamkowalewski.opw.view.controller;
+
+import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.bean.KandydatBean;
+import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
- * ToDo reconsider, could be usefull.
+ * Provides reusable logic around Kandydat.
  *
  * @author Adam Kowalewski
  */
-public class FileController {
+@Named
+@SessionScoped
+public class KandydatController implements Serializable {
+
+    @EJB
+    private KandydatBean bean;
+
+    @Inject
+    ConfigController configController;
+
+    public void create(OpwKandydat kandydat) {
+        if (configController.isListKandydatOpen()) {
+            bean.create(kandydat);
+        } else {
+            MsgController.addErrorMessage(MsgController.getLocalizedMessage("configListKandydatClosed"));
+        }
+    }
+
+    public void edit(OpwKandydat kandydat) {
+        if (configController.isListKandydatOpen()) {
+            bean.edit(kandydat);
+        } else {
+            MsgController.addErrorMessage(MsgController.getLocalizedMessage("configListKandydatClosed"));
+        }
+    }
+
+    public List<OpwKandydat> findAll() {
+        return bean.findAll();
+    }
 
 }

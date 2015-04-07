@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.handler;
+package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
-import com.adamkowalewski.opw.session.Identity;
-import com.adamkowalewski.opw.session.controller.OkregowaController;
+import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import com.adamkowalewski.opw.view.Identity;
+import com.adamkowalewski.opw.view.controller.ObwodowaController;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -39,49 +39,49 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class OkregowaHandler extends AbstractCrudHandler<OpwOkregowaKomisja> implements Serializable {
+public class ObwodowaHandler extends AbstractCrudHandler<OpwObwodowaKomisja> implements Serializable {
 
-    private List<OpwOkregowaKomisja> okregowaList;
+    private List<OpwObwodowaKomisja> okregowaList;
 
     @Inject
     Identity identity;
 
     @Inject
-    OkregowaController okregowaController;
+    ObwodowaController obwodowaController;
 
-    public OkregowaHandler() {
-        VIEW_ID = "okregowa";
-        VIEW_ID_EDIT = "okregowaEdit";
-        VIEW_ID_CREATE = "okregowaCreate";
+    public ObwodowaHandler() {
+        VIEW_ID = "obwodowa";
+        VIEW_ID_EDIT = "obwodowaEdit";
+        VIEW_ID_CREATE = "obwodowaCreate";
     }
 
     @Override
     public String create() {
-        okregowaController.create(instance);
+        obwodowaController.create(instance);
         return VIEW_ID;
     }
 
     @Override
     public String edit() {
-        okregowaController.edit(instance);
+        obwodowaController.edit(instance);
         return VIEW_ID;
     }
 
     @Override
     public void prepareList() {
-        okregowaList = okregowaController.findAll();
+        okregowaList = obwodowaController.findAll();
     }
 
     @Override
     public void prepareCreate() {
-        instance = new OpwOkregowaKomisja();
+        instance = new OpwObwodowaKomisja();
     }
 
-    public List<OpwOkregowaKomisja> getOkregowaList() {
+    public List<OpwObwodowaKomisja> getObwodowaList() {
         return okregowaList;
     }
 
-    public void setOkregowaList(List<OpwOkregowaKomisja> okregowaList) {
+    public void setObwodowaList(List<OpwObwodowaKomisja> okregowaList) {
         this.okregowaList = okregowaList;
     }
 

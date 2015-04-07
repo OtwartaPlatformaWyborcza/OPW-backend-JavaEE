@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
+package com.adamkowalewski.opw.view.controller;
 
-import com.adamkowalewski.opw.session.dto.ConfigMailDto;
+import com.adamkowalewski.opw.view.dto.ConfigMailDto;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;

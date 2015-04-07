@@ -23,6 +23,8 @@
  */
 package com.adamkowalewski.opw.session.controller;
 
+import com.adamkowalewski.opw.view.controller.UserController;
+import com.adamkowalewski.opw.view.controller.MailController;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.bean.UserBean;
 import java.util.List;

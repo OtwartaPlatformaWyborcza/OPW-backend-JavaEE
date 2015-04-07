@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
+package com.adamkowalewski.opw.view.controller;
 
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.bean.OkregowaBean;

@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
+package com.adamkowalewski.opw.view.controller;
 
 import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.entity.OpwUser;
-import com.adamkowalewski.opw.session.dto.ConfigMailDto;
-import com.adamkowalewski.opw.session.dto.MailContentDto;
+import com.adamkowalewski.opw.view.dto.ConfigMailDto;
+import com.adamkowalewski.opw.view.dto.MailContentDto;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

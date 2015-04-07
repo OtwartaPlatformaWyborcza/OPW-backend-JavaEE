@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.handler;
+package com.adamkowalewski.opw.view.handler;
 
 import com.adamkowalewski.opw.entity.OpwUser;
-import com.adamkowalewski.opw.session.Identity;
-import com.adamkowalewski.opw.session.controller.MsgController;
+import com.adamkowalewski.opw.view.Identity;
+import com.adamkowalewski.opw.view.controller.MsgController;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;

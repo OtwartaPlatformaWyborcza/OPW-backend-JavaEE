@@ -21,50 +21,68 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
+package com.adamkowalewski.opw.view.handler;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
-import com.adamkowalewski.opw.bean.KandydatBean;
+import com.adamkowalewski.opw.view.controller.KandydatController;
 import java.io.Serializable;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * Provides reusable logic around Kandydat.
+ * CRUD backing bean / handler for all CRUD related JSF sites.
  *
  * @author Adam Kowalewski
  */
 @Named
 @SessionScoped
-public class KandydatController implements Serializable {
+public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements Serializable {
 
-    @EJB
-    private KandydatBean bean;
+    List<OpwKandydat> kandydatList;
 
     @Inject
-    ConfigController configController;
+    KandydatController kandydatController;
 
-    public void create(OpwKandydat kandydat) {
-        if (configController.isListKandydatOpen()) {
-            bean.create(kandydat);
-        } else {
-            MsgController.addErrorMessage(MsgController.getLocalizedMessage("configListKandydatClosed"));
-        }
+    public KandydatHandler() {
+        VIEW_ID = "kandydat";
+        VIEW_ID_EDIT = "kandydatEdit";
     }
 
-    public void edit(OpwKandydat kandydat) {
-        if (configController.isListKandydatOpen()) {
-            bean.edit(kandydat);
-        } else {
-            MsgController.addErrorMessage(MsgController.getLocalizedMessage("configListKandydatClosed"));
-        }
+    @Override
+    public String create() {
+        kandydatController.create(instance);
+        return VIEW_ID;
     }
 
-    public List<OpwKandydat> findAll() {
-        return bean.findAll();
+    @Override
+    public String edit() {
+        kandydatController.edit(instance);
+        return VIEW_ID;
+    }
+
+    @Override
+    public void prepareCreate() {
+        instance = new OpwKandydat();
+    }
+
+    @Override
+    public void prepareList() {
+        kandydatList = kandydatController.findAll();
+    }
+
+    public List<OpwKandydat> getKandydatList() {
+        return kandydatList;
+    }
+
+    public void setKandydatList(List<OpwKandydat> kandydatList) {
+        this.kandydatList = kandydatList;
+    }
+
+    @Override
+    public void prepareView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session;
+package com.adamkowalewski.opw.view;
 
 /**
  * Contain configuration settings which may not be changed.

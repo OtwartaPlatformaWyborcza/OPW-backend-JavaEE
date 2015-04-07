@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.dto;
+package com.adamkowalewski.opw.view.dto;
 
 import java.util.regex.PatternSyntaxException;
 

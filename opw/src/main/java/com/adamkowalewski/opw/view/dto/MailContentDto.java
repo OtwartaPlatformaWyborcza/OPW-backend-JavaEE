@@ -21,38 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.controller;
-
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
-import com.adamkowalewski.opw.bean.ObwodowaBean;
-import java.io.Serializable;
-import java.util.List;
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+package com.adamkowalewski.opw.view.dto;
 
 /**
- * Provides reusable logic around Komisja Obwodowa. 
  *
  * @author Adam Kowalewski
  */
-@Named
-@SessionScoped
-public class ObwodowaController implements Serializable {
+public class MailContentDto {
 
-    @EJB
-    ObwodowaBean bean;
+    private String login, password, link;
 
-    public void create(OpwObwodowaKomisja okregowa) {
-        bean.create(okregowa);
+    public MailContentDto() {
     }
 
-    public void edit(OpwObwodowaKomisja okregowa) {
-        bean.edit(okregowa);
+    public MailContentDto(String login, String password, String link) {
+        this.login = login;
+        this.password = password;
+        this.link = link;
     }
 
-    public List<OpwObwodowaKomisja> findAll() {
-        return bean.findAll();
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
 }

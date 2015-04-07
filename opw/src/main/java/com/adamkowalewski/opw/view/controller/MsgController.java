@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.adamkowalewski.opw.session.controller;
+package com.adamkowalewski.opw.view.controller;
 
 import java.util.List;
 import java.util.ResourceBundle;

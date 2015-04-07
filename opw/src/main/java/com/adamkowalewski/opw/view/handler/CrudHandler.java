@@ -21,49 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.dto;
+package com.adamkowalewski.opw.view.handler;
 
 /**
- * DTO represents E-Mail configuration.
+ * Represent common CRUD logic required for work with an entity.
  *
  * @author Adam Kowalewski
+ * @version 2015.03.22
  */
-public class ConfigMailDto {
+public interface CrudHandler {
 
-    private String fromLabel, fromAddress;
-    private String hostname;
+    /**
+     * Retrieves current entity for viewing.
+     */
+    public void prepareView();
+    
+    /**
+     * Prepare current entity to be edited.
+     */
+    public void prepareEdit();
 
-    public ConfigMailDto() {
-    }
+    /**
+     * Retrieves list of entities from database.
+     */
+    public void prepareList();
 
-    public ConfigMailDto(String fromLabel, String fromAddress, String hostname) {
-        this.fromLabel = fromLabel;
-        this.fromAddress = fromAddress;
-        this.hostname = hostname;
-    }
+    /**
+     * Creates a new empty instance to work with.
+     */
+    public void prepareCreate();
 
-    public String getFromLabel() {
-        return fromLabel;
-    }
+    /**
+     * Persists a new entity in the database.
+     *
+     * @return JSF name of list page.
+     */
+    public String create();
 
-    public void setFromLabel(String fromLabel) {
-        this.fromLabel = fromLabel;
-    }
+    /**
+     * Edits an entity in the database.
+     *
+     * @return JSF name of list page.
+     */
+    public String edit();
 
-    public String getFromAddress() {
-        return fromAddress;
-    }
-
-    public void setFromAddress(String fromAddress) {
-        this.fromAddress = fromAddress;
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
-    }
+    /**
+     * Handles 'Cancel' button within editing form.
+     *
+     * @return name of list view.
+     */
+    public String cancel();
 
 }

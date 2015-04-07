@@ -25,8 +25,8 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
-import com.adamkowalewski.opw.session.controller.KandydatController;
-import com.adamkowalewski.opw.session.controller.OkregowaController;
+import com.adamkowalewski.opw.view.controller.KandydatController;
+import com.adamkowalewski.opw.view.controller.OkregowaController;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.WynikOkregowaDto;

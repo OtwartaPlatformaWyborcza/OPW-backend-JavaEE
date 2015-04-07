@@ -21,50 +21,69 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session;
+package com.adamkowalewski.opw.view.handler;
 
-import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import java.util.List;
 
 /**
- * TODO JAAS
  *
  * @author Adam Kowalewski
+ * @param <T>
  */
-@Named
-@SessionScoped
-public class Identity implements Serializable {
+public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
-    private int userId;
-    private String fullname;
-    private boolean loggedin;
+    boolean viewMode = true;
+    T instance;
 
-    public Identity() {
+    String VIEW_ID;
+    String VIEW_ID_EDIT;
+    String VIEW_ID_CREATE;
+
+    /**
+     * TODO
+     *
+     * @param r instance of an entity to view.
+     * @return TODO
+     * @author Adam Kowalewski
+     * @version 2015.03.19
+     */
+    public String prepareView(T r) {
+        instance = r;
+        viewMode = true;
+        return VIEW_ID_EDIT;
     }
 
-    public int getUserId() {
-        return userId;
+    public String prepareEdit(T r) {
+        instance = r;
+        viewMode = false;
+        return VIEW_ID_EDIT;
+    }
+        
+    @Override
+    public void prepareEdit() {
+        viewMode = false;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    @Override
+    public String cancel() {
+        viewMode = true;
+        return VIEW_ID;
     }
 
-    public boolean isLoggedin() {
-        return loggedin;
+    public boolean isViewMode() {
+        return viewMode;
     }
 
-    public void setLoggedin(boolean loggedin) {
-        this.loggedin = loggedin;
+    public void setViewMode(boolean viewMode) {
+        this.viewMode = viewMode;
     }
 
-    public String getFullname() {
-        return fullname;
+    public T getInstance() {
+        return instance;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setInstance(T instance) {
+        this.instance = instance;
     }
 
 }

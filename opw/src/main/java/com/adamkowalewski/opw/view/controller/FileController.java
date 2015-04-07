@@ -21,51 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.handler;
-
-import com.adamkowalewski.opw.session.controller.UserController;
-import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+package com.adamkowalewski.opw.view.controller;
 
 /**
+ * ToDo reconsider, could be usefull.
  *
  * @author Adam Kowalewski
  */
-@Named
-@SessionScoped
-public class VerifyHandler implements Serializable {
-    
-    private String email;
-    private String code;
-    
-    @Inject 
-    private UserController userController;
-
-    public VerifyHandler() {
-    }    
-    
-    public String verifyAccount(){
-        System.out.println("mail " + email);
-        System.out.println("code " + code);
-        return "index";
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
+public class FileController {
 
 }

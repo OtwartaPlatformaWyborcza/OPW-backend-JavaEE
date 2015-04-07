@@ -24,7 +24,7 @@
 package com.adamkowalewski.opw.session.controller;
 
 import com.adamkowalewski.opw.entity.OpwUser;
-import com.adamkowalewski.opw.session.bean.UserBean;
+import com.adamkowalewski.opw.bean.UserBean;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.MessageDigest;

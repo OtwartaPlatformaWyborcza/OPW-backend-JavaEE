@@ -24,7 +24,7 @@
 package com.adamkowalewski.opw.session.controller;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
-import com.adamkowalewski.opw.session.bean.KandydatBean;
+import com.adamkowalewski.opw.bean.KandydatBean;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;

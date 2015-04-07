@@ -24,7 +24,7 @@
 package com.adamkowalewski.opw.session.controller;
 
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
-import com.adamkowalewski.opw.session.bean.ObwodowaBean;
+import com.adamkowalewski.opw.bean.ObwodowaBean;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.adamkowalewski.opw.session.bean;
+package com.adamkowalewski.opw.bean;
 
 import com.adamkowalewski.opw.session.OpwConfig;
 import java.util.List;

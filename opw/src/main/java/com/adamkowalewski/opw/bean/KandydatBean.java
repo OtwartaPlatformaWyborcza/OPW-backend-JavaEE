@@ -21,60 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.bean;
+package com.adamkowalewski.opw.bean;
 
-import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.entity.OpwKandydat;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
- * Provides access to user.
+ * Poovides access to Kandydat.
  *
  * @author Adam Kowalewski
  */
 @Stateless
-public class UserBean extends AbstractOpwFacade<OpwUser> {
+public class KandydatBean extends AbstractOpwFacade<OpwKandydat> {
 
     @PersistenceContext(unitName = PU_OPW)
     private EntityManager em;
 
-    public UserBean() {
-        super(OpwUser.class);
+    public KandydatBean() {
+        super(OpwKandydat.class);
     }
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    /**
-     * Returns single user instance by given login / E-Mail address.
-     *
-     * @param login E-Mail address to look for.
-     * @return full instance of OpwUser or null if no record was found.
-     * @author Adam Kowalewski
-     * @version 2015.03.15
-     */
-    public OpwUser findUser(String login) {
-        Query q = em.createNamedQuery("OpwUser.findByEmail");
-        q.setParameter("login", login);
-        return (OpwUser) q.getSingleResult();
-    }
-
-    /**
-     * Returns single user by user id.
-     *
-     * @param id user id.
-     * @return full instance of OpwUser.
-     * @author Adam Kowalewski
-     * @version 2015.03.15
-     */
-    public OpwUser findUser(int id) {
-        Query q = em.createNamedQuery("OpwUser.findById");
-        q.setParameter("id", id);
-        return (OpwUser) q.getSingleResult();
     }
 
 }

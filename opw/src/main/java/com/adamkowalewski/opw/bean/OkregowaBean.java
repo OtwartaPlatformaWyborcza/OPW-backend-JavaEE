@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.session.bean;
+package com.adamkowalewski.opw.bean;
 
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import java.util.List;

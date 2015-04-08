@@ -23,10 +23,12 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import java.io.Serializable;
+import com.google.common.base.MoreObjects;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * DTO
@@ -47,6 +49,12 @@ public class KandydatDto implements Serializable {
     public KandydatDto(int pkwId, String fullname) {
         this.pkwId = pkwId;
         this.fullname = fullname;
+    }
+
+    public KandydatDto(int pkwId, String fullname, int glosow) {
+        this.pkwId = pkwId;
+        this.fullname = fullname;
+        this.glosow = glosow;
     }
 
     public int getPkwId() {
@@ -73,4 +81,13 @@ public class KandydatDto implements Serializable {
         this.glosow = glosow;
     }
 
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("pkwId", pkwId)
+                .add("fullname", fullname)
+                .add("glosow", glosow)
+                .toString();
+    }
 }

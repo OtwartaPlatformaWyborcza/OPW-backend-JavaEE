@@ -16,31 +16,31 @@ public abstract class BaseWynikServiceTest extends JerseyTestNg.ContainerPerMeth
     protected static KandydatController kandydatController = Mockito.mock(KandydatController.class);
     protected static OkregowaController okregowaController = Mockito.mock(OkregowaController.class);
 
-    protected static class MockWynikServiceFactory implements Factory<WynikService> {
-        @Override
-        public WynikService provide() {
-            wynikService.kandydatController = kandydatController;
-            wynikService.okregowaController = okregowaController;
-            return wynikService;
-        }
-
-        @Override
-        public void dispose(WynikService wynikService) {
-            /* Nothing to do here */
-        }
-    }
-
-    @Override
-    public Application configure() {
-        AbstractBinder binder = new AbstractBinder() {
-            @Override
-            protected void configure() {
-                bindFactory(MockWynikServiceFactory.class)
-                        .to(WynikService.class);
-            }
-        };
-        ResourceConfig config = new ResourceConfig(WynikService.class);
-        config.register(binder);
-        return config;
-    }
+//    protected static class MockWynikServiceFactory implements Factory<WynikService> {
+//        @Override
+//        public WynikService provide() {
+//            wynikService.kandydatController = kandydatController;
+//            wynikService.okregowaController = okregowaController;
+//            return wynikService;
+//        }
+//
+//        @Override
+//        public void dispose(WynikService wynikService) {
+//            /* Nothing to do here */
+//        }
+//    }
+//
+//    @Override
+//    public Application configure() {
+//        AbstractBinder binder = new AbstractBinder() {
+//            @Override
+//            protected void configure() {
+//                bindFactory(MockWynikServiceFactory.class)
+//                        .to(WynikService.class);
+//            }
+//        };
+//        ResourceConfig config = new ResourceConfig(WynikService.class);
+//        config.register(binder);
+//        return config;
+//    }
 }

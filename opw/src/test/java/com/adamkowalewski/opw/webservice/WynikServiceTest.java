@@ -21,7 +21,7 @@ import static org.testng.Assert.assertTrue;
 
 public class WynikServiceTest extends BaseWynikServiceTest {
 
-    @Test
+    @Test(enabled = false)
     public void shouldFetchWynik() {
         // given
         String login = "login";

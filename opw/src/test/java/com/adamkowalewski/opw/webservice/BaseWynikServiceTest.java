@@ -30,17 +30,17 @@ public abstract class BaseWynikServiceTest extends JerseyTestNg.ContainerPerMeth
 //        }
 //    }
 //
-//    @Override
-//    public Application configure() {
-//        AbstractBinder binder = new AbstractBinder() {
-//            @Override
-//            protected void configure() {
+    @Override
+    public Application configure() {
+        AbstractBinder binder = new AbstractBinder() {
+            @Override
+            protected void configure() {
 //                bindFactory(MockWynikServiceFactory.class)
 //                        .to(WynikService.class);
-//            }
-//        };
-//        ResourceConfig config = new ResourceConfig(WynikService.class);
-//        config.register(binder);
-//        return config;
-//    }
+            }
+        };
+        ResourceConfig config = new ResourceConfig(WynikService.class);
+        config.register(binder);
+        return config;
+    }
 }

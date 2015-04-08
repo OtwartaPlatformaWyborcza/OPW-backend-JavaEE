@@ -41,6 +41,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkState;
+import java.util.Random;
 
 /**
  * Represents wynik perspective. Main service for all OPW dashboard
@@ -60,32 +61,23 @@ public class WynikService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response wynik() {
 
-        DashboardDto result = new DashboardDto(new Date(1428517345709l), 24500, 24500, 40000000, 20000000);
+        DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
 
         List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
-
-        for (int i = 0; i < kandydatList.size(); i++) {
-            OpwKandydat kandydat = kandydatList.get(i);
-            checkState(kandydat.getPkwId() != null, "Expected non-null pkwId field");
-            checkState(kandydat.getName() != null, "Expected non-null name field");
-
-            KandydatDto kandydatDto = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
-            kandydatDto.setGlosow(1000 - ((1000 % (i + 1)) * (1000 / (i + 1))));
-            result.getKandydatList().add(kandydatDto);
+       
+        for (OpwKandydat kandydat : kandydatList) {
+            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
+            k.setGlosow(new Random().nextInt(1000));
+            result.getKandydatList().add(k);
         }
-
+        
         List<OpwOkregowaKomisja> okregowaList = wynikEjb.obwodowaFindAll();
         for (OpwOkregowaKomisja okregowa : okregowaList) {
-            checkState(okregowa.getName() != null, "Expected non-null name field");
-
-            WynikOkregowaDto wynikOkregowaDto = new WynikOkregowaDto(
-                    okregowa.getName(),
-                    154967,
-                    750000,
-                    157,
-                    800
-            );
-            result.getOkregowaList().add(wynikOkregowaDto);
+            WynikOkregowaDto o = new WynikOkregowaDto(
+                    okregowa.getName(), 
+                    new Random().nextInt(750000), 750000, 
+                    new Random().nextInt(800), 800);
+            result.getOkregowaList().add(o);
         }
 
         return Response.ok().entity(result).build();

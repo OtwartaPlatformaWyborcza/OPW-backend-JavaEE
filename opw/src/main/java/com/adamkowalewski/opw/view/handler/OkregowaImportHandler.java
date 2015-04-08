@@ -25,8 +25,7 @@ package com.adamkowalewski.opw.view.handler;
 
 import com.adamkowalewski.opw.view.controller.ImportController;
 import com.adamkowalewski.opw.view.controller.MsgController;
-import com.adamkowalewski.opw.view.controller.OkregowaController;
-import com.adamkowalewski.opw.view.dto.ImportOkregowaCsvDto;
+import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -53,7 +52,7 @@ public class OkregowaImportHandler implements Serializable {
     private final String formatXml = "XML";
 
     private UploadedFile file;
-    private List<ImportOkregowaCsvDto> okregowaList;
+    private List<OkregowaCsvDto> okregowaList;
 
     @Inject
     ImportController importController;   
@@ -92,11 +91,11 @@ public class OkregowaImportHandler implements Serializable {
         this.file = file;
     }
 
-    public List<ImportOkregowaCsvDto> getOkregowaList() {
+    public List<OkregowaCsvDto> getOkregowaList() {
         return okregowaList;
     }
 
-    public void setOkregowaList(List<ImportOkregowaCsvDto> okregowaList) {
+    public void setOkregowaList(List<OkregowaCsvDto> okregowaList) {
         this.okregowaList = okregowaList;
     }
 

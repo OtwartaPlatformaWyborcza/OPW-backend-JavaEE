@@ -24,18 +24,21 @@
 package com.adamkowalewski.opw.view.controller;
 
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
-import com.adamkowalewski.opw.view.dto.ImportOkregowaCsvDto;
-import java.io.BufferedReader;
+import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
+
+import static com.adamkowalewski.opw.view.controller.OkregowaCsvDtoReader.okregowaCsvDtoReader;
 
 /**
  * Provides reusable logic for file import.
@@ -46,24 +49,13 @@ import javax.inject.Named;
 @RequestScoped
 public class ImportController implements Serializable {
 
-    private static final String DEFAULT_SEPARATOR = ";";
-    private final String separator;
-
     @Inject
     OkregowaController okregowaController;
 
-    public ImportController() {
-        separator = DEFAULT_SEPARATOR;
-    }
-
-    public ImportController(String customSeparator) {
-        separator = customSeparator;
-    }
-
-    public void performImport(List<ImportOkregowaCsvDto> okregowaList) {
+    public void performImport(List<OkregowaCsvDto> okregowaList) {
         List<OpwOkregowaKomisja> resultList = new ArrayList<>();
 
-        for (ImportOkregowaCsvDto csvDto : okregowaList) {
+        for (OkregowaCsvDto csvDto : okregowaList) {
             OpwOkregowaKomisja single = new OpwOkregowaKomisja();
             single.setPkwId(csvDto.getPkwId());
             single.setName(csvDto.getName());
@@ -85,48 +77,23 @@ public class ImportController implements Serializable {
      * @author Adam Kowalewski
      * @version 2015.04.06
      */
-    public List<ImportOkregowaCsvDto> parseOkregowa(InputStream content)
+    public List<OkregowaCsvDto> parseOkregowa(InputStream content)
             throws IOException, IndexOutOfBoundsException, NumberFormatException, PatternSyntaxException {
-        List<ImportOkregowaCsvDto> result = new ArrayList<>();
-        List<String> lines = contentToLines(content);
 
-        lines.remove(0); // remove first line 
+        List<OkregowaCsvDto> result = okregowaCsvDtoReader().readAllFrom(content);
 
-        for (String line : lines) {
-            ImportOkregowaCsvDto dto = new ImportOkregowaCsvDto();
-            dto.parseLine(line, separator);
-
-            // check duplicates
+        // check duplicates
+        for (OkregowaCsvDto okregowaCsvDto : result) {
             try {
-                OpwOkregowaKomisja findByPkwId = okregowaController.findByPkwId(dto.getPkwId());
-                dto.setDuplicate(true);
-            } catch (Exception ex) {
-                dto.setDuplicate(false);
+                //FIXME Sterowanie przeplywem sterowania za pomoca wyjatkow to nie najlepszy pomysl
+                OpwOkregowaKomisja findByPkwId = okregowaController.findByPkwId(okregowaCsvDto.getPkwId());
+                okregowaCsvDto.setDuplicate(true);
+            } catch (NoResultException ex) {
+                okregowaCsvDto.setDuplicate(false);
+            } catch (NonUniqueResultException ex) {
+                okregowaCsvDto.setDuplicate(true);
             }
-            result.add(dto);
         }
         return result;
     }
-
-    /**
-     * Converts content into list of String.
-     *
-     * @param content from a CSV file.
-     * @return content as list of String.
-     * @throws IOException
-     * @author Adam Kowalewski
-     * @version 2015.04.06
-     */
-    private List<String> contentToLines(InputStream content) throws IOException {
-        List<String> result = new ArrayList<>();
-        InputStreamReader isr = new InputStreamReader(content);
-        BufferedReader bf = new BufferedReader(isr);
-        String line;
-        while (bf.ready()) {
-            line = bf.readLine();
-            result.add(line);
-        }
-        return result;
-    }
-
 }

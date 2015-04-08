@@ -29,10 +29,7 @@ import com.adamkowalewski.opw.webservice.controller.WynikEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.WynikOkregowaDto;
-import java.util.Date;
-import java.util.List;
 
-import java.util.Random;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.GET;
@@ -40,6 +37,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
+import java.util.List;
+
+import static com.google.common.base.Preconditions.checkState;
 
 /**
  * Represents wynik perspective. Main service for all OPW dashboard
@@ -59,23 +60,32 @@ public class WynikService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response wynik() {
 
-        DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
+        DashboardDto result = new DashboardDto(new Date(1428517345709l), 24500, 24500, 40000000, 20000000);
 
         List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
 
-        for (OpwKandydat kandydat : kandydatList) {
-            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
-            k.setGlosow(new Random().nextInt(1000));
-            result.getKandydatList().add(k);
+        for (int i = 0; i < kandydatList.size(); i++) {
+            OpwKandydat kandydat = kandydatList.get(i);
+            checkState(kandydat.getPkwId() != null, "Expected non-null pkwId field");
+            checkState(kandydat.getName() != null, "Expected non-null name field");
+
+            KandydatDto kandydatDto = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
+            kandydatDto.setGlosow(1000 - ((1000 % (i + 1)) * (1000 / (i + 1))));
+            result.getKandydatList().add(kandydatDto);
         }
 
         List<OpwOkregowaKomisja> okregowaList = wynikEjb.obwodowaFindAll();
         for (OpwOkregowaKomisja okregowa : okregowaList) {
-            WynikOkregowaDto o = new WynikOkregowaDto(
+            checkState(okregowa.getName() != null, "Expected non-null name field");
+
+            WynikOkregowaDto wynikOkregowaDto = new WynikOkregowaDto(
                     okregowa.getName(),
-                    new Random().nextInt(750000), 750000,
-                    new Random().nextInt(800), 800);
-            result.getOkregowaList().add(o);
+                    154967,
+                    750000,
+                    157,
+                    800
+            );
+            result.getOkregowaList().add(wynikOkregowaDto);
         }
 
         return Response.ok().entity(result).build();

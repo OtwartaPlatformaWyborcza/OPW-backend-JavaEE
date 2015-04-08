@@ -23,49 +23,30 @@
  */
 package com.adamkowalewski.opw.view.dto;
 
-import java.util.regex.PatternSyntaxException;
+import com.google.common.base.Objects;
 
 /**
  * DTO used for CSV import of Komisja Okregowa.
- * TODO needs to be reconsidered. 
  *
  * @author Adam Kowalewski
  */
-public class ImportOkregowaCsvDto {
+public class OkregowaCsvDto {
 
     private int pkwId;
     private String name;
+    //FIXME brakuje wojewodztw!
     private String powiaty;
     private String miasta;
     private boolean duplicate;
 
-    public ImportOkregowaCsvDto() {
+    public OkregowaCsvDto() {
     }
 
-    public ImportOkregowaCsvDto(int pkwId, String name, String powiaty, String miasta) {
+    public OkregowaCsvDto(int pkwId, String name, String powiaty, String miasta) {
         this.pkwId = pkwId;
         this.name = name;
         this.powiaty = powiaty;
         this.miasta = miasta;
-    }
-
-    /**
-     * Parse single line into current instance.
-     *
-     * @param lineToParse line from CSV file.
-     * @param separator separator to use.
-     * @throws IndexOutOfBoundsException
-     * @throws PatternSyntaxException
-     * @throws NumberFormatException
-     * @author Adam Kowalewski
-     * @version 2015.04.06
-     */
-    public void parseLine(String lineToParse, String separator) {
-        String[] split = lineToParse.split(separator);
-        this.pkwId = Integer.parseInt(split[0]);
-        this.name = split[1];
-//        this.powiaty = split[3];
-//        this.miasta = split[4];
     }
 
     public int getPkwId() {
@@ -108,4 +89,22 @@ public class ImportOkregowaCsvDto {
         this.duplicate = duplicate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OkregowaCsvDto that = (OkregowaCsvDto) o;
+
+        return Objects.equal(duplicate, that.duplicate)
+                && Objects.equal(pkwId, that.pkwId)
+                && Objects.equal(miasta, that.miasta)
+                && Objects.equal(name, that.name)
+                && Objects.equal(powiaty, that.powiaty);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(pkwId, name, powiaty, miasta, duplicate);
+    }
 }

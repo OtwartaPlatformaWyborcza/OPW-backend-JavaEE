@@ -23,12 +23,14 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.google.common.base.MoreObjects;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * DTO for all dashboard clients.
@@ -115,4 +117,16 @@ public class DashboardDto {
         this.okregowaList = okregowaList;
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("obwodowa", obwodowa)
+                .add("obwodowaAll", obwodowaAll)
+                .add("frekwencja", frekwencja)
+                .add("frekwencjaAll", frekwencjaAll)
+                .add("exportDate", exportDate)
+                .add("kandydatList", kandydatList)
+                .add("okregowaList", okregowaList)
+                .toString();
+    }
 }

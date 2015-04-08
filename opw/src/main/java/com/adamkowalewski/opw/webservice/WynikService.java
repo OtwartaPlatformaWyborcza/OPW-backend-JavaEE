@@ -25,18 +25,16 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
-import com.adamkowalewski.opw.view.controller.KandydatController;
-import com.adamkowalewski.opw.view.controller.OkregowaController;
+import com.adamkowalewski.opw.webservice.controller.WynikEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.WynikOkregowaDto;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import java.util.Random;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -53,11 +51,8 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class WynikService extends AbstractService {
 
-    @Inject
-    KandydatController kandydatController;
-    
-    @Inject
-    OkregowaController okregowaController;
+    @EJB
+    WynikEjb wynikEjb;
 
     @GET
     @Path("/complete")
@@ -66,23 +61,22 @@ public class WynikService extends AbstractService {
 
         DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
 
-        List<OpwKandydat> kandydatList = kandydatController.findAll();
-       
+        List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
+
         for (OpwKandydat kandydat : kandydatList) {
             KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
             k.setGlosow(new Random().nextInt(1000));
             result.getKandydatList().add(k);
         }
-        
-        List<OpwOkregowaKomisja> okregowaList = okregowaController.findAll();
+
+        List<OpwOkregowaKomisja> okregowaList = wynikEjb.obwodowaFindAll();
         for (OpwOkregowaKomisja okregowa : okregowaList) {
             WynikOkregowaDto o = new WynikOkregowaDto(
-                    okregowa.getName(), 
-                    new Random().nextInt(750000), 750000, 
+                    okregowa.getName(),
+                    new Random().nextInt(750000), 750000,
                     new Random().nextInt(800), 800);
             result.getOkregowaList().add(o);
         }
-        
 
         return Response.ok().entity(result).build();
     }

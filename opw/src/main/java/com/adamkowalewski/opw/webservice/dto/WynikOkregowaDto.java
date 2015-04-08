@@ -23,10 +23,12 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import java.io.Serializable;
+import com.google.common.base.MoreObjects;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * DTO represents all relevant numbers related to one Komisja Okregowa.
@@ -97,4 +99,14 @@ public class WynikOkregowaDto implements Serializable {
         this.obwodowaAll = obwodowaAll;
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("okregowaName", okregowaName)
+                .add("frekwencja", frekwencja)
+                .add("frekwencjaAll", frekwencjaAll)
+                .add("obwodowa", obwodowa)
+                .add("obwodowaAll", obwodowaAll)
+                .toString();
+    }
 }

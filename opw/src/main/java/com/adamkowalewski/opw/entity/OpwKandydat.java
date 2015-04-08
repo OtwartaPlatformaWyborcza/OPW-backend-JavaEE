@@ -49,14 +49,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OpwKandydat.findByPkwId", query = "SELECT o FROM OpwKandydat o WHERE o.pkwId = :pkwId"),
     @NamedQuery(name = "OpwKandydat.findByName", query = "SELECT o FROM OpwKandydat o WHERE o.name = :name")})
 public class OpwKandydat implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
+
     @Column(name = "pkwId")
     private Integer pkwId;
+
     @Size(max = 128)
     @Column(name = "name", length = 128)
     private String name;
@@ -66,6 +70,11 @@ public class OpwKandydat implements Serializable {
 
     public OpwKandydat(Integer id) {
         this.id = id;
+    }
+
+    public OpwKandydat(Integer pkwId, String name) {
+        this.pkwId = pkwId;
+        this.name = name;
     }
 
     public Integer getId() {

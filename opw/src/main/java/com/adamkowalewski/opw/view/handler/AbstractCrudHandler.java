@@ -23,8 +23,6 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
-import java.util.List;
-
 /**
  *
  * @author Adam Kowalewski

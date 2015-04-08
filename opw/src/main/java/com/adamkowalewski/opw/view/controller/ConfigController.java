@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.view.OpwConfig;
 import com.adamkowalewski.opw.view.dto.ConfigMailDto;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -38,10 +39,7 @@ import javax.inject.Named;
 @SessionScoped
 public class ConfigController implements Serializable {
 
-    /**
-     * Application salt may not be changed and is therefore hardcoded.
-     */
-    private final String APP_SALT = "abc";
+    private String applicationSalt;
 
     private ConfigMailDto configMail;
 
@@ -64,10 +62,11 @@ public class ConfigController implements Serializable {
         configImportDuplicatesAllowed = false;
         listKandydatOpen = false;
         listOkregowaOpen = false;
+        applicationSalt = OpwConfig.APP_SALT;
     }
 
-    public String getAPP_SALT() {
-        return APP_SALT;
+    public String getApplicationSalt() {
+        return applicationSalt;
     }
 
     public ConfigMailDto getConfigMail() {

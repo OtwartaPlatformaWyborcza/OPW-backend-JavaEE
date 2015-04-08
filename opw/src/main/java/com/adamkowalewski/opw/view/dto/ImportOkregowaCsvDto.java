@@ -27,6 +27,7 @@ import java.util.regex.PatternSyntaxException;
 
 /**
  * DTO used for CSV import of Komisja Okregowa.
+ * TODO needs to be reconsidered. 
  *
  * @author Adam Kowalewski
  */
@@ -97,10 +98,6 @@ public class ImportOkregowaCsvDto {
 
     public void setMiasta(String miasta) {
         this.miasta = miasta;
-    }
-
-    public static void main(String[] args) {
-
     }
 
     public boolean isDuplicate() {

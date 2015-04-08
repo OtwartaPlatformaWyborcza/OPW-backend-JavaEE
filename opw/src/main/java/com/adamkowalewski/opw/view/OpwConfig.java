@@ -24,7 +24,7 @@
 package com.adamkowalewski.opw.view;
 
 /**
- * Contain configuration settings which may not be changed.
+ * Configuration settings which may not be changed.
  *
  * @author Adam Kowalewski
  * @version 2015.03.15
@@ -40,9 +40,9 @@ public class OpwConfig {
      * User ID for root access.
      */
     public static final int ROOT_ID = 1;
-    
+
     /**
-     * Application level salt 
+     * Application salt may not be changed and is therefore hardcoded.
      */
     public static final String APP_SALT = "Søägüąź.29";
 }

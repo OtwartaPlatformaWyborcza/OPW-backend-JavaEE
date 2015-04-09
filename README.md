@@ -8,6 +8,7 @@ Sortowanie alfabetyczne po imieniu.
 | ------------- | ------------- |
 | AdamK | Architektura, Java  |
 | PrzemekJ | Analiza |
+| PrzemekP | Architektura, Java |
 | RafałR | Analiza i Organizacja |
 | RobertP | Analiza |
 

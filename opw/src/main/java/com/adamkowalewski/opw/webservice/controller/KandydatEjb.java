@@ -23,7 +23,14 @@
  */
 package com.adamkowalewski.opw.webservice.controller;
 
+import com.adamkowalewski.opw.bean.KandydatBean;
+import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -31,6 +38,27 @@ import javax.ejb.Stateless;
  * @author Adam Kowalewski
  */
 @Stateless
-public class KandydatEjb implements Serializable{
-    
+public class KandydatEjb implements Serializable {
+
+    @EJB
+    KandydatBean kandydatBean;
+
+    public KandydatEjb() {
+    }
+
+    public List<OpwKandydat> findAll() {
+        return kandydatBean.findAll();
+    }
+
+    public List<KandydatDto> findAllDto() {
+        List<KandydatDto> result = new ArrayList<>();
+
+        List<OpwKandydat> kandydatList = findAll();
+
+        for (OpwKandydat kandydat : kandydatList) {
+            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
+            result.add(k);
+        }
+        return result;
+    }
 }

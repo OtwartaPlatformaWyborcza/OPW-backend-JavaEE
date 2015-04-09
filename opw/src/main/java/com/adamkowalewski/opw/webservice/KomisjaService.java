@@ -23,12 +23,15 @@
  */
 package com.adamkowalewski.opw.webservice;
 
+import com.adamkowalewski.opw.webservice.controller.KandydatEjb;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
 import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
 import com.adamkowalewski.opw.webservice.dto.UploadWynikDto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -44,7 +47,11 @@ import javax.ws.rs.core.Response;
  * @author Adam Kowalewski
  */
 @Path("/komisja")
-public class KomisjaService extends AbstractService{
+@RequestScoped
+public class KomisjaService extends AbstractService {
+
+    @EJB
+    KandydatEjb kandydatEjb;
 
     @GET
     @Path("/{pkwId}")
@@ -52,21 +59,17 @@ public class KomisjaService extends AbstractService{
     public Response loadObwodowa(@PathParam("pkwId") String pkwId) {
 
         if (pkwId.equals("1212-1")) {
-            List<KandydatDto> kandydatList = new ArrayList<>();
-            kandydatList.add(new KandydatDto(1, "Bolek"));
-            kandydatList.add(new KandydatDto(2, "Lolek"));
-            kandydatList.add(new KandydatDto(3, "Jacek"));
-            kandydatList.add(new KandydatDto(4, "Placek"));
+
+            List<KandydatDto> kandydatList = kandydatEjb.findAllDto();
 
             KomisjaDto komisja = new KomisjaDto("1212-1", "Koisja obowdow 22", "szkola 11 Liswøł", new OkregowaDto("OKR-ABCD", "Komisja Wawa", "ul. wiejska 11"), kandydatList);
             Response result = Response.ok().entity(komisja).build();
-            
+
             return result;
         }
-        Response result = Response.noContent().build();
-        
-        return result;
 
+        Response result = Response.noContent().build();
+        return result;
     }
 
     @POST

@@ -25,7 +25,7 @@ public class KomisjaServiceTest extends JerseyTestNg.ContainerPerMethodTest {
         return new ResourceConfig(KomisjaService.class);
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldLoadObwodowa() throws Exception {
         // given
         String pkwId = "1212-1";

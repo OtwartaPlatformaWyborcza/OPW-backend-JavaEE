@@ -200,6 +200,7 @@ Plan implementacji
 
 ### Wersja 0.5
 * Autoryzacja i autentyfikacja na bazie JAAS
+* OPW-T-5 : Definicja struktury plików CSV Komisji Obwodowych
 * [WiP] Definicja architektury na nadchodzące wybory
 
 

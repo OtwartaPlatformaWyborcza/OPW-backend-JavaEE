@@ -26,7 +26,8 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 | ------------- | ------------- |
 | Tablica Trello   | https://trello.com/b/hKes4OCP/otwarta-platforma-wyborcza  |
 | Backend daily (Java EE)   | http://91.250.114.134:8080/opw/  |
-| Frontend daily  (AngularJS) | http://91.250.114.134/ |
+| Frontend komisja daily (AngularJS) | http://91.250.114.134/ |
+| Frontend wyniki daily (jQuery) | http://91.250.114.134/dashboard/ |
 
 # Quickstart
 1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    

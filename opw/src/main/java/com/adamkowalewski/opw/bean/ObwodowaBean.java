@@ -27,6 +27,8 @@ import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -50,6 +52,41 @@ public class ObwodowaBean extends AbstractOpwFacade<OpwObwodowaKomisja> {
         return em;
     }
 
+    
+    /**
+     * Verify if an entity with this PKW ID already exists in the database.
+     *
+     * @param pkwId unique ID given by PKW.
+     * @return <code>true</code> if a duplicate, otherwise <code>false</code>.
+     * @author Adam Kowalewski
+     * @version 2015.04.09
+     */
+    public boolean isDuplicate(String pkwId) {
+        boolean result = true;
+        try {
+            findObwodowa(pkwId);
+        } catch (NoResultException ex) {
+            result = false;
+        } catch (NonUniqueResultException ex) {
+            result = true;
+        }
+        return result;
+    }
+
+    /**
+     * Returns all duplicates for given PKW ID.
+     *
+     * @param pkwId unique ID given by PKW.
+     * @return all known duplicates.
+     * @author Adam Kowalewski
+     * @version 2015.04.09
+     */
+    public List<OpwObwodowaKomisja> findDuplicates(String pkwId) {
+        Query q = em.createNamedQuery("OpwObwodowaKomisja.findByPkwId");
+        q.setParameter("pkwId", pkwId);
+        return q.getResultList();
+    }
+    
     public OpwObwodowaKomisja findObwodowa(String pkwId) {
         Query q = em.createNamedQuery("OpwObwodowaKomisja.findByPkwId");
         q.setParameter("pkwId", pkwId);

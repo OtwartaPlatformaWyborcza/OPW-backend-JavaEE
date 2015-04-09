@@ -27,6 +27,8 @@ import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -50,6 +52,48 @@ public class OkregowaBean extends AbstractOpwFacade<OpwOkregowaKomisja> {
         return em;
     }
 
+    /**
+     * Verify if an entity with this PKW ID already exists in the database.
+     *
+     * @param pkwId unique ID given by PKW.
+     * @return <code>true</code> if a duplicate, otherwise <code>false</code>.
+     * @author Adam Kowalewski
+     * @version 2015.04.09
+     */
+    public boolean isDuplicate(int pkwId) {
+        boolean result = true;
+        try {
+            findOkregowa(pkwId);
+        } catch (NoResultException ex) {
+            result = false;
+        } catch (NonUniqueResultException ex) {
+            result = true;
+        }
+        return result;
+    }
+
+    /**
+     * Returns all duplicates for given PKW ID.
+     *
+     * @param pkwId unique ID given by PKW.
+     * @return all known duplicates.
+     * @author Adam Kowalewski
+     * @version 2015.04.09
+     */
+    public List<OpwOkregowaKomisja> findDuplicates(int pkwId) {
+        Query q = em.createNamedQuery("OpwOkregowaKomisja.findByPkwId");
+        q.setParameter("pkwId", pkwId);
+        return q.getResultList();
+    }
+
+    /**
+     * Returns a single Komisja Okregowa by PKW ID.
+     *
+     * @param pkwId unique ID given by PKW.
+     * @return Komisja Obwodowa instance.
+     * @author Adam Kowalewski
+     * @version 2015.04.09
+     */
     public OpwOkregowaKomisja findOkregowa(int pkwId) {
         Query q = em.createNamedQuery("OpwOkregowaKomisja.findByPkwId");
         q.setParameter("pkwId", pkwId);

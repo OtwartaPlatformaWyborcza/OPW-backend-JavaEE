@@ -26,6 +26,8 @@ package com.adamkowalewski.opw.bean;
 import com.adamkowalewski.opw.entity.OpwUser;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -47,6 +49,26 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    /**
+     * Verify if given E-Mail address is already a known login within OPW. 
+     *
+     * @param email E-Mail address used by the user as login. 
+     * @return <code>true</code> if an account exists, otherwise <code>false</code>.
+     * @author Adam Kowalewski
+     * @version 2015.04.09
+     */
+    public boolean isDuplicate(String email) {
+        boolean result = true;
+        try {
+            findUser(email);
+        } catch (NoResultException ex) {
+            result = false;
+        } catch (NonUniqueResultException ex) {
+            result = true;
+        }
+        return result;
     }
 
     /**

@@ -1,0 +1,51 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="./WEB-INF/opwTemplate.xhtml">
+
+    <ui:define name="content">
+        <h1>#{messages.userTitle}</h1>
+        #{userHandler.prepareList()}
+
+        <div class="left box box_blue">
+            <div class="left"></div>
+            <div class="right"><h:link outcome="/userCreate" value="#{messages.userCreateTitle}"/></div>
+            <div class="clear"></div>
+            <br/>
+
+            <h:form id="frmList">
+                <p:dataTable id="tblKandydat" emptyMessage="#{messages.userListEmpty}" 
+                             value="#{userHandler.userList}" var="i" 
+                             sortBy="#{i.lastname}">
+
+                    <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}" >
+                        <h:outputText value="#{i.firstname}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.lastname}" sortBy="#{i.lastname}">
+                        <h:outputText value="#{i.lastname}"/>
+                    </p:column>
+                    <p:column headerText="#{messages.userType}" sortBy="#{i.type}">
+                        <h:outputText value="#{i.type}"/>
+                    </p:column>
+                    <p:column headerText="#{messages.email}" sortBy="#{i.email}">
+                        <h:outputText value="#{i.email}"/>
+                    </p:column>
+                    <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}">
+                        
+                        <h:outputText value="#{messages.active}" rendered="#{i.active}"/>
+                        <h:outputText value="#{messages.inactive}" rendered="#{not i.active}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{messages.action}">
+                        <h:commandLink id="btnView" value="#{messages.display}"
+                                       action="#{userHandler.prepareView(i)}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

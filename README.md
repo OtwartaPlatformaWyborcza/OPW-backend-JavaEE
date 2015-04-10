@@ -72,11 +72,10 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 
 1. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczęsciej gminne bądź dzielnicowe)
 2. Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
-4. Kordynator wybórów zakłada konta operatorom i przewodniczącemu komisji - Import XLS
-5. Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom
-6. Koordynator zbiera dane od członków komisji ( imie, nazwisko, telefon, mail,  z jakiej partii , data powołania, Pesel, Walidacja Czy nie kandydują, nr Komisji , Adres komisji)
-7. Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji
-8. System generuje hasła dostepu dla operatorow i przewodniczących komisji, którzy proszą po zalogowaniu się o wydanie certyfikatu 
+3. Kordynator wybórów zakłada konta operatorom i przewodniczącemu komisji - Import XLS
+4. Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom
+5. Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji
+6. System generuje hasła dostepu dla operatorow i przewodniczących komisji, którzy proszą po zalogowaniu się o wydanie certyfikatu 
 
 
 **Dzień wyborczy**

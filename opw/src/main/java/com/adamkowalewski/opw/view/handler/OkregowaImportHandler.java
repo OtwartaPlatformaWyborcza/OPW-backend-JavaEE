@@ -47,56 +47,59 @@ import org.primefaces.model.UploadedFile;
 @Named
 @SessionScoped
 public class OkregowaImportHandler implements Serializable {
-
+    
     private final String formatCsv = "CSV";
     private final String formatXml = "XML";
-
+    
     private UploadedFile file;
     private List<OkregowaCsvDto> okregowaList;
-
+    
     @Inject
-    ImportController importController;   
-
+    ImportController importController;
+    
     private String importFormat;
-
+    
     public OkregowaImportHandler() {
         okregowaList = new ArrayList<>();
     }
-
+    
     public void performImport() {
         if (okregowaList != null && !okregowaList.isEmpty()) {
             importController.performImport(okregowaList);
         }
     }
-
+    
     public void upload() {
         if (file != null) {
             okregowaList = new ArrayList<>();
             try {
                 InputStream is = file.getInputstream();
                 okregowaList = importController.parseOkregowa(is);
-                System.out.println("x");
-            } catch (IOException | IndexOutOfBoundsException | NumberFormatException | PatternSyntaxException ex) {
+            } catch (NumberFormatException ex) {
+                MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseNumberError"));
+                Logger.getLogger(OkregowaImportHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException | IndexOutOfBoundsException | PatternSyntaxException ex) {
+                MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
                 Logger.getLogger(OkregowaImportHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        MsgController.addErrorMessage("WiP");
+        MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));
     }
-
+    
     public UploadedFile getFile() {
         return file;
     }
-
+    
     public void setFile(UploadedFile file) {
         this.file = file;
     }
-
+    
     public List<OkregowaCsvDto> getOkregowaList() {
         return okregowaList;
     }
-
+    
     public void setOkregowaList(List<OkregowaCsvDto> okregowaList) {
         this.okregowaList = okregowaList;
     }
-
+    
 }

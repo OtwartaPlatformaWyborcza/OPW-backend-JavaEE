@@ -21,7 +21,7 @@ public class OkregowaCsvDtoParser implements CSVEntryParser<OkregowaCsvDto> {
     public OkregowaCsvDto parseEntry(String... values) {
         int pkwId = Integer.parseInt(values[0]);
         String name = values[1];
-        String wojewodztwo = values[2]; //FIXME brak wojewodztw w OkregowaCsvDto
+        // We are currently not using values[2] (województwo)
         String powiaty = values[3];
         String miasta = values[4];
         return new OkregowaCsvDto(pkwId, name, powiaty, miasta);

@@ -23,14 +23,10 @@
  */
 package com.adamkowalewski.opw.webservice.controller;
 
-import java.io.Serializable;
-import javax.ejb.Stateless;
-
 /**
  *
  * @author Adam Kowalewski
  */
-@Stateless
-public class ObwodowaEjb implements Serializable{
+public class UserServiceEjb {
     
 }

@@ -15,8 +15,11 @@
                     <h:outputLabel for="knr" id="knrL" value="#{messages.nr}*" />
                     <p:inputText id="knr" value="#{kandydatHandler.instance.pkwId}" required="true"/>
 
-                    <h:outputLabel for="kn" id="knL" value="#{messages.fullname}*" />
-                    <p:inputText id="kn" value="#{kandydatHandler.instance.name}" required="true" />
+                    <h:outputLabel for="kfn" id="kfnL" value="#{messages.firstname}*" />
+                    <p:inputText id="kfn" value="#{kandydatHandler.instance.firstname}" required="true" />
+
+                    <h:outputLabel for="kln" id="klnL" value="#{messages.lastname}*" />
+                    <p:inputText id="kln" value="#{kandydatHandler.instance.lastname}" required="true" />
 
                 </h:panelGrid>
 

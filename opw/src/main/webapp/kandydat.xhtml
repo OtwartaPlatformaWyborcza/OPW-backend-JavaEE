@@ -22,11 +22,12 @@
                     <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
                         <h:outputText value="#{i.pkwId}"/>
                     </p:column>
-
-                    <p:column headerText="#{messages.name}" sortBy="#{i.name}">
-                        <h:outputText value="#{i.name}"/>
+                    <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}">
+                        <h:outputText value="#{i.firstname}"/>
                     </p:column>
-
+                    <p:column headerText="#{messages.lastname}" sortBy="#{i.lastname}">
+                        <h:outputText value="#{i.lastname}"/>
+                    </p:column>
                     <p:column headerText="#{messages.action}">
                         <h:commandLink id="btnView" value="#{messages.display}"
                                        action="#{kandydatHandler.prepareView(i)}"/>

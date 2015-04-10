@@ -55,9 +55,13 @@ public class KandydatEjb implements Serializable {
         List<KandydatDto> result = new ArrayList<>(kandydatList.size());
 
         for (OpwKandydat kandydat : kandydatList) {
-            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
+            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydatBean.getFullname(kandydat));
             result.add(k);
         }
         return result;
+    }
+
+    public String getFullname(OpwKandydat kandydat) {
+        return kandydatBean.getFullname(kandydat);
     }
 }

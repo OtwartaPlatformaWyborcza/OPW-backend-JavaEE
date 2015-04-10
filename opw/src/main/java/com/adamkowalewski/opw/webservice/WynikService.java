@@ -25,7 +25,7 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
-import com.adamkowalewski.opw.webservice.controller.WynikEjb;
+import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.WynikOkregowaDto;
@@ -54,7 +54,7 @@ import java.util.Random;
 public class WynikService extends AbstractService {
 
     @EJB
-    WynikEjb wynikEjb;
+    WynikServiceEjb wynikEjb;
 
     @GET
     @Path("/complete")
@@ -64,18 +64,19 @@ public class WynikService extends AbstractService {
         DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
 
         List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
-       
+
         for (OpwKandydat kandydat : kandydatList) {
-            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getName());
+            String fullname = kandydat.getFirstname() + " " + kandydat.getLastname();
+            KandydatDto k = new KandydatDto(kandydat.getPkwId(), fullname);
             k.setGlosow(new Random().nextInt(1000));
             result.getKandydatList().add(k);
         }
-        
+
         List<OpwOkregowaKomisja> okregowaList = wynikEjb.obwodowaFindAll();
         for (OpwOkregowaKomisja okregowa : okregowaList) {
             WynikOkregowaDto o = new WynikOkregowaDto(
-                    okregowa.getName(), 
-                    new Random().nextInt(750000), 750000, 
+                    okregowa.getName(),
+                    new Random().nextInt(750000), 750000,
                     new Random().nextInt(800), 800);
             result.getOkregowaList().add(o);
         }

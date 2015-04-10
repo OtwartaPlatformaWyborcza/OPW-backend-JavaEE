@@ -48,4 +48,17 @@ public class KandydatBean extends AbstractOpwFacade<OpwKandydat> {
         return em;
     }
 
+    /**
+     * Returns fullname for a Kandydat.
+     *
+     * TODO reconsider usage of patterns as well as UPPERCASE
+     * @param kandydat instance of entity.
+     * @return String representation of fullname.
+     * @author Adam Kowalewski
+     * @version 2015.04.10
+     */
+    public String getFullname(OpwKandydat kandydat) {
+        return kandydat.getLastname() + " " + kandydat.getFirstname();
+    }
+
 }

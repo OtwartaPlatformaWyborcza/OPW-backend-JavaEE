@@ -38,14 +38,15 @@ import javax.ejb.Stateless;
  * @author Adam Kowalewski
  */
 @Stateless
-public class WynikEjb implements Serializable {
+public class WynikServiceEjb implements Serializable {
 
     @EJB
     KandydatBean kandydatBean;
+    
     @EJB
     OkregowaBean okregowaBean;
 
-    public WynikEjb() {
+    public WynikServiceEjb() {
     }
 
     public List<OpwKandydat> kandydatFindAll() {
@@ -55,5 +56,7 @@ public class WynikEjb implements Serializable {
     public List<OpwOkregowaKomisja> obwodowaFindAll() {
         return okregowaBean.findAll();
     }
+    
+    
 
 }

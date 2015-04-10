@@ -195,6 +195,7 @@ Plan implementacji
 ### Wersja 0.4.0
 * OPW-A-6 : import kont użytkowników z pliku CSV
 * [WiP] Definicja masek UI dla klienta HTML5/CSS3 
+* [DONE] OPW-T-5 : Rozbicie kolumny `name` w bazie danych na `firstname` i `lastname` 
 * [DONE] OPW-A-8 Możliwość zamknięcia listy kandydatów. 
 * OPW-A-2 Import CSV/KLK dla encji: komisja obwodowa, 
 * [DONE] OPW-A-3 Import CSV/KLK dla encji: komisja okręgowa 

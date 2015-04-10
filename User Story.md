@@ -35,8 +35,10 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-T-2 : Integracja SFL4J jako loggera
 * OPW-T-3 : Migracja z EclipseLink na Hibernate +envers 
 * OPW-T-4 : Generowanie E-Mail poprzez szablony FreeMarker
-* OPW-T-5
-
+* OPW-T-5 : Rozbicie kolumny `name` w bazie danych na `firstname` i `lastname` 
+* OPW-T-
+* OPW-T-
+* OPW-T-
 
 ## Wariant rozszeżony
  

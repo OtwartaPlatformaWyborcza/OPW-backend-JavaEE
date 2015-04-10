@@ -34,7 +34,6 @@ public class OkregowaCsvDto {
 
     private int pkwId;
     private String name;
-    //FIXME brakuje wojewodztw!
     private String powiaty;
     private String miasta;
     private boolean duplicate;

@@ -1,4 +1,4 @@
-package com.adamkowalewski.opw.view.controller;
+package com.adamkowalewski.opw.view.controller.csv;
 
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 import com.googlecode.jcsv.reader.CSVEntryParser;

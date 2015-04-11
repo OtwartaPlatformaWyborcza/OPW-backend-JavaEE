@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
-import static com.adamkowalewski.opw.view.controller.OkregowaCsvDtoReader.okregowaCsvDtoReader;
+import static com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader.okregowaCsvDtoReader;
 
 /**
  * Provides reusable logic for file import.

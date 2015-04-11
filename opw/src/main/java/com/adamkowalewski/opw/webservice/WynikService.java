@@ -66,6 +66,10 @@ public class WynikService extends AbstractService {
         List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
 
         for (OpwKandydat kandydat : kandydatList) {
+            checkState(kandydat.getPkwId() != null, "Expected non-null pkwId field");
+            checkState(kandydat.getFirstname() != null, "Expected non-null firstname field");
+            checkState(kandydat.getLastname() != null, "Expected non-null lastname field");
+
             String fullname = kandydat.getFirstname() + " " + kandydat.getLastname();
             KandydatDto k = new KandydatDto(kandydat.getPkwId(), fullname);
             k.setGlosow(new Random().nextInt(1000));

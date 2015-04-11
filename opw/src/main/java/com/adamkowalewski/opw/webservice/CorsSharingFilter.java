@@ -29,8 +29,8 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.ext.Provider;
 
 /**
- * General response filter for CORS support. 
- * 
+ * General response filter for CORS support.
+ *
  * @author Adam Kowalewski
  */
 @Provider
@@ -39,12 +39,17 @@ public class CorsSharingFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext response) {
         String allowHeaders = "Content-Type, Accept, "
-                + "X-OPW-login, X-OPW-password, X-OPW-token";
-        
+                + "X-OPW-login, X-OPW-password, "
+                + "X-OPW-token, "
+                + "X-OPW-API-token";
+
+        // TODO remove for prod
+        allowHeaders = allowHeaders + ", X-OPW-debug-500";
+
         response.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
         response.getHeaders().putSingle("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
         response.getHeaders().putSingle("Access-Control-Allow-Headers", allowHeaders);
-        response.getHeaders().putSingle("Access-Control-Expose-Headers", "*");        
+        response.getHeaders().putSingle("Access-Control-Expose-Headers", "*");
     }
-    
+
 }

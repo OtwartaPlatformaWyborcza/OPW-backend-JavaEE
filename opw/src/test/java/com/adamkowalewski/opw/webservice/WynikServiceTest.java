@@ -17,12 +17,12 @@ import static org.testng.Assert.assertTrue;
 
 public class WynikServiceTest extends BaseWynikServiceTest {
 
-    @Test(enabled = false)
+    @Test
     public void shouldFetchWynik() {
         // given
         String login = "login";
         OpwKandydat k = new OpwKandydat();
-        k.setId(1111);
+        k.setPkwId(1111);
         k.setFirstname("John");
         k.setLastname("Doe");
         ArrayList<OpwKandydat> opwKandydats = newArrayList(k);

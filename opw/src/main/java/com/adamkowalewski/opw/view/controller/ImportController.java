@@ -82,18 +82,8 @@ public class ImportController implements Serializable {
 
         List<OkregowaCsvDto> result = okregowaCsvDtoReader().readAllFrom(content);
 
-        // check duplicates
-        for (OkregowaCsvDto okregowaCsvDto : result) {
-            try {
-                //FIXME Sterowanie przeplywem sterowania za pomoca wyjatkow to nie najlepszy pomysl
-                OpwOkregowaKomisja findByPkwId = okregowaController.findByPkwId(okregowaCsvDto.getPkwId());
-                okregowaCsvDto.setDuplicate(true);
-            } catch (NoResultException ex) {
-                okregowaCsvDto.setDuplicate(false);
-            } catch (NonUniqueResultException ex) {
-                okregowaCsvDto.setDuplicate(true);
-            }
-        }
+        // TODO check duplicates
+        
         return result;
     }
 }

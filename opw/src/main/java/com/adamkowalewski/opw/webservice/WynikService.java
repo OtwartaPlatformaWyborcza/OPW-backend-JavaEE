@@ -83,7 +83,7 @@ public class WynikService extends AbstractService {
                     new Random().nextInt(750000), 750000,
                     new Random().nextInt(800), 800);
             result.getOkregowaList().add(o);
-        }
+        }                
 
         return Response.ok().entity(result).build();
     }

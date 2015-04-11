@@ -61,15 +61,12 @@ public class OkregowaBean extends AbstractOpwFacade<OpwOkregowaKomisja> {
      * @version 2015.04.09
      */
     public boolean isDuplicate(int pkwId) {
+
+        System.out.println("lista  " + count());
+
         boolean result = true;
-        try {
-            findOkregowa(pkwId);
-        } catch (NoResultException ex) {
-            result = false;
-        } catch (NonUniqueResultException ex) {
-            result = true;
-        }
-        return result;
+
+        return false;
     }
 
     /**

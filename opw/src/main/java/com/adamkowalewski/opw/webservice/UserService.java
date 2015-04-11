@@ -34,8 +34,6 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 /**
  * Represents user perspective.
  *
@@ -50,9 +48,18 @@ public class UserService extends AbstractService {
     public Response loadObwodowaShortList(
             @NotNull @PathParam("userId") int userId,
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
-        checkArgument(login != null, "Expected non-null login argument");
-        checkArgument(token != null, "Expected non-null token argument");
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+
+        if (debug != null) {
+            return mockServerError();
+        }
+
+        if (verifyAccess(login, token) == false) {
+            Response response = Response.status(Response.Status.UNAUTHORIZED)
+                    .build();
+            return response;
+        }
 
         List<KomisjaShortDto> resultList = new ArrayList<>(29);
 
@@ -60,7 +67,8 @@ public class UserService extends AbstractService {
             resultList.add(new KomisjaShortDto(i, "1212-" + i, "Komisja " + i, "adres " + i));
         }
 
-        GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {};
+        GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
+        };
 
         Response response = Response.ok()
                 .entity(result)
@@ -74,16 +82,17 @@ public class UserService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response login(
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_PASSWORD) String password) {
-        checkArgument(login != null, "Expected non-null login argument");
-        checkArgument(password != null, "Expected non-null password argument");
+            @NotNull @HeaderParam(OPW_HEADER_PASSWORD) String password,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+
+        if (debug != null) {
+            return mockServerError();
+        }
 
         if (login.equals("admin") && password.equals("admin")) {
-
             Response response = Response.ok()
-                    .entity(new UserDto(1, "Mock admina", "token1234", true))
+                    .entity(new UserDto(1, "OPW Administrator", mockTokenId, true))
                     .build();
-
             return response;
         }
         Response response = Response.status(Response.Status.UNAUTHORIZED)
@@ -97,9 +106,17 @@ public class UserService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response logout(
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
-        checkArgument(login != null, "Expected non-null login argument");
-        checkArgument(token != null, "Expected non-null token argument");
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+
+        if (debug != null) {
+            return mockServerError();
+        }
+        if (verifyAccess(login, token) == false) {
+            Response response = Response.status(Response.Status.UNAUTHORIZED)
+                    .build();
+            return response;
+        }
 
         Response response = Response.ok()
                 .entity(new UserDto(false))

@@ -25,6 +25,7 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_LOGIN;
 import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
@@ -42,6 +43,8 @@ import java.util.List;
 
 import static com.google.common.base.Preconditions.checkState;
 import java.util.Random;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.HeaderParam;
 
 /**
  * Represents wynik perspective. Main service for all OPW dashboard
@@ -59,7 +62,18 @@ public class WynikService extends AbstractService {
     @GET
     @Path("/complete")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response wynik() {
+    public Response wynik(
+            @NotNull @HeaderParam(OPW_HEADER_API_TOKEN) String apiToken,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+
+        if (debug != null) {
+            return mockServerError();
+        }
+        if (!verifyAccess(apiToken)) {
+            Response response = Response.status(Response.Status.UNAUTHORIZED)
+                    .build();
+            return response;
+        }
 
         DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
 
@@ -83,7 +97,7 @@ public class WynikService extends AbstractService {
                     new Random().nextInt(750000), 750000,
                     new Random().nextInt(800), 800);
             result.getOkregowaList().add(o);
-        }                
+        }
 
         return Response.ok().entity(result).build();
     }

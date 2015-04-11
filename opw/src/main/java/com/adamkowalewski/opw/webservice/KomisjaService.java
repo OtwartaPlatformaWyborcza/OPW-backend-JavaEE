@@ -35,6 +35,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
  * REST Service represents komisja perspective.
@@ -51,7 +52,20 @@ public class KomisjaService extends AbstractService {
     @GET
     @Path("/{pkwId}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response loadObwodowa(@PathParam("pkwId") String pkwId) {
+    public Response loadObwodowa(
+            @NotNull @PathParam("pkwId") String pkwId,
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+
+        if (debug != null) {
+            return mockServerError();
+        }
+        if (verifyAccess(login, token) == false) {
+            Response response = Response.status(Response.Status.UNAUTHORIZED)
+                    .build();
+            return response;
+        }
 
         if (pkwId.equals("1212-1")) {
 

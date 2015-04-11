@@ -27,7 +27,7 @@ public class UserServiceTest extends JerseyTestNg.ContainerPerMethodTest {
         return new ResourceConfig(UserService.class);
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldLoadObwodowaShortList() throws Exception {
         // given
         int userId = 1234;
@@ -44,7 +44,8 @@ public class UserServiceTest extends JerseyTestNg.ContainerPerMethodTest {
                 .header(OPW_HEADER_LOGIN, login)
                 .header(OPW_HEADER_TOKEN, token)
                 .get();
-        List<KomisjaShortDto> actualResult = response.readEntity(new GenericType<List<KomisjaShortDto>>() {});
+        List<KomisjaShortDto> actualResult = response.readEntity(new GenericType<List<KomisjaShortDto>>() {
+        });
 
         // then
         assertEquals(response.getStatus(), OK_200);
@@ -56,7 +57,7 @@ public class UserServiceTest extends JerseyTestNg.ContainerPerMethodTest {
         // given
         String login = "admin";
         String password = "admin";
-        UserDto expectedResponse = new UserDto(1, "Mock admina", "token1234", true);
+        UserDto expectedResponse = new UserDto(1, "OPW Administrator", mockTokenId, true);
 
         // when
         Response response = target("user/login").request()

@@ -194,8 +194,10 @@ Plan implementacji
 ### Wersja 0.4.0 [wydana 2015.04.12] 
 * [DONE] OPW-T-5 : Rozbicie kolumny `name` w bazie danych na `firstname` i `lastname` 
 * [DONE] OPW-A-8 Możliwość zamknięcia listy kandydatów. 
-* [DONE] OPW-A-3 Import CSV/KLK dla encji: komisja okręgowa 
+* [DONE] OPW-A-3 Import CSV dla encji: komisja okręgowa 
 * [DONE] OPW-T-5 : Definicja struktury plików CSV Komisji Obwodowych
+* [DONE] Migracja repozytoriów do organizacji
+* [DONE] Wykonanie mockup serwisów REST dla klientów
 
 ### Wersja 0.5
 * Autoryzacja i autentyfikacja na bazie JAAS

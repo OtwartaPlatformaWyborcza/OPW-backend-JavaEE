@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
+import com.adamkowalewski.opw.view.dto.ObwodowaCsvDto;
 
 import com.adamkowalewski.opw.view.dto.UserCsvDto;
 import static com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader.okregowaCsvDtoReader;
@@ -108,6 +109,30 @@ public class ImportController implements Serializable {
         List<UserCsvDto> result = new ArrayList<>();
         result.add(new UserCsvDto("Marek", "Saganowski", "ms@openpkw.pl", "O", new ArrayList<OpwObwodowaKomisja>(), false));
         result.add(new UserCsvDto("Robert", "Saganowski", "rs@openpkw.pl", "O", new ArrayList<OpwObwodowaKomisja>(), false));
+        return result;
+    }
+
+    /**
+     * TODO OPW-A-2
+     *
+     * @MOCK
+     * @param obwodowaList
+     */
+    public void performImportObwodowa(List<ObwodowaCsvDto> obwodowaList) {
+        System.out.println("MOCK!");
+    }
+
+    /**
+     * TODO OPW-A-2
+     *
+     * @MOCK!
+     * @param content
+     * @return
+     */
+    public List<ObwodowaCsvDto> parseObwodowa(InputStream content) {
+        List<ObwodowaCsvDto> result = new ArrayList<>();
+        result.add(new ObwodowaCsvDto("146513-587", "Szkoła Podstawowa nr 319 ", "ul. ZWM 10, Ursynów, 02-786 Warszawa", "P", 1452, false));
+        result.add(new ObwodowaCsvDto("146513-588", "Szkoła Podstawowa nr 322 ", "ul. Dembowskiego 9, Ursynów, 02-784 Warszawa", "P", 1751, false));
         return result;
     }
 }

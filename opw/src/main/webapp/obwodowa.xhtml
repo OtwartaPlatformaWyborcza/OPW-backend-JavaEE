@@ -7,13 +7,17 @@
     <ui:define name="content">
         <h1>#{messages.obwodowaListTitle}</h1>
         #{obwodowaHandler.prepareList()}
-        
+
         <div class="left box box_blue">
             <div class="left"></div>
-            <div class="right"><h:link outcome="/obwodowaCreate" value="#{messages.obwodowaCreate}"/></div>
+            <div class="right">
+                <h:link outcome="/obwodowaCreate" value="#{messages.obwodowaCreate}"/>
+                <h:outputText value=" | "/>
+                <h:link outcome="/importObwodowa" value="#{messages.importFile}"/>
+            </div>
             <div class="clear"></div>
             <br/>
-            
+
             <h:form id="frmList">
                 <p:dataTable id="tblOkr" emptyMessage="#{messages.obwodowaListEmpty}" 
                              value="#{obwodowaHandler.obwodowaList}" var="i" 
@@ -26,11 +30,11 @@
                     <p:column headerText="#{messages.name}" sortBy="#{i.name}">
                         <h:outputText value="#{i.name}"/>
                     </p:column>
-                    
+
                     <p:column headerText="#{messages.address}" sortBy="#{i.address}">
                         <h:outputText value="#{i.address}"/>
                     </p:column>
-                    
+
                     <p:column headerText="#{messages.okregowaEditTitle}" sortBy="#{i.opwOkregowaKomisjaId.name}">
                         <h:outputText value="#{i.opwOkregowaKomisjaId.name}"/>
                     </p:column>
@@ -43,7 +47,7 @@
                 </p:dataTable>
             </h:form>
         </div>
-        
+
     </ui:define>
 
 </ui:composition>

@@ -23,37 +23,35 @@
  */
 package com.adamkowalewski.opw.view.dto;
 
-import com.google.common.base.Objects;
-
 /**
- * DTO used for CSV import of Komisja Okregowa.
+ * DTO used for CSV import of Komisja Obwodowa.
  *
  * @author Adam Kowalewski
  * @version 2015.04.12
  */
-public class OkregowaCsvDto {
+public class ObwodowaCsvDto {
 
-    private int pkwId;
-    private String name;
-    private String powiaty;
-    private String miasta;
+    private String pkwId, name, address, type;
+    private int allowedToVote;
     private boolean duplicate;
 
-    public OkregowaCsvDto() {
+    public ObwodowaCsvDto() {
     }
 
-    public OkregowaCsvDto(int pkwId, String name, String powiaty, String miasta) {
+    public ObwodowaCsvDto(String pkwId, String name, String address, String type, int allowedToVote, boolean duplicate) {
         this.pkwId = pkwId;
         this.name = name;
-        this.powiaty = powiaty;
-        this.miasta = miasta;
+        this.address = address;
+        this.type = type;
+        this.allowedToVote = allowedToVote;
+        this.duplicate = duplicate;
     }
 
-    public int getPkwId() {
+    public String getPkwId() {
         return pkwId;
     }
 
-    public void setPkwId(int pkwId) {
+    public void setPkwId(String pkwId) {
         this.pkwId = pkwId;
     }
 
@@ -65,20 +63,28 @@ public class OkregowaCsvDto {
         this.name = name;
     }
 
-    public String getPowiaty() {
-        return powiaty;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPowiaty(String powiaty) {
-        this.powiaty = powiaty;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getMiasta() {
-        return miasta;
+    public String getType() {
+        return type;
     }
 
-    public void setMiasta(String miasta) {
-        this.miasta = miasta;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getAllowedToVote() {
+        return allowedToVote;
+    }
+
+    public void setAllowedToVote(int allowedToVote) {
+        this.allowedToVote = allowedToVote;
     }
 
     public boolean isDuplicate() {
@@ -89,22 +95,4 @@ public class OkregowaCsvDto {
         this.duplicate = duplicate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OkregowaCsvDto that = (OkregowaCsvDto) o;
-
-        return Objects.equal(duplicate, that.duplicate)
-                && Objects.equal(pkwId, that.pkwId)
-                && Objects.equal(miasta, that.miasta)
-                && Objects.equal(name, that.name)
-                && Objects.equal(powiaty, that.powiaty);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(pkwId, name, powiaty, miasta, duplicate);
-    }
 }

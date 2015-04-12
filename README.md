@@ -191,7 +191,7 @@ Plan implementacji
 * [DONE] Integracja TestNG i Mockito 
 * [DONE] Integracja mvn release 
 
-### Wersja 0.4.0
+### Wersja 0.4.0 [wydana 2015.04.12] 
 * [DONE] OPW-T-5 : Rozbicie kolumny `name` w bazie danych na `firstname` i `lastname` 
 * [DONE] OPW-A-8 Możliwość zamknięcia listy kandydatów. 
 * [DONE] OPW-A-3 Import CSV/KLK dla encji: komisja okręgowa 
@@ -200,25 +200,23 @@ Plan implementacji
 ### Wersja 0.5
 * Autoryzacja i autentyfikacja na bazie JAAS
 * [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
-* [WiP] Definicja architektury na nadchodzące wybory
 * [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
-* [WiP] Definicja masek UI dla klienta HTML5/CSS3 
+* [WiP] REST API dla klienta AngularJS 
+* [WiP] REST API dla klienta jQuery 
 
 
 ### Wersja 0.6
-* Frontend bezpośrednio w HTML / JavaScript / REST
-* Aktualne wyniki wyborów są dostępne na stronie.
-
+* [WiP] Definicja architektury na nadchodzące wybory
+* [WiP] Definicja szablonu SMS
 
 ### Wersja 0.8
 * Podbieranie protokołów przesłanych na skrzynke pocztową
 * Automatyczne parsowanie protokołów ze skrzynki pocztowej
   * import poprawnych protokołów
   * tagowanie błędnych protokołów  
-* [WiP] Definicja szablonu SMS
-* Aktualizacja Dashboard
 
 ### Wersja 1.0
 * Backend w Java EE
 * Maski administratora w JSF
-* Maski użytkowników w HTML + REST 
+* Maski użytkowników w HTML - AngularJS + REST 
+* Wyniki wyborów w HTML - jQuery + REST

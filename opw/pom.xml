@@ -160,8 +160,8 @@
         </repository>
     </repositories>
     <scm>
-        <connection>scm:git:git@github.com:adamkowalewski/OtwartaPlatformaWyborcza.git</connection>
-        <url>scm:git:git@github.com:adamkowalewski/OtwartaPlatformaWyborcza.git</url>
-        <developerConnection>scm:git:git@github.com:adamkowalewski/OtwartaPlatformaWyborcza.git</developerConnection>
+        <connection>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</connection>
+        <url>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</url>
+        <developerConnection>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</developerConnection>
     </scm>
 </project>

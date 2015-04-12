@@ -23,7 +23,6 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.view.controller.ImportController;
 import com.adamkowalewski.opw.view.controller.MsgController;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 import java.io.IOException;
@@ -35,71 +34,45 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.PatternSyntaxException;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.model.UploadedFile;
 
 /**
- * Handler for CSV import of Komisja Okregowa.
+ * Import handler for Komisja Okregowa.
  *
  * @author Adam Kowalewski
  */
 @Named
 @SessionScoped
-public class OkregowaImportHandler implements Serializable {
-    
-    private final String formatCsv = "CSV";
-    private final String formatXml = "XML";
-    
-    private UploadedFile file;
-    private List<OkregowaCsvDto> okregowaList;
-    
-    @Inject
-    ImportController importController;
-    
-    private String importFormat;
-    
-    public OkregowaImportHandler() {
-        okregowaList = new ArrayList<>();
-    }
-    
-    public void performImport() {
-        if (okregowaList != null && !okregowaList.isEmpty()) {
-            importController.performImport(okregowaList);
-        }
-    }
-    
+public class ImportOkregowaHandler extends AbstractImportHandler<OkregowaCsvDto> implements Serializable {
+
     public void upload() {
         if (file != null) {
-            okregowaList = new ArrayList<>();
+            uploadList = new ArrayList<>();
             try {
                 InputStream is = file.getInputstream();
-                okregowaList = importController.parseOkregowa(is);
+                uploadList = importController.parseOkregowa(is);
             } catch (NumberFormatException ex) {
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseNumberError"));
-                Logger.getLogger(OkregowaImportHandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ImportOkregowaHandler.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException | IndexOutOfBoundsException | PatternSyntaxException ex) {
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
-                Logger.getLogger(OkregowaImportHandler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ImportOkregowaHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));
+        MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));
     }
-    
-    public UploadedFile getFile() {
-        return file;
+
+    public void performImport() {
+        if (uploadList != null && !uploadList.isEmpty()) {
+            importController.performImportOkregowa(uploadList);
+            cleanUp();
+        }
+        MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importOkregowaSuccess"));
     }
-    
-    public void setFile(UploadedFile file) {
-        this.file = file;
+
+    @Override
+    public List<OkregowaCsvDto> getUploadList() {
+        return uploadList;
     }
-    
-    public List<OkregowaCsvDto> getOkregowaList() {
-        return okregowaList;
-    }
-    
-    public void setOkregowaList(List<OkregowaCsvDto> okregowaList) {
-        this.okregowaList = okregowaList;
-    }
-    
+
 }

@@ -54,7 +54,7 @@ public class ImportController implements Serializable {
     @Inject
     OkregowaController okregowaController;
 
-    public void performImport(List<OkregowaCsvDto> okregowaList) {
+    public void performImportOkregowa(List<OkregowaCsvDto> okregowaList) {
         List<OpwOkregowaKomisja> resultList = new ArrayList<>();
 
         for (OkregowaCsvDto csvDto : okregowaList) {

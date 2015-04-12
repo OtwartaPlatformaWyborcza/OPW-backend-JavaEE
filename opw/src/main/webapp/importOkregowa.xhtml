@@ -5,7 +5,7 @@
                 template="./WEB-INF/opwTemplate.xhtml">
 
     <ui:define name="content">
-        <h1>#{messages.okregowaImportTitle}</h1>
+        <h1>#{messages.importOkregowaTitle}</h1>
         <div class="left box box520 box_blue">
             <h2>#{messages.importFileTitle}</h2>
 
@@ -13,12 +13,12 @@
                 <h:panelGrid columns="2" cellspacing="7">
                     <h:outputText value="#{messages.importFileType}"/>
                     <h:outputText value=""/>
-                    <p:fileUpload value="#{okregowaImportHandler.file}" mode="simple"
+                    <p:fileUpload value="#{importOkregowaHandler.file}" mode="simple"
                                   multiple="false" />
 
                     <p:commandLink id="btnUpload" styleClass="btn"
                                    value="#{messages.upload}" ajax="false"  
-                                   actionListener="#{okregowaImportHandler.upload()}"/>  
+                                   actionListener="#{importOkregowaHandler.upload()}"/>  
 
                 </h:panelGrid>
 
@@ -32,10 +32,10 @@
         </div>
         <div class="clear"></div>
 
-        <ui:fragment rendered="#{not empty okregowaImportHandler.okregowaList}">
+        <ui:fragment rendered="#{not empty importOkregowaHandler.uploadList}">
             <p:dataTable id="tblOkrImp" rowIndexVar="rowIndex" resizableColumns="true"
-                         rendered="#{not empty okregowaImportHandler.okregowaList}"
-                         value="#{okregowaImportHandler.okregowaList}" var="i" >
+                         rendered="#{not empty importOkregowaHandler.uploadList}"
+                         value="#{importOkregowaHandler.uploadList}" var="i" tableStyle="width:auto" >
                 <p:column headerText="#">
                     #{rowIndex+1}
                 </p:column>
@@ -50,11 +50,11 @@
                     <h:outputText value="#{messages.entityDuplicate}" rendered="#{i.duplicate}"/>
                 </p:column>
             </p:dataTable>
-            
+
             <h:form id="frmImpOkr">
                 <h:commandLink id="btnImport" styleClass="btn"
                                value="#{messages.importSubmit}"
-                               action="#{okregowaImportHandler.performImport()}"/>
+                               action="#{importOkregowaHandler.performImport()}"/>
             </h:form> 
 
         </ui:fragment>

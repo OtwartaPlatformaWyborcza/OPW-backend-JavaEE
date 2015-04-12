@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class UserCsvDto {
 
-    private String firstname, lastname, email;
+    private String firstname, lastname, email, type;
 
     private List<OpwObwodowaKomisja> obwodowaList;
     private boolean duplicate;
@@ -43,10 +43,11 @@ public class UserCsvDto {
         obwodowaList = new ArrayList<>();
     }
 
-    public UserCsvDto(String firstname, String lastname, String email, List<OpwObwodowaKomisja> obwodowaList, boolean duplicate) {
+    public UserCsvDto(String firstname, String lastname, String email, String type, List<OpwObwodowaKomisja> obwodowaList, boolean duplicate) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.type = type;
         this.obwodowaList = obwodowaList;
         this.duplicate = duplicate;
     }
@@ -89,6 +90,14 @@ public class UserCsvDto {
 
     public void setDuplicate(boolean duplicate) {
         this.duplicate = duplicate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

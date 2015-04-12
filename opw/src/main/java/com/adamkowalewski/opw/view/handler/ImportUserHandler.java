@@ -23,25 +23,53 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.view.controller.ImportController;
-import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
+import com.adamkowalewski.opw.view.controller.MsgController;
+import com.adamkowalewski.opw.view.dto.UserCsvDto;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
-import org.primefaces.model.UploadedFile;
 
 /**
+ * Import handler for user accounts.
  *
  * @author Adam Kowalewski
  */
 @Named
 @SessionScoped
-public class UserImportHandler implements Serializable {
-private UploadedFile file;
-private List<OkregowaCsvDto> userList;
+public class ImportUserHandler extends AbstractImportHandler<UserCsvDto> implements Serializable {
 
-    @Inject
-    ImportController importController;   
+    public void upload() {
+        if (file != null) {
+            uploadList = new ArrayList<>();
+
+            InputStream is;
+            try {
+                is = file.getInputstream();
+                uploadList = importController.parseUser(is);
+            } catch (IOException ex) {
+                Logger.getLogger(ImportUserHandler.class.getName()).log(Level.SEVERE, null, ex);
+                MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
+            }
+            MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));
+        }
+    }
+
+    public void performImport() {
+        if (uploadList != null && !uploadList.isEmpty()) {
+            importController.performImportUser(uploadList);
+            cleanUp();
+        }
+        MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importUserSuccess"));
+    }
+
+    @Override
+    public List<UserCsvDto> getUploadList() {
+        return uploadList;
+    }
 }

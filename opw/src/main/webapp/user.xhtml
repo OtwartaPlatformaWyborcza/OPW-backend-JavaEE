@@ -10,7 +10,11 @@
 
         <div class="left box box_blue">
             <div class="left"></div>
-            <div class="right"><h:link outcome="/userCreate" value="#{messages.userCreateTitle}"/></div>
+            <div class="right">
+                <h:link outcome="/userCreate" value="#{messages.userCreateTitle}"/>
+                <h:outputText value=" | "/>
+                <h:link outcome="/importUser" value="#{messages.importFile}"/>
+            </div>
             <div class="clear"></div>
             <br/>
 
@@ -33,11 +37,11 @@
                         <h:outputText value="#{i.email}"/>
                     </p:column>
                     <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}">
-                        
+
                         <h:outputText value="#{messages.active}" rendered="#{i.active}"/>
                         <h:outputText value="#{messages.inactive}" rendered="#{not i.active}"/>
                     </p:column>
-                    
+
                     <p:column headerText="#{messages.action}">
                         <h:commandLink id="btnView" value="#{messages.display}"
                                        action="#{userHandler.prepareView(i)}"/>

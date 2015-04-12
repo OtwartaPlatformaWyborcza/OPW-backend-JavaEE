@@ -23,14 +23,13 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -38,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
+
+import com.adamkowalewski.opw.view.dto.UserCsvDto;
 import static com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader.okregowaCsvDtoReader;
 
 /**
@@ -83,7 +84,30 @@ public class ImportController implements Serializable {
         List<OkregowaCsvDto> result = okregowaCsvDtoReader().readAllFrom(content);
 
         // TODO check duplicates
-        
+        return result;
+    }
+
+    /**
+     * TODO OPW-A-6
+     *
+     * @MOCK
+     * @param userList
+     */
+    public void performImportUser(List<UserCsvDto> userList) {
+        System.out.println("MOCK!");
+    }
+
+    /**
+     * TODO OPW-A-6
+     *
+     * @MOCK!
+     * @param content
+     * @return
+     */
+    public List<UserCsvDto> parseUser(InputStream content) {
+        List<UserCsvDto> result = new ArrayList<>();
+        result.add(new UserCsvDto("Marek", "Saganowski", "ms@openpkw.pl", "O", new ArrayList<OpwObwodowaKomisja>(), false));
+        result.add(new UserCsvDto("Robert", "Saganowski", "rs@openpkw.pl", "O", new ArrayList<OpwObwodowaKomisja>(), false));
         return result;
     }
 }

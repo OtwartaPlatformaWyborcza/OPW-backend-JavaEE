@@ -5,47 +5,68 @@
                 template="./WEB-INF/opwTemplate.xhtml">
 
     <ui:define name="content">
-        <h1>#{messages.userTitle}</h1>
-        #{userHandler.prepareList()}
 
-        <div class="left box box_blue">
-            <div class="left"></div>
-            <div class="right"><h:link outcome="/userCreate" value="#{messages.userCreateTitle}"/></div>
-            <div class="clear"></div>
-            <br/>
+        <h1>#{messages.importUserTitle}</h1>
+        <div class="left box box520 box_blue">
+            <h2>#{messages.importFileTitle}</h2>
 
-            <h:form id="frmList">
-                <p:dataTable id="tblKandydat" emptyMessage="#{messages.userListEmpty}" 
-                             value="#{userHandler.userList}" var="i" 
-                             sortBy="#{i.lastname}">
+            <h:form id="frmImpConf" enctype="multipart/form-data"   >
+                <h:panelGrid columns="2" cellspacing="7">
+                    <h:outputText value="#{messages.importFileType}"/>
+                    <h:outputText value=""/>
+                    <p:fileUpload value="#{importUserHandler.file}" mode="simple"
+                                  multiple="false" />
 
-                    <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}" >
-                        <h:outputText value="#{i.firstname}"/>
-                    </p:column>
-
-                    <p:column headerText="#{messages.lastname}" sortBy="#{i.lastname}">
-                        <h:outputText value="#{i.lastname}"/>
-                    </p:column>
-                    <p:column headerText="#{messages.userType}" sortBy="#{i.type}">
-                        <h:outputText value="#{i.type}"/>
-                    </p:column>
-                    <p:column headerText="#{messages.email}" sortBy="#{i.email}">
-                        <h:outputText value="#{i.email}"/>
-                    </p:column>
-                    <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}">
-                        
-                        <h:outputText value="#{messages.active}" rendered="#{i.active}"/>
-                        <h:outputText value="#{messages.inactive}" rendered="#{not i.active}"/>
-                    </p:column>
-                    
-                    <p:column headerText="#{messages.action}">
-                        <h:commandLink id="btnView" value="#{messages.display}"
-                                       action="#{userHandler.prepareView(i)}"/>
-                    </p:column>
-
-                </p:dataTable>
+                    <p:commandLink id="btnUpload" styleClass="btn"
+                                   value="#{messages.upload}" ajax="false"  
+                                   actionListener="#{importUserHandler.upload()}"/>  
+                </h:panelGrid>
             </h:form>
         </div>
+
+        <div class="right box box520 box_orange_dark">
+            <h2>#{messages.importFileStatusTitle}</h2>
+
+        </div>
+        <div class="clear"></div>
+
+        <ui:fragment rendered="#{not empty importUserHandler.uploadList}">
+            <p:dataTable id="tblOkrImp" rowIndexVar="rowIndex" resizableColumns="true"
+                         rendered="#{not empty importUserHandler.uploadList}"
+                         value="#{importUserHandler.uploadList}" var="i" >
+                <p:column headerText="#">
+                    #{rowIndex+1}
+                </p:column>
+                <p:column headerText="#{messages.firstname}">
+                    <h:outputText value="#{i.firstname}"/>
+                </p:column>
+                <p:column headerText="#{messages.lastname}">
+                    <h:outputText value="#{i.lastname}"/>
+                </p:column>
+                <p:column headerText="#{messages.email}">
+                    <h:outputText value="#{i.email}"/>
+                </p:column>
+                <p:column headerText="#{messages.userType}">
+                    <h:outputText value="#{i.type}"/>
+                </p:column>
+                <p:column headerText="#{messages.userObwodowaCount}">
+                    <h:outputText value="TODO"/>
+                </p:column>
+
+                <p:column headerText="#{messages.entityStatus}">
+                    <h:outputText value="#{messages.entityNew}" rendered="#{not i.duplicate}"/>
+                    <h:outputText value="#{messages.entityDuplicate}" rendered="#{i.duplicate}"/>
+                </p:column>
+            </p:dataTable>
+
+            <h:form id="frmImpOkr">
+                <h:commandLink id="btnImport" styleClass="btn"
+                               value="#{messages.importSubmit}"
+                               action="#{importUserHandler.performImport()}"/>
+            </h:form> 
+
+        </ui:fragment>
+
     </ui:define>
 
 </ui:composition>

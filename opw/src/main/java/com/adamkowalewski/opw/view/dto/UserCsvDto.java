@@ -23,7 +23,6 @@
  */
 package com.adamkowalewski.opw.view.dto;
 
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,14 +35,14 @@ public class UserCsvDto {
 
     private String firstname, lastname, email, type;
 
-    private List<OpwObwodowaKomisja> obwodowaList;
+    private List<String> obwodowaList;
     private boolean duplicate;
 
     public UserCsvDto() {
         obwodowaList = new ArrayList<>();
     }
 
-    public UserCsvDto(String firstname, String lastname, String email, String type, List<OpwObwodowaKomisja> obwodowaList, boolean duplicate) {
+    public UserCsvDto(String firstname, String lastname, String email, String type, List<String> obwodowaList, boolean duplicate) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -76,11 +75,11 @@ public class UserCsvDto {
         this.email = email;
     }
 
-    public List<OpwObwodowaKomisja> getObwodowaList() {
+    public List<String> getObwodowaList() {
         return obwodowaList;
     }
 
-    public void setObwodowaList(List<OpwObwodowaKomisja> obwodowaList) {
+    public void setObwodowaList(List<String> obwodowaList) {
         this.obwodowaList = obwodowaList;
     }
 

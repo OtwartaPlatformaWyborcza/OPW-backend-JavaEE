@@ -23,7 +23,6 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 
@@ -107,8 +106,8 @@ public class ImportController implements Serializable {
      */
     public List<UserCsvDto> parseUser(InputStream content) {
         List<UserCsvDto> result = new ArrayList<>();
-        result.add(new UserCsvDto("Marek", "Saganowski", "ms@openpkw.pl", "O", new ArrayList<OpwObwodowaKomisja>(), false));
-        result.add(new UserCsvDto("Robert", "Saganowski", "rs@openpkw.pl", "O", new ArrayList<OpwObwodowaKomisja>(), false));
+        result.add(new UserCsvDto("Marek", "Saganowski", "ms@openpkw.pl", "O", new ArrayList<String>(), false));
+        result.add(new UserCsvDto("Robert", "Saganowski", "rs@openpkw.pl", "O", new ArrayList<String>(), false));
         return result;
     }
 

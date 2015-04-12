@@ -192,19 +192,17 @@ Plan implementacji
 * [DONE] Integracja mvn release 
 
 ### Wersja 0.4.0
-* OPW-A-6 : import kont użytkowników z pliku CSV
-* [WiP] Definicja masek UI dla klienta HTML5/CSS3 
 * [DONE] OPW-T-5 : Rozbicie kolumny `name` w bazie danych na `firstname` i `lastname` 
 * [DONE] OPW-A-8 Możliwość zamknięcia listy kandydatów. 
-* OPW-A-2 Import CSV/KLK dla encji: komisja obwodowa, 
 * [DONE] OPW-A-3 Import CSV/KLK dla encji: komisja okręgowa 
-
+* [DONE] OPW-T-5 : Definicja struktury plików CSV Komisji Obwodowych
 
 ### Wersja 0.5
 * Autoryzacja i autentyfikacja na bazie JAAS
-* OPW-T-5 : Definicja struktury plików CSV Komisji Obwodowych
+* [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
 * [WiP] Definicja architektury na nadchodzące wybory
-
+* [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
+* [WiP] Definicja masek UI dla klienta HTML5/CSS3 
 
 
 ### Wersja 0.6

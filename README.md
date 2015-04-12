@@ -7,8 +7,8 @@ Sortowanie alfabetyczne po imieniu.
 | Członek  | Rola  |
 | ------------- | ------------- |
 | AdamK | Architektura, Java  |
+| PawełP | Architektura, Java |
 | PrzemekJ | Analiza |
-| PrzemekP | Architektura, Java |
 | RafałR | Analiza i Organizacja |
 | RobertP | Analiza |
 

@@ -24,9 +24,11 @@
 package com.adamkowalewski.opw.view.handler;
 
 /**
+ * Provide common methods and attributes for all CRUD handlers.
  *
+ * @param <T> CSV DTO class to be used.
  * @author Adam Kowalewski
- * @param <T>
+ * @version 2015.04.12
  */
 public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
@@ -56,7 +58,7 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
         viewMode = false;
         return VIEW_ID_EDIT;
     }
-        
+
     @Override
     public void prepareEdit() {
         viewMode = false;

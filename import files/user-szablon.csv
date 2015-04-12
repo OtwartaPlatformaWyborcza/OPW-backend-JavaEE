@@ -1,0 +1,4 @@
+Imie [text 64];Nazwisko [text 64];Email [text 64];typ [text 64];komisje obwodowe [lista PKW ID kody oddzielone , ]
+Jakub;Arak;jk@openpkw.pl;O;146513-577,146513-578,146513-579,146513-580
+Marek;Saganowski;ms@openpkw.pl;O;146513-510, 146513-511
+Michał;Kucharczyk;mk@openpkw.pl;M;146513-100, 146513-121, 146513-144

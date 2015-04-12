@@ -46,11 +46,11 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 * IDE z obsługą Maven 3
 * Kontener JEE w profilu **full** (zależność JavaMail) (preferuje i polecam GlassFish 4)
 * Wymagane JNDI resources 
-  * GlassFish pozwala na import definicji z pliku XML setup/glassfish-resources.xml 
+  * GlassFish pozwala na import definicji z pliku XML `setup/glassfish-resources.xml`
   * `jdbc/opw` dla bazy danych (plik XML - pełna definicja)
   * `mail/opw` dla JavaMail (plik XML - brakuje loginów, haseł jak i adresów)
 * MySQL 5 na localhost (w pliku .mwb jest ustawiona min. kompatybilność na 5.5) 
-  * url, port, login i hasło są w pliku persistance.xml
+  * url, port, login i hasło są w pliku `persistance.xml`
 * MySQL Workbench
   * baza danych jest definiowana jako diagram ERM
   * synchronizacja z serwerem poprzez opcje Forward Engineer (CTRL+G)

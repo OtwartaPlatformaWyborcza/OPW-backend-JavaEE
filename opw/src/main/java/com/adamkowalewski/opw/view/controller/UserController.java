@@ -53,6 +53,8 @@ public class UserController implements Serializable {
 
     @Inject
     private MailController mailController;
+    @Inject
+    private ConfigController configController;
 
     public UserController() {
     }
@@ -67,12 +69,14 @@ public class UserController implements Serializable {
      *
      * @param user instance of user.
      * @author Adam Kowalewski
-     * @version 2015.03.29
+     * @version 2015.04.13
      */
     public void create(OpwUser user) {
         String passwordPlain = generatePassword();
+        String userSalt = generatePassword(8);
+        user.setSalt(userSalt);
         mailController.sendMailWelcome(user, passwordPlain);
-        user.setPassword(encryptSHA(passwordPlain));
+        user.setPassword(generatePasswordSalted(configController.getApplicationSalt(), userSalt, passwordPlain));
         bean.create(user);
     }
 

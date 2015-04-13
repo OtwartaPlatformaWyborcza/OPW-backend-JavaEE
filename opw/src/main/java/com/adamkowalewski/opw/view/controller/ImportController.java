@@ -24,7 +24,9 @@
 package com.adamkowalewski.opw.view.controller;
 
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import com.adamkowalewski.opw.view.dto.ObwodowaCsvDto;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
+import com.adamkowalewski.opw.view.dto.UserCsvDto;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -36,10 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
-import com.adamkowalewski.opw.view.dto.ObwodowaCsvDto;
-
-import com.adamkowalewski.opw.view.dto.UserCsvDto;
 import static com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader.okregowaCsvDtoReader;
+import static com.adamkowalewski.opw.view.controller.csv.UserCsvDtoReader.userCsvDtoReader;
 
 /**
  * Provides reusable logic for file import.
@@ -80,11 +80,8 @@ public class ImportController implements Serializable {
      */
     public List<OkregowaCsvDto> parseOkregowa(InputStream content)
             throws IOException, IndexOutOfBoundsException, NumberFormatException, PatternSyntaxException {
-
-        List<OkregowaCsvDto> result = okregowaCsvDtoReader().readAllFrom(content);
-
         // TODO check duplicates
-        return result;
+        return okregowaCsvDtoReader().readAllFrom(content);
     }
 
     /**
@@ -104,11 +101,8 @@ public class ImportController implements Serializable {
      * @param content
      * @return
      */
-    public List<UserCsvDto> parseUser(InputStream content) {
-        List<UserCsvDto> result = new ArrayList<>();
-        result.add(new UserCsvDto("Marek", "Saganowski", "ms@openpkw.pl", "O", new ArrayList<String>(), false));
-        result.add(new UserCsvDto("Robert", "Saganowski", "rs@openpkw.pl", "O", new ArrayList<String>(), false));
-        return result;
+    public List<UserCsvDto> parseUser(InputStream content) throws IOException {
+        return userCsvDtoReader().readAllFrom(content);
     }
 
     /**

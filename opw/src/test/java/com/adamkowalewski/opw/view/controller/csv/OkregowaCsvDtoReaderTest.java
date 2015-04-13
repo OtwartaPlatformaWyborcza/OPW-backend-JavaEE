@@ -1,6 +1,5 @@
-package com.adamkowalewski.opw.view.controller;
+package com.adamkowalewski.opw.view.controller.csv;
 
-import com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 import org.testng.annotations.Test;
 
@@ -15,7 +14,7 @@ public class OkregowaCsvDtoReaderTest  {
     @Test
     public void shouldReadAllEntries() throws Exception {
         // given
-        InputStream inputStream = OkregowaCsvDtoReaderTest.class.getResourceAsStream("/komisje_okregowe_test.csv");
+        InputStream inputStream = this.getClass().getResourceAsStream("/komisje_okregowe_test.csv");
         List<OkregowaCsvDto> expectedOkregowaCsvDtos = newArrayList(
                 new OkregowaCsvDto(1,"Okręgowa Komisja Wyborcza Nr 1 we Wrocławiu", "milicki,oleśnicki,oławski,strzeliński,średzki,trzebnicki,wołowski,wrocławski", "Wrocław"),
                 new OkregowaCsvDto(2,"Okręgowa Komisja Wyborcza Nr 2 w Jeleniej Górze", "bolesławiecki,jeleniogórski,kamiennogórski,lubański,lwówecki,zgorzelecki", "Jelenia Góra"),

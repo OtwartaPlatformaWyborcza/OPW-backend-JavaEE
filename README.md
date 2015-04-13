@@ -32,12 +32,12 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 
 # Quickstart
 1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    
-  * ```default-storage-engine = InnoDB```  
-  * ```collation-server = utf8_general_ci```  
-  * ```character-set-server = utf8```  
-2. MySQL dodaj użytkownika opw zgodnie z definicją w glassfish-resources.xml
+  * `default-storage-engine = InnoDB`  
+  * `collation-server = utf8_general_ci`  
+  * `character-set-server = utf8`  
+2. MySQL dodaj użytkownika opw zgodnie z definicją w `glassfish-resources.xml`
 3. MySQL Workbench wykonaj import bazy (opcja Forward Engineer)
-4. GlassFish wykonaj import glassfish-resources.xml 
+4. GlassFish wykonaj import `glassfish-resources.xml` 
 5. mvn clean install i deploy na serwer
 
 
@@ -59,54 +59,30 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 # Proces
 
 **Przygotowanie wyborów**
+1. Administrator definiuje / importuje oficjalną listę Komisji Okręgowych  (51)
+2. Administrator definiuje / importuje oficjalną listę Kandydatów (11)
+3. Administrator definiuje / importuje oficjalną listę Komisji Obwodowych (około 27 000) 
+4. Administrator zakłada / importuje konta użytkowników (wolentariusze, mężowie zaufania, około 25 000)
+5. System automatycznie rozsyła hasła użytkowikom, wraz z linkiem do aktywacji konta, na podany adres E-Mail.  
+6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (możliwa fluktuacja użytkowników tuż przed wyborami)
 
-1. Administrator definiuje / importuje komisje obwodowe (nr komisji oraz adresy komisji)
-2. Administrator zakłada konta użytkownikom (wolentariuszom bądz/i mężom zaufania)
-3. Administrator rozsyła hasła użytkowikom 
-4. Administrator zbiera dane  użytkownika bądź/i importuje je  z XLS  (Imie, nazwisko, mail , telefon, nr komisji) 
-5. System automatycznie wysyła link do aktywacji konta, login i hasło użytkownikom na podany adres e-mail
-6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (duża fluktuacja użytkownków przed wyborami)
-7. Administrator ma możliwość weryfikacji i podglądu, który użytkownik odebrał hasła i poprawnie przeszedł procedurę testowego logowania do systemu
+**Dzień wyborczy - perspektywa użytkownika**
+1. Użytkownik loguje się na stronie OPW i wybiera z listy jedną z przypisanych mu Komisji Obwodowych. 
+2. Użytkownik widzi na okrenie dokładne informacje dotyczące wybranej Komisji Obwodowej. 
+3. Użytkownik wpisuje dane / liczby wyborcze z protokołu do aplikacji OPW. 
+4. Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych.
+5. Użytkownik wysyła dane/liczby wyborcze na serwer OPW. 
 
-**Przygotowanie wyborów ( funkcjonalnoć docelowa )**
-
-1. Administrator definiuje/ importuje koordynatorów wyborów (imie, nazwisko, telefon, mail, przypisane komisje obwodowe najczęsciej gminne bądź dzielnicowe)
-2. Administrator zakłada konta koordynatorom i łączy je z odpowiednimi komisjami i obwodami
-3. Kordynator wybórów zakłada konta operatorom i przewodniczącemu komisji - Import XLS
-4. Administrator generuje i rozsyła certyfikaty SSL/TSL koordynatorom
-5. Koordynator wyborów definiuje/importuje składy komisji lokalnych i przypisuje do nr komisji
-6. System generuje hasła dostepu dla operatorow i przewodniczących komisji, którzy proszą po zalogowaniu się o wydanie certyfikatu 
-
-
-**Dzień wyborczy**
-
-
-1.  ***System po zatwierdzeniu zgłoszenia przez Administratora udostepnia certyfikat do pobrania operatorom i przewodniczacym -  funkcja docelowa w przyszłośći***
-2.  Użytkownik loguje się na stronie OPW i automatycznie zostaje przypisany do prawidłowej komisji
-3.  Użytkownik wpisuje dane do/z protokołu (maski w paper browser)
-4.  Użytkownik ma możliwość wydrukowania protokołu (nie wypełnionego także)
-5.  Użytkownik ma możliwość zapisania/wczytania protokołu na/z zewnetrznego nośnika (CD, USB)
-6.  Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych i miekkich.
-7.  Użytkownik wysyła dane (protokół)
-8.  Użytkownik otrzymuje powiadomienie o odebraniu protokołu przez serwer np po przez mail
-9.  ***Raport błedów/ostrzeżeń dla przewodniczacych komisji - funkcja docelowa w przyszlości.***
+**Dzień wyborczy - perspektywa serwera**
+1. Liczby wyborcze spływają na serwer. 
+1. Każdy protokół jest walidowany, w przypadku identyfikacji błędu miękkiego protokół protokół zostanie otagowany. 
+1. Protokoły są zapisywane w bazie danych. 
+1. Aktualny wynik wyborów jest publikowany co 5 minut. 
 
 
-
-PERSPEKTYWA SERWERA  
-
-
-1. ***Sprawdzenie certyfikatów i uwierzytelnień operatorów i przewodniczących - funcja docelowa w przyszłości***
-2. Import Danych do serwera (protokołów)
-3. Potwierdzenie otrzymania danych dla użytkownika (np wysłanie maila)
-4. Panel administracyjny dla Administratora jakie dane z których komisji spłyneły wraz z warningami (selecty SQL + maski w paper browser ) 
-
-**Dzień wyborczy wyniki**  
-
-1.  Gość wchodzi na stronę główną www, dostaje aktualne wyniki (agregowane np. co 5 min)
-2.  Podział po kodzie Teryt, Wojewódzwo, Gmina, Komisja 
-3.  Frekwencja - wysyłanie liczby osób uprawnionych do głosowania i wydanych kart. 
-
+**Dzień wyborczy / perspektywa gościa**  
+1. Gość wchodzi na stronę główną aplikacji OPW-dashboard
+1. OPW/dashboard zapewnia dostęp do aktualnych wyników w skali kraju jak i gminy. 
 
 # Specyfikacja
 
@@ -205,10 +181,11 @@ Plan implementacji
 * [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
 * [WiP] REST API dla klienta AngularJS 
 * [WiP] REST API dla klienta jQuery 
-
+* Pełna integracja z aplikacją OPW-client
+* Pełna integracja z aplikacją OPW-dashboard
 
 ### Wersja 0.6
-* [WiP] Definicja architektury na nadchodzące wybory
+* [WiP] Definicja infrastruktury na nadchodzące wybory
 * [WiP] Definicja szablonu SMS
 
 ### Wersja 0.8

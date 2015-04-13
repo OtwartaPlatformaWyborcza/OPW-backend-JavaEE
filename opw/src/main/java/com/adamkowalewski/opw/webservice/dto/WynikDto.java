@@ -95,4 +95,14 @@ public class WynikDto {
         this.kandydatList = kandydatList;
     }
 
+    @Override
+    public String toString() {
+        return "WynikDto{" + "uprawnionych=" + uprawnionych 
+                + ", glosujacych=" + glosujacych 
+                + ", kartWarznych=" + kartWarznych 
+                + ", kartNieWarznych=" + kartNieWarznych 
+                + ", glosowWarznych=" + glosowWarznych 
+                + ", kandydatList=" + kandydatList + '}';
+    }
+
 }

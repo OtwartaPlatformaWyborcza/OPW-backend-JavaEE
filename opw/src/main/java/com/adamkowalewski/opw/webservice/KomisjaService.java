@@ -27,7 +27,7 @@ import com.adamkowalewski.opw.webservice.controller.KandydatEjb;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
 import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
-import com.adamkowalewski.opw.webservice.dto.UploadWynikDto;
+import com.adamkowalewski.opw.webservice.dto.WynikDto;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -85,8 +85,14 @@ public class KomisjaService extends AbstractService {
     @Path("/{pkwId}/protokol")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response uploadWyniki(@PathParam("pkwId") String pkwId, UploadWynikDto wynik) {
-//        UploadWynikResultDto
+    public Response uploadWyniki(
+            @NotNull @PathParam("pkwId") String pkwId, 
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug, 
+            WynikDto wynik) {
+
+        System.out.println("wynik " + wynik.toString());
         return Response.noContent().build();
     }
 

@@ -3,7 +3,7 @@ package com.adamkowalewski.opw.webservice;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
 import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
-import com.adamkowalewski.opw.webservice.dto.UploadWynikDto;
+import com.adamkowalewski.opw.webservice.dto.WynikDto;
 import com.google.gson.Gson;
 import org.mockito.Mockito;
 import org.testng.annotations.AfterMethod;
@@ -82,13 +82,13 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
     public void shouldNotUploadWyniki() throws Exception {
         // given
         String pkwId = "unknown";
-        UploadWynikDto uploadWynikDto = new UploadWynikDto();
+        WynikDto WynikDto = new WynikDto();
         Gson gson = new Gson();
-        String uploadWynikDtoJson = gson.toJson(uploadWynikDto);
+        String wynikDtoJson = gson.toJson(WynikDto);
 
         // when
         Response response = target(format("komisja/%s/protokol", pkwId))
-                .request().post(entity(uploadWynikDtoJson, APPLICATION_JSON));
+                .request().post(entity(wynikDtoJson, APPLICATION_JSON));
 
         // then
         assertEquals(response.getStatus(), NO_CONTENT_204);

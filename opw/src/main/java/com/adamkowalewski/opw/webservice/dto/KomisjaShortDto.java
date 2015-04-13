@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * DTO Represents payload for Komisja selection.
+ * DTO Represents payload for Komisja Obwodowa list selection.
  *
  * @author Adam Kowalewski
  */

@@ -12,12 +12,15 @@ import org.testng.annotations.Test;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
+import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_LOGIN;
+import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_TOKEN;
 import static com.cedarsoftware.util.DeepEquals.deepEquals;
 import static com.google.common.collect.Lists.newArrayList;
 import static java.lang.String.format;
 import static javax.ws.rs.client.Entity.entity;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.eclipse.jetty.http.HttpStatus.NO_CONTENT_204;
+import static org.eclipse.jetty.http.HttpStatus.UNAUTHORIZED_401;
 import static org.eclipse.jetty.http.HttpStatus.OK_200;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
@@ -30,10 +33,12 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         Mockito.reset(kandydatEjb);
     }
 
-    @Test(enabled = false)
+    @Test
     public void shouldLoadObwodowa() throws Exception {
         // given
         String pkwId = "1212-1";
+        String login = "admin";
+        String token = "";
         ArrayList<KandydatDto> expectedKandydatDtos = newArrayList(
                 new KandydatDto(1, "Bolek"),
                 new KandydatDto(2, "Lolek"),
@@ -54,7 +59,10 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
                 .thenReturn(expectedKandydatDtos);
 
         // when
-        Response response = target(format("komisja/%s", pkwId)).request().get();
+        Response response = target(format("komisja/%s", pkwId)).request()
+                .header(OPW_HEADER_LOGIN, login)
+                .header(OPW_HEADER_TOKEN, token)
+                .get();
         KomisjaDto actualKomisja = response.readEntity(KomisjaDto.class);
 
         // then
@@ -62,15 +70,18 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         assertTrue(deepEquals(actualKomisja, ecpectedKomisja));
     }
 
-    @Test(enabled = false)
+    @Test
     public void shouldNotLoadObwodowa() throws Exception {
         // given
         String pkwId = "unknown";
+        String login = "admin";
         when(kandydatEjb.findAllDto())
                 .thenReturn(new ArrayList<KandydatDto>(0));
 
         // when
-        Response response = target(format("komisja/%s", pkwId)).request().get();
+        Response response = target(format("komisja/%s", pkwId)).request()
+                .header(OPW_HEADER_LOGIN, login)
+                .get();
         String content = response.readEntity(String.class);
 
         // then
@@ -79,16 +90,41 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
     }
 
     @Test
+    public void shouldNotAuthorize() throws Exception {
+        // given
+        String pkwId = "unknown";
+        String login = "not-authorized";
+        String token = "";
+        when(kandydatEjb.findAllDto())
+                .thenReturn(new ArrayList<KandydatDto>(0));
+
+        // when
+        Response response = target(format("komisja/%s", pkwId)).request()
+                .header(OPW_HEADER_LOGIN, login)
+                .header(OPW_HEADER_TOKEN, token)
+                .get();
+        String content = response.readEntity(String.class);
+
+        // then
+        assertEquals(response.getStatus(), UNAUTHORIZED_401);
+        assertTrue(content.isEmpty());
+    }
+
+    @Test
     public void shouldNotUploadWyniki() throws Exception {
         // given
         String pkwId = "unknown";
+        String login = "admin";
+        String token = "";
         WynikDto WynikDto = new WynikDto();
         Gson gson = new Gson();
         String wynikDtoJson = gson.toJson(WynikDto);
 
         // when
-        Response response = target(format("komisja/%s/protokol", pkwId))
-                .request().post(entity(wynikDtoJson, APPLICATION_JSON));
+        Response response = target(format("komisja/%s/protokol", pkwId)).request()
+                .header(OPW_HEADER_LOGIN, login)
+                .header(OPW_HEADER_TOKEN, token)
+                .post(entity(wynikDtoJson, APPLICATION_JSON));
 
         // then
         assertEquals(response.getStatus(), NO_CONTENT_204);

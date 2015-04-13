@@ -40,20 +40,22 @@ import java.io.Serializable;
 public class KandydatDto implements Serializable {
 
     private int pkwId;
-    private String fullname;
+    private String firstname, lastname;
     private int glosow;
 
     public KandydatDto() {
     }
 
-    public KandydatDto(int pkwId, String fullname) {
+    public KandydatDto(int pkwId, String firstname, String lastname) {
         this.pkwId = pkwId;
-        this.fullname = fullname;
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
-    public KandydatDto(int pkwId, String fullname, int glosow) {
+    public KandydatDto(int pkwId, String firstname, String lastname, int glosow) {
         this.pkwId = pkwId;
-        this.fullname = fullname;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.glosow = glosow;
     }
 
@@ -65,14 +67,6 @@ public class KandydatDto implements Serializable {
         this.pkwId = pkwId;
     }
 
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
     public int getGlosow() {
         return glosow;
     }
@@ -81,13 +75,28 @@ public class KandydatDto implements Serializable {
         this.glosow = glosow;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     @Override
     public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("pkwId", pkwId)
-                .add("fullname", fullname)
-                .add("glosow", glosow)
-                .toString();
+        return "KandydatDto{" + "pkwId=" + pkwId
+                + ", firstname=" + firstname
+                + ", lastname=" + lastname
+                + ", glosow=" + glosow + '}';
     }
+
 }

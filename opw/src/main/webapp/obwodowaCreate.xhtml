@@ -33,7 +33,7 @@
                     <h:selectOneMenu id="okreg" styleClass="in200"
                                      value="#{obwodowaHandler.instance.opwOkregowaKomisjaId}" 
                                      required="true" >
-                        <f:selectItems value="#{okregowaHandler.okregowaList}"
+                        <f:selectItems value="#{okregowaHandler.instanceList}"
                                        var="itemRolle" itemLabel="#{itemRolle.pkwId} - #{itemRolle.name}"/>
                     </h:selectOneMenu>
 

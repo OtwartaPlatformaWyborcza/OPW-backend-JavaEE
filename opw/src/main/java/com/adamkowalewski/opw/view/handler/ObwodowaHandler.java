@@ -41,8 +41,6 @@ import javax.inject.Named;
 @SessionScoped
 public class ObwodowaHandler extends AbstractCrudHandler<OpwObwodowaKomisja> implements Serializable {
 
-    private List<OpwObwodowaKomisja> okregowaList;
-
     @Inject
     Identity identity;
 
@@ -69,7 +67,7 @@ public class ObwodowaHandler extends AbstractCrudHandler<OpwObwodowaKomisja> imp
 
     @Override
     public void prepareList() {
-        okregowaList = obwodowaController.findAll();
+        instanceList = obwodowaController.findAll();
     }
 
     @Override
@@ -77,12 +75,9 @@ public class ObwodowaHandler extends AbstractCrudHandler<OpwObwodowaKomisja> imp
         instance = new OpwObwodowaKomisja();
     }
 
-    public List<OpwObwodowaKomisja> getObwodowaList() {
-        return okregowaList;
-    }
-
-    public void setObwodowaList(List<OpwObwodowaKomisja> okregowaList) {
-        this.okregowaList = okregowaList;
+    @Override
+    public List<OpwObwodowaKomisja> getInstanceList() {
+        return instanceList;
     }
 
     @Override

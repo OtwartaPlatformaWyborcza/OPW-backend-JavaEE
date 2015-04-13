@@ -40,8 +40,6 @@ import javax.inject.Named;
 @SessionScoped
 public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements Serializable {
 
-    List<OpwKandydat> kandydatList;
-
     @Inject
     KandydatController kandydatController;
 
@@ -69,15 +67,12 @@ public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements
 
     @Override
     public void prepareList() {
-        kandydatList = kandydatController.findAll();
+        instanceList = kandydatController.findAll();
     }
 
-    public List<OpwKandydat> getKandydatList() {
-        return kandydatList;
-    }
-
-    public void setKandydatList(List<OpwKandydat> kandydatList) {
-        this.kandydatList = kandydatList;
+    @Override
+    public List<OpwKandydat> getInstanceList() {
+        return instanceList;
     }
 
     @Override

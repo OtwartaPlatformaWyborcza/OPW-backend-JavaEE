@@ -41,8 +41,6 @@ import javax.inject.Named;
 @SessionScoped
 public class UserHandler extends AbstractCrudHandler<OpwUser> implements Serializable {
 
-    private List<OpwUser> userList;
-
     @Inject
     Identity identity;
 
@@ -54,9 +52,9 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
         VIEW_ID_EDIT = "userEdit";
         VIEW_ID_CREATE = "userCreate";
     }
-    
+
     public String resetPassword() {
-        userController.resetPassword(instance);        
+        userController.resetPassword(instance);
         return VIEW_ID;
     }
 
@@ -79,7 +77,7 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
 
     @Override
     public void prepareList() {
-        userList = userController.findAll();
+        instanceList = userController.findAll();
     }
 
     @Override
@@ -87,12 +85,9 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
         instance = new OpwUser();
     }
 
-    public List<OpwUser> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<OpwUser> userList) {
-        this.userList = userList;
+    @Override
+    public List<OpwUser> getInstanceList() {
+        return instanceList;
     }
 
     @Override

@@ -20,7 +20,7 @@
 
             <h:form id="frmList">
                 <p:dataTable id="tblOkr" emptyMessage="#{messages.obwodowaListEmpty}" 
-                             value="#{obwodowaHandler.obwodowaList}" var="i" 
+                             value="#{obwodowaHandler.instanceList}" var="i" 
                              sortBy="#{i.pkwId}">
 
                     <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >

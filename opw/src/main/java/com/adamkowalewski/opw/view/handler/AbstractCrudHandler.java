@@ -23,6 +23,9 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Provide common methods and attributes for all CRUD handlers.
  *
@@ -34,10 +37,15 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
     boolean viewMode = true;
     T instance;
+    List<T> instanceList;
 
     String VIEW_ID;
     String VIEW_ID_EDIT;
     String VIEW_ID_CREATE;
+
+    public AbstractCrudHandler() {
+        instanceList = new ArrayList<>();
+    }
 
     /**
      * TODO
@@ -84,6 +92,14 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
 
     public void setInstance(T instance) {
         this.instance = instance;
+    }
+
+    public List<T> getInstanceList() {
+        return instanceList;
+    }
+
+    public void setInstanceList(List<T> instanceList) {
+        this.instanceList = instanceList;
     }
 
 }

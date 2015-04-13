@@ -20,7 +20,7 @@
 
             <h:form id="frmList">
                 <p:dataTable id="tblKandydat" emptyMessage="#{messages.userListEmpty}" 
-                             value="#{userHandler.userList}" var="i" 
+                             value="#{userHandler.instanceList}" var="i" 
                              sortBy="#{i.lastname}">
 
                     <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}" >

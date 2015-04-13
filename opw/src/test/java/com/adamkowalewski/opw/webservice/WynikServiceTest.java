@@ -8,9 +8,8 @@ import org.testng.annotations.Test;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
-import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_LOGIN;
-import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_TOKEN;
-import static com.adamkowalewski.opw.webservice.AbstractService.mockTokenId;
+import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_API_TOKEN;
+import static com.adamkowalewski.opw.webservice.AbstractService.mockAPITokenId;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.eclipse.jetty.http.HttpStatus.OK_200;
 import static org.mockito.Mockito.when;
@@ -19,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 
 public class WynikServiceTest extends BaseWynikServiceTest {
 
-    @Test(enabled = false)
+    @Test
     public void shouldFetchWynik() {
         // given
         String login = "login";
@@ -36,7 +35,7 @@ public class WynikServiceTest extends BaseWynikServiceTest {
 
         // when
         Response response = target("wynik/complete").request()                
-                .header(OPW_HEADER_TOKEN, mockTokenId)
+                .header(OPW_HEADER_API_TOKEN, mockAPITokenId)
                 .get();
         DashboardDto actualContent = response.readEntity(DashboardDto.class);
 

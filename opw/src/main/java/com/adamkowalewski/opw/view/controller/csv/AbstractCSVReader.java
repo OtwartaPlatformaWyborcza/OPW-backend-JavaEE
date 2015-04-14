@@ -19,21 +19,27 @@ public abstract class AbstractCSVReader<T> {
 
     private CSVStrategy csvStrategy;
 
+    protected abstract CSVEntryParser<T> getCsvEntryParser();
+
+    public List<T> readAllFrom(InputStream content) throws IOException {
+        return readAllUsing(getCsvEntryParser(), content);
+    }
+
     protected List<T> readAllUsing(CSVEntryParser<T> csvEntryParser, InputStream content) throws IOException {
         checkArgument(csvEntryParser != null, "Expected non-null csvEntryParser argument");
         checkArgument(content != null, "Expected non-null content argument");
         Reader reader = new InputStreamReader(content);
-        CSVReader<T> okregowaCsvReader = new CSVReaderBuilder<T>(reader)
+        CSVReader<T> csvReader = new CSVReaderBuilder<T>(reader)
                 .strategy(csvStrategy)
                 .entryParser(csvEntryParser)
                 .build();
-        return okregowaCsvReader.readAll();
+        return csvReader.readAll();
     }
 
     /**
      * @param csvStrategy {@link https://code.google.com/p/jcsv/wiki/CSVStrategy}
      */
-    protected AbstractCSVReader(CSVStrategy csvStrategy) {
+    public AbstractCSVReader(CSVStrategy csvStrategy) {
         this.csvStrategy = csvStrategy;
     }
 }

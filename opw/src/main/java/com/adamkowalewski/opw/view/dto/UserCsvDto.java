@@ -23,6 +23,9 @@
  */
 package com.adamkowalewski.opw.view.dto;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +36,24 @@ import java.util.List;
  */
 public class UserCsvDto {
 
-    private String firstname, lastname, email, type;
-
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String type;
     private List<String> obwodowaList;
+
     private boolean duplicate;
 
     public UserCsvDto() {
         obwodowaList = new ArrayList<>();
+    }
+
+    public UserCsvDto(String firstname, String lastname, String email, String type, List<String> obwodowaList) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.type = type;
+        this.obwodowaList = obwodowaList;
     }
 
     public UserCsvDto(String firstname, String lastname, String email, String type, List<String> obwodowaList, boolean duplicate) {
@@ -99,4 +113,33 @@ public class UserCsvDto {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("firstname", firstname)
+                .add("lastname", lastname)
+                .add("email", email)
+                .add("type", type)
+                .add("obwodowaList", obwodowaList)
+                .add("duplicate", duplicate)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserCsvDto that = (UserCsvDto) o;
+        return Objects.equal(duplicate, that.duplicate)
+                && Objects.equal(email, that.email)
+                && Objects.equal(firstname, that.firstname)
+                && Objects.equal(obwodowaList, that.obwodowaList)
+                && Objects.equal(type, that.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(firstname, lastname, email, type, obwodowaList, duplicate);
+    }
 }

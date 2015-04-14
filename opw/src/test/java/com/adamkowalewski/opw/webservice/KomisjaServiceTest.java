@@ -40,10 +40,10 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         String login = "admin";
         String token = "";
         ArrayList<KandydatDto> expectedKandydatDtos = newArrayList(
-                new KandydatDto(1, "Bolek"),
-                new KandydatDto(2, "Lolek"),
-                new KandydatDto(3, "Jacek"),
-                new KandydatDto(4, "Placek")
+                new KandydatDto(1, "Bolek","B"),
+                new KandydatDto(2, "Lolek","B"),
+                new KandydatDto(3, "Jacek","B"),
+                new KandydatDto(4, "Placek","B")
         );
         KomisjaDto ecpectedKomisja = new KomisjaDto(
                 pkwId,

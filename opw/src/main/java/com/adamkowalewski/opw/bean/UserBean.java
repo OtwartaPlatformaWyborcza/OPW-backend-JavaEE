@@ -24,6 +24,10 @@
 package com.adamkowalewski.opw.bean;
 
 import com.adamkowalewski.opw.entity.OpwUser;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -42,6 +46,9 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
     @PersistenceContext(unitName = PU_OPW)
     private EntityManager em;
 
+    // ToDo extract to properties 
+    private final int DEFAULT_PWD_LENGTH = 10;
+
     public UserBean() {
         super(OpwUser.class);
     }
@@ -52,10 +59,11 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
     }
 
     /**
-     * Verify if given E-Mail address is already a known login within OPW. 
+     * Verify if given E-Mail address is already a known login within OPW.
      *
-     * @param email E-Mail address used by the user as login. 
-     * @return <code>true</code> if an account exists, otherwise <code>false</code>.
+     * @param email E-Mail address used by the user as login.
+     * @return <code>true</code> if an account exists, otherwise
+     * <code>false</code>.
      * @author Adam Kowalewski
      * @version 2015.04.09
      */
@@ -97,6 +105,78 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
         Query q = em.createNamedQuery("OpwUser.findById");
         q.setParameter("id", id);
         return (OpwUser) q.getSingleResult();
+    }
+
+    /**
+     * Returns salted password.
+     *
+     * @param appSalt application level salt.
+     * @param userSalt user level salt.
+     * @param password password in plaintext.
+     * @return salted password.
+     * @author Adam Kowalewski
+     * @version 2015.03.27
+     */
+    public String saltPassword(String appSalt, String userSalt, String password) {
+        return encryptSHA(appSalt + password + userSalt);
+    }
+
+    /**
+     * Generates a random password with default length.
+     *
+     * @return String random password.
+     * @author Adam Kowalewski
+     * @version 2015.03.27
+     */
+    public String generatePassword() {
+        return getPassword(DEFAULT_PWD_LENGTH);
+    }
+
+    /**
+     * Generates a random password.
+     *
+     * @param length length for password.
+     * @return String random password.
+     * @author Adam Kowalewski
+     * @version 2015.03.27
+     */
+    public String generatePassword(int length) {
+        return getPassword(length);
+    }
+
+    private String getPassword(int length) {
+        SecureRandom random = new SecureRandom();
+        String result = new BigInteger(130, random).toString(32);;
+        result = result.substring(0, Math.min(result.length(), length));
+        return result;
+    }
+
+    /**
+     * Generates a SHA-256 hash from the given String.
+     *
+     * @param value plain text password to be encrypted.
+     * @return String hashed text.
+     * @author Adam Kowalewski
+     * @version 2015.03.27
+     */
+    public String encryptSHA(String value) {
+        StringBuilder encrypted = new StringBuilder();
+        String algorithm = "SHA-256";
+        byte[] passwordArray = value.getBytes();
+
+        try {
+            MessageDigest md = MessageDigest.getInstance(algorithm);
+            md.reset();
+            md.update(passwordArray);
+            byte[] encryptedArray = md.digest();
+
+            for (int i = 0; i < encryptedArray.length; i++) {
+                encrypted.append(Integer.toHexString(0xFF & encryptedArray[i]));
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
+        return encrypted.toString();
     }
 
 }

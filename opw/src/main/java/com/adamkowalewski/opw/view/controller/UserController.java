@@ -26,10 +26,6 @@ package com.adamkowalewski.opw.view.controller;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.bean.UserBean;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -44,9 +40,6 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class UserController implements Serializable {
-
-    // ToDo extract to properties 
-    private final int DEFAULT_PWD_LENGTH = 10;
 
     @EJB
     private UserBean bean;
@@ -69,14 +62,14 @@ public class UserController implements Serializable {
      *
      * @param user instance of user.
      * @author Adam Kowalewski
-     * @version 2015.04.13
+     * @version 2015.04.14
      */
     public void create(OpwUser user) {
-        String passwordPlain = generatePassword();
-        String userSalt = generatePassword(8);
+        String passwordPlain = bean.generatePassword();
+        String userSalt = bean.generatePassword(8);
         user.setSalt(userSalt);
         mailController.sendMailWelcome(user, passwordPlain);
-        user.setPassword(generatePasswordSalted(configController.getApplicationSalt(), userSalt, passwordPlain));
+        user.setPassword(bean.saltPassword(configController.getApplicationSalt(), userSalt, passwordPlain));
         bean.create(user);
     }
 
@@ -90,82 +83,10 @@ public class UserController implements Serializable {
      * @version 2015.03.29
      */
     public void resetPassword(OpwUser user) {
-        String passwordPlain = generatePassword();
+        String passwordPlain = bean.generatePassword();
         mailController.sendMailPasswordNew(user, passwordPlain);
-        user.setPassword(encryptSHA(passwordPlain));
+        user.setPassword(bean.saltPassword(configController.getApplicationSalt(), user.getSalt(), passwordPlain));
         bean.edit(user);
-    }
-
-    /**
-     * Generates salted password.
-     *
-     * @param appSalt application level salt.
-     * @param userSalt user level salt.
-     * @param password password in plaintext.
-     * @return salted password.
-     * @author Adam Kowalewski
-     * @version 2015.03.27
-     */
-    public String generatePasswordSalted(String appSalt, String userSalt, String password) {
-        return encryptSHA(appSalt + password + userSalt);
-    }
-
-    /**
-     * Generates a random password with default length.
-     *
-     * @return String random password.
-     * @author Adam Kowalewski
-     * @version 2015.03.27
-     */
-    public String generatePassword() {
-        return getPassword(DEFAULT_PWD_LENGTH);
-    }
-
-    /**
-     * Generates a random password.
-     *
-     * @param length length for password.
-     * @return String random password.
-     * @author Adam Kowalewski
-     * @version 2015.03.27
-     */
-    public String generatePassword(int length) {
-        return getPassword(length);
-    }
-
-    private String getPassword(int length) {
-        SecureRandom random = new SecureRandom();
-        String result = new BigInteger(130, random).toString(32);;
-        result = result.substring(0, Math.min(result.length(), length));
-        return result;
-    }
-
-    /**
-     * Generates a SHA-256 hash from the given String.
-     *
-     * @param value plain text password to be encrypted.
-     * @return String hashed text.
-     * @author Adam Kowalewski
-     * @version 2015.03.27
-     */
-    public String encryptSHA(String value) {
-        StringBuilder encrypted = new StringBuilder();
-        String algorithm = "SHA-256";
-        byte[] passwordArray = value.getBytes();
-
-        try {
-            MessageDigest md = MessageDigest.getInstance(algorithm);
-            md.reset();
-            md.update(passwordArray);
-            byte[] encryptedArray = md.digest();
-
-            for (int i = 0; i < encryptedArray.length; i++) {
-                encrypted.append(Integer.toHexString(0xFF & encryptedArray[i]));
-            }
-        } catch (NoSuchAlgorithmException ex) {
-            return null;
-        }
-        return encrypted.toString();
     }
 
     public void delete(OpwUser user) {

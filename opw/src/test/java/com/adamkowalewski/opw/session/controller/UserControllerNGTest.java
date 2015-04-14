@@ -100,8 +100,8 @@ public class UserControllerNGTest {
         String password = "";
         UserController instance = new UserController();
         String expResult = "";
-        String result = instance.generatePasswordSalted(appSalt, userSalt, password);
-        assertEquals(result, expResult);
+//        String result = instance.generatePasswordSalted(appSalt, userSalt, password);
+//        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -114,8 +114,8 @@ public class UserControllerNGTest {
         System.out.println("generatePassword");
         UserController instance = new UserController();
         String expResult = "";
-        String result = instance.generatePassword();
-        assertEquals(result, expResult);
+//        String result = instance.generatePassword();
+//        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -129,8 +129,8 @@ public class UserControllerNGTest {
         int length = 0;
         UserController instance = new UserController();
         String expResult = "";
-        String result = instance.generatePassword(length);
-        assertEquals(result, expResult);
+//        String result = instance.generatePassword(length);
+//        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -144,8 +144,8 @@ public class UserControllerNGTest {
         String value = "";
         UserController instance = new UserController();
         String expResult = "";
-        String result = instance.encryptSHA(value);
-        assertEquals(result, expResult);
+//        String result = instance.encryptSHA(value);
+//        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

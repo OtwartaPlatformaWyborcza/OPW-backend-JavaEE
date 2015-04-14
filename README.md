@@ -176,7 +176,7 @@ Plan implementacji
 * [DONE] Wykonanie mockup serwisów REST dla klientów
 
 ### Wersja 0.5
-* Autoryzacja i autentyfikacja na bazie JAAS
+* OPW-T-6 Autoryzacja i autentyfikacja na bazie JAAS
 * [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
 * [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
 * [WiP] REST API dla klienta AngularJS 

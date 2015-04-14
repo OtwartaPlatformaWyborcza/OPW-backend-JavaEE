@@ -27,8 +27,8 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 
 ### Gość
 
- * OPW-G-1 : Jako gość jestem w stanie wejść na stronę www i wyświetlić wyniki z danej komisji wyborczej / gminy / powiatu / okręgu / województwa / Polski.
- *  OPW-G-2 : Jako gość mam limitowany dostęp do serwera i możliwość wyswietlania wyników aby nie przeciążyć serwera  
+* OPW-G-1 : Jako gość jestem w stanie wejść na stronę www i wyświetlić wyniki z danej komisji wyborczej / gminy / powiatu / okręgu / województwa / Polski.
+* OPW-G-2 : Jako gość mam limitowany dostęp do serwera i możliwość wyswietlania wyników aby nie przeciążyć serwera  
 
 ### Technologia
 * OPW-T-1 : Wykonanie dokumentacji REST API w swagger.io 
@@ -36,8 +36,8 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-T-3 : Migracja z EclipseLink na Hibernate +envers 
 * OPW-T-4 : Generowanie E-Mail poprzez szablony FreeMarker
 * OPW-T-5 : Rozbicie kolumny `name` w bazie danych na `firstname` i `lastname` 
-* OPW-T-
-* OPW-T-
+* OPW-T-6 : Autoryzacja i autentykacja na bazie JAAS
+* OPW-T-7 : Logowanie dla REST i JSF
 * OPW-T-
 
 ## Wariant rozszeżony

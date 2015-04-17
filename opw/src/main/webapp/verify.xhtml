@@ -5,14 +5,25 @@
                 template="./WEB-INF/opwTemplate.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+
+    <f:metadata>
+        <f:viewParam name="email" value="#{verifyHandler.email}" />            
+        <f:viewParam name="code" value="#{verifyHandler.code}" />            
+    </f:metadata>
+
     <ui:define name="content">
-        <h1>user verify</h1>
-        <f:view>
-            <f:metadata>
-                <f:viewParam name="email" value="#{verifyHandler.email}" />            
-                <f:viewAction  action="#{verifyHandler.verifyAccount()}" />
-            </f:metadata>
-        </f:view>
+                
+        #{verifyHandler.verifyAccount()}
+        <ui:fragment rendered="#{verifyHandler.actResult}">
+            <h1>ToDo activ ok</h1>
+        </ui:fragment>
+        
+        <ui:fragment rendered="#{not verifyHandler.actResult}">
+            <h1>ToDo activ failed</h1>
+        </ui:fragment>
+        
+        <p>Mail: #{verifyHandler.email}</p>
+        <p>code: #{verifyHandler.code}</p>
 
     </ui:define>
 

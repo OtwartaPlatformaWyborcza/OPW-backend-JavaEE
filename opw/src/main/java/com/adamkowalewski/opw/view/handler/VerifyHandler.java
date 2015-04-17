@@ -23,33 +23,35 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.view.controller.UserController;
+import com.adamkowalewski.opw.view.controller.MailController;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
- *
+ * Handler responsible for account activation.
+ * 
  * @author Adam Kowalewski
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class VerifyHandler implements Serializable {
-    
+
     private String email;
     private String code;
-    
-    @Inject 
-    private UserController userController;
 
-    public VerifyHandler() {
-    }    
-    
-    public String verifyAccount(){
-        System.out.println("mail " + email);
-        System.out.println("code " + code);
-        return "index";
+    private boolean actResult;
+
+    /**
+     * WiP
+     */
+    public void verifyAccount() {
+        Logger.getLogger(VerifyHandler.class.getName()).log(Level.INFO, "email {0}", email);
+        Logger.getLogger(VerifyHandler.class.getName()).log(Level.INFO, "code {0}", code);
+        
+        actResult = true;
     }
 
     public String getEmail() {
@@ -66,6 +68,14 @@ public class VerifyHandler implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public boolean isActResult() {
+        return actResult;
+    }
+
+    public void setActResult(boolean actResult) {
+        this.actResult = actResult;
     }
 
 }

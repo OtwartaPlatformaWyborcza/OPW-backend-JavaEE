@@ -68,6 +68,8 @@ public class UserController implements Serializable {
         String passwordPlain = bean.generatePassword();
         String userSalt = bean.generatePassword(8);
         user.setSalt(userSalt);
+        user.setToken(bean.generateToken());
+        user.setActive(false);
         mailController.sendMailWelcome(user, passwordPlain);
         user.setPassword(bean.saltPassword(configController.getApplicationSalt(), userSalt, passwordPlain));
         bean.create(user);

@@ -23,7 +23,6 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.view.controller.MailController;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +40,7 @@ public class VerifyHandler implements Serializable {
 
     private String email;
     private String code;
-
+    
     private boolean actResult;
 
     /**

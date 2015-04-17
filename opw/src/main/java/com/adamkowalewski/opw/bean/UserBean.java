@@ -122,6 +122,17 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
     }
 
     /**
+     * Generates random token for account activation.
+     *
+     * @return random token 32 chars.
+     * @author Adam Kowalewski
+     * @version 2015.04.17
+     */
+    public String generateToken() {
+        return encryptSHA(generatePassword()).substring(0, 31);
+    }
+
+    /**
      * Generates a random password with default length.
      *
      * @return String random password.

@@ -181,7 +181,7 @@ Plan implementacji
 * [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
 * [WiP] REST API dla klienta AngularJS 
 * [WiP] REST API dla klienta jQuery 
-* [WiP] [OPW-U-6]() aktywacja konta  
+* [WiP] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta  
 * Pełna integracja z aplikacją OPW-client
 * Pełna integracja z aplikacją OPW-dashboard
 

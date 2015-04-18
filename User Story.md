@@ -23,6 +23,7 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-U-3 : Jako użytkownik widzę po wybraniu komisji podstawowe informacje: listę kandydatów, listę protokołów jak i formularz liczb wyborczych
 * OPW-U-4 : Bezpośrednia walidacja błędów twardych w przeglądarce
 * OPW-U-5 : Upload liczb wyborczych do serwera OPW
+* OPW-U-6 : Aktywacja konta
 
 
 ### Gość

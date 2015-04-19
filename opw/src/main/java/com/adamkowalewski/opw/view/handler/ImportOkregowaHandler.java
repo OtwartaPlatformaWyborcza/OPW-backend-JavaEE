@@ -30,11 +30,11 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.PatternSyntaxException;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Import handler for Komisja Okregowa.
@@ -45,6 +45,8 @@ import javax.inject.Named;
 @SessionScoped
 public class ImportOkregowaHandler extends AbstractImportHandler<OkregowaCsvDto> implements Serializable {
 
+    private static final Logger log = LoggerFactory.getLogger(ImportOkregowaHandler.class);
+
     public void upload() {
         if (file != null) {
             uploadList = new ArrayList<>();
@@ -53,10 +55,10 @@ public class ImportOkregowaHandler extends AbstractImportHandler<OkregowaCsvDto>
                 uploadList = importController.parseOkregowa(is);
             } catch (NumberFormatException ex) {
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseNumberError"));
-                Logger.getLogger(ImportOkregowaHandler.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(null, ex);
             } catch (IOException | IndexOutOfBoundsException | PatternSyntaxException ex) {
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
-                Logger.getLogger(ImportOkregowaHandler.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(null, ex);
             }
         }
         MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));

@@ -24,32 +24,35 @@
 package com.adamkowalewski.opw.view.handler;
 
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Handler responsible for account activation.
- * 
+ *
  * @author Adam Kowalewski
  */
 @Named
 @RequestScoped
 public class VerifyHandler implements Serializable {
 
+    private static final Logger log = LoggerFactory.getLogger(VerifyHandler.class);
+
     private String email;
     private String code;
-    
+
     private boolean actResult;
 
     /**
      * WiP
      */
     public void verifyAccount() {
-        Logger.getLogger(VerifyHandler.class.getName()).log(Level.INFO, "email {0}", email);
-        Logger.getLogger(VerifyHandler.class.getName()).log(Level.INFO, "code {0}", code);
-        
+        log.info("email {}." + email);
+        log.info("code {}." + code);
+
         actResult = true;
     }
 

@@ -34,8 +34,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -47,6 +45,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides reusable logic related to E-Mail in- and outbound.
@@ -55,6 +55,8 @@ import javax.mail.internet.MimeMessage;
  */
 @Stateless
 public class MailController {
+
+    private static final Logger log = LoggerFactory.getLogger(MailController.class);
 
     @Resource(name = "mail/opw")
     private Session mailSession;
@@ -72,10 +74,10 @@ public class MailController {
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdNewMailSend") + " [" + user.getEmail() + "]");
             return true;
         } catch (IOException | TemplateException | MessagingException ex) {
-            Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
+            log.error(null, ex);
         } catch (OpwException ex) {
             MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
-            Logger.getLogger(MailController.class.getName()).log(Level.WARNING, null, ex.getMessage());
+            log.error(null, ex);
         }
         return false;
     }
@@ -90,10 +92,10 @@ public class MailController {
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdResetMailSend") + " [" + user.getEmail() + "]");
             return true;
         } catch (IOException | TemplateException | MessagingException ex) {
-            Logger.getLogger(MailController.class.getName()).log(Level.SEVERE, null, ex);
+            log.error(null, ex);
         } catch (OpwException ex) {
             MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
-            Logger.getLogger(MailController.class.getName()).log(Level.WARNING, null, ex.getMessage());
+            log.error(null, ex);
         }
         return false;
     }

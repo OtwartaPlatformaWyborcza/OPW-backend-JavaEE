@@ -15,6 +15,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <scm>
+        <connection>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</connection>
+        <url>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</url>
+        <developerConnection>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</developerConnection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.primefaces</groupId>
@@ -43,12 +49,22 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>2.17</version>
-        </dependency>
+        </dependency>        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.4</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -60,6 +76,7 @@
             <artifactId>jcsv</artifactId>
             <version>1.4.0</version>
         </dependency>
+        
 
         <!-- Tests -->
         <dependency>
@@ -159,9 +176,5 @@
             <name>Repository for library PrimeFaces-maven-lib</name>
         </repository>
     </repositories>
-    <scm>
-        <connection>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</connection>
-        <url>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</url>
-        <developerConnection>scm:git:git@github.com:OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git</developerConnection>
-    </scm>
+
 </project>

@@ -30,10 +30,10 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Import handler for Komisja Obwodowa.
@@ -44,6 +44,8 @@ import javax.inject.Named;
 @SessionScoped
 public class ImportObwodowaHandler extends AbstractImportHandler<ObwodowaCsvDto> implements Serializable {
 
+    private static final Logger log = LoggerFactory.getLogger(ImportObwodowaHandler.class);
+
     public void upload() {
         if (file != null) {
             uploadList = new ArrayList<>();
@@ -53,7 +55,7 @@ public class ImportObwodowaHandler extends AbstractImportHandler<ObwodowaCsvDto>
                 is = file.getInputstream();
                 uploadList = importController.parseObwodowa(is);
             } catch (IOException ex) {
-                Logger.getLogger(ImportUserHandler.class.getName()).log(Level.SEVERE, null, ex);
+                log.error(null, ex);
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
             }
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));

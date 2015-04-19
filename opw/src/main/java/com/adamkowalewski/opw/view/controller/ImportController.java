@@ -37,6 +37,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader.okregowaCsvDtoReader;
 import static com.adamkowalewski.opw.view.controller.csv.UserCsvDtoReader.userCsvDtoReader;
@@ -49,6 +51,8 @@ import static com.adamkowalewski.opw.view.controller.csv.UserCsvDtoReader.userCs
 @Named
 @RequestScoped
 public class ImportController implements Serializable {
+
+    private static final Logger log = LoggerFactory.getLogger(ImportController.class);
 
     @Inject
     OkregowaController okregowaController;
@@ -64,8 +68,8 @@ public class ImportController implements Serializable {
             OpwOkregowaKomisja single = new OpwOkregowaKomisja();
             single.setPkwId(csvDto.getPkwId());
             single.setName(csvDto.getName());
-            resultList.add(single);            
-        }        
+            resultList.add(single);
+        }
         okregowaController.create(resultList);
     }
 
@@ -89,6 +93,8 @@ public class ImportController implements Serializable {
         for (OkregowaCsvDto okregowa : okregowaList) {
             okregowa.setDuplicate(okregowaController.isDuplicate(okregowa.getPkwId()));
         }
+        log.info("lista {}.", okregowaList.size());
+        log.error("error {}.", okregowaList.size());
         return okregowaList;
     }
 

@@ -30,10 +30,10 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Import handler for user accounts.
@@ -43,6 +43,8 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class ImportUserHandler extends AbstractImportHandler<UserCsvDto> implements Serializable {
+    
+    private static final Logger log = LoggerFactory.getLogger(ImportUserHandler.class);
 
     public void upload() {
         if (file != null) {
@@ -53,7 +55,7 @@ public class ImportUserHandler extends AbstractImportHandler<UserCsvDto> impleme
                 is = file.getInputstream();
                 uploadList = importController.parseUser(is);
             } catch (IOException ex) {
-                Logger.getLogger(ImportUserHandler.class.getName()).log(Level.SEVERE, null, ex);
+                log.error("File upload",ex);                
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
             }
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));

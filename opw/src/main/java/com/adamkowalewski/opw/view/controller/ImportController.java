@@ -57,12 +57,15 @@ public class ImportController implements Serializable {
         List<OpwOkregowaKomisja> resultList = new ArrayList<>();
 
         for (OkregowaCsvDto csvDto : okregowaList) {
+            // skip duplicates 
+            if (csvDto.isDuplicate()) {
+                continue;
+            }
             OpwOkregowaKomisja single = new OpwOkregowaKomisja();
             single.setPkwId(csvDto.getPkwId());
             single.setName(csvDto.getName());
-            resultList.add(single);
-        }
-
+            resultList.add(single);            
+        }        
         okregowaController.create(resultList);
     }
 
@@ -81,7 +84,12 @@ public class ImportController implements Serializable {
     public List<OkregowaCsvDto> parseOkregowa(InputStream content)
             throws IOException, IndexOutOfBoundsException, NumberFormatException, PatternSyntaxException {
         // TODO check duplicates
-        return okregowaCsvDtoReader().readAllFrom(content);
+        List<OkregowaCsvDto> okregowaList = okregowaCsvDtoReader().readAllFrom(content);
+
+        for (OkregowaCsvDto okregowa : okregowaList) {
+            okregowa.setDuplicate(okregowaController.isDuplicate(okregowa.getPkwId()));
+        }
+        return okregowaList;
     }
 
     /**

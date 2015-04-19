@@ -43,30 +43,34 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class OkregowaController implements Serializable {
-    
+
     @EJB
     OkregowaBean bean;
-    
+
+    public boolean isDuplicate(int pkwId) {
+        return bean.isDuplicate(pkwId);
+    }
+
     public void create(OpwOkregowaKomisja okregowa) {
         bean.create(okregowa);
     }
-    
+
     public void edit(OpwOkregowaKomisja okregowa) {
         bean.edit(okregowa);
     }
-    
+
     public List<OpwOkregowaKomisja> findAll() {
         return bean.findAll();
     }
-    
+
     public OpwOkregowaKomisja find(int id) {
         return bean.find(id);
     }
-    
+
     public OpwOkregowaKomisja findByPkwId(int pkwId) {
         return bean.findOkregowa(pkwId);
     }
-    
+
     public void create(List<OpwOkregowaKomisja> okregowaList) {
         for (OpwOkregowaKomisja okregowa : okregowaList) {
             bean.create(okregowa);
@@ -78,7 +82,7 @@ public class OkregowaController implements Serializable {
      */
     @FacesConverter(forClass = OpwOkregowaKomisja.class)
     public static class OpwOkregowaKomisjaControllerConverter implements Converter {
-        
+
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
@@ -88,19 +92,19 @@ public class OkregowaController implements Serializable {
                     getValue(facesContext.getELContext(), null, "okregowaController");
             return controller.find(getKey(value));
         }
-        
+
         java.lang.Integer getKey(String value) {
             java.lang.Integer key;
             key = Integer.valueOf(value);
             return key;
         }
-        
+
         String getStringKey(java.lang.Integer value) {
             StringBuilder sb = new StringBuilder();
             sb.append(value);
             return sb.toString();
         }
-        
+
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
@@ -113,7 +117,7 @@ public class OkregowaController implements Serializable {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + OpwOkregowaKomisja.class.getName());
             }
         }
-        
+
     }
-    
+
 }

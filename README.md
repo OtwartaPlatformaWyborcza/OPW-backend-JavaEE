@@ -170,6 +170,7 @@ Plan implementacji
 * [WiP] REST API dla klienta AngularJS 
 * [WiP] REST API dla klienta jQuery 
 * [WiP] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta  
+* [DONE] [OPW-T-2](https://trello.com/c/9LQ9Atld/11-opw-t-2-konfiguracja-sfl4j-jako-g-ownego-loggera-aplikacji) Integracja SFL4J
 * Pełna integracja z aplikacją OPW-client
 * Pełna integracja z aplikacją OPW-dashboard
 

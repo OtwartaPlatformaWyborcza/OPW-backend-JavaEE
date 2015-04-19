@@ -58,31 +58,30 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 
 # Proces
 
-**Przygotowanie wyborów**
-1. Administrator definiuje / importuje oficjalną listę Komisji Okręgowych  (51)
-2. Administrator definiuje / importuje oficjalną listę Kandydatów (11)
-3. Administrator definiuje / importuje oficjalną listę Komisji Obwodowych (około 27 000) 
-4. Administrator zakłada / importuje konta użytkowników (wolentariusze, mężowie zaufania, około 25 000)
+**Przygotowanie wyborów**  
+1. Administrator definiuje / importuje oficjalną listę Komisji Okręgowych  (51)  
+2. Administrator definiuje / importuje oficjalną listę Kandydatów (11)  
+3. Administrator definiuje / importuje oficjalną listę Komisji Obwodowych (około 27 000)   
+4. Administrator zakłada / importuje konta użytkowników (wolentariusze, mężowie zaufania, około 25 000)  
 5. System automatycznie rozsyła hasła użytkowikom, wraz z linkiem do aktywacji konta, na podany adres E-Mail.  
-6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (możliwa fluktuacja użytkowników tuż przed wyborami)
+6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (możliwa fluktuacja użytkowników tuż przed wyborami)  
 
-**Dzień wyborczy - perspektywa użytkownika**
-1. Użytkownik loguje się na stronie OPW i wybiera z listy jedną z przypisanych mu Komisji Obwodowych. 
-2. Użytkownik widzi na okrenie dokładne informacje dotyczące wybranej Komisji Obwodowej. 
-3. Użytkownik wpisuje dane / liczby wyborcze z protokołu do aplikacji OPW. 
-4. Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych.
-5. Użytkownik wysyła dane/liczby wyborcze na serwer OPW. 
+**Dzień wyborczy - perspektywa użytkownika**  
+1. Użytkownik loguje się na stronie OPW i wybiera z listy jedną z przypisanych mu Komisji Obwodowych.  
+2. Użytkownik widzi na okrenie dokładne informacje dotyczące wybranej Komisji Obwodowej.  
+3. Użytkownik wpisuje dane / liczby wyborcze z protokołu do aplikacji OPW.  
+4. Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych.  
+5. Użytkownik wysyła dane/liczby wyborcze na serwer OPW.   
 
-**Dzień wyborczy - perspektywa serwera**
-1. Liczby wyborcze spływają na serwer. 
-1. Każdy protokół jest walidowany, w przypadku identyfikacji błędu miękkiego protokół protokół zostanie otagowany. 
-1. Protokoły są zapisywane w bazie danych. 
-1. Aktualny wynik wyborów jest publikowany co 5 minut. 
-
+**Dzień wyborczy - perspektywa serwera**  
+1. Liczby wyborcze spływają na serwer.   
+2. Każdy protokół jest walidowany, w przypadku identyfikacji błędu miękkiego protokół protokół zostanie otagowany.  
+3. Protokoły są zapisywane w bazie danych.  
+4. Aktualny wynik wyborów jest publikowany co 5 minut.  
 
 **Dzień wyborczy / perspektywa gościa**  
-1. Gość wchodzi na stronę główną aplikacji OPW-dashboard
-1. OPW/dashboard zapewnia dostęp do aktualnych wyników w skali kraju jak i gminy. 
+1. Gość wchodzi na stronę główną aplikacji OPW-dashboard  
+2. OPW/dashboard zapewnia dostęp do aktualnych wyników w skali kraju jak i gminy. 
 
 # Specyfikacja
 
@@ -98,17 +97,6 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 3. Operator Informatyczny  (najczęściej informatyk, może być odpowiedzialny za kilka komisji)
 4. Przewodniczący Komisji 
 5. Gość (guest) - obywatel który odwiedza strone aby sprawdzić wynik wyborów
-
-## Risk & Issue Logs
-1. Wysyłanie protokołów i zakonczenie liczenia głosów w 25000 komisjach zazwyczaj konczy się o tej samej porze +/- 15 min w przypadku prostych wyborów jakimi są Wybory Prezydenckie Potrzebna Analiza wydajnosciowa serwerów  w tym (SQL, Moc Obliczeniowa maszyny oraz sama przepustowość łącza i-net). Zastanowić się nad modułem synchronizacji otrzymywania wyników.
-
-2. Goście (wyborcy), którzy będą chcieli sprawdzić niezależne wyniki na stronie www - mogą spowodować zawieszenie się wydajnościowe serwera, gdy usługa będzie cieszyć sie bardzo dużą popularnoscią. Do rozważenia wprowadzenie modułu logowania na gości i ograniczenie ilości połaczeń dla danego gościa.   
-
-## Appendix Features
-1. Moduł generowania umów zleceń z operatorami oraz wypaty diet dla członków komisji wraz z wstępnie wypełnionym PIT-R
-2. Import / eksport danych operatorów i członków komisji z/do pliku XLS 
-3. Moduł "Przypominajek" dla operatorów i członków komisji wyborczych mowiący o poprawnym przeprowadzeniu procedury wyborów np. Wywieszeniu Obwieszczeń, Wydrukowaniu w należytej ilosci kopii protokołów, Zabezpieczeniu Brudnopisów, Zgraniu na zewnętrzny nośnik elektronicznej wersji protokołu, Przekazanie protokołu fizcznie po wydrukowaniu do KBW itp itd etc.   
-
 
 ## Software stack 
 ### Backend 

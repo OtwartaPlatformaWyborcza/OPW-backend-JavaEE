@@ -25,7 +25,9 @@ package com.adamkowalewski.opw.view.handler;
 
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.Identity;
+import com.adamkowalewski.opw.view.controller.ConfigController;
 import com.adamkowalewski.opw.view.controller.MsgController;
+import com.adamkowalewski.opw.view.controller.UserController;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -48,19 +50,25 @@ public class LoginHandler implements Serializable {
 
     @Inject
     Identity identity;
+    @Inject
+    UserController userController;
+    @Inject
+    private ConfigController configController;
 
     public LoginHandler() {
     }
 
     public String authenticate() {
-        
-        if (login.equals("admin") && password.equals("admin")) {
+        OpwUser u = userController.authenticate(login, password);
+
+        if (u != null) {
             identity.setLoggedin(true);
-            identity.setFullname("Administrator");
+            identity.setFullname(u.getFirstname() + " " + u.getLastname());
+            identity.setUserId(u.getId());
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("loginOk"));
-        }else{
+        } else {
             MsgController.addErrorMessage(MsgController.getLocalizedMessage("loginFailed"));
-    }
+        }
 
         return "index";
     }

@@ -34,6 +34,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides access to user.
@@ -42,6 +44,8 @@ import javax.persistence.Query;
  */
 @Stateless
 public class UserBean extends AbstractOpwFacade<OpwUser> {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserBean.class);
 
     @PersistenceContext(unitName = PU_OPW)
     private EntityManager em;
@@ -56,6 +60,27 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    /**
+     * Verifies user credentials and return an instance if correct.
+     *
+     * @param login user login.
+     * @param password user password in plaintext.
+     * @param appSalt application level salt.
+     * @return when successfull full <code>OpwUser</code> instance, otherwise
+     * null
+     * @author Adam Kowalewski
+     * @version 2015.04.20
+     */
+    public OpwUser verifyCredentials(String login, String password, String appSalt) {
+        OpwUser user = this.findUser(login);
+        String pwd = saltPassword(appSalt, user.getSalt(), password);
+
+        if (pwd.equals(user.getPassword())) {
+            return user;
+        }
+        return null;
     }
 
     /**
@@ -89,7 +114,7 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      */
     public OpwUser findUser(String login) {
         Query q = em.createNamedQuery("OpwUser.findByEmail");
-        q.setParameter("login", login);
+        q.setParameter("email", login);
         return (OpwUser) q.getSingleResult();
     }
 

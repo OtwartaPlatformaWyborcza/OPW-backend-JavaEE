@@ -57,6 +57,10 @@ public class UserController implements Serializable {
         this.mailController = mailController;
     }
 
+    public OpwUser authenticate(String login, String password) {
+        return bean.verifyCredentials(login, password, configController.getApplicationSalt());
+    }
+
     /**
      * Creates a new user within database and generates a random password.
      *

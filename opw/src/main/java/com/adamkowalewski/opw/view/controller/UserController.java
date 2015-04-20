@@ -57,6 +57,10 @@ public class UserController implements Serializable {
         this.mailController = mailController;
     }
 
+    public boolean activateAccount(String email, String token) {
+        return bean.activateAccount(email, token);
+    }
+
     public OpwUser authenticate(String login, String password) {
         return bean.verifyCredentials(login, password, configController.getApplicationSalt());
     }

@@ -75,12 +75,32 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      */
     public OpwUser verifyCredentials(String login, String password, String appSalt) {
         OpwUser user = this.findUser(login);
-        String pwd = saltPassword(appSalt, user.getSalt(), password);
+        if (user != null) {
+            String pwd = saltPassword(appSalt, user.getSalt(), password);
 
-        if (pwd.equals(user.getPassword())) {
-            return user;
+            if (pwd.equals(user.getPassword())) {
+                return user;
+            }
         }
         return null;
+    }
+
+    public boolean activateAccount(String email, String token) {
+        OpwUser user = this.findUser(email);
+
+        if (user != null) {
+            if (token.equals(user.getToken())
+                    && (user.getActive() == false)) {
+                user.setToken(new String());
+                user.setActive(true);
+                edit(user);
+                return true;
+            }
+            logger.error("Account activation failed.");
+            logger.error("Expected email {} and token {}.", email, token);
+            logger.error("Found email {} and token {}.", user.getEmail(), user.getToken());
+        }
+        return false;
     }
 
     /**
@@ -115,7 +135,11 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
     public OpwUser findUser(String login) {
         Query q = em.createNamedQuery("OpwUser.findByEmail");
         q.setParameter("email", login);
-        return (OpwUser) q.getSingleResult();
+        try { // TODO !
+            return (OpwUser) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**

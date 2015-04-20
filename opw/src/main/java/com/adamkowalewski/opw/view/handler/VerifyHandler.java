@@ -23,9 +23,11 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
+import com.adamkowalewski.opw.view.controller.UserController;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +48,9 @@ public class VerifyHandler implements Serializable {
 
     private boolean actResult;
 
+    @Inject
+    UserController userController;
+
     /**
      * WiP
      */
@@ -53,7 +58,7 @@ public class VerifyHandler implements Serializable {
         logger.info("email {}." + email);
         logger.info("code {}." + code);
 
-        actResult = true;
+        actResult = userController.activateAccount(email, code);
     }
 
     public String getEmail() {

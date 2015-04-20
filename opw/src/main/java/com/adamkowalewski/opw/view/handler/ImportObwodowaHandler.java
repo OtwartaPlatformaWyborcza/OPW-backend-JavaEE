@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class ImportObwodowaHandler extends AbstractImportHandler<ObwodowaCsvDto> implements Serializable {
 
-    private static final Logger log = LoggerFactory.getLogger(ImportObwodowaHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImportObwodowaHandler.class);
 
     public void upload() {
         if (file != null) {
@@ -55,7 +55,7 @@ public class ImportObwodowaHandler extends AbstractImportHandler<ObwodowaCsvDto>
                 is = file.getInputstream();
                 uploadList = importController.parseObwodowa(is);
             } catch (IOException ex) {
-                log.error(null, ex);
+                logger.error(null, ex);
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
             }
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));

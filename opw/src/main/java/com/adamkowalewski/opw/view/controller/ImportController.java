@@ -52,7 +52,7 @@ import static com.adamkowalewski.opw.view.controller.csv.UserCsvDtoReader.userCs
 @RequestScoped
 public class ImportController implements Serializable {
 
-    private static final Logger log = LoggerFactory.getLogger(ImportController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImportController.class);
 
     @Inject
     OkregowaController okregowaController;
@@ -93,8 +93,8 @@ public class ImportController implements Serializable {
         for (OkregowaCsvDto okregowa : okregowaList) {
             okregowa.setDuplicate(okregowaController.isDuplicate(okregowa.getPkwId()));
         }
-        log.info("lista {}.", okregowaList.size());
-        log.error("error {}.", okregowaList.size());
+        logger.info("lista {}.", okregowaList.size());
+        logger.error("error {}.", okregowaList.size());
         return okregowaList;
     }
 

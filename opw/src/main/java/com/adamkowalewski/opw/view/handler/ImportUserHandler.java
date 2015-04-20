@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class ImportUserHandler extends AbstractImportHandler<UserCsvDto> implements Serializable {
     
-    private static final Logger log = LoggerFactory.getLogger(ImportUserHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImportUserHandler.class);
 
     public void upload() {
         if (file != null) {
@@ -55,7 +55,7 @@ public class ImportUserHandler extends AbstractImportHandler<UserCsvDto> impleme
                 is = file.getInputstream();
                 uploadList = importController.parseUser(is);
             } catch (IOException ex) {
-                log.error("File upload",ex);                
+                logger.error("File upload",ex);                
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
             }
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));

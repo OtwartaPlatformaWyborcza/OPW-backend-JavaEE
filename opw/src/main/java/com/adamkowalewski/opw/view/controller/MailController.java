@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 @Stateless
 public class MailController {
 
-    private static final Logger log = LoggerFactory.getLogger(MailController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MailController.class);
 
     @Resource(name = "mail/opw")
     private Session mailSession;
@@ -74,10 +74,10 @@ public class MailController {
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdNewMailSend") + " [" + user.getEmail() + "]");
             return true;
         } catch (IOException | TemplateException | MessagingException ex) {
-            log.error(null, ex);
+            logger.error(null, ex);
         } catch (OpwException ex) {
             MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
-            log.error(null, ex);
+            logger.error(null, ex);
         }
         return false;
     }
@@ -92,10 +92,10 @@ public class MailController {
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdResetMailSend") + " [" + user.getEmail() + "]");
             return true;
         } catch (IOException | TemplateException | MessagingException ex) {
-            log.error(null, ex);
+            logger.error(null, ex);
         } catch (OpwException ex) {
             MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
-            log.error(null, ex);
+            logger.error(null, ex);
         }
         return false;
     }

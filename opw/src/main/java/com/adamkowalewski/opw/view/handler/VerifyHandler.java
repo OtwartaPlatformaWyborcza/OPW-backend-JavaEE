@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 @RequestScoped
 public class VerifyHandler implements Serializable {
 
-    private static final Logger log = LoggerFactory.getLogger(VerifyHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(VerifyHandler.class);
 
     private String email;
     private String code;
@@ -50,8 +50,8 @@ public class VerifyHandler implements Serializable {
      * WiP
      */
     public void verifyAccount() {
-        log.info("email {}." + email);
-        log.info("code {}." + code);
+        logger.info("email {}." + email);
+        logger.info("code {}." + code);
 
         actResult = true;
     }

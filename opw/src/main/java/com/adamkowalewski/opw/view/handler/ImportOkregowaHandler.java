@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class ImportOkregowaHandler extends AbstractImportHandler<OkregowaCsvDto> implements Serializable {
 
-    private static final Logger log = LoggerFactory.getLogger(ImportOkregowaHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(ImportOkregowaHandler.class);
 
     public void upload() {
         if (file != null) {
@@ -55,10 +55,10 @@ public class ImportOkregowaHandler extends AbstractImportHandler<OkregowaCsvDto>
                 uploadList = importController.parseOkregowa(is);
             } catch (NumberFormatException ex) {
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseNumberError"));
-                log.error(null, ex);
+                logger.error(null, ex);
             } catch (IOException | IndexOutOfBoundsException | PatternSyntaxException ex) {
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
-                log.error(null, ex);
+                logger.error(null, ex);
             }
         }
         MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));

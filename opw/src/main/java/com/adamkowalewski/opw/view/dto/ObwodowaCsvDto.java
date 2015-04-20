@@ -27,10 +27,11 @@ package com.adamkowalewski.opw.view.dto;
  * DTO used for CSV import of Komisja Obwodowa.
  *
  * @author Adam Kowalewski
- * @version 2015.04.12
+ * @version 2015.04.20
  */
 public class ObwodowaCsvDto {
 
+    private int okregowaPkwId;
     private String pkwId, name, address, type;
     private int allowedToVote;
     private boolean duplicate;
@@ -38,13 +39,22 @@ public class ObwodowaCsvDto {
     public ObwodowaCsvDto() {
     }
 
-    public ObwodowaCsvDto(String pkwId, String name, String address, String type, int allowedToVote, boolean duplicate) {
+    public ObwodowaCsvDto(int okregowaPkwId, String pkwId, String name, String address, String type, int allowedToVote, boolean duplicate) {
+        this.okregowaPkwId = okregowaPkwId;
         this.pkwId = pkwId;
         this.name = name;
         this.address = address;
         this.type = type;
         this.allowedToVote = allowedToVote;
         this.duplicate = duplicate;
+    }
+
+    public int getOkregowaPkwId() {
+        return okregowaPkwId;
+    }
+
+    public void setOkregowaPkwId(int okregowaPkwId) {
+        this.okregowaPkwId = okregowaPkwId;
     }
 
     public String getPkwId() {

@@ -138,8 +138,8 @@ public class ImportController implements Serializable {
      */
     public List<ObwodowaCsvDto> parseObwodowa(InputStream content) {
         List<ObwodowaCsvDto> result = new ArrayList<>();
-        result.add(new ObwodowaCsvDto("146513-587", "Szkoła Podstawowa nr 319 ", "ul. ZWM 10, Ursynów, 02-786 Warszawa", "P", 1452, false));
-        result.add(new ObwodowaCsvDto("146513-588", "Szkoła Podstawowa nr 322 ", "ul. Dembowskiego 9, Ursynów, 02-784 Warszawa", "P", 1751, false));
+        result.add(new ObwodowaCsvDto(21, "146513-587", "Szkoła Podstawowa nr 319 ", "ul. ZWM 10, Ursynów, 02-786 Warszawa", "P", 1452, false));
+        result.add(new ObwodowaCsvDto(21, "146513-588", "Szkoła Podstawowa nr 322 ", "ul. Dembowskiego 9, Ursynów, 02-784 Warszawa", "P", 1751, false));
         return result;
     }
 }

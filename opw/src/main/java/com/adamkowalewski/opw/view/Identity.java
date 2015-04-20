@@ -24,11 +24,13 @@
 package com.adamkowalewski.opw.view;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
- * TODO JAAS
+ * Represents a user with all its groups, roles and permissions.
  *
  * @author Adam Kowalewski
  */
@@ -40,7 +42,32 @@ public class Identity implements Serializable {
     private String fullname;
     private boolean loggedin;
 
+    private final List<String> group;
+    private final List<String> permission;
+    private final List<String> role;
+
     public Identity() {
+        group = new ArrayList<>();
+        permission = new ArrayList<>();
+        role = new ArrayList<>();
+    }
+
+    public void addGroup(String groupName) {
+        if (!group.contains(groupName) && !groupName.isEmpty()) {
+            group.add(groupName);
+        }
+    }
+
+    public void addPermission(String permName) {
+        if (!permission.contains(permName) && !permName.isEmpty()) {
+            permission.add(permName);
+        }
+    }
+
+    public void addRole(String roleName) {
+        if (!role.contains(roleName) && !roleName.isEmpty()) {
+            role.add(roleName);
+        }
     }
 
     public int getUserId() {

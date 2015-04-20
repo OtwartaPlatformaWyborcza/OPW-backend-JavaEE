@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />        
@@ -41,18 +42,29 @@
 
                 <div id="main-nav">
                     <h:link outcome="/index" value="Start" />
-                    <h:link outcome="/dashboard" value="Dashboard"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/obwodowa" value="#{messages.obwodowaEditTitle}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/okregowa" value="#{messages.okregowaEditTitle}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/user" value="#{messages.userEditTitle}"  rendered="#{identity.loggedin}" />
                 </div>
 
             </div>
 
-            
+
             <div id="content-wrapper">
-                <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true"  />
-                <ui:insert name="content"></ui:insert>
-                <div class="clear"></div>
+
+                <c:choose>
+                    <c:when test="#{accessControlList.accessView(view.viewId)}">
+                        <p:messages id="messages" showDetail="false" autoUpdate="true" closable="true"  />
+                        <ui:insert name="content"></ui:insert>
+                        <div class="clear"></div>
+                    </c:when>
+                    <c:otherwise>
+                        <h1>#{messages.securityNoAccessError}</h1>
+                        <h:link value="#{messages.loginTitle}" outcome="/login" />
+                    </c:otherwise>
+                </c:choose>  
             </div>
-            
+
 
             <div id="footer-wrapper">
                 <p style="text-align: right; font-size: 10px;">

@@ -13,17 +13,17 @@ import java.util.List;
  * Given csv file format is:
  * Imie;Nazwisko;Email;Typ;komisjeObwodowe
  */
-public class UserCsvDtoParser implements CSVEntryParser<UserCsvDto> {
+class UserCsvDtoParser implements CSVEntryParser<UserCsvDto> {
     @Override
     public UserCsvDto parseEntry(String... data) {
-        String firstname = data[0];
-        String lastname = data[1];
-        String email = data[2];
-        String type = data[3];
+        String firstname = data[0].trim();
+        String lastname = data[1].trim();
+        String email = data[2].trim();
+        String type = data[3].trim();
         List<String> obwodowaList = Splitter.on(',')
                 .trimResults()
                 .omitEmptyStrings()
-                .splitToList(data[4]);
+                .splitToList(data[4].trim());
         return new UserCsvDto(firstname, lastname, email, type, obwodowaList);
     }
 }

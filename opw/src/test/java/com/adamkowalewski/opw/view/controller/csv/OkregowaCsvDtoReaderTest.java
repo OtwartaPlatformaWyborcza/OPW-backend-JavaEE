@@ -28,6 +28,4 @@ public class OkregowaCsvDtoReaderTest  {
         // then
         assertEquals(expectedOkregowaCsvDtos, actualOkregowaCsvDtos);
     }
-
-
 }

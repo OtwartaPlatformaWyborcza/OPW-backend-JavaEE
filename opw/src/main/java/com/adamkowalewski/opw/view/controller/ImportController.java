@@ -27,6 +27,8 @@ import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.view.dto.ObwodowaCsvDto;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 import com.adamkowalewski.opw.view.dto.UserCsvDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -37,9 +39,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import static com.adamkowalewski.opw.view.controller.csv.ObwodowaCsvDtoReader.obwodowaCsvDtoReader;
 import static com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader.okregowaCsvDtoReader;
 import static com.adamkowalewski.opw.view.controller.csv.UserCsvDtoReader.userCsvDtoReader;
 
@@ -136,10 +137,7 @@ public class ImportController implements Serializable {
      * @param content
      * @return
      */
-    public List<ObwodowaCsvDto> parseObwodowa(InputStream content) {
-        List<ObwodowaCsvDto> result = new ArrayList<>();
-        result.add(new ObwodowaCsvDto(21, "146513-587", "Szkoła Podstawowa nr 319 ", "ul. ZWM 10, Ursynów, 02-786 Warszawa", "P", 1452, false));
-        result.add(new ObwodowaCsvDto(21, "146513-588", "Szkoła Podstawowa nr 322 ", "ul. Dembowskiego 9, Ursynów, 02-784 Warszawa", "P", 1751, false));
-        return result;
+    public List<ObwodowaCsvDto> parseObwodowa(InputStream content) throws IOException {
+        return obwodowaCsvDtoReader().readAllFrom(content);
     }
 }

@@ -36,6 +36,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,7 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Adam Kowalewski
  */
 @Entity
-@Table(name = "opw_okregowa_komisja", catalog = "opw", schema = "")
+@Table(name = "opw_okregowa_komisja", catalog = "opw", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"pkwId"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OpwOkregowaKomisja.findAll", query = "SELECT o FROM OpwOkregowaKomisja o"),
@@ -56,34 +58,26 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwOkregowaKomisja.findByPowiaty", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.powiaty = :powiaty"),
     @NamedQuery(name = "OpwOkregowaKomisja.findByMiasta", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.miasta = :miasta")})
 public class OpwOkregowaKomisja implements Serializable {
-
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-
     @Column(name = "pkwId")
     private Integer pkwId;
-
     @Size(max = 128)
     @Column(name = "name", length = 128)
     private String name;
-
     @Size(max = 128)
     @Column(name = "address", length = 128)
     private String address;
-
     @Size(max = 128)
     @Column(name = "powiaty", length = 128)
     private String powiaty;
-
     @Size(max = 128)
     @Column(name = "miasta", length = 128)
     private String miasta;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwOkregowaKomisjaId")
     private List<OpwObwodowaKomisja> opwObwodowaKomisjaList;
 
@@ -92,11 +86,6 @@ public class OpwOkregowaKomisja implements Serializable {
 
     public OpwOkregowaKomisja(Integer id) {
         this.id = id;
-    }
-
-    public OpwOkregowaKomisja(Integer pkwId, String name) {
-        this.pkwId = pkwId;
-        this.name = name;
     }
 
     public Integer getId() {

@@ -29,7 +29,10 @@ public class WynikServiceTest extends BaseWynikServiceTest {
         ArrayList<OpwKandydat> opwKandydats = newArrayList(k);
         when(wynikEjb.kandydatFindAll())
                 .thenReturn(opwKandydats);
-        ArrayList<OpwOkregowaKomisja> opwOkregowaKomisjas = newArrayList(new OpwOkregowaKomisja(22, "Komisja 22"));
+        OpwOkregowaKomisja okr = new OpwOkregowaKomisja();
+        okr.setName("Komisja 22");
+        okr.setPkwId(22);
+        ArrayList<OpwOkregowaKomisja> opwOkregowaKomisjas = newArrayList(okr);
         when(wynikEjb.obwodowaFindAll())
                 .thenReturn(opwOkregowaKomisjas);
 

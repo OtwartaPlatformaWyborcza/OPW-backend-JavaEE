@@ -40,6 +40,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -49,12 +50,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Adam Kowalewski
  */
 @Entity
-@Table(name = "opw_obwodowa_komisja", catalog = "opw", schema = "")
+@Table(name = "opw_obwodowa_komisja", catalog = "opw", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"pkwId"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OpwObwodowaKomisja.findAll", query = "SELECT o FROM OpwObwodowaKomisja o"),
     @NamedQuery(name = "OpwObwodowaKomisja.findById", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.id = :id"),
     @NamedQuery(name = "OpwObwodowaKomisja.findByPkwId", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.pkwId = :pkwId"),
+    @NamedQuery(name = "OpwObwodowaKomisja.findByObwodNr", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.obwodNr = :obwodNr"),
     @NamedQuery(name = "OpwObwodowaKomisja.findByName", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.name = :name"),
     @NamedQuery(name = "OpwObwodowaKomisja.findByAddress", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.address = :address"),
     @NamedQuery(name = "OpwObwodowaKomisja.findByType", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.type = :type"),
@@ -69,6 +72,8 @@ public class OpwObwodowaKomisja implements Serializable {
     @Size(max = 64)
     @Column(name = "pkwId", length = 64)
     private String pkwId;
+    @Column(name = "obwodNr")
+    private Integer obwodNr;
     @Size(max = 128)
     @Column(name = "name", length = 128)
     private String name;
@@ -112,6 +117,14 @@ public class OpwObwodowaKomisja implements Serializable {
 
     public void setPkwId(String pkwId) {
         this.pkwId = pkwId;
+    }
+
+    public Integer getObwodNr() {
+        return obwodNr;
+    }
+
+    public void setObwodNr(Integer obwodNr) {
+        this.obwodNr = obwodNr;
     }
 
     public String getName() {

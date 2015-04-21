@@ -113,17 +113,17 @@ public class OpwWynik implements Serializable {
     private Short k10;
     @Column(name = "k11")
     private Short k11;
-    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private OpwUser opwUserId;
+    private OpwObwodowaKomisja opwObwodowaKomisjaId;
     @OneToMany(mappedBy = "parentId")
     private List<OpwWynik> opwWynikList;
     @JoinColumn(name = "parentId", referencedColumnName = "id")
     @ManyToOne
     private OpwWynik parentId;
-    @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private OpwObwodowaKomisja opwObwodowaKomisjaId;
+    private OpwUser opwUserId;
 
     public OpwWynik() {
     }
@@ -284,12 +284,12 @@ public class OpwWynik implements Serializable {
         this.k11 = k11;
     }
 
-    public OpwUser getOpwUserId() {
-        return opwUserId;
+    public OpwObwodowaKomisja getOpwObwodowaKomisjaId() {
+        return opwObwodowaKomisjaId;
     }
 
-    public void setOpwUserId(OpwUser opwUserId) {
-        this.opwUserId = opwUserId;
+    public void setOpwObwodowaKomisjaId(OpwObwodowaKomisja opwObwodowaKomisjaId) {
+        this.opwObwodowaKomisjaId = opwObwodowaKomisjaId;
     }
 
     @XmlTransient
@@ -309,12 +309,12 @@ public class OpwWynik implements Serializable {
         this.parentId = parentId;
     }
 
-    public OpwObwodowaKomisja getOpwObwodowaKomisjaId() {
-        return opwObwodowaKomisjaId;
+    public OpwUser getOpwUserId() {
+        return opwUserId;
     }
 
-    public void setOpwObwodowaKomisjaId(OpwObwodowaKomisja opwObwodowaKomisjaId) {
-        this.opwObwodowaKomisjaId = opwObwodowaKomisjaId;
+    public void setOpwUserId(OpwUser opwUserId) {
+        this.opwUserId = opwUserId;
     }
 
     @Override

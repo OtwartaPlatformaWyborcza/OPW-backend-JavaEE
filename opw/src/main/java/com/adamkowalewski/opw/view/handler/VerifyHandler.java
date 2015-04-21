@@ -29,6 +29,7 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.Size;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +44,11 @@ public class VerifyHandler implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(VerifyHandler.class);
 
+    // TODO add regex validator for mail
+    @Size(max = 64)
     private String email;
+    // TODO add regex validator for sha
+    @Size(max = 32)
     private String code;
 
     private boolean actResult;
@@ -52,13 +57,16 @@ public class VerifyHandler implements Serializable {
     UserController userController;
 
     /**
-     * WiP
+     * Trigger account activation.
      */
     public void verifyAccount() {
-        logger.info("email {}." + email);
-        logger.info("code {}." + code);
-
         actResult = userController.activateAccount(email, code);
+
+        if (actResult) {
+            logger.info("Account activation for email {} with token {}", email, code);
+        } else {
+            logger.error("Account activation failed for email {} with token {}", email, code);
+        }
     }
 
     public String getEmail() {

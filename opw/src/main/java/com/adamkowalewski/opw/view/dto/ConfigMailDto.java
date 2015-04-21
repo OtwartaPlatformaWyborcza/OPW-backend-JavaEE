@@ -23,12 +23,14 @@
  */
 package com.adamkowalewski.opw.view.dto;
 
+import java.io.Serializable;
+
 /**
  * DTO represents E-Mail configuration.
  *
  * @author Adam Kowalewski
  */
-public class ConfigMailDto {
+public class ConfigMailDto implements Serializable {
 
     private String fromLabel, fromAddress;
     private String hostname;

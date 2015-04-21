@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="Neues Dokument 1">
+   sodipodi:docname="opw_logo.svg">
   <defs
      id="defs4">
     <inkscape:perspective
@@ -32,9 +32,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="91.017178"
-     inkscape:cy="967.14713"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="127.64875"
+     inkscape:cy="946.74798"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -84,5 +84,24 @@
          d="M 125,117.36218 125,12.362183 20,117.36218 z"
          style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
     </g>
+    <rect
+       style="fill:#cb0000;fill-opacity:1;stroke:none;stroke-width:1;stroke-opacity:1"
+       id="rect2987"
+       width="105"
+       height="105"
+       x="130"
+       y="12.362183"
+       inkscape:export-filename="/home/adam/opw_logo_v2_x128.png"
+       inkscape:export-xdpi="109.71429"
+       inkscape:export-ydpi="109.71429" />
+    <path
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       id="path3863-6"
+       d="m 134,113.36218 0,-96.999997 97,0 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       inkscape:export-filename="/home/adam/opw_logo_v2_x128.png"
+       inkscape:export-xdpi="109.71429"
+       inkscape:export-ydpi="109.71429" />
   </g>
 </svg>

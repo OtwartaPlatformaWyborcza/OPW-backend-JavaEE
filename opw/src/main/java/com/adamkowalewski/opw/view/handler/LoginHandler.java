@@ -34,6 +34,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Size;
 
 /**
  * Handler for login and logout operations.
@@ -44,9 +45,10 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class LoginHandler implements Serializable {
 
+    @Size(max = 64)
     private String login;
+    @Size(max = 64)
     private String password;
-    private OpwUser user;
 
     @Inject
     Identity identity;

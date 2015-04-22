@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.view.dto.ObwodowaCsvDto;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
@@ -57,6 +58,8 @@ public class ImportController implements Serializable {
 
     @Inject
     OkregowaController okregowaController;
+    @Inject
+    ObwodowaController obwodowaController;
 
     public void performImportOkregowa(List<OkregowaCsvDto> okregowaList) {
         List<OpwOkregowaKomisja> resultList = new ArrayList<>();
@@ -127,7 +130,25 @@ public class ImportController implements Serializable {
      * @param obwodowaList
      */
     public void performImportObwodowa(List<ObwodowaCsvDto> obwodowaList) {
-        System.out.println("MOCK!");
+        List<OpwObwodowaKomisja> resultList = new ArrayList<>();
+
+        for (ObwodowaCsvDto csvDto : obwodowaList) {
+            if (csvDto.isDuplicate()) {
+                continue;
+            }
+            //14;106101-2;2;P;Studio Consulting Sp. z o.o.; ul. Romanowska 55E, 91-174 Łódź;1234
+            OpwObwodowaKomisja single = new OpwObwodowaKomisja();
+            single.setOpwOkregowaKomisjaId(okregowaController.find(csvDto.getOkregowaPkwId()));
+
+            single.setPkwId(csvDto.getPkwId());
+            single.setObwodNr(csvDto.getObwodNr());
+            single.setType(csvDto.getType());
+            single.setName(csvDto.getName());
+            single.setAddress(csvDto.getAddress());
+            single.setAllowedToVote(csvDto.getAllowedToVote());
+            resultList.add(single);
+        }
+        obwodowaController.create(resultList);        
     }
 
     /**

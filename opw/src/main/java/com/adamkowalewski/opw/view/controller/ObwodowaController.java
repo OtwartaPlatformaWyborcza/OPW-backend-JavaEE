@@ -32,7 +32,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 /**
- * Provides reusable logic around Komisja Obwodowa. 
+ * Provides reusable logic around Komisja Obwodowa.
  *
  * @author Adam Kowalewski
  */
@@ -45,6 +45,12 @@ public class ObwodowaController implements Serializable {
 
     public void create(OpwObwodowaKomisja okregowa) {
         bean.create(okregowa);
+    }
+
+    public void create(List<OpwObwodowaKomisja> obwodowaList) {
+        for (OpwObwodowaKomisja obwodowa : obwodowaList) {
+            bean.create(obwodowa);
+        }
     }
 
     public void edit(OpwObwodowaKomisja okregowa) {

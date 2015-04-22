@@ -167,7 +167,7 @@ public class OpwOkregowaKomisja implements Serializable {
 
     @Override
     public String toString() {
-        return "com.adamkowalewski.opw.entity.OpwOkregowaKomisja[ id=" + id + " ]";
+        return name; //"com.adamkowalewski.opw.entity.OpwOkregowaKomisja[ id=" + id + " ]";
     }
     
 }

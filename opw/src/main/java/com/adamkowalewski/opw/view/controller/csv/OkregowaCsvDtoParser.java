@@ -10,7 +10,7 @@ import com.googlecode.jcsv.reader.CSVEntryParser;
  * Given csv file format is:
  * pkwId;numer i siedziba;województwo;powiaty;Miasta na prawach powiatu
  */
-public class OkregowaCsvDtoParser implements CSVEntryParser<OkregowaCsvDto> {
+class OkregowaCsvDtoParser implements CSVEntryParser<OkregowaCsvDto> {
 
     /**
      * Converts a row of the csv file to a java object
@@ -19,11 +19,11 @@ public class OkregowaCsvDtoParser implements CSVEntryParser<OkregowaCsvDto> {
      */
     @Override
     public OkregowaCsvDto parseEntry(String... values) {
-        int pkwId = Integer.parseInt(values[0]);
-        String name = values[1];
+        int pkwId = Integer.parseInt(values[0].trim());
+        String name = values[1].trim();
         // We are currently not using values[2] (województwo)
-        String powiaty = values[3];
-        String miasta = values[4];
+        String powiaty = values[3].trim();
+        String miasta = values[4].trim();
         return new OkregowaCsvDto(pkwId, name, powiaty, miasta);
     }
 }

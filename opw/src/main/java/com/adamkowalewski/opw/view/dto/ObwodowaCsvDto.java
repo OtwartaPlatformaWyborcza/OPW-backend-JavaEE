@@ -23,6 +23,9 @@
  */
 package com.adamkowalewski.opw.view.dto;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 /**
  * DTO used for CSV import of Komisja Obwodowa.
  *
@@ -32,16 +35,31 @@ package com.adamkowalewski.opw.view.dto;
 public class ObwodowaCsvDto {
 
     private int okregowaPkwId;
-    private String pkwId, name, address, type;
+    private String pkwId;
+    private int obwodNr;
+    private String name;
+    private String address;
+    private String type;
     private int allowedToVote;
     private boolean duplicate;
 
     public ObwodowaCsvDto() {
     }
 
-    public ObwodowaCsvDto(int okregowaPkwId, String pkwId, String name, String address, String type, int allowedToVote, boolean duplicate) {
+    public ObwodowaCsvDto(int okregowaPkwId, String pkwId, int obwodNr, String name, String address, String type, int allowedToVote) {
         this.okregowaPkwId = okregowaPkwId;
         this.pkwId = pkwId;
+        this.obwodNr = obwodNr;
+        this.name = name;
+        this.address = address;
+        this.type = type;
+        this.allowedToVote = allowedToVote;
+    }
+
+    public ObwodowaCsvDto(int okregowaPkwId, String pkwId, int obwodNr, String name, String address, String type, int allowedToVote, boolean duplicate) {
+        this.okregowaPkwId = okregowaPkwId;
+        this.pkwId = pkwId;
+        this.obwodNr = obwodNr;
         this.name = name;
         this.address = address;
         this.type = type;
@@ -63,6 +81,14 @@ public class ObwodowaCsvDto {
 
     public void setPkwId(String pkwId) {
         this.pkwId = pkwId;
+    }
+
+    public int getObwodNr() {
+        return obwodNr;
+    }
+
+    public void setObwodNr(int obwodNr) {
+        this.obwodNr = obwodNr;
     }
 
     public String getName() {
@@ -105,4 +131,47 @@ public class ObwodowaCsvDto {
         this.duplicate = duplicate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ObwodowaCsvDto that = (ObwodowaCsvDto) o;
+
+        return Objects.equal(okregowaPkwId, that.okregowaPkwId)
+                && Objects.equal(pkwId, that.pkwId)
+                && Objects.equal(obwodNr, that.obwodNr)
+                && Objects.equal(name, that.name)
+                && Objects.equal(address, that.address)
+                && Objects.equal(type, that.type)
+                && Objects.equal(allowedToVote, that.allowedToVote);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(
+                okregowaPkwId,
+                pkwId,
+                obwodNr,
+                name,
+                address,
+                type,
+                allowedToVote,
+                duplicate
+        );
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("okregowaPkwId", okregowaPkwId)
+                .add("pkwId", pkwId)
+                .add("obwodNr", obwodNr)
+                .add("name", name)
+                .add("address", address)
+                .add("type", type)
+                .add("allowedToVote", allowedToVote)
+                .add("duplicate", duplicate)
+                .toString();
+    }
 }

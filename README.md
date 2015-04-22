@@ -167,14 +167,14 @@ Plan implementacji
 * [DONE] OPW-T-6 Autoryzacja i autentyfikacja użytkowników
 * [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
 * [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
-* [WiP] REST API dla klienta AngularJS 
-* [WiP] REST API dla klienta jQuery 
-* [WiP] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta 
+* [DONE] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta 
 * [DONE] [OPW-T-2](https://trello.com/c/9LQ9Atld/11-opw-t-2-konfiguracja-sfl4j-jako-g-ownego-loggera-aplikacji) Integracja SFL4J
 
 ### Wersja 0.6
 * [WiP] Definicja infrastruktury na nadchodzące wybory
 * [WiP] Definicja szablonu SMS
+* [WiP] REST API dla klienta AngularJS 
+* [WiP] REST API dla klienta jQuery 
 * Pełna integracja z aplikacją OPW-client
 * Pełna integracja z aplikacją OPW-dashboard
 

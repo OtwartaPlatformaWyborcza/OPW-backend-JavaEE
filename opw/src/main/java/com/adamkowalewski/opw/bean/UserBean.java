@@ -77,8 +77,8 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
         OpwUser user = this.findUser(login);
         if (user != null) {
             String pwd = saltPassword(appSalt, user.getSalt(), password);
-
-            if (pwd.equals(user.getPassword())) {
+            
+            if (pwd.equals(user.getPassword()) && user.getActive()) {
                 return user;
             }
         }

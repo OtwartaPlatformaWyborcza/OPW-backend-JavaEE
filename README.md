@@ -165,8 +165,8 @@ Plan implementacji
 
 ### Wersja 0.5
 * [DONE] OPW-T-6 Autoryzacja i autentyfikacja użytkowników
-* [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
-* [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
+* [WiP] [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
+* [WiP] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
 * [DONE] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta 
 * [DONE] [OPW-T-2](https://trello.com/c/9LQ9Atld/11-opw-t-2-konfiguracja-sfl4j-jako-g-ownego-loggera-aplikacji) Integracja SFL4J
 

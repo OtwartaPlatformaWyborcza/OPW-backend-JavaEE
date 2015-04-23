@@ -91,7 +91,7 @@ public class ImportController implements Serializable {
      */
     public List<OkregowaCsvDto> parseOkregowa(InputStream content)
             throws IOException, IndexOutOfBoundsException, NumberFormatException, PatternSyntaxException {
-        // TODO check duplicates
+        
         List<OkregowaCsvDto> okregowaList = okregowaCsvDtoReader().readAllFrom(content);
 
         for (OkregowaCsvDto okregowa : okregowaList) {
@@ -151,14 +151,14 @@ public class ImportController implements Serializable {
         obwodowaController.create(resultList);        
     }
 
-    /**
-     * TODO OPW-A-2
-     *
-     * @MOCK!
-     * @param content
-     * @return
-     */
+
     public List<ObwodowaCsvDto> parseObwodowa(InputStream content) throws IOException {
-        return obwodowaCsvDtoReader().readAllFrom(content);
+        
+        List<ObwodowaCsvDto> obwodowaList = obwodowaCsvDtoReader().readAllFrom(content);
+        
+        for (ObwodowaCsvDto obwodowa : obwodowaList) {
+            obwodowa.setDuplicate(obwodowaController.isDuplicate(obwodowa.getPkwId()));
+        }        
+        return obwodowaList;
     }
 }

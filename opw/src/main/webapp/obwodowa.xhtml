@@ -21,12 +21,16 @@
             <h:form id="frmList">
                 <p:dataTable id="tblOkr" emptyMessage="#{messages.obwodowaListEmpty}" 
                              value="#{obwodowaHandler.instanceList}" var="i" 
-                             sortBy="#{i.pkwId}">
+                             sortBy="#{i.obwodNr}">
 
                     <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
                         <h:outputText value="#{i.pkwId}"/>
                     </p:column>
-
+                    
+                    <p:column headerText="#{messages.obwodNr}" sortBy="#{i.obwodNr}">
+                        <h:outputText value="#{i.obwodNr}"/>
+                    </p:column>
+                    
                     <p:column headerText="#{messages.name}" sortBy="#{i.name}">
                         <h:outputText value="#{i.name}"/>
                     </p:column>

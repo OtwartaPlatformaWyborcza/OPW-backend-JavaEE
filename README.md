@@ -164,7 +164,7 @@ Plan implementacji
 * [DONE] Migracja repozytoriów do organizacji
 * [DONE] Wykonanie mockup serwisów REST dla klientów
 
-### Wersja 0.5
+### Wersja 0.5 [wydana 2015.04.24]
 * [DONE] OPW-T-6 Autoryzacja i autentyfikacja użytkowników
 * [DONE] [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
 * [DONE] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta 

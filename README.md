@@ -173,20 +173,23 @@ Plan implementacji
 
 ### Wersja 0.6
 * [WiP] Definicja infrastruktury na nadchodzące wybory
-* [WiP] Definicja szablonu SMS
 * [WiP] REST API dla klienta AngularJS 
 * [WiP] REST API dla klienta jQuery 
 * Pełna integracja z aplikacją OPW-client
 * Pełna integracja z aplikacją OPW-dashboard
 
 ### Wersja 0.8
-* Podbieranie protokołów przesłanych na skrzynke pocztową
-* Automatyczne parsowanie protokołów ze skrzynki pocztowej
-  * import poprawnych protokołów
-  * tagowanie błędnych protokołów  
+* tagowanie błędnych protokołów  
 
 ### Wersja 1.0
 * Backend w Java EE
 * Maski administratora w JSF
 * Maski użytkowników w HTML - AngularJS + REST 
 * Wyniki wyborów w HTML - jQuery + REST
+
+### Wersja 1.1
+* [WiP] Definicja szablonu SMS
+* Podbieranie protokołów przesłanych na skrzynke pocztową
+* Automatyczne parsowanie protokołów ze skrzynki pocztowej
+  * import poprawnych protokołów
+  * tagowanie błędnych protokołów  

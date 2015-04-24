@@ -41,12 +41,12 @@
                                    offLabel="#{messages.userAccountInactive}" 
                                    disabled="#{userHandler.viewMode}" />
                 </h:panelGrid>
-                
+
                 <h:commandLink id="btnCancel" class="btn btn" immediate="true"
                                value="#{messages.cancel}" 
                                action="#{userHandler.cancel()}" 
                                rendered="#{not userHandler.viewMode}"/>
-                
+
                 <h:commandLink id="btnSave" class="btn" 
                                value="#{messages.submit}" 
                                action="#{userHandler.edit()}"
@@ -56,13 +56,13 @@
                                value="#{messages.edit}"
                                action="#{userHandler.prepareEdit()}"
                                rendered="#{userHandler.viewMode}"/>
-                
+
                 <h:commandLink id="btnNewPwd" class="btn" immediate="true"
                                value="#{messages.userResetPwd}"
                                action="#{userHandler.resetPassword()}"
                                rendered="#{not userHandler.viewMode}"/>
                 <br/>
-                
+
                 <h:commandLink id="btnDel" class="btn btnred" immediate="true"
                                value="#{messages.delete}"
                                action="#{userHandler.delete()}"
@@ -70,6 +70,52 @@
 
             </h:form>
         </div>
+        <div class="right box box_blue box550">
+            <h2>#{messages.userObwodowe}</h2>
+            <h:form id="frmMyObwodowa">
+                <h:panelGrid columns="2" cellspacing="7">
+                    <h:outputLabel for="obw" id="obwL" value="#{messages.firstname}" />
+                    <h:outputText value=" "/>
+
+                    <p:inputText id="obw" value="#{userHandler.instance.firstname}"
+                                 disabled="#{userHandler.viewMode}" required="true" />
+                </h:panelGrid>
+            </h:form>
+            <br/>
+        </div>
+        <div class="clear"></div>
+
+        <div class="right box box_blue">
+            <h:form id="obwDel">
+
+                <p:dataTable id="tblObw" emptyMessage="#{messages.obwodowaListEmpty}" 
+                             value="#{userHandler.instance.opwObwodowaKomisjaList}" var="i" >
+
+                    <p:column headerText="#{messages.nr}" >
+                        <h:outputText value="#{i.pkwId}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.obwodNr}" >
+                        <h:outputText value="#{i.obwodNr}"/>
+                    </p:column>    
+
+                    <p:column headerText="#{messages.name}" >
+                        <h:outputText value="#{i.name}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.address}">
+                        <h:outputText value="#{i.address}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.okregowaEditTitle}" >
+                        <h:outputText value="#{i.opwOkregowaKomisjaId.name}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+        </div>
+
     </ui:define>
 
 </ui:composition>

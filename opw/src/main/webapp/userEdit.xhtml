@@ -71,14 +71,20 @@
             </h:form>
         </div>
         <div class="right box box_blue box550">
-            <h2>#{messages.userObwodowe}</h2>
+            <h2>#{messages.userAddObwodowa}</h2>
             <h:form id="frmMyObwodowa">
                 <h:panelGrid columns="2" cellspacing="7">
-                    <h:outputLabel for="obw" id="obwL" value="#{messages.firstname}" />
+                    <h:outputLabel for="obw" id="obwL" value="#{messages.pkwId}" />
                     <h:outputText value=" "/>
 
-                    <p:inputText id="obw" value="#{userHandler.instance.firstname}"
+                    <p:inputText id="obw" value="#{userHandler.obwodowaPkwId}"
                                  disabled="#{userHandler.viewMode}" required="true" />
+
+                    <h:commandLink id="btnAddObwodowa" class="btn"
+                                   value="#{messages.add}"
+                                   action="#{userHandler.addObwodowa()}"
+                                   rendered="#{not userHandler.viewMode}"/>
+
                 </h:panelGrid>
             </h:form>
             <br/>
@@ -86,12 +92,13 @@
         <div class="clear"></div>
 
         <div class="right box box_blue">
+            <h2>#{messages.userObwodowe}</h2>
             <h:form id="obwDel">
 
                 <p:dataTable id="tblObw" emptyMessage="#{messages.obwodowaListEmpty}" 
                              value="#{userHandler.instance.opwObwodowaKomisjaList}" var="i" >
 
-                    <p:column headerText="#{messages.nr}" >
+                    <p:column headerText="#{messages.pkwId}" >
                         <h:outputText value="#{i.pkwId}"/>
                     </p:column>
 
@@ -105,10 +112,10 @@
 
                     <p:column headerText="#{messages.address}">
                         <h:outputText value="#{i.address}"/>
-                    </p:column>
-
-                    <p:column headerText="#{messages.okregowaEditTitle}" >
-                        <h:outputText value="#{i.opwOkregowaKomisjaId.name}"/>
+                    </p:column>                    
+                    
+                    <p:column headerText="#{messages.action}" >
+                        <h:commandLink value="#{messages.delete}" action="#{userHandler.delObwodowa(i.pkwId)}"/>
                     </p:column>
 
                 </p:dataTable>

@@ -43,8 +43,8 @@ public class ObwodowaController implements Serializable {
     @EJB
     ObwodowaBean bean;
 
-    public void create(OpwObwodowaKomisja okregowa) {
-        bean.create(okregowa);
+    public void create(OpwObwodowaKomisja obwodowa) {
+        bean.create(obwodowa);
     }
 
     public void create(List<OpwObwodowaKomisja> obwodowaList) {
@@ -63,6 +63,10 @@ public class ObwodowaController implements Serializable {
 
     public void edit(OpwObwodowaKomisja okregowa) {
         bean.edit(okregowa);
+    }
+    
+    public OpwObwodowaKomisja findByPkwId(String pkwId) {
+        return bean.findObwodowa(pkwId);
     }
 
     public List<OpwObwodowaKomisja> findAll() {

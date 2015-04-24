@@ -171,6 +171,7 @@ Plan implementacji
 * [DONE] [OPW-T-2](https://trello.com/c/9LQ9Atld/11-opw-t-2-konfiguracja-sfl4j-jako-g-ownego-loggera-aplikacji) Integracja SFL4J
 
 ### Wersja 0.6
+* [DONE] [OPW-A-9](https://trello.com/c/X87QydDf/18-opw-a-9-crud-dla-listy-komisji-obwodowych-przypisanych-do-u-ytkownika) CRUD listy Komisji Obwodowych przypisanych do użytkownika.
 * [WiP] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
 * [WiP] REST API dla klienta AngularJS 
 * [WiP] Pełna integracja z aplikacją OPW-client

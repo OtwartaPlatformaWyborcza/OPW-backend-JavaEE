@@ -53,6 +53,11 @@ public class ObwodowaHandler extends AbstractCrudHandler<OpwObwodowaKomisja> imp
         VIEW_ID_CREATE = "obwodowaCreate";
     }
 
+    public String delete() {
+        obwodowaController.delete(instance);
+        return VIEW_ID;
+    }
+
     @Override
     public String create() {
         obwodowaController.create(instance);

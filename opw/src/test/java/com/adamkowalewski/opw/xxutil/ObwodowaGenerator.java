@@ -48,8 +48,8 @@ public class ObwodowaGenerator {
 //14;106101-1;1;P;Studio Consulting Sp. z o.o.; ul. Romanowska 55E, 91-174 Łódź;1234
 //14;106101-2;2;P;Studio Consulting Sp. z o.o.; ul. Romanowska 55E, 91-174 Łódź;1234
     public static void main(String[] args) {
-        for (int i = 1; i < 10; i++) {
-            System.out.println("14;106102-" + i + ";" + i + ";P;Lokal ABC-" + i + ";ul. Wiejska 1-" + i + " 91-174 Łódź;" + new Random().nextInt(3000));
+        for (int i = 1; i < 555; i++) {
+            System.out.println("14;106102-" + i + ";" + i + ";P;Lokal wyborczy Bałuty Nr. " + i + ";ul. Romanowska 1-" + i + " 91-174 Łódź-Bałuty;" + new Random().nextInt(3000));
         }
     }
 }

@@ -52,9 +52,13 @@ public class ObwodowaController implements Serializable {
             bean.create(obwodowa);
         }
     }
-    
+
     public boolean isDuplicate(String pkwId) {
         return bean.isDuplicate(pkwId);
+    }
+
+    public void delete(OpwObwodowaKomisja obwodowa) {
+        bean.remove(obwodowa);
     }
 
     public void edit(OpwObwodowaKomisja okregowa) {

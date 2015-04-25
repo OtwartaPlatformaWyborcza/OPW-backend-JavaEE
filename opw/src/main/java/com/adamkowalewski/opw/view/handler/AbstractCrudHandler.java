@@ -58,7 +58,7 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
     public String prepareView(T r) {
         instance = r;
         viewMode = true;
-        return VIEW_ID_EDIT;
+        return VIEW_ID_EDIT + "?faces-redirect=true";
     }
 
     public String prepareEdit(T r) {
@@ -75,7 +75,7 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
     @Override
     public String cancel() {
         viewMode = true;
-        return VIEW_ID;
+        return VIEW_ID + "?faces-redirect=true";
     }
 
     public boolean isViewMode() {

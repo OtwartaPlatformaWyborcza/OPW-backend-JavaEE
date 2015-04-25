@@ -66,7 +66,7 @@
                 <h:commandLink id="btnDel" class="btn btnred" immediate="true"
                                value="#{messages.delete}"
                                action="#{userHandler.delete()}"
-                               rendered="#{not userHandler.viewMode}"/>
+                               rendered="#{(not userHandler.viewMode) and identity.userId == 1}"/>
 
             </h:form>
         </div>

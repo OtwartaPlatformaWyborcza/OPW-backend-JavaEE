@@ -225,15 +225,17 @@ h1 {
     background-color: #962D22;
 }
 
-.in120{width: 120px; margin-right: 5px;}
-.in150{width: 150px; margin-right: 5px;}
-.in200{width: 200px; margin-right: 5px;}
-.in230{width: 230px; margin-right: 5px;}
-.in250{width: 250px; margin-right: 5px;}
-.in350{width: 350px; margin-right: 5px;}
+.in80{width: 80px;}
+.in120{width: 120px;}
+.in150{width: 150px;}
+.in200{width: 200px;}
+.in230{width: 230px;}
+.in250{width: 250px;}
+.in350{width: 350px;}
 
 .ml50{margin-left: 50px;}
 
+.mr5{margin-right: 5px;}
 .mr50{margin-right: 50px;}
 
 label {

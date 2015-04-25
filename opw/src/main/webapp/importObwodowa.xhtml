@@ -33,11 +33,11 @@
         <ui:fragment rendered="#{not empty importObwodowaHandler.uploadList}">
             <p:dataTable id="tblOkrImp" rowIndexVar="rowIndex" resizableColumns="true"
                          rendered="#{not empty importObwodowaHandler.uploadList}"
-                         value="#{importObwodowaHandler.uploadList}" var="i" tableStyle="width:auto">
-                <p:column headerText="#">
+                         value="#{importObwodowaHandler.uploadList}" var="i">
+                <p:column headerText="#" styleClass="in80">
                     #{rowIndex+1}
                 </p:column>
-                <p:column headerText="#{messages.pkwId}">
+                <p:column headerText="#{messages.pkwId}" styleClass="in120" >
                     <h:outputText value="#{i.pkwId}"/>
                 </p:column>
                 <p:column headerText="#{messages.name}">
@@ -46,14 +46,14 @@
                 <p:column headerText="#{messages.address}">
                     <h:outputText value="#{i.address}"/>
                 </p:column>
-                <p:column headerText="#{messages.obwodowaType}">
+                <p:column headerText="#{messages.obwodowaType}" styleClass="in80">
                     <h:outputText value="#{i.type}"/>
                 </p:column>
-                <p:column headerText="#{messages.allowedToVote}">
+                <p:column headerText="#{messages.allowedToVote}" styleClass="in80">
                     <h:outputText value="#{i.allowedToVote}"/>
                 </p:column>                
 
-                <p:column headerText="#{messages.entityStatus}">
+                <p:column headerText="#{messages.entityStatus}" styleClass="in80">
                     <h:outputText value="#{messages.entityNew}" rendered="#{not i.duplicate}"/>
                     <h:outputText value="#{messages.entityDuplicate}" rendered="#{i.duplicate}"/>
                 </p:column>

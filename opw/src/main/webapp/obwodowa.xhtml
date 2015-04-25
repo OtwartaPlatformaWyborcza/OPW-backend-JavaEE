@@ -21,16 +21,23 @@
             <h:form id="frmList">
                 <p:dataTable id="tblOkr" emptyMessage="#{messages.obwodowaListEmpty}" 
                              value="#{obwodowaHandler.instanceList}" var="i" 
-                             sortBy="#{i.obwodNr}">
+                             sortBy="#{i.obwodNr}" 
+                             rows="100" paginator="true"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="50,100,300,500">
 
-                    <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
+                    <p:column headerText="#{messages.pkwId}" sortBy="#{i.pkwId}" styleClass="in120" >
                         <h:outputText value="#{i.pkwId}"/>
                     </p:column>
-                    
-                    <p:column headerText="#{messages.obwodNr}" sortBy="#{i.obwodNr}">
+
+                    <p:column headerText="#{messages.obwod}" sortBy="#{i.obwodNr}" styleClass="in80">
                         <h:outputText value="#{i.obwodNr}"/>
                     </p:column>
-                    
+
+                    <p:column headerText="#{messages.okreg}" sortBy="#{i.opwOkregowaKomisjaId.pkwId}" styleClass="in80">
+                        <h:outputText value="#{i.opwOkregowaKomisjaId.pkwId}"/>
+                    </p:column>
+
                     <p:column headerText="#{messages.name}" sortBy="#{i.name}">
                         <h:outputText value="#{i.name}"/>
                     </p:column>
@@ -39,11 +46,7 @@
                         <h:outputText value="#{i.address}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.okregowaEditTitle}" sortBy="#{i.opwOkregowaKomisjaId.name}">
-                        <h:outputText value="#{i.opwOkregowaKomisjaId.name}"/>
-                    </p:column>
-
-                    <p:column headerText="#{messages.action}">
+                    <p:column headerText="#{messages.action}" styleClass="in80">
                         <h:commandLink id="btnView" value="#{messages.display}"
                                        action="#{obwodowaHandler.prepareView(i)}"/>
                     </p:column>

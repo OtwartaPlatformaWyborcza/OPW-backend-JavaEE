@@ -25,11 +25,16 @@ package com.adamkowalewski.opw.webservice.controller;
 
 import com.adamkowalewski.opw.bean.KandydatBean;
 import com.adamkowalewski.opw.bean.ObwodowaBean;
+import com.adamkowalewski.opw.bean.UserBean;
+import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.entity.OpwWynik;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
 import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
+import com.adamkowalewski.opw.webservice.dto.WynikDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,9 +58,13 @@ public class KomisjaServiceEjb implements Serializable {
     @Inject
     SecurityHandler securityHandler;
     @EJB
+    UserBean userBean;
+    @EJB
     ObwodowaBean obwodowaBean;
     @EJB
     KandydatBean kandydatBean;
+    @EJB
+    WynikBean wynikBean;
 
     public KomisjaServiceEjb() {
     }
@@ -76,6 +85,45 @@ public class KomisjaServiceEjb implements Serializable {
         }
         logger.error("REST loadObwodowa() unauthorized access  {} - {}", login, token);
         return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    public Response uploadWynik(String pkwId, String login, String token, WynikDto wynik) {
+        System.out.println("wynik " + wynik);
+        
+        if (securityHandler.checkUser(login, token)) {
+            OpwUser user = userBean.find(securityHandler.getUserMap().get(login).getUserId());
+            OpwObwodowaKomisja obwodowa = obwodowaBean.findObwodowa(pkwId);
+
+            OpwWynik w = new OpwWynik();
+            w.setOpwUserId(user);
+            w.setOpwObwodowaKomisjaId(obwodowa);
+
+            w.setVotersValid(wynik.getUprawnionych());
+            w.setVotersAmount(wynik.getGlosujacych());
+            w.setCardsValid(wynik.getKartWarznych());
+//            w.setVotesInvalid(wynik.);
+            w.setVotesValid(wynik.getGlosowWarznych());
+            w.setActive(Boolean.TRUE);
+
+            w.setK1(wynik.getK1());
+            w.setK2(wynik.getK2());
+            w.setK3(wynik.getK3());
+            w.setK4(wynik.getK4());
+            w.setK5(wynik.getK5());
+            w.setK6(wynik.getK6());
+            w.setK7(wynik.getK7());
+            w.setK8(wynik.getK8());
+            w.setK9(wynik.getK9());
+            w.setK10(wynik.getK10());
+            w.setK11(wynik.getK11());
+            
+            wynikBean.create(w);
+            
+            return Response.status(Response.Status.OK).build();
+        }
+        logger.error("REST uploadWynik() unauthorized access  {} - {}", login, token);
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+
     }
 
     public List<KandydatDto> findKandydatAllDto() {

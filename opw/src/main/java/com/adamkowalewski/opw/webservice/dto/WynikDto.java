@@ -23,7 +23,6 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,7 +41,7 @@ public class WynikDto {
     private int kartNieWarznych;
     private int glosowWarznych;
 
-    private List<KandydatDto> kandydatList;
+    private Short k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
 
     public WynikDto() {
     }
@@ -87,22 +86,113 @@ public class WynikDto {
         this.glosowWarznych = glosowWarznych;
     }
 
-    public List<KandydatDto> getKandydatList() {
-        return kandydatList;
+    public Short getK1() {
+        return k1;
     }
 
-    public void setKandydatList(List<KandydatDto> kandydatList) {
-        this.kandydatList = kandydatList;
+    public void setK1(Short k1) {
+        this.k1 = k1;
+    }
+
+    public Short getK2() {
+        return k2;
+    }
+
+    public void setK2(Short k2) {
+        this.k2 = k2;
+    }
+
+    public Short getK3() {
+        return k3;
+    }
+
+    public void setK3(Short k3) {
+        this.k3 = k3;
+    }
+
+    public Short getK4() {
+        return k4;
+    }
+
+    public void setK4(Short k4) {
+        this.k4 = k4;
+    }
+
+    public Short getK5() {
+        return k5;
+    }
+
+    public void setK5(Short k5) {
+        this.k5 = k5;
+    }
+
+    public Short getK6() {
+        return k6;
+    }
+
+    public void setK6(Short k6) {
+        this.k6 = k6;
+    }
+
+    public Short getK7() {
+        return k7;
+    }
+
+    public void setK7(Short k7) {
+        this.k7 = k7;
+    }
+
+    public Short getK8() {
+        return k8;
+    }
+
+    public void setK8(Short k8) {
+        this.k8 = k8;
+    }
+
+    public Short getK9() {
+        return k9;
+    }
+
+    public void setK9(Short k9) {
+        this.k9 = k9;
+    }
+
+    public Short getK10() {
+        return k10;
+    }
+
+    public void setK10(Short k10) {
+        this.k10 = k10;
+    }
+
+    public Short getK11() {
+        return k11;
+    }
+
+    public void setK11(Short k11) {
+        this.k11 = k11;
     }
 
     @Override
     public String toString() {
-        return "WynikDto{" + "uprawnionych=" + uprawnionych 
-                + ", glosujacych=" + glosujacych 
-                + ", kartWarznych=" + kartWarznych 
-                + ", kartNieWarznych=" + kartNieWarznych 
-                + ", glosowWarznych=" + glosowWarznych 
-                + ", kandydatList=" + kandydatList + '}';
+        return "WynikDto{" + "uprawnionych=" + uprawnionych
+                + ", glosujacych=" + glosujacych
+                + ", kartWarznych=" + kartWarznych
+                + ", kartNieWarznych=" + kartNieWarznych
+                + ", glosowWarznych=" + glosowWarznych
+                + ", k1=" + k1
+                + ", k2=" + k2
+                + ", k3=" + k3
+                + ", k4=" + k4
+                + ", k5=" + k5
+                + ", k6=" + k6
+                + ", k7=" + k7
+                + ", k8=" + k8
+                + ", k9=" + k9
+                + ", k10=" + k10
+                + ", k11=" + k11
+                + '}';
     }
 
 }

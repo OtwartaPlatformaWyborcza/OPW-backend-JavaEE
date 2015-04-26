@@ -23,42 +23,34 @@
  */
 package com.adamkowalewski.opw.bean;
 
-import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.entity.OpwWynik;
+import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Provides access to Kandydat.
- *
+ * Provides access to wynik.
+ * 
  * @author Adam Kowalewski
  */
 @Stateless
-public class KandydatBean extends AbstractOpwFacade<OpwKandydat> {
+public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(WynikBean.class);
 
     @PersistenceContext(unitName = PU_OPW)
     private EntityManager em;
 
-    public KandydatBean() {
-        super(OpwKandydat.class);
+    public WynikBean() {
+        super(OpwWynik.class);
     }
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    /**
-     * Returns fullname for a Kandydat.
-     *
-     * TODO reconsider usage of patterns as well as UPPERCASE
-     * @param kandydat instance of entity.
-     * @return String representation of fullname.
-     * @author Adam Kowalewski
-     * @version 2015.04.10
-     */
-    public String getFullname(OpwKandydat kandydat) {
-        return kandydat.getLastname() + " " + kandydat.getFirstname();
     }
 
 }

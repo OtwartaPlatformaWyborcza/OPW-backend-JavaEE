@@ -28,10 +28,16 @@ import com.adamkowalewski.opw.webservice.dto.WynikDto;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  * REST Service represents komisja perspective.
@@ -42,7 +48,6 @@ import javax.validation.constraints.NotNull;
 @RequestScoped
 public class KomisjaService extends AbstractService {
 
-    
     @EJB
     KomisjaServiceEjb komisjaServiceEjb;
 
@@ -66,15 +71,18 @@ public class KomisjaService extends AbstractService {
     @Path("/{pkwId}/protokol")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response uploadWyniki(
-            @NotNull @PathParam("pkwId") String pkwId, 
+    public Response uploadWynik(
+            @NotNull @PathParam("pkwId") String pkwId,
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
             @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug, 
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
             WynikDto wynik) {
 
-        System.out.println("wynik " + wynik.toString());
-        return Response.noContent().build();
+        if (debug != null) {
+            return mockServerError();
+        }
+
+        return komisjaServiceEjb.uploadWynik(pkwId, login, token, wynik);
     }
 
 }

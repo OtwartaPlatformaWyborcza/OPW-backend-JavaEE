@@ -2,11 +2,29 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                template="./WEB-INF/opwTemplate.xhtml">
+                template="./WEB-INF/opwTemplate.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
         <h1>Strona glowna</h1>
-        
-        
+        <p>Sec: #{securityHandler.userMap.size()}</p>
+
+        #{securityHandler.refreshUserList()}
+        <p:dataTable value="#{securityHandler.userList}" var="i">
+            <p:column headerText="userId" styleClass="in80">
+                #{i.userId}
+            </p:column>
+            <p:column headerText="login" styleClass="in250">
+                #{i.login}
+            </p:column>
+            <p:column headerText="token" >
+                #{i.token}
+            </p:column>
+            <p:column headerText="valid" styleClass="in150">
+                <h:outputText value="#{i.validTo}">
+                    <f:convertDateTime pattern="dd.MM.yy HH:mm"/>
+                </h:outputText>
+            </p:column>
+        </p:dataTable>
     </ui:define>
 </ui:composition>

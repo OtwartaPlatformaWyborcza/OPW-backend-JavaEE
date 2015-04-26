@@ -68,7 +68,7 @@ public abstract class AbstractService {
         return apiToken.equals(mockAPITokenId);
     }
 
-    Response mockServerError() {
+    Response mockServerError() {        
         return Response.serverError().build();
     }
 

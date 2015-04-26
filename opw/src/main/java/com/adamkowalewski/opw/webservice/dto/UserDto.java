@@ -38,24 +38,26 @@ public class UserDto implements Serializable {
 
     private int id;
     private String fullname;
+    private String firstname;
+    private String lastname;
+    private String login;
     private String token;
-    private boolean activeSession;
+    private boolean sessionActive;
+    private String sessionTimeout;
 
     public UserDto() {
     }
 
-    public UserDto(int id, String fullname, String token, boolean activeSession) {
+    public UserDto(int id, String firstname, String lastname, String login, String token, boolean sessionActive, String sessionTimeout) {
         this.id = id;
-        this.fullname = fullname;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.fullname = firstname + " " + lastname;
+        this.login = login;
         this.token = token;
-        this.activeSession = activeSession;
+        this.sessionActive = sessionActive;
+        this.sessionTimeout = sessionTimeout;
     }
-
-    public UserDto(boolean activeSession) {
-        this.activeSession = activeSession;
-    }
-
-
 
     public int getId() {
         return id;
@@ -73,6 +75,30 @@ public class UserDto implements Serializable {
         this.fullname = fullname;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getToken() {
         return token;
     }
@@ -81,12 +107,20 @@ public class UserDto implements Serializable {
         this.token = token;
     }
 
-    public boolean isActiveSession() {
-        return activeSession;
+    public boolean isSessionActive() {
+        return sessionActive;
     }
 
-    public void setActiveSession(boolean activeSession) {
-        this.activeSession = activeSession;
+    public void setSessionActive(boolean sessionActive) {
+        this.sessionActive = sessionActive;
+    }
+
+    public String getSessionTimeout() {
+        return sessionTimeout;
+    }
+
+    public void setSessionTimeout(String sessionTimeout) {
+        this.sessionTimeout = sessionTimeout;
     }
 
 }

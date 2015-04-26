@@ -23,8 +23,8 @@
  */
 package com.adamkowalewski.opw.webservice;
 
+import com.adamkowalewski.opw.webservice.controller.UserServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
-import com.adamkowalewski.opw.webservice.dto.UserDto;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
@@ -33,6 +33,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents user perspective.
@@ -41,6 +44,30 @@ import java.util.List;
  */
 @Path("/user")
 public class UserService extends AbstractService {
+
+    private final static Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    @EJB
+    UserServiceEjb userServiceEjb;
+
+    public UserService() {
+    }
+
+    @GET
+    @Path("/login")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response login(
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_PASSWORD) String password,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+
+        if (debug != null) {
+            logger.info("Debug call for login()");
+            return mockServerError();
+        }
+
+        return userServiceEjb.login(login, password);
+    }
 
     @GET
     @Path("/{userId}/obwodowa")
@@ -78,30 +105,6 @@ public class UserService extends AbstractService {
     }
 
     @GET
-    @Path("/login")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response login(
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_PASSWORD) String password,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
-
-        if (debug != null) {
-            return mockServerError();
-        }
-
-        if (login.equals("admin") && password.equals("admin")) {
-            Response response = Response.ok()
-                    .entity(new UserDto(1, "OPW Administrator", mockTokenId, true))
-                    .build();
-            return response;
-        }
-        Response response = Response.status(Response.Status.UNAUTHORIZED)
-                .build();
-
-        return response;
-    }
-
-    @GET
     @Path("/logout")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response logout(
@@ -112,17 +115,8 @@ public class UserService extends AbstractService {
         if (debug != null) {
             return mockServerError();
         }
-        if (verifyAccess(login, token) == false) {
-            Response response = Response.status(Response.Status.UNAUTHORIZED)
-                    .build();
-            return response;
-        }
 
-        Response response = Response.ok()
-                .entity(new UserDto(false))
-                .build();
-
-        return response;
+        return userServiceEjb.logout(login, token);
     }
 
 }

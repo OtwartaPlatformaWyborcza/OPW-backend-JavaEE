@@ -71,6 +71,16 @@ public class SecurityHandler implements Serializable {
         return false;
     }
 
+    public boolean checkUser(String login, String token) {
+        if (userMap.containsKey(login)) {
+            if (token.equals(userMap.get(login).getToken())) {
+                // todo add timeout 
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void clear() {
         userMap = new HashMap<>();
     }

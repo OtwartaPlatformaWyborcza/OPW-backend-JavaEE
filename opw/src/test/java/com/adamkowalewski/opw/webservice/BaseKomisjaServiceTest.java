@@ -17,7 +17,7 @@ public class BaseKomisjaServiceTest extends JerseyTestNg.ContainerPerMethodTest 
     protected static class MockKomisjaServiceFactory implements Factory<KomisjaService> {
         @Override
         public KomisjaService provide() {
-            komisjaService.kandydatEjb = kandydatEjb;
+//            komisjaService.kandydatEjb = kandydatEjb;
             return komisjaService;
         }
 

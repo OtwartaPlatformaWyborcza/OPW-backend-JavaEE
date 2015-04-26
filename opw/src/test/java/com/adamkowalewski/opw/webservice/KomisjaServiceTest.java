@@ -33,7 +33,7 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         Mockito.reset(kandydatEjb);
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldLoadObwodowa() throws Exception {
         // given
         String pkwId = "1212-1";
@@ -70,7 +70,7 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         assertTrue(deepEquals(actualKomisja, ecpectedKomisja));
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldNotLoadObwodowa() throws Exception {
         // given
         String pkwId = "unknown";
@@ -89,7 +89,7 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         assertTrue(content.isEmpty());
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldNotAuthorize() throws Exception {
         // given
         String pkwId = "unknown";
@@ -110,7 +110,7 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         assertTrue(content.isEmpty());
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldNotUploadWyniki() throws Exception {
         // given
         String pkwId = "unknown";

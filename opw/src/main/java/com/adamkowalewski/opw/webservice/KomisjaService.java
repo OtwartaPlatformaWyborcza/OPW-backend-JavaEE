@@ -23,10 +23,7 @@
  */
 package com.adamkowalewski.opw.webservice;
 
-import com.adamkowalewski.opw.webservice.controller.KandydatEjb;
-import com.adamkowalewski.opw.webservice.dto.KandydatDto;
-import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
-import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
+import com.adamkowalewski.opw.webservice.controller.KomisjaServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.WynikDto;
 
 import javax.ejb.EJB;
@@ -34,7 +31,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -46,8 +42,9 @@ import javax.validation.constraints.NotNull;
 @RequestScoped
 public class KomisjaService extends AbstractService {
 
+    
     @EJB
-    KandydatEjb kandydatEjb;
+    KomisjaServiceEjb komisjaServiceEjb;
 
     @GET
     @Path("/{pkwId}")
@@ -61,24 +58,8 @@ public class KomisjaService extends AbstractService {
         if (debug != null) {
             return mockServerError();
         }
-        if (verifyAccess(login, token) == false) {
-            Response response = Response.status(Response.Status.UNAUTHORIZED)
-                    .build();
-            return response;
-        }
 
-        if (pkwId.equals("1212-1")) {
-
-            List<KandydatDto> kandydatList = kandydatEjb.findAllDto();
-
-            KomisjaDto komisja = new KomisjaDto("1212-1", "Koisja obowdow 22", "szkola 11 Liswøł", new OkregowaDto("OKR-ABCD", "Komisja Wawa", "ul. wiejska 11"), kandydatList);
-            Response result = Response.ok().entity(komisja).build();
-
-            return result;
-        }
-
-        Response result = Response.noContent().build();
-        return result;
+        return komisjaServiceEjb.loadObwodowa(pkwId, login, token);
     }
 
     @POST

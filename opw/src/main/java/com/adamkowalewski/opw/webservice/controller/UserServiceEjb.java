@@ -24,16 +24,21 @@
 package com.adamkowalewski.opw.webservice.controller;
 
 import com.adamkowalewski.opw.bean.UserBean;
+import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.OpwConfig;
+import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 import com.adamkowalewski.opw.webservice.dto.UserDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import com.adamkowalewski.opw.webservice.security.SecurityObject;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,4 +113,29 @@ public class UserServiceEjb implements Serializable {
         logger.error("REST logout failed for {} - {}", login, token);
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
+
+    public Response loadObwodowaShortList(int userId, String login, String token) {
+        System.out.println("x" + userId + " "+ login + " " + token);
+
+        if (!securityHandler.checkUser(userId, login, token)) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        OpwUser user = userBean.findUser(userId);
+        
+        List<KomisjaShortDto> resultList = new ArrayList<>();        
+        System.out.println("user obwodowa " + user.getOpwObwodowaKomisjaList().size());
+
+        for (OpwObwodowaKomisja obwodowa : user.getOpwObwodowaKomisjaList()) {
+            resultList.add(new KomisjaShortDto(obwodowa.getId(), obwodowa.getPkwId(), obwodowa.getName(), obwodowa.getAddress(), obwodowa.getOpwWynikList().size()));
+        }
+        System.out.println("obwodowa" + resultList.size());
+
+        GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
+        };
+
+        return Response.ok().entity(result).build();
+
+    }
+
 }

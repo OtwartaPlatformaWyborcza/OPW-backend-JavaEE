@@ -24,15 +24,11 @@
 package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.webservice.controller.UserServiceEjb;
-import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,26 +78,7 @@ public class UserService extends AbstractService {
             return mockServerError();
         }
 
-        if (verifyAccess(login, token) == false) {
-            Response response = Response.status(Response.Status.UNAUTHORIZED)
-                    .build();
-            return response;
-        }
-
-        List<KomisjaShortDto> resultList = new ArrayList<>(29);
-
-        for (int i = 1; i < 30; i++) {
-            resultList.add(new KomisjaShortDto(i, "1212-" + i, "Komisja " + i, "adres " + i));
-        }
-
-        GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
-        };
-
-        Response response = Response.ok()
-                .entity(result)
-                .build();
-
-        return response;
+        return userServiceEjb.loadObwodowaShortList(userId, login, token);
     }
 
     @GET

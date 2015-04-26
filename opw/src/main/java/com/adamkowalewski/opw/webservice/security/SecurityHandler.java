@@ -60,6 +60,17 @@ public class SecurityHandler implements Serializable {
         }
     }
 
+    public boolean checkUser(int userId, String login, String token) {
+        if (userMap.containsKey(login)) {
+            if (userId == userMap.get(login).getUserId()
+                    && token.equals(userMap.get(login).getToken())) {
+                // todo add timeout 
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void clear() {
         userMap = new HashMap<>();
     }

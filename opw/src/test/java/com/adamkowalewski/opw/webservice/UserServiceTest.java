@@ -28,30 +28,30 @@ public class UserServiceTest extends JerseyTestNg.ContainerPerMethodTest {
         return new ResourceConfig(UserService.class);
     }
 
-    @Test(enabled = false)
-    public void shouldLoadObwodowaShortList() throws Exception {
-        // given
-        int userId = 1234;
-        String login = "login";
-        String token = "token1234";
-
-        List<KomisjaShortDto> expectedResult = new ArrayList<>();
-        for (int i = 1; i < 30; i++) {
-            expectedResult.add(new KomisjaShortDto(i, "1212-" + i, "Komisja " + i, "adres " + i));
-        }
-
-        // when
-        Response response = target(format("user/%s/obwodowa", userId)).request()
-                .header(OPW_HEADER_LOGIN, login)
-                .header(OPW_HEADER_TOKEN, token)
-                .get();
-        List<KomisjaShortDto> actualResult = response.readEntity(new GenericType<List<KomisjaShortDto>>() {
-        });
-
-        // then
-        assertEquals(response.getStatus(), OK_200);
-        assertTrue(deepEquals(expectedResult, actualResult));
-    }
+//    @Test(enabled = false)
+//    public void shouldLoadObwodowaShortList() throws Exception {
+//        // given
+//        int userId = 1234;
+//        String login = "login";
+//        String token = "token1234";
+//
+//        List<KomisjaShortDto> expectedResult = new ArrayList<>();
+//        for (int i = 1; i < 30; i++) {
+//            expectedResult.add(new KomisjaShortDto(i, "1212-" + i, "Komisja " + i, "adres " + i));
+//        }
+//
+//        // when
+//        Response response = target(format("user/%s/obwodowa", userId)).request()
+//                .header(OPW_HEADER_LOGIN, login)
+//                .header(OPW_HEADER_TOKEN, token)
+//                .get();
+//        List<KomisjaShortDto> actualResult = response.readEntity(new GenericType<List<KomisjaShortDto>>() {
+//        });
+//
+//        // then
+//        assertEquals(response.getStatus(), OK_200);
+//        assertTrue(deepEquals(expectedResult, actualResult));
+//    }
 
 //    @Test(enabled = false)
 //    public void shouldLogin() throws Exception {

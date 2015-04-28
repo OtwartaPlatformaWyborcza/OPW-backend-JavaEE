@@ -37,9 +37,9 @@ public class WynikDto {
 
     private int uprawnionych;
     private int glosujacych;
-    private int kartWarznych;
-    private int kartNieWarznych;
-    private int glosowWarznych;
+    private int kartWaznych;
+    private int kartNieWaznych;
+    private int glosowWaznych;
 
     private Short k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
 
@@ -62,28 +62,28 @@ public class WynikDto {
         this.glosujacych = glosujacych;
     }
 
-    public int getKartWarznych() {
-        return kartWarznych;
+    public int getKartWaznych() {
+        return kartWaznych;
     }
 
-    public void setKartWarznych(int kartWarznych) {
-        this.kartWarznych = kartWarznych;
+    public void setKartWaznych(int kartWaznych) {
+        this.kartWaznych = kartWaznych;
     }
 
-    public int getKartNieWarznych() {
-        return kartNieWarznych;
+    public int getKartNieWaznych() {
+        return kartNieWaznych;
     }
 
-    public void setKartNieWarznych(int kartNieWarznych) {
-        this.kartNieWarznych = kartNieWarznych;
+    public void setKartNieWaznych(int kartNieWaznych) {
+        this.kartNieWaznych = kartNieWaznych;
     }
 
-    public int getGlosowWarznych() {
-        return glosowWarznych;
+    public int getGlosowWaznych() {
+        return glosowWaznych;
     }
 
-    public void setGlosowWarznych(int glosowWarznych) {
-        this.glosowWarznych = glosowWarznych;
+    public void setGlosowWaznych(int glosowWaznych) {
+        this.glosowWaznych = glosowWaznych;
     }
 
     public Short getK1() {
@@ -172,27 +172,6 @@ public class WynikDto {
 
     public void setK11(Short k11) {
         this.k11 = k11;
-    }
-
-    @Override
-    public String toString() {
-        return "WynikDto{" + "uprawnionych=" + uprawnionych
-                + ", glosujacych=" + glosujacych
-                + ", kartWarznych=" + kartWarznych
-                + ", kartNieWarznych=" + kartNieWarznych
-                + ", glosowWarznych=" + glosowWarznych
-                + ", k1=" + k1
-                + ", k2=" + k2
-                + ", k3=" + k3
-                + ", k4=" + k4
-                + ", k5=" + k5
-                + ", k6=" + k6
-                + ", k7=" + k7
-                + ", k8=" + k8
-                + ", k9=" + k9
-                + ", k10=" + k10
-                + ", k11=" + k11
-                + '}';
     }
 
 }

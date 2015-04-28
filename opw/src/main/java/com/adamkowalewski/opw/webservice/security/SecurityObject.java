@@ -28,8 +28,10 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
+ * DTO represents security object of a REST user.
  *
  * @author Adam Kowalewski
+ * @version 2015.04.28
  */
 public class SecurityObject implements Serializable {
 

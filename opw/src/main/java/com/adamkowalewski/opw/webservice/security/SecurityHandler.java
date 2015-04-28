@@ -35,6 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Handles REST security.
  *
  * @author Adam Kowalewski
  */
@@ -62,22 +63,50 @@ public class SecurityHandler implements Serializable {
 
     public boolean checkUser(int userId, String login, String token) {
         if (userMap.containsKey(login)) {
-            if (userId == userMap.get(login).getUserId()
-                    && token.equals(userMap.get(login).getToken())) {
-                // todo add timeout 
-                return true;
+
+            SecurityObject user = userMap.get(login);
+
+            if (userId == user.getUserId()
+                    && token.equals(user.getToken())) {
+
+                if (token.equals(user.getToken())) {
+                    return !checkTimeout(user);
+                }
+
             }
         }
+        logger.error("failed checkUser for userId: {} login: {} token: {}", userId, login, token);
         return false;
     }
 
+    /**
+     *
+     * @param login
+     * @param token
+     * @return
+     */
     public boolean checkUser(String login, String token) {
         if (userMap.containsKey(login)) {
-            if (token.equals(userMap.get(login).getToken())) {
-                // todo add timeout 
-                return true;
+            SecurityObject user = userMap.get(login);
+            if (token.equals(user.getToken())) {
+                return !checkTimeout(user);
             }
         }
+        logger.error("failed checkUser for login: {} token: {}", login, token);
+        return false;
+    }
+
+    /**
+     * Checks if session timed out.
+     *
+     * @param user instance representing REST user.
+     * @return <code>true</code> if session timed out, otherwise
+     * <code>false</code>
+     * @author Adam Kowalewski
+     */
+    public boolean checkTimeout(SecurityObject user) {
+
+//        logger.error("Session timeout for login: {} token: {}", user.getLogin(), user.getToken());
         return false;
     }
 

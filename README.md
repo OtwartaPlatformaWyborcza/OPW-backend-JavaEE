@@ -173,7 +173,7 @@ Plan implementacji
 ### Wersja 0.6
 * [DONE] [OPW-A-9](https://trello.com/c/X87QydDf/18-opw-a-9-crud-dla-listy-komisji-obwodowych-przypisanych-do-u-ytkownika) CRUD listy Komisji Obwodowych przypisanych do użytkownika.
 * [WiP] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
-* [WiP] REST API dla klienta AngularJS 
+* [DONE] REST API dla klienta AngularJS 
 * [WiP] Pełna integracja z aplikacją OPW-client
 
 

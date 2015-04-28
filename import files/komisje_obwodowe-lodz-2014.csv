@@ -1,4 +1,4 @@
-okregowaId[1-51];obwodId;obwodNr;obwodTyp;obwodName;obwodAddress;allowedToVote
+Nr Komisji Okręgowej[1-51];Kod Komisji Obwodowej;Numer obwodu;Typ Obwodu;Nazwa lokalu;Adres lokalu;Uprawnionych do głosowania
 14;106101-1;1;P; Studio Consulting Sp. z o.o.;ul. Romanowska 55F, 91-174 Łódź;964
 14;106101-2;2;P;Świetlica Ochotniczej Straży Pożarnej Łódź-Mikołajew;ul. Plonowa 18, 91-156 Łódź;1940
 14;106101-3;3;P;Świetlica Ochotniczej Straży Pożarnej Łódź-Mikołajew;ul. Plonowa 18, 91-156 Łódź;553

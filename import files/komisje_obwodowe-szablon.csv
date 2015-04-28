@@ -1,3 +1,2 @@
-okregowaId[1-51];obwodId;obwodNr;obwodTyp;obwodName;obwodAddress;allowedToVote
-14;106101-1;1;P;Studio Consulting Sp. z o.o.; ul. Romanowska 55E, 91-174 Łódź;1234
-14;106101-2;2;P;Studio Consulting Sp. z o.o.; ul. Romanowska 55E, 91-174 Łódź;1234
+Nr Komisji Okręgowej[1-51];Kod Komisji Obwodowej;Numer obwodu;Typ Obwodu;Nazwa lokalu;Adres lokalu;Uprawnionych do głosowania
+

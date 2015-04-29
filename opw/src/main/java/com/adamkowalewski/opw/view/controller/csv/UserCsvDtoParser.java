@@ -6,6 +6,8 @@ import com.googlecode.jcsv.reader.CSVEntryParser;
 
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 /**
  * The UserCsvDtoParser receives a line of the csv file and converts it
  * to a UserCsvDto object.
@@ -20,10 +22,10 @@ class UserCsvDtoParser implements CSVEntryParser<UserCsvDto> {
         String lastname = data[1].trim();
         String email = data[2].trim();
         String type = data[3].trim();
-        List<String> obwodowaList = Splitter.on(',')
+        List<String> obwodowaList = newArrayList(Splitter.on(',')
                 .trimResults()
                 .omitEmptyStrings()
-                .splitToList(data[4].trim());
+                .splitToList(data[4].trim()));
         return new UserCsvDto(firstname, lastname, email, type, obwodowaList);
     }
 }

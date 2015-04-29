@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.view.controller.csv;
 
 import com.adamkowalewski.opw.view.dto.UserCsvDto;
+import static com.google.common.collect.Lists.newArrayList;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -36,12 +37,19 @@ import org.testng.annotations.Test;
  * @author Adam Kowalewski
  */
 public class UserCsvDtoParserNGTest {
-    
+
+    private static String[] case1csv;
+
+    private static UserCsvDto case1dto;
+
     public UserCsvDtoParserNGTest() {
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        case1csv = new String[]{"Jakub", "Arak", "jk@local.pl", "O", "146513-577,146513-578,146513-579"};
+        case1dto = new UserCsvDto("Jakub", "Arak", "jk@local.pl", "O", newArrayList("146513-577", "146513-578", "146513-579"));
+
     }
 
     @AfterClass
@@ -62,21 +70,14 @@ public class UserCsvDtoParserNGTest {
     @Test
     public void testParseEntry() {
         System.out.println("parseEntry");
-        String[] data = new String[5];
-        data[0]="Jakub";
-        data[1]="Arak";
-        data[2]="jk@local.pl";
-        data[3]="O";
-        data[4]="146513-577,146513-578,146513-579";
 
         UserCsvDtoParser instance = new UserCsvDtoParser();
-        UserCsvDto expResult = null;
-        UserCsvDto result = instance.parseEntry(data);
+        UserCsvDto expResult = case1dto;
+        UserCsvDto result = instance.parseEntry(case1csv);
         System.out.println("res" + result);
         assertNotNull(result);
-//        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+        assertEquals(result, expResult);
+
     }
-    
+
 }

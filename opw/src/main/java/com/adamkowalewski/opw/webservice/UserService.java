@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.webservice.controller.UserServiceEjb;
+import com.adamkowalewski.opw.webservice.dto.UserRegisterDto;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
@@ -94,6 +95,21 @@ public class UserService extends AbstractService {
         }
 
         return userServiceEjb.logout(login, token);
+    }
+
+    @POST
+    @Path("/register")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response register(
+            @NotNull @HeaderParam(OPW_HEADER_API_TOKEN) String apiToken,
+            @NotNull UserRegisterDto newUser) {
+
+        /**
+         * WiP
+         */
+        return userServiceEjb.register();
+
     }
 
 }

@@ -40,6 +40,8 @@ public abstract class AbstractService {
     @VisibleForTesting
     static final String OPW_HEADER_TOKEN = "X-OPW-token";
     @VisibleForTesting
+    static final String OPW_HEADER_API_CLIENT = "X-OPW-API-client";
+    @VisibleForTesting
     static final String OPW_HEADER_API_TOKEN = "X-OPW-API-token";
     @VisibleForTesting
     static final String OPW_HEADER_DEBUG_ERROR500 = "X-OPW-debug-500";

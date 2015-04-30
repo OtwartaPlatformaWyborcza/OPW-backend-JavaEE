@@ -137,5 +137,10 @@ public class UserServiceEjb implements Serializable {
         return Response.ok().entity(result).build();
 
     }
+    
+    
+    public Response register(){
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
 
 }

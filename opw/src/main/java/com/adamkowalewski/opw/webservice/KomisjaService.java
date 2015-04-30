@@ -38,6 +38,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * REST Service represents komisja perspective.
@@ -47,6 +49,8 @@ import javax.ws.rs.Produces;
 @Path("/komisja")
 @RequestScoped
 public class KomisjaService extends AbstractService {
+    
+    private final static Logger logger = LoggerFactory.getLogger(KomisjaService.class);
 
     @EJB
     KomisjaServiceEjb komisjaServiceEjb;
@@ -61,9 +65,11 @@ public class KomisjaService extends AbstractService {
             @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
 
         if (debug != null) {
+            logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-
+        
+        logger.trace("REST call Komisja {} Login {} ", pkwId, login);
         return komisjaServiceEjb.loadObwodowa(pkwId, login, token);
     }
 
@@ -79,9 +85,10 @@ public class KomisjaService extends AbstractService {
             WynikDto wynik) {
 
         if (debug != null) {
+            logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-
+        logger.trace("REST call Komisja {} Login {} ", pkwId, login);
         return komisjaServiceEjb.uploadWynik(pkwId, login, token, wynik);
     }
 

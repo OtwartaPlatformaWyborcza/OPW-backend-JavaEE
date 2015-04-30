@@ -45,24 +45,22 @@ public class UserService extends AbstractService {
     private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @EJB
-    UserServiceEjb userServiceEjb;
-
-    public UserService() {
-    }
+    UserServiceEjb userServiceEjb;    
 
     @GET
     @Path("/login")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response login(
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_PASSWORD) String password,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+            @NotNull @HeaderParam(OPW_HEADER_PASSWORD) String password) {
 
         if (debug != null) {
-            logger.info("Debug call for login()");
+            logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-
+        
+        logger.trace("REST call Login {} ", login);
         return userServiceEjb.login(login, password);
     }
 
@@ -70,15 +68,17 @@ public class UserService extends AbstractService {
     @Path("/{userId}/obwodowa")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response loadObwodowaShortList(
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
             @NotNull @PathParam("userId") int userId,
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
 
         if (debug != null) {
+            logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-
+        
+        logger.trace("REST call Login {} ", login);
         return userServiceEjb.loadObwodowaShortList(userId, login, token);
     }
 
@@ -86,11 +86,13 @@ public class UserService extends AbstractService {
     @Path("/logout")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response logout(
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token
+    ) {
 
         if (debug != null) {
+            logger.debug(LOG_DBG_500);
             return mockServerError();
         }
 
@@ -102,12 +104,15 @@ public class UserService extends AbstractService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response register(
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+            @NotNull @HeaderParam(OPW_HEADER_API_CLIENT) String apiClient,
             @NotNull @HeaderParam(OPW_HEADER_API_TOKEN) String apiToken,
             @NotNull UserRegisterDto newUser) {
 
         /**
          * WiP
          */
+        logger.trace("REST call API client {} ", apiClient);
         return userServiceEjb.register();
 
     }

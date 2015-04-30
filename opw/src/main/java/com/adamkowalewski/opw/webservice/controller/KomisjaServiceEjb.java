@@ -87,8 +87,7 @@ public class KomisjaServiceEjb implements Serializable {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
-    public Response uploadWynik(String pkwId, String login, String token, WynikDto wynik) {
-        System.out.println("wynik " + wynik);
+    public Response uploadWynik(String pkwId, String login, String token, WynikDto wynik) {        
         
         if (securityHandler.checkUser(login, token)) {
             OpwUser user = userBean.find(securityHandler.getUserMap().get(login).getUserId());

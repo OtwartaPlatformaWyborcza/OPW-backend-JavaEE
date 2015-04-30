@@ -23,17 +23,20 @@
  */
 package com.adamkowalewski.opw.bean;
 
+import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.entity.OpwWynik;
 import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Provides access to wynik.
- * 
+ *
  * @author Adam Kowalewski
  */
 @Stateless
@@ -51,6 +54,40 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    /**
+     * Returns the number of Wynik uploaded for given Komisja Obwodowa.
+     *
+     * @param obwodowa Komisja Obwodowa to use.
+     * @return number of Wynik in database matching given criteria.
+     * @author Adam Kowalewski
+     * @version 2015.05.01
+     */
+    public int countWynik(OpwObwodowaKomisja obwodowa) {
+        Query q = em.createQuery("SELECT o FROM OpwWynik o WHERE o.opwObwodowaKomisjaId = :obwodowa");
+        q.setParameter("obwodowa", obwodowa);
+        int result = q.getResultList().size();        
+        logger.trace("For Obwodowa {} counted {} Wynik records.", obwodowa.getPkwId(), result);
+        return result;
+    }
+
+    /**
+     * Returns the number of Wynik uploaded by user for Komisja Obwodowa.
+     *
+     * @param obwodowa Komisja Obwodowa to use.
+     * @param user uploader.
+     * @return number of Wynik in database matching given criteria.
+     * @author Adam Kowalewski
+     * @version 2015.05.01
+     */
+    public int countWynik(OpwObwodowaKomisja obwodowa, OpwUser user) {
+        Query q = em.createQuery("SELECT o FROM OpwWynik o WHERE o.opwObwodowaKomisjaId = :obwodowa AND o.opwUserId = :user");
+        q.setParameter("obwodowa", obwodowa);
+        q.setParameter("user", user);
+        int result = q.getResultList().size();
+        logger.trace("For Obwodowa {} and user {} counted {} Wynik records.", obwodowa.getPkwId(), user.getEmail(), result);
+        return result;
     }
 
 }

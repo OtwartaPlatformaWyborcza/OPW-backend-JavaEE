@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.webservice.controller;
 
 import com.adamkowalewski.opw.bean.UserBean;
+import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.OpwConfig;
@@ -56,6 +57,8 @@ public class UserServiceEjb implements Serializable {
     SecurityHandler securityHandler;
     @EJB
     UserBean userBean;
+    @EJB
+    WynikBean wynikBean;
 
     public UserServiceEjb() {
     }
@@ -115,21 +118,22 @@ public class UserServiceEjb implements Serializable {
     }
 
     public Response loadObwodowaShortList(int userId, String login, String token) {
-        System.out.println("x" + userId + " "+ login + " " + token);
 
         if (!securityHandler.checkUser(userId, login, token)) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
         OpwUser user = userBean.findUser(userId);
-        
-        List<KomisjaShortDto> resultList = new ArrayList<>();        
-        System.out.println("user obwodowa " + user.getOpwObwodowaKomisjaList().size());
+        logger.trace("userId: {} user: {} obwodowa: {} wynik: {} ", user.getId(), user.getEmail(), user.getOpwObwodowaKomisjaList().size(), user.getOpwWynikList().size());
+
+        List<KomisjaShortDto> resultList = new ArrayList<>();
 
         for (OpwObwodowaKomisja obwodowa : user.getOpwObwodowaKomisjaList()) {
-            resultList.add(new KomisjaShortDto(obwodowa.getId(), obwodowa.getPkwId(), obwodowa.getName(), obwodowa.getAddress(), obwodowa.getOpwWynikList().size()));
+            int countWynik = wynikBean.countWynik(obwodowa);
+            KomisjaShortDto komisja = new KomisjaShortDto(obwodowa.getId(), obwodowa.getPkwId(), obwodowa.getName(), obwodowa.getAddress(), countWynik);
+            logger.trace(komisja.toString());
+            resultList.add(komisja);
         }
-        System.out.println("obwodowa" + resultList.size());
 
         GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
         };
@@ -137,9 +141,8 @@ public class UserServiceEjb implements Serializable {
         return Response.ok().entity(result).build();
 
     }
-    
-    
-    public Response register(){
+
+    public Response register() {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 

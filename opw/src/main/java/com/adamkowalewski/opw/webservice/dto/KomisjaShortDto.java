@@ -46,6 +46,13 @@ public class KomisjaShortDto implements Serializable {
     public KomisjaShortDto() {
     }
 
+    public KomisjaShortDto(int id, String pkwId, String name, String address) {
+        this.id = id;
+        this.pkwId = pkwId;
+        this.name = name;
+        this.address = address;
+    }
+
     public KomisjaShortDto(int id, String pkwId, String name, String address, int protokolCount) {
         this.id = id;
         this.pkwId = pkwId;
@@ -93,5 +100,17 @@ public class KomisjaShortDto implements Serializable {
     public void setProtokolCount(int protokolCount) {
         this.protokolCount = protokolCount;
     }
+
+    @Override
+    public String toString() {
+        return "KomisjaShortDto{" 
+                + "id=" + id 
+                + ", pkwId=" + pkwId 
+                + ", name=" + name.length()
+                + ", address=" + address.length()
+                + ", protokolCount=" + protokolCount + '}';
+    }
+    
+    
 
 }

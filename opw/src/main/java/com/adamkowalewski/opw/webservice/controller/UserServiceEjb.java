@@ -28,7 +28,7 @@ import com.adamkowalewski.opw.bean.UserBean;
 import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
-import com.adamkowalewski.opw.view.OpwConfig;
+import com.adamkowalewski.opw.view.OpwConfigStatic;
 import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 import com.adamkowalewski.opw.webservice.dto.UserDto;
 import com.adamkowalewski.opw.webservice.dto.UserRegisterDto;
@@ -75,7 +75,7 @@ public class UserServiceEjb implements Serializable {
             securityHandler.getUserMap().remove(login);
         }
 
-        OpwUser user = userBean.verifyCredentials(login, password, OpwConfig.APP_SALT);
+        OpwUser user = userBean.verifyCredentials(login, password, OpwConfigStatic.APP_SALT);
 
         // if auth failed 
         if (user == null) {
@@ -176,7 +176,7 @@ public class UserServiceEjb implements Serializable {
             user.setOrigin(apiClient);
 
             mailBean.sendMailWelcome(user, passwordPlain, false);
-            user.setPassword(userBean.saltPassword(OpwConfig.APP_SALT, userSalt, passwordPlain));
+            user.setPassword(userBean.saltPassword(OpwConfigStatic.APP_SALT, userSalt, passwordPlain));
             try {
                 userBean.create(user);
             } catch (Exception e){

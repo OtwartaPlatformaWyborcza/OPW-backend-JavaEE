@@ -23,7 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
-import com.adamkowalewski.opw.view.OpwConfig;
+import com.adamkowalewski.opw.view.OpwConfigStatic;
 import com.adamkowalewski.opw.view.dto.ConfigMailDto;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -62,7 +62,7 @@ public class ConfigController implements Serializable {
         configImportDuplicatesAllowed = false;
         listKandydatOpen = false;
         listOkregowaOpen = false;
-        applicationSalt = OpwConfig.APP_SALT;
+        applicationSalt = OpwConfigStatic.APP_SALT;
     }
 
     public String getApplicationSalt() {

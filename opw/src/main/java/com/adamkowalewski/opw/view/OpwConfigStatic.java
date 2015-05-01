@@ -29,7 +29,7 @@ package com.adamkowalewski.opw.view;
  * @author Adam Kowalewski
  * @version 2015.03.15
  */
-public class OpwConfig {
+public class OpwConfigStatic {
 
     /**
      * Persistance unit name.

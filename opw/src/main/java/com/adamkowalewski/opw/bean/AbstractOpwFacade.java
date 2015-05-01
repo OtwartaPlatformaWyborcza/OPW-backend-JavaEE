@@ -24,7 +24,7 @@
 
 package com.adamkowalewski.opw.bean;
 
-import com.adamkowalewski.opw.view.OpwConfig;
+import com.adamkowalewski.opw.view.OpwConfigStatic;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -36,7 +36,7 @@ import javax.persistence.EntityManager;
  * @version 2015.03.15
  */
 public abstract class AbstractOpwFacade<T> {
-    protected final String PU_OPW = OpwConfig.PU_OPW;
+    protected final String PU_OPW = OpwConfigStatic.PU_OPW;
     private Class<T> entityClass;
 
     public AbstractOpwFacade(Class<T> entityClass) {

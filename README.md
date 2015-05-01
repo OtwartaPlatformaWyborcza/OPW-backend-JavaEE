@@ -2,7 +2,7 @@
 Otwarta Platforma Wyborcza (OPW) to oprogramowanie klasy enterprise, którego podstawowym zadaniem jest niezależna i obiektywna weryfikacja wyników wyborów prezydenckich 2015. Celem projektu OPW **nie jest kompletna implementacja wymagań sprecyzowanych przez PKW** w ramach projektu PW2 (Platforma Wyborcza 2).   
 
 # Członkowie
-Sortowanie alfabetyczne po imieniu.  
+Sortowanie alfabetyczne po imieniu.
 
 | Członek  | Rola  |
 | ------------- | ------------- |
@@ -12,14 +12,14 @@ Sortowanie alfabetyczne po imieniu.
 | RafałR | Analiza i Organizacja |
 | RobertP | Analiza |
 
-**Jak do nas dołączyć?**  
+**Jak do nas dołączyć?**
 Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja odbywa się poprzez E-Mail i Skype. 
 
-**Aktualnie poszukujemy**  
-1. Doświadczonego architekta REST, który pomoże nam ulepszyć aktualny serwis (security, best practices ipt.).  
+**Aktualnie poszukujemy**
+1. Doświadczonego architekta REST, który pomoże nam ulepszyć aktualny serwis (security, best practices ipt.).
 2. Doświadczonego administratora Jenkins. Mamy aktualnie skonfigurowany CI pipeline dla 3 projektów (OPW, [OPW AngularJS](https://github.com/marcintokarski/OtwartaPlatformaWyborczaFronted) jak i [OpenPKW POC_Kalkulator](https://github.com/openpkw/PocKalkulatorWyborczyHtml)) ale na pewno da się to zrobić o wiele lepiej.  
-3. Doświadczonego administratora kontenera Java EE GlassFish 4.1 bądź WildFly 8.2.0. Celem jest konfiguracja produkcyjnego clustera.  
-4. Grafika do opracowania ikonografiki (przyciski) programu, tła, liternictwa, oraz głównego symbolu znaku graficznego / logo programu.  
+3. Doświadczonego administratora kontenera Java EE GlassFish 4.1 bądź WildFly 8.2.0. Celem jest konfiguracja produkcyjnego clustera.
+4. Grafika do opracowania ikonografiki (przyciski) programu, tła, liternictwa, oraz głównego symbolu znaku graficznego / logo programu.
 
 # Linki
 
@@ -32,15 +32,36 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 | Frontend wyniki (jQuery) daily  | http://91.250.114.134/dashboard-v2/ |
 
 # Quickstart
-1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    
-  * `default-storage-engine = InnoDB`  
-  * `collation-server = utf8_general_ci`  
-  * `character-set-server = utf8`  
+1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB
+  * `default-storage-engine = InnoDB`
+  * `collation-server = utf8_general_ci`
+  * `character-set-server = utf8`
 2. MySQL dodaj użytkownika opw zgodnie z definicją w `glassfish-resources.xml`
 3. MySQL Workbench wykonaj import bazy (opcja Forward Engineer)
 4. GlassFish wykonaj import `glassfish-resources.xml` 
 5. mvn clean install i deploy na serwer
 
+# Simplestart
+1. Sklonuj repozytorium zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym ma znaleźć się projekt
+	
+        $ cd {YOUR_PROJECT_DIRECTORY}
+        $ git clone https://github.com/OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git
+
+2. Skonfiguruj bazę danych zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się sklonowany projekt
+
+	    $ mysql -u root -p --execute="CREATE USER 'opw'@'localhost' IDENTIFIED BY 'Lc4!_-f4FjmypLDRHW.'; GRANT ALL PRIVILEGES ON * . * TO 'opw'@'localhost'; FLUSH PRIVILEGES;"
+	    $ mysql -u opw --password='Lc4!_-f4FjmypLDRHW.' --execute="SOURCE {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/ddl/db_opw.sql"
+ 
+3. Skonfiguruj serwer aplikacji
+	
+        $ wget http://download.java.net/glassfish/4.1/release/glassfish-4.1.zip
+        $ unzip glassfish-4.1*zip
+        $ echo "export GLASSFISH_HOME=`pwd`/glassfish4" >> ~/.bashrc
+
+4. Zbuduj u uruchom projekt. Zastąp _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się projekt
+ 
+        $ cd {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/opw
+        $ mvn clean install glassfish:deploy
 
 ##Wymagane oprogramowania
 * JDK7 (migracja na JDK8 ASAP)
@@ -59,29 +80,29 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 
 # Proces
 
-**Przygotowanie wyborów**  
-1. Administrator definiuje / importuje oficjalną listę Komisji Okręgowych  (51)  
-2. Administrator definiuje / importuje oficjalną listę Kandydatów (11)  
-3. Administrator definiuje / importuje oficjalną listę Komisji Obwodowych (około 27 000)   
-4. Administrator zakłada / importuje konta użytkowników (wolentariusze, mężowie zaufania, około 25 000)  
-5. System automatycznie rozsyła hasła użytkowikom, wraz z linkiem do aktywacji konta, na podany adres E-Mail.  
-6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (możliwa fluktuacja użytkowników tuż przed wyborami)  
+**Przygotowanie wyborów**
+1. Administrator definiuje / importuje oficjalną listę Komisji Okręgowych  (51)
+2. Administrator definiuje / importuje oficjalną listę Kandydatów (11)
+3. Administrator definiuje / importuje oficjalną listę Komisji Obwodowych (około 27 000)
+4. Administrator zakłada / importuje konta użytkowników (wolentariusze, mężowie zaufania, około 25 000)
+5. System automatycznie rozsyła hasła użytkowikom, wraz z linkiem do aktywacji konta, na podany adres E-Mail.
+6. Administrator systemu ma możliwość edycji i weryfikacji kont użytkownków wraz ich danymi (możliwa fluktuacja użytkowników tuż przed wyborami)
 
-**Dzień wyborczy - perspektywa użytkownika**  
-1. Użytkownik loguje się na stronie OPW i wybiera z listy jedną z przypisanych mu Komisji Obwodowych.  
-2. Użytkownik widzi na okrenie dokładne informacje dotyczące wybranej Komisji Obwodowej.  
-3. Użytkownik wpisuje dane / liczby wyborcze z protokołu do aplikacji OPW.  
-4. Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych.  
-5. Użytkownik wysyła dane/liczby wyborcze na serwer OPW.   
+**Dzień wyborczy - perspektywa użytkownika**
+1. Użytkownik loguje się na stronie OPW i wybiera z listy jedną z przypisanych mu Komisji Obwodowych.
+2. Użytkownik widzi na okrenie dokładne informacje dotyczące wybranej Komisji Obwodowej.
+3. Użytkownik wpisuje dane / liczby wyborcze z protokołu do aplikacji OPW.
+4. Walidacja protokołu po stronie klienta (JavaScript/HTML5) dla błędów twardych.
+5. Użytkownik wysyła dane/liczby wyborcze na serwer OPW.
 
-**Dzień wyborczy - perspektywa serwera**  
-1. Liczby wyborcze spływają na serwer.   
-2. Każdy protokół jest walidowany, w przypadku identyfikacji błędu miękkiego protokół protokół zostanie otagowany.  
-3. Protokoły są zapisywane w bazie danych.  
-4. Aktualny wynik wyborów jest publikowany co 5 minut.  
+**Dzień wyborczy - perspektywa serwera**
+1. Liczby wyborcze spływają na serwer.
+2. Każdy protokół jest walidowany, w przypadku identyfikacji błędu miękkiego protokół protokół zostanie otagowany.
+3. Protokoły są zapisywane w bazie danych.
+4. Aktualny wynik wyborów jest publikowany co 5 minut.
 
-**Dzień wyborczy / perspektywa gościa**  
-1. Gość wchodzi na stronę główną aplikacji OPW-dashboard  
+**Dzień wyborczy / perspektywa gościa**
+1. Gość wchodzi na stronę główną aplikacji OPW-dashboard
 2. OPW/dashboard zapewnia dostęp do aktualnych wyników w skali kraju jak i gminy. 
 
 # Specyfikacja
@@ -116,18 +137,18 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 
 
 ## REST 
-Proces wgrywania protokołu z perspektywy.  
-1. GET Zalogowanie  
-2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny  
-3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów)  
-4. POST Upload liczb wyborczych  
-5. GET Wylogowanie  
+Proces wgrywania protokołu z perspektywy.
+1. GET Zalogowanie
+2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny
+3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów)
+4. POST Upload liczb wyborczych
+5. GET Wylogowanie
 
 ### Headers 
-Jako prefix `X-OPW`  
-* `X-OPW-login`  
-* `X-OPW-password`  
-* `X-OPW-token`  
+Jako prefix `X-OPW`
+* `X-OPW-login`
+* `X-OPW-password`
+* `X-OPW-token`
 
 
 ## Roadmap
@@ -183,7 +204,7 @@ Plan implementacji
 
 
 ### Wersja 0.8
-* tagowanie błędnych protokołów  
+* tagowanie błędnych protokołów
 * [WiP] Definicja infrastruktury na nadchodzące wybory
 
 ### Wersja 1.0
@@ -197,4 +218,4 @@ Plan implementacji
 * Podbieranie protokołów przesłanych na skrzynke pocztową
 * Automatyczne parsowanie protokołów ze skrzynki pocztowej
   * import poprawnych protokołów
-  * tagowanie błędnych protokołów  
+  * tagowanie błędnych protokołów

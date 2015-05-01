@@ -125,7 +125,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -188,7 +188,7 @@
                     <components>
                         <component>
                             <name>${project.artifactId}</name>
-                            <artifact>target/${project.artifactId}-${project.version}.war</artifact>
+                            <artifact>target/${project.artifactId}.war</artifact>
                         </component>
                     </components>
                     <debug>true</debug>

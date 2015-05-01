@@ -30,7 +30,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides access to Komisja Obwodowa.
@@ -39,6 +42,8 @@ import javax.persistence.Query;
  */
 @Stateless
 public class ObwodowaBean extends AbstractOpwFacade<OpwObwodowaKomisja> {
+    
+    private final static Logger logger = LoggerFactory.getLogger(ObwodowaBean.class);
 
     @PersistenceContext(unitName = PU_OPW)
     private EntityManager em;
@@ -52,7 +57,6 @@ public class ObwodowaBean extends AbstractOpwFacade<OpwObwodowaKomisja> {
         return em;
     }
 
-    
     /**
      * Verify if an entity with this PKW ID already exists in the database.
      *
@@ -86,11 +90,17 @@ public class ObwodowaBean extends AbstractOpwFacade<OpwObwodowaKomisja> {
         q.setParameter("pkwId", pkwId);
         return q.getResultList();
     }
-    
+
     public OpwObwodowaKomisja findObwodowa(String pkwId) {
         Query q = em.createNamedQuery("OpwObwodowaKomisja.findByPkwId");
         q.setParameter("pkwId", pkwId);
-        return (OpwObwodowaKomisja) q.getSingleResult();
+
+        try {
+            return (OpwObwodowaKomisja) q.getSingleResult();
+        } catch (PersistenceException e) {
+            logger.error("Ex {} for pkwId({}) ", e.getMessage(), pkwId);
+            return null;
+        }
     }
 
     public List<OpwObwodowaKomisja> findObwodowaLike(String pkwId) {

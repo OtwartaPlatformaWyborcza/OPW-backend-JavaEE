@@ -71,8 +71,12 @@ public class KomisjaServiceEjb implements Serializable {
 
     public Response loadObwodowa(String pkwId, String login, String token) {
         if (securityHandler.checkUser(login, token)) {
-
             OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
+
+            if (obw == null) {                
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
             List<KandydatDto> kandydatList = findKandydatAllDto();
 
             OkregowaDto okr = new OkregowaDto(obw.getOpwOkregowaKomisjaId().getPkwId().toString(), obw.getOpwOkregowaKomisjaId().getName(), obw.getOpwOkregowaKomisjaId().getAddress());
@@ -87,8 +91,8 @@ public class KomisjaServiceEjb implements Serializable {
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
-    public Response uploadWynik(String pkwId, String login, String token, WynikDto wynik) {        
-        
+    public Response uploadWynik(String pkwId, String login, String token, WynikDto wynik) {
+
         if (securityHandler.checkUser(login, token)) {
             OpwUser user = userBean.find(securityHandler.getUserMap().get(login).getUserId());
             OpwObwodowaKomisja obwodowa = obwodowaBean.findObwodowa(pkwId);
@@ -115,9 +119,9 @@ public class KomisjaServiceEjb implements Serializable {
             w.setK9(wynik.getK9());
             w.setK10(wynik.getK10());
             w.setK11(wynik.getK11());
-            
+
             wynikBean.create(w);
-            
+
             return Response.status(Response.Status.OK).build();
         }
         logger.error("REST uploadWynik() unauthorized access  {} - {}", login, token);

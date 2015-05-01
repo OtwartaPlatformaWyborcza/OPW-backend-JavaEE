@@ -30,11 +30,15 @@ import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.entity.OpwWynik;
 import com.adamkowalewski.opw.webservice.dto.WynikDto;
+import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides business logic for webservice around Wynik.
@@ -44,6 +48,10 @@ import javax.ws.rs.core.Response;
 @Stateless
 public class WynikServiceEjb implements Serializable {
 
+    private final static Logger logger = LoggerFactory.getLogger(WynikServiceEjb.class);
+    
+    @Inject
+    SecurityHandler securityHandler;
     @EJB
     KandydatBean kandydatBean;
 
@@ -59,11 +67,18 @@ public class WynikServiceEjb implements Serializable {
      * todo comment
      *
      * @param wynikId
+     * @param login
+     * @param token
      * @return
      * @author Adam Kowalewski
      * @version 2015.05.01
      */
-    public Response loadWynikSingle(int wynikId) {
+    public Response loadWynikSingle(int wynikId, String login, String token) {
+        
+        if (!securityHandler.checkUser(login, token)) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+        
         OpwWynik wynik = wynikBean.find(wynikId);
 
         WynikDto result = new WynikDto(

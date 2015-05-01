@@ -25,12 +25,16 @@ package com.adamkowalewski.opw.webservice.controller;
 
 import com.adamkowalewski.opw.bean.KandydatBean;
 import com.adamkowalewski.opw.bean.OkregowaBean;
+import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import com.adamkowalewski.opw.entity.OpwWynik;
+import com.adamkowalewski.opw.webservice.dto.WynikDto;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.core.Response;
 
 /**
  * Provides business logic for webservice around Wynik.
@@ -42,11 +46,35 @@ public class WynikServiceEjb implements Serializable {
 
     @EJB
     KandydatBean kandydatBean;
-    
+
     @EJB
     OkregowaBean okregowaBean;
+    @EJB
+    WynikBean wynikBean;
 
     public WynikServiceEjb() {
+    }
+
+    /**
+     * todo comment
+     *
+     * @param wynikId
+     * @return
+     * @author Adam Kowalewski
+     * @version 2015.05.01
+     */
+    public Response loadWynikSingle(int wynikId) {
+        OpwWynik wynik = wynikBean.find(wynikId);
+
+        WynikDto result = new WynikDto(
+                wynik.getVotersValid(), wynik.getVotersAmount(),
+                wynik.getCardsValid(), 
+                wynik.getVotesInvalid(), wynik.getVotesValid(),
+                wynik.getK1(), wynik.getK2(), wynik.getK3(), wynik.getK4(),
+                wynik.getK5(), wynik.getK6(), wynik.getK7(), wynik.getK8(),
+                wynik.getK9(), wynik.getK10(), wynik.getK11());
+
+        return Response.ok().entity(result).build();
     }
 
     public List<OpwKandydat> kandydatFindAll() {
@@ -56,7 +84,5 @@ public class WynikServiceEjb implements Serializable {
     public List<OpwOkregowaKomisja> obwodowaFindAll() {
         return okregowaBean.findAll();
     }
-    
-    
 
 }

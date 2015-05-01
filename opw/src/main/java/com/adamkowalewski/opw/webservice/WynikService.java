@@ -26,7 +26,6 @@ package com.adamkowalewski.opw.webservice;
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_DEBUG_ERROR500;
-import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_LOGIN;
 import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
@@ -47,6 +46,8 @@ import java.util.Random;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents wynik perspective. Main service for all OPW dashboard
@@ -57,10 +58,28 @@ import javax.ws.rs.PathParam;
 @Path("/wynik")
 @RequestScoped
 public class WynikService extends AbstractService {
+    
+    private final static Logger logger = LoggerFactory.getLogger(WynikService.class);
 
     @EJB
     WynikServiceEjb wynikEjb;
-   
+
+    @GET
+    @Path("/{wynikId}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response loadWynikSingle(
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+            @NotNull @PathParam("wynikId") int wynikId) {
+        
+        if (debug != null) {
+            return mockServerError();
+        }
+        logger.trace("load wynik {}", wynikId);
+        
+        return wynikEjb.loadWynikSingle(wynikId);
+
+    }
+
     @GET
     @Path("/complete")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

@@ -35,11 +35,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WynikDto {
 
-    private short uprawnionych, glosujacych, kartWaznych, kartNieWaznych, glosowWaznych;
+    private short uprawnionych, glosujacych, kartWaznych, glosowNieWaznych, glosowWaznych;
 
     private Short k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
 
     public WynikDto() {
+    }
+
+    public WynikDto(short uprawnionych, short glosujacych, short kartWaznych, short glosowNieWaznych, short glosowWaznych, Short k1, Short k2, Short k3, Short k4, Short k5, Short k6, Short k7, Short k8, Short k9, Short k10, Short k11) {
+        this.uprawnionych = uprawnionych;
+        this.glosujacych = glosujacych;
+        this.kartWaznych = kartWaznych;
+        this.glosowNieWaznych = glosowNieWaznych;
+        this.glosowWaznych = glosowWaznych;
+        this.k1 = k1;
+        this.k2 = k2;
+        this.k3 = k3;
+        this.k4 = k4;
+        this.k5 = k5;
+        this.k6 = k6;
+        this.k7 = k7;
+        this.k8 = k8;
+        this.k9 = k9;
+        this.k10 = k10;
+        this.k11 = k11;
     }
 
     public short getUprawnionych() {
@@ -66,12 +85,12 @@ public class WynikDto {
         this.kartWaznych = kartWaznych;
     }
 
-    public short getKartNieWaznych() {
-        return kartNieWaznych;
+    public short getGlosowNieWaznych() {
+        return glosowNieWaznych;
     }
 
-    public void setKartNieWaznych(short kartNieWaznych) {
-        this.kartNieWaznych = kartNieWaznych;
+    public void setGlosowNieWaznych(short glosowNieWaznych) {
+        this.glosowNieWaznych = glosowNieWaznych;
     }
 
     public short getGlosowWaznych() {

@@ -69,6 +69,8 @@ public class WynikService extends AbstractService {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response loadWynikSingle(
             @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
             @NotNull @PathParam("wynikId") int wynikId) {
         
         if (debug != null) {
@@ -76,7 +78,7 @@ public class WynikService extends AbstractService {
         }
         logger.trace("load wynik {}", wynikId);
         
-        return wynikEjb.loadWynikSingle(wynikId);
+        return wynikEjb.loadWynikSingle(wynikId, login, token);
 
     }
 

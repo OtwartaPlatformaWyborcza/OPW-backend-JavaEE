@@ -42,23 +42,24 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 5. mvn clean install i deploy na serwer
 
 # Simplestart
-1. Sklonuj repozytorium zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym ma znaleźć się projekt
+1. Sklonuj repozytorium zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym ma znaleźć się projekt.
 	
         $ cd {YOUR_PROJECT_DIRECTORY}
         $ git clone https://github.com/OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git
 
-2. Skonfiguruj bazę danych zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się sklonowany projekt
+2. Skonfiguruj bazę danych zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się sklonowany projekt.
 
 	    $ mysql -u root -p --execute="CREATE USER 'opw'@'localhost' IDENTIFIED BY 'Lc4!_-f4FjmypLDRHW.'; GRANT ALL PRIVILEGES ON * . * TO 'opw'@'localhost'; FLUSH PRIVILEGES;"
 	    $ mysql -u opw --password='Lc4!_-f4FjmypLDRHW.' --execute="SOURCE {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/ddl/db_opw.sql"
  
-3. Skonfiguruj serwer aplikacji
+3. Skonfiguruj serwer aplikacji. Zastąp _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się projekt.
 	
         $ wget http://download.java.net/glassfish/4.1/release/glassfish-4.1.zip
         $ unzip glassfish-4.1*zip
         $ echo "export GLASSFISH_HOME=`pwd`/glassfish4" >> ~/.bashrc
+        $ ./glassfish4/glassfish/bin/asadmin add-resources {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/opw/src/main/setup/glassfish-resources.xml
 
-4. Zbuduj u uruchom projekt. Zastąp _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się projekt
+4. Zbuduj i uruchom projekt. Zastąp _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się projekt.
  
         $ cd {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/opw
         $ mvn clean install glassfish:deploy

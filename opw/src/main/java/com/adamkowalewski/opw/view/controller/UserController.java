@@ -26,6 +26,7 @@ package com.adamkowalewski.opw.view.controller;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.bean.UserBean;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -78,6 +79,7 @@ public class UserController implements Serializable {
         user.setSalt(userSalt);
         user.setToken(bean.generateToken());
         user.setActive(false);
+        user.setDateCreated(new Date());
         mailController.sendMailWelcome(user, passwordPlain);
         user.setPassword(bean.saltPassword(configController.getApplicationSalt(), userSalt, passwordPlain));
         bean.create(user);

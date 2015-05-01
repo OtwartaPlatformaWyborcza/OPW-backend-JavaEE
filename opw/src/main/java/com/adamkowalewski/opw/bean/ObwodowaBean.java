@@ -63,18 +63,10 @@ public class ObwodowaBean extends AbstractOpwFacade<OpwObwodowaKomisja> {
      * @param pkwId unique ID given by PKW.
      * @return <code>true</code> if a duplicate, otherwise <code>false</code>.
      * @author Adam Kowalewski
-     * @version 2015.04.09
+     * @version 2015.05.01
      */
-    public boolean isDuplicate(String pkwId) {
-        boolean result = true;
-        try {
-            findObwodowa(pkwId);
-        } catch (NoResultException ex) {
-            result = false;
-        } catch (NonUniqueResultException ex) {
-            result = true;
-        }
-        return result;
+    public boolean isDuplicate(String pkwId) {        
+        return findObwodowa(pkwId) != null;        
     }
 
     /**

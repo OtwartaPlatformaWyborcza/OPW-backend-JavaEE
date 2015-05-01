@@ -69,7 +69,7 @@ public class KomisjaService extends AbstractService {
             return mockServerError();
         }
 
-        logger.trace("REST call Komisja {} user {} ", pkwId, login);
+        logger.trace("Komisja {} user {} ", pkwId, login);
         return komisjaServiceEjb.loadObwodowa(pkwId, login, token);
     }
 
@@ -86,7 +86,7 @@ public class KomisjaService extends AbstractService {
             logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-        logger.trace("REST call Komisja {} user {} ", pkwId, login);
+        logger.trace("Komisja {} user {} ", pkwId, login);
         return komisjaServiceEjb.loadWynik(pkwId, login, token);
     }
 
@@ -95,12 +95,9 @@ public class KomisjaService extends AbstractService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response uploadWynik(
-            @NotNull
-            @PathParam("pkwId") String pkwId,
-            @NotNull
-            @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull
-            @HeaderParam(OPW_HEADER_TOKEN) String token,
+            @NotNull @PathParam("pkwId") String pkwId,
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
             @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
             WynikDto wynik) {
 
@@ -108,7 +105,7 @@ public class KomisjaService extends AbstractService {
             logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-        logger.trace("REST call Komisja {} user {} ", pkwId, login);
+        logger.trace("Komisja {} user {} ", pkwId, login);
         return komisjaServiceEjb.uploadWynik(pkwId, login, token, wynik);
     }
 

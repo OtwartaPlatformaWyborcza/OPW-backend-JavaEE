@@ -74,11 +74,11 @@ public class OpwObwodowaKomisja implements Serializable {
     private String pkwId;
     @Column(name = "obwodNr")
     private Integer obwodNr;
-    @Size(max = 128)
-    @Column(name = "name", length = 128)
+    @Size(max = 256)
+    @Column(name = "name", length = 256)
     private String name;
-    @Size(max = 128)
-    @Column(name = "address", length = 128)
+    @Size(max = 256)
+    @Column(name = "address", length = 256)
     private String address;
     @Size(max = 4)
     @Column(name = "type", length = 4)

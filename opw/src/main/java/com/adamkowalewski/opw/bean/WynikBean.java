@@ -27,6 +27,7 @@ import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.entity.OpwWynik;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -56,6 +57,14 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
         return em;
     }
 
+    public List<OpwWynik> find(OpwObwodowaKomisja obwodowa) {
+        Query q = em.createQuery("SELECT o FROM OpwWynik o WHERE o.opwObwodowaKomisjaId = :obwodowa");
+        q.setParameter("obwodowa", obwodowa);
+        List<OpwWynik> result = q.getResultList();
+        logger.trace("For Obwodowa {} returned {} Wynik records.", obwodowa.getPkwId(), result.size());
+        return result;
+    }
+
     /**
      * Returns the number of Wynik uploaded for given Komisja Obwodowa.
      *
@@ -67,7 +76,7 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
     public int countWynik(OpwObwodowaKomisja obwodowa) {
         Query q = em.createQuery("SELECT o FROM OpwWynik o WHERE o.opwObwodowaKomisjaId = :obwodowa");
         q.setParameter("obwodowa", obwodowa);
-        int result = q.getResultList().size();        
+        int result = q.getResultList().size();
         logger.trace("For Obwodowa {} counted {} Wynik records.", obwodowa.getPkwId(), result);
         return result;
     }

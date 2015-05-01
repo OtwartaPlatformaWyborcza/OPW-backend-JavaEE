@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WynikShortDto implements Serializable {
 
-    // TODO redesign, add rate functionality 
     private int id;
     private String uploadTimestamp;
     private int ratedPositiv, ratedNegativ;
@@ -45,8 +44,39 @@ public class WynikShortDto implements Serializable {
         return id;
     }
 
+    public WynikShortDto(int id, String uploadTimestamp, int ratedPositiv, int ratedNegativ) {
+        this.id = id;
+        this.uploadTimestamp = uploadTimestamp;
+        this.ratedPositiv = ratedPositiv;
+        this.ratedNegativ = ratedNegativ;
+    }
+
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUploadTimestamp() {
+        return uploadTimestamp;
+    }
+
+    public void setUploadTimestamp(String uploadTimestamp) {
+        this.uploadTimestamp = uploadTimestamp;
+    }
+
+    public int getRatedPositiv() {
+        return ratedPositiv;
+    }
+
+    public void setRatedPositiv(int ratedPositiv) {
+        this.ratedPositiv = ratedPositiv;
+    }
+
+    public int getRatedNegativ() {
+        return ratedNegativ;
+    }
+
+    public void setRatedNegativ(int ratedNegativ) {
+        this.ratedNegativ = ratedNegativ;
     }
 
 }

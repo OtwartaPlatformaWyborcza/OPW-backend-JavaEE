@@ -113,6 +113,7 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
 
     @Override
     public String create() {
+        instance.setOrigin("backend-manual");
         userController.create(instance);
         return VIEW_ID;
     }
@@ -142,7 +143,7 @@ public class UserHandler extends AbstractCrudHandler<OpwUser> implements Seriali
 
     @Override
     public void prepareCreate() {
-        instance = new OpwUser();
+        instance = new OpwUser();        
     }
 
     @Override

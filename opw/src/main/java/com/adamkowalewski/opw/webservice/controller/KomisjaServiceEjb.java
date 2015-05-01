@@ -35,13 +35,16 @@ import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
 import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
 import com.adamkowalewski.opw.webservice.dto.WynikDto;
+import com.adamkowalewski.opw.webservice.dto.WynikShortDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +90,7 @@ public class KomisjaServiceEjb implements Serializable {
             return result;
 
         }
-        logger.error("REST loadObwodowa() unauthorized access  {} - {}", login, token);
+        logger.error("unauthorized access  {} - {}", login, token);
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
@@ -99,18 +102,26 @@ public class KomisjaServiceEjb implements Serializable {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
 
-            List<KandydatDto> kandydatList = findKandydatAllDto();
+            List<WynikShortDto> wynikShortList = new ArrayList<>();
+            List<OpwWynik> wynikList = wynikBean.find(obw);
 
-            OkregowaDto okr = new OkregowaDto(obw.getOpwOkregowaKomisjaId().getPkwId().toString(), obw.getOpwOkregowaKomisjaId().getName(), obw.getOpwOkregowaKomisjaId().getAddress());
+            for (OpwWynik single : wynikList) {
+                WynikShortDto wynikShort = new WynikShortDto(single.getId(), String.valueOf(single.getDateCreated().getTime()), single.getRatedPositiv(), single.getRatedNegativ());
+                wynikShortList.add(wynikShort);
+            }
 
-            KomisjaDto komisja = new KomisjaDto(obw.getPkwId(), obw.getName(), obw.getAddress(), okr, kandydatList);
-            Response result = Response.ok().entity(komisja).build();
+            GenericEntity<List<WynikShortDto>> resultList = new GenericEntity<List<WynikShortDto>>(wynikShortList) {
+            };
+            
+            logger.trace("obwodowa {} found {} wynik records", pkwId, wynikShortList.size());
+
+            Response result = Response.ok().entity(resultList).build();
 
             return result;
 
         }
 
-        logger.error("REST loadObwodowa() unauthorized access  {} - {}", login, token);
+        logger.error("unauthorized access  {} - {}", login, token);
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 
@@ -130,6 +141,7 @@ public class KomisjaServiceEjb implements Serializable {
 //            w.setVotesInvalid(wynik.);
             w.setVotesValid(wynik.getGlosowWaznych());
             w.setActive(Boolean.TRUE);
+            w.setDateCreated(new Date());
 
             w.setK1(wynik.getK1());
             w.setK2(wynik.getK2());
@@ -142,12 +154,14 @@ public class KomisjaServiceEjb implements Serializable {
             w.setK9(wynik.getK9());
             w.setK10(wynik.getK10());
             w.setK11(wynik.getK11());
+            w.setRatedNegativ(0);
+            w.setRatedPositiv(0);
 
             wynikBean.create(w);
 
             return Response.status(Response.Status.OK).build();
         }
-        logger.error("REST uploadWynik() unauthorized access  {} - {}", login, token);
+        logger.error("unauthorized access  {} - {}", login, token);
         return Response.status(Response.Status.UNAUTHORIZED).build();
 
     }

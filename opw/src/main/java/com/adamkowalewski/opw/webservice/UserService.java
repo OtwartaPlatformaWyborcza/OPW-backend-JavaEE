@@ -60,7 +60,7 @@ public class UserService extends AbstractService {
             return mockServerError();
         }
         
-        logger.trace("REST call Login {} ", login);
+        logger.trace("Login {} ", login);
         return userServiceEjb.login(login, password);
     }
 
@@ -78,7 +78,7 @@ public class UserService extends AbstractService {
             return mockServerError();
         }
         
-        logger.trace("REST call Login {} ", login);
+        logger.trace("user {} ", login);
         return userServiceEjb.loadObwodowaShortList(userId, login, token);
     }
 
@@ -112,7 +112,7 @@ public class UserService extends AbstractService {
         /**
          * WiP
          */
-        logger.trace("REST call API client {} ", apiClient);
+        logger.trace("API client {} ", apiClient);
         return userServiceEjb.register();
 
     }

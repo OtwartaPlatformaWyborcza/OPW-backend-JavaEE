@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,6 +38,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -58,6 +61,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwWynik.findByVotesValid", query = "SELECT o FROM OpwWynik o WHERE o.votesValid = :votesValid"),
     @NamedQuery(name = "OpwWynik.findByFileOriginal", query = "SELECT o FROM OpwWynik o WHERE o.fileOriginal = :fileOriginal"),
     @NamedQuery(name = "OpwWynik.findByActive", query = "SELECT o FROM OpwWynik o WHERE o.active = :active"),
+    @NamedQuery(name = "OpwWynik.findByDateCreated", query = "SELECT o FROM OpwWynik o WHERE o.dateCreated = :dateCreated"),
     @NamedQuery(name = "OpwWynik.findByK1", query = "SELECT o FROM OpwWynik o WHERE o.k1 = :k1"),
     @NamedQuery(name = "OpwWynik.findByK2", query = "SELECT o FROM OpwWynik o WHERE o.k2 = :k2"),
     @NamedQuery(name = "OpwWynik.findByK3", query = "SELECT o FROM OpwWynik o WHERE o.k3 = :k3"),
@@ -68,7 +72,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwWynik.findByK8", query = "SELECT o FROM OpwWynik o WHERE o.k8 = :k8"),
     @NamedQuery(name = "OpwWynik.findByK9", query = "SELECT o FROM OpwWynik o WHERE o.k9 = :k9"),
     @NamedQuery(name = "OpwWynik.findByK10", query = "SELECT o FROM OpwWynik o WHERE o.k10 = :k10"),
-    @NamedQuery(name = "OpwWynik.findByK11", query = "SELECT o FROM OpwWynik o WHERE o.k11 = :k11")})
+    @NamedQuery(name = "OpwWynik.findByK11", query = "SELECT o FROM OpwWynik o WHERE o.k11 = :k11"),
+    @NamedQuery(name = "OpwWynik.findByRatedPositiv", query = "SELECT o FROM OpwWynik o WHERE o.ratedPositiv = :ratedPositiv"),
+    @NamedQuery(name = "OpwWynik.findByRatedNegativ", query = "SELECT o FROM OpwWynik o WHERE o.ratedNegativ = :ratedNegativ")})
 public class OpwWynik implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -77,20 +83,23 @@ public class OpwWynik implements Serializable {
     @Column(name = "id", nullable = false)
     private Integer id;
     @Column(name = "votersValid")
-    private Integer votersValid;
+    private Short votersValid;
     @Column(name = "votersAmount")
-    private Integer votersAmount;
+    private Short votersAmount;
     @Column(name = "cardsValid")
-    private Integer cardsValid;
+    private Short cardsValid;
     @Column(name = "votesInvalid")
-    private Integer votesInvalid;
+    private Short votesInvalid;
     @Column(name = "votesValid")
-    private Integer votesValid;
+    private Short votesValid;
     @Size(max = 128)
     @Column(name = "fileOriginal", length = 128)
     private String fileOriginal;
     @Column(name = "active")
     private Boolean active;
+    @Column(name = "dateCreated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateCreated;
     @Column(name = "k1")
     private Short k1;
     @Column(name = "k2")
@@ -113,17 +122,21 @@ public class OpwWynik implements Serializable {
     private Short k10;
     @Column(name = "k11")
     private Short k11;
-    @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)
+    @Column(name = "ratedPositiv")
+    private Integer ratedPositiv;
+    @Column(name = "ratedNegativ")
+    private Integer ratedNegativ;
+    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private OpwObwodowaKomisja opwObwodowaKomisjaId;
+    private OpwUser opwUserId;
     @OneToMany(mappedBy = "parentId")
     private List<OpwWynik> opwWynikList;
     @JoinColumn(name = "parentId", referencedColumnName = "id")
     @ManyToOne
     private OpwWynik parentId;
-    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private OpwUser opwUserId;
+    private OpwObwodowaKomisja opwObwodowaKomisjaId;
 
     public OpwWynik() {
     }
@@ -140,43 +153,43 @@ public class OpwWynik implements Serializable {
         this.id = id;
     }
 
-    public Integer getVotersValid() {
+    public Short getVotersValid() {
         return votersValid;
     }
 
-    public void setVotersValid(Integer votersValid) {
+    public void setVotersValid(Short votersValid) {
         this.votersValid = votersValid;
     }
 
-    public Integer getVotersAmount() {
+    public Short getVotersAmount() {
         return votersAmount;
     }
 
-    public void setVotersAmount(Integer votersAmount) {
+    public void setVotersAmount(Short votersAmount) {
         this.votersAmount = votersAmount;
     }
 
-    public Integer getCardsValid() {
+    public Short getCardsValid() {
         return cardsValid;
     }
 
-    public void setCardsValid(Integer cardsValid) {
+    public void setCardsValid(Short cardsValid) {
         this.cardsValid = cardsValid;
     }
 
-    public Integer getVotesInvalid() {
+    public Short getVotesInvalid() {
         return votesInvalid;
     }
 
-    public void setVotesInvalid(Integer votesInvalid) {
+    public void setVotesInvalid(Short votesInvalid) {
         this.votesInvalid = votesInvalid;
     }
 
-    public Integer getVotesValid() {
+    public Short getVotesValid() {
         return votesValid;
     }
 
-    public void setVotesValid(Integer votesValid) {
+    public void setVotesValid(Short votesValid) {
         this.votesValid = votesValid;
     }
 
@@ -194,6 +207,14 @@ public class OpwWynik implements Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public Short getK1() {
@@ -284,12 +305,28 @@ public class OpwWynik implements Serializable {
         this.k11 = k11;
     }
 
-    public OpwObwodowaKomisja getOpwObwodowaKomisjaId() {
-        return opwObwodowaKomisjaId;
+    public Integer getRatedPositiv() {
+        return ratedPositiv;
     }
 
-    public void setOpwObwodowaKomisjaId(OpwObwodowaKomisja opwObwodowaKomisjaId) {
-        this.opwObwodowaKomisjaId = opwObwodowaKomisjaId;
+    public void setRatedPositiv(Integer ratedPositiv) {
+        this.ratedPositiv = ratedPositiv;
+    }
+
+    public Integer getRatedNegativ() {
+        return ratedNegativ;
+    }
+
+    public void setRatedNegativ(Integer ratedNegativ) {
+        this.ratedNegativ = ratedNegativ;
+    }
+
+    public OpwUser getOpwUserId() {
+        return opwUserId;
+    }
+
+    public void setOpwUserId(OpwUser opwUserId) {
+        this.opwUserId = opwUserId;
     }
 
     @XmlTransient
@@ -309,12 +346,12 @@ public class OpwWynik implements Serializable {
         this.parentId = parentId;
     }
 
-    public OpwUser getOpwUserId() {
-        return opwUserId;
+    public OpwObwodowaKomisja getOpwObwodowaKomisjaId() {
+        return opwObwodowaKomisjaId;
     }
 
-    public void setOpwUserId(OpwUser opwUserId) {
-        this.opwUserId = opwUserId;
+    public void setOpwObwodowaKomisjaId(OpwObwodowaKomisja opwObwodowaKomisjaId) {
+        this.opwObwodowaKomisjaId = opwObwodowaKomisjaId;
     }
 
     @Override

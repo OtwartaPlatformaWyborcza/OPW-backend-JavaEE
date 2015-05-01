@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -37,6 +38,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -61,7 +64,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwUser.findBySalt", query = "SELECT o FROM OpwUser o WHERE o.salt = :salt"),
     @NamedQuery(name = "OpwUser.findByActive", query = "SELECT o FROM OpwUser o WHERE o.active = :active"),
     @NamedQuery(name = "OpwUser.findByToken", query = "SELECT o FROM OpwUser o WHERE o.token = :token"),
-    @NamedQuery(name = "OpwUser.findByPhone", query = "SELECT o FROM OpwUser o WHERE o.phone = :phone")})
+    @NamedQuery(name = "OpwUser.findByPhone", query = "SELECT o FROM OpwUser o WHERE o.phone = :phone"),
+    @NamedQuery(name = "OpwUser.findByOrigin", query = "SELECT o FROM OpwUser o WHERE o.origin = :origin"),
+    @NamedQuery(name = "OpwUser.findByDateCreated", query = "SELECT o FROM OpwUser o WHERE o.dateCreated = :dateCreated")})
 public class OpwUser implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -97,6 +102,12 @@ public class OpwUser implements Serializable {
     @Size(max = 32)
     @Column(name = "phone", length = 32)
     private String phone;
+    @Size(max = 64)
+    @Column(name = "origin", length = 64)
+    private String origin;
+    @Column(name = "dateCreated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateCreated;
     @ManyToMany(mappedBy = "opwUserList")
     private List<OpwObwodowaKomisja> opwObwodowaKomisjaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
@@ -187,6 +198,22 @@ public class OpwUser implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     @XmlTransient

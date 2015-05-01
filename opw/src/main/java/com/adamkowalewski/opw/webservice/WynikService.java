@@ -25,6 +25,7 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_DEBUG_ERROR500;
 import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_LOGIN;
 import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
@@ -45,6 +46,7 @@ import static com.google.common.base.Preconditions.checkState;
 import java.util.Random;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.PathParam;
 
 /**
  * Represents wynik perspective. Main service for all OPW dashboard
@@ -58,7 +60,7 @@ public class WynikService extends AbstractService {
 
     @EJB
     WynikServiceEjb wynikEjb;
-
+   
     @GET
     @Path("/complete")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -83,7 +85,7 @@ public class WynikService extends AbstractService {
             checkState(kandydat.getPkwId() != null, "Expected non-null pkwId field");
             checkState(kandydat.getFirstname() != null, "Expected non-null firstname field");
             checkState(kandydat.getLastname() != null, "Expected non-null lastname field");
-            
+
             KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getFirstname(), kandydat.getLastname());
             k.setGlosow(new Random().nextInt(1000));
             result.getKandydatList().add(k);

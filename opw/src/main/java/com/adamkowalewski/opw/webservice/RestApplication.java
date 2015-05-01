@@ -33,7 +33,7 @@ import javax.ws.rs.core.Application;
  * @author Adam Kowalewski
  */
 @ApplicationPath("service")
-public class RestConfig extends Application {
+public class RestApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {

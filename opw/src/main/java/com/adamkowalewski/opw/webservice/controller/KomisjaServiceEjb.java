@@ -73,7 +73,7 @@ public class KomisjaServiceEjb implements Serializable {
         if (securityHandler.checkUser(login, token)) {
             OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
 
-            if (obw == null) {                
+            if (obw == null) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
 
@@ -87,6 +87,29 @@ public class KomisjaServiceEjb implements Serializable {
             return result;
 
         }
+        logger.error("REST loadObwodowa() unauthorized access  {} - {}", login, token);
+        return Response.status(Response.Status.UNAUTHORIZED).build();
+    }
+
+    public Response loadWynik(String pkwId, String login, String token) {
+        if (securityHandler.checkUser(login, token)) {
+            OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
+
+            if (obw == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+
+            List<KandydatDto> kandydatList = findKandydatAllDto();
+
+            OkregowaDto okr = new OkregowaDto(obw.getOpwOkregowaKomisjaId().getPkwId().toString(), obw.getOpwOkregowaKomisjaId().getName(), obw.getOpwOkregowaKomisjaId().getAddress());
+
+            KomisjaDto komisja = new KomisjaDto(obw.getPkwId(), obw.getName(), obw.getAddress(), okr, kandydatList);
+            Response result = Response.ok().entity(komisja).build();
+
+            return result;
+
+        }
+
         logger.error("REST loadObwodowa() unauthorized access  {} - {}", login, token);
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }

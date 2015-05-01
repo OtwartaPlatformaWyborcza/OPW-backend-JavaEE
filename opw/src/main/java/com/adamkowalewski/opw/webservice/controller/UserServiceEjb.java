@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.webservice.controller;
 
+import com.adamkowalewski.opw.bean.MailBean;
 import com.adamkowalewski.opw.bean.UserBean;
 import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
@@ -30,6 +31,7 @@ import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.OpwConfig;
 import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 import com.adamkowalewski.opw.webservice.dto.UserDto;
+import com.adamkowalewski.opw.webservice.dto.UserRegisterDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import com.adamkowalewski.opw.webservice.security.SecurityObject;
 import java.io.Serializable;
@@ -59,6 +61,8 @@ public class UserServiceEjb implements Serializable {
     UserBean userBean;
     @EJB
     WynikBean wynikBean;
+    @EJB 
+    MailBean mailBean;
 
     public UserServiceEjb() {
     }
@@ -142,7 +146,49 @@ public class UserServiceEjb implements Serializable {
 
     }
 
-    public Response register() {
+    /**
+     * MOCK
+     *
+     * @param apiClient
+     * @param apiToken
+     * @param newUser
+     * @return
+     */
+    public Response register(String apiClient, String apiToken, UserRegisterDto newUser) {
+
+        if (securityHandler.checkClient(apiClient, apiToken)) {
+            logger.info("register " + newUser.toString());
+
+            OpwUser user = new OpwUser();
+
+            user.setFirstname(newUser.getFirstname());
+            user.setLastname(newUser.getLastname());
+            user.setEmail(newUser.getEmail());
+            user.setPhone(newUser.getPhone());
+
+            String passwordPlain = userBean.generatePassword();
+            String userSalt = userBean.generatePassword(8);
+            user.setSalt(userSalt);
+            user.setToken(userBean.generateToken());
+            user.setActive(false);
+            user.setDateCreated(new Date());
+            user.setType("U"); // TODO move to ENUM 
+            user.setOrigin(apiClient);
+
+            mailBean.sendMailWelcome(user, passwordPlain, false);
+            user.setPassword(userBean.saltPassword(OpwConfig.APP_SALT, userSalt, passwordPlain));
+            try {
+                userBean.create(user);
+            } catch (Exception e){
+                logger.error("err {} ", e.getMessage() );
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
+            
+
+            return Response.status(Response.Status.OK).build();
+        }
+
+        logger.error("invalid client: {} token: {}", apiClient, apiToken);
         return Response.status(Response.Status.UNAUTHORIZED).build();
     }
 

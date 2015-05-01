@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.bean.MailBean;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.bean.UserBean;
 import java.io.Serializable;
@@ -46,16 +47,16 @@ public class UserController implements Serializable {
     private UserBean bean;
 
     @Inject
-    private MailController mailController;
+    private MailBean mailBean;
     @Inject
     private ConfigController configController;
 
     public UserController() {
     }
 
-    public UserController(UserBean bean, MailController mailController) {
+    public UserController(UserBean bean, MailBean mailController) {
         this.bean = bean;
-        this.mailController = mailController;
+        this.mailBean = mailController;
     }
 
     public boolean activateAccount(String email, String token) {
@@ -78,9 +79,12 @@ public class UserController implements Serializable {
         String userSalt = bean.generatePassword(8);
         user.setSalt(userSalt);
         user.setToken(bean.generateToken());
+        if (user.getType() == null) {
+            user.setType("U"); // TODO enum
+        }
         user.setActive(false);
         user.setDateCreated(new Date());
-        mailController.sendMailWelcome(user, passwordPlain);
+        mailBean.sendMailWelcome(user, passwordPlain, true);
         user.setPassword(bean.saltPassword(configController.getApplicationSalt(), userSalt, passwordPlain));
         bean.create(user);
     }
@@ -96,7 +100,7 @@ public class UserController implements Serializable {
      */
     public void resetPassword(OpwUser user) {
         String passwordPlain = bean.generatePassword();
-        mailController.sendMailPasswordNew(user, passwordPlain);
+        mailBean.sendMailPasswordNew(user, passwordPlain);
         user.setPassword(bean.saltPassword(configController.getApplicationSalt(), user.getSalt(), passwordPlain));
         bean.edit(user);
     }

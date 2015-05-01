@@ -24,7 +24,7 @@
 package com.adamkowalewski.opw.session.controller;
 
 import com.adamkowalewski.opw.view.controller.UserController;
-import com.adamkowalewski.opw.view.controller.MailController;
+import com.adamkowalewski.opw.bean.MailBean;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.bean.UserBean;
 import java.util.List;
@@ -175,7 +175,7 @@ public class UserControllerNGTest {
         UserBean bean = mock(UserBean.class);
         when(bean.findUser(id)).thenReturn(u);
         
-        UserController instance = new UserController(bean, new MailController());
+        UserController instance = new UserController(bean, new MailBean());
         
         
         OpwUser expResult = null;

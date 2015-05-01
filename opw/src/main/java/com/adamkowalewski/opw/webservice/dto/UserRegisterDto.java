@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.webservice.dto;
 
 import java.io.Serializable;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,7 +38,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UserRegisterDto implements Serializable {
 
-    private String firstname, lastname, email, phone;
+    @Size(min = 2, max = 5)
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String phone;
 
     public UserRegisterDto() {
     }
@@ -79,6 +84,16 @@ public class UserRegisterDto implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRegisterDto{"
+                + "firstname=" + firstname
+                + ", lastname=" + lastname
+                + ", email=" + email
+                + ", phone=" + phone
+                + '}';
     }
 
 }

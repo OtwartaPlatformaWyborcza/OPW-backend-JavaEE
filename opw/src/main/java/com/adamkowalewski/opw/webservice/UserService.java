@@ -45,7 +45,7 @@ public class UserService extends AbstractService {
     private final static Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @EJB
-    UserServiceEjb userServiceEjb;    
+    UserServiceEjb userServiceEjb;
 
     @GET
     @Path("/login")
@@ -59,7 +59,7 @@ public class UserService extends AbstractService {
             logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-        
+
         logger.trace("Login {} ", login);
         return userServiceEjb.login(login, password);
     }
@@ -77,7 +77,7 @@ public class UserService extends AbstractService {
             logger.debug(LOG_DBG_500);
             return mockServerError();
         }
-        
+
         logger.trace("user {} ", login);
         return userServiceEjb.loadObwodowaShortList(userId, login, token);
     }
@@ -109,12 +109,13 @@ public class UserService extends AbstractService {
             @NotNull @HeaderParam(OPW_HEADER_API_TOKEN) String apiToken,
             @NotNull UserRegisterDto newUser) {
 
-        /**
-         * WiP
-         */
-        logger.trace("API client {} ", apiClient);
-        return userServiceEjb.register();
+        if (debug != null) {
+            logger.debug(LOG_DBG_500);
+            return mockServerError();
+        }
 
+        logger.trace("API client {} ", apiClient);
+        return userServiceEjb.register(apiClient, apiToken, newUser);
     }
 
 }

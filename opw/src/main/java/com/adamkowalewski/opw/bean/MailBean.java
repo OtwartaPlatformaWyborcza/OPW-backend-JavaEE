@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.adamkowalewski.opw.view.controller;
+package com.adamkowalewski.opw.bean;
 
 import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.view.controller.ConfigController;
+import com.adamkowalewski.opw.view.controller.MsgController;
 import com.adamkowalewski.opw.view.dto.ConfigMailDto;
 import com.adamkowalewski.opw.view.dto.MailContentDto;
 import freemarker.template.Configuration;
@@ -54,9 +56,9 @@ import org.slf4j.LoggerFactory;
  * @author Adam Kowalewski
  */
 @Stateless
-public class MailController {
+public class MailBean {
 
-    private static final Logger logger = LoggerFactory.getLogger(MailController.class);
+    private static final Logger logger = LoggerFactory.getLogger(MailBean.class);
 
     @Resource(name = "mail/opw")
     private Session mailSession;
@@ -64,7 +66,7 @@ public class MailController {
     @Inject
     private ConfigController configController;
 
-    public boolean sendMailWelcome(OpwUser user, String passwordPlain) {
+    public boolean sendMailWelcome(OpwUser user, String passwordPlain, boolean useFacesMsg) {
         String subject = MsgController.getLocalizedMessage("mailWelcomeTitle");
         String actLink = prepareActivationLink(user, configController.getConfigMail().getHostname());
         MailContentDto payload = new MailContentDto(user.getEmail(), passwordPlain, actLink);
@@ -76,7 +78,9 @@ public class MailController {
         } catch (IOException | TemplateException | MessagingException ex) {
             logger.error(null, ex);
         } catch (OpwException ex) {
-            MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
+            if (useFacesMsg) {
+                MsgController.addWarningMessage(MsgController.getLocalizedMessage("configEmailOutboundDisabled"));
+            }
             logger.error(null, ex);
         }
         return false;
@@ -147,7 +151,7 @@ public class MailController {
     private Configuration prepareFreemarkerConfig() {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
         cfg.setDefaultEncoding("UTF-8");
-        cfg.setClassForTemplateLoading(MailController.class, "templates");
+        cfg.setClassForTemplateLoading(MailBean.class, "templates");
         return cfg;
     }
 

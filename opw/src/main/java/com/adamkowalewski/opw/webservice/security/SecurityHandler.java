@@ -23,12 +23,14 @@
  */
 package com.adamkowalewski.opw.webservice.security;
 
+import com.adamkowalewski.opw.bean.ConfigBean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -42,18 +44,23 @@ import org.slf4j.LoggerFactory;
 @Named
 @ApplicationScoped
 public class SecurityHandler implements Serializable {
-
+    
     private final static Logger logger = LoggerFactory.getLogger(SecurityHandler.class);
-
+    
     Map<String, SecurityObject> userMap;
     List<SecurityObject> userList;
-
+    Map<String, String> clientMap;  // Todo reconsider how to auth client apps
+    
+    @EJB
+    ConfigBean configBean;
+    
     public SecurityHandler() {
         logger.info("SecurityHandler()");
         userMap = new HashMap<>();
         userList = new ArrayList<>();
+        clientMap = new HashMap<>();
     }
-
+    
     public void refreshUserList() {
         userList = new ArrayList<>();
         for (Entry<String, SecurityObject> entry : userMap.entrySet()) {
@@ -61,18 +68,39 @@ public class SecurityHandler implements Serializable {
         }
     }
 
+    /**
+     * MOCK
+     *
+     * @param apiClient
+     * @param apiToken
+     * @return
+     */
+    public boolean checkClient(String apiClient, String apiToken) {
+        // TODO extract properly
+        String client = configBean.readConfigValue("CLIENT_REG_ID");
+        String clientToken = configBean.readConfigValue("CLIENT_REG_TOKEN");
+        
+        if (apiClient.equals(client) && apiToken.equals(clientToken)) {
+            logger.trace("");
+            return true;
+        }
+        logger.error("failer for apiClient {} apiToken {}", apiClient, apiToken);
+        return false;
+        
+    }
+    
     public boolean checkUser(int userId, String login, String token) {
         if (userMap.containsKey(login)) {
-
+            
             SecurityObject user = userMap.get(login);
-
+            
             if (userId == user.getUserId()
                     && token.equals(user.getToken())) {
-
+                
                 if (token.equals(user.getToken())) {
                     return !checkTimeout(user);
                 }
-
+                
             }
         }
         logger.error("failed checkUser for userId: {} login: {} token: {}", userId, login, token);
@@ -109,25 +137,25 @@ public class SecurityHandler implements Serializable {
 //        logger.error("Session timeout for login: {} token: {}", user.getLogin(), user.getToken());
         return false;
     }
-
+    
     public void clear() {
         userMap = new HashMap<>();
     }
-
+    
     public Map<String, SecurityObject> getUserMap() {
         return userMap;
     }
-
+    
     public void setUserMap(Map<String, SecurityObject> userMap) {
         this.userMap = userMap;
     }
-
+    
     public List<SecurityObject> getUserList() {
         return userList;
     }
-
+    
     public void setUserList(List<SecurityObject> userList) {
         this.userList = userList;
     }
-
+    
 }

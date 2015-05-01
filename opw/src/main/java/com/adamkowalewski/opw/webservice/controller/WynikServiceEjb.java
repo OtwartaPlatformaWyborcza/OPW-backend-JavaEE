@@ -88,6 +88,10 @@ public class WynikServiceEjb implements Serializable {
                 wynik.getK1(), wynik.getK2(), wynik.getK3(), wynik.getK4(),
                 wynik.getK5(), wynik.getK6(), wynik.getK7(), wynik.getK8(),
                 wynik.getK9(), wynik.getK10(), wynik.getK11());
+        
+        result.setRatedPositiv(wynik.getRatedPositiv());
+        result.setRatedNegativ(wynik.getRatedNegativ());
+        result.setTimestampCreated(String.valueOf(wynik.getDateCreated().getTime()));
 
         return Response.ok().entity(result).build();
     }

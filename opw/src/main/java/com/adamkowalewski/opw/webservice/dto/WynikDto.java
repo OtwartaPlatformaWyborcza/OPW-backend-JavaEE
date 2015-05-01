@@ -39,6 +39,9 @@ public class WynikDto {
 
     private Short k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11;
 
+    private String timestampCreated;
+    private int ratedPositiv, ratedNegativ;
+
     public WynikDto() {
     }
 
@@ -187,6 +190,30 @@ public class WynikDto {
 
     public void setK11(Short k11) {
         this.k11 = k11;
+    }
+
+    public String getTimestampCreated() {
+        return timestampCreated;
+    }
+
+    public void setTimestampCreated(String timestampCreated) {
+        this.timestampCreated = timestampCreated;
+    }
+
+    public int getRatedPositiv() {
+        return ratedPositiv;
+    }
+
+    public void setRatedPositiv(int ratedPositiv) {
+        this.ratedPositiv = ratedPositiv;
+    }
+
+    public int getRatedNegativ() {
+        return ratedNegativ;
+    }
+
+    public void setRatedNegativ(int ratedNegativ) {
+        this.ratedNegativ = ratedNegativ;
     }
 
 }

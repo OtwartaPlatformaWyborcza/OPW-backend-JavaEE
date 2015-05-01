@@ -32,15 +32,37 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 | Frontend wyniki (jQuery) daily  | http://91.250.114.134/dashboard-v2/ |
 
 # Quickstart
-1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB    
-  * `default-storage-engine = InnoDB`  
-  * `collation-server = utf8_general_ci`  
-  * `character-set-server = utf8`  
+1. MySQL skonfiguruj serwer do pracy w trybie UTF-8, jako engine InnoDB
+  * `default-storage-engine = InnoDB`
+  * `collation-server = utf8_general_ci`
+  * `character-set-server = utf8`
 2. MySQL dodaj użytkownika opw zgodnie z definicją w `glassfish-resources.xml`
 3. MySQL Workbench wykonaj import bazy (opcja Forward Engineer)
 4. GlassFish wykonaj import `glassfish-resources.xml` 
 5. mvn clean install i deploy na serwer
 
+# Simplestart
+1. Sklonuj repozytorium zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym ma znaleźć się projekt.
+	
+        $ cd {YOUR_PROJECT_DIRECTORY}
+        $ git clone https://github.com/OtwartaPlatformaWyborcza/OPW-backend-JavaEE.git
+
+2. Skonfiguruj bazę danych zastępując _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się sklonowany projekt.
+
+	    $ mysql -u root -p --execute="CREATE USER 'opw'@'localhost' IDENTIFIED BY 'Lc4!_-f4FjmypLDRHW.'; GRANT ALL PRIVILEGES ON * . * TO 'opw'@'localhost'; FLUSH PRIVILEGES;"
+	    $ mysql -u opw --password='Lc4!_-f4FjmypLDRHW.' --execute="SOURCE {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/ddl/db_opw.sql"
+ 
+3. Skonfiguruj serwer aplikacji. Zastąp _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się projekt.
+	
+        $ wget http://download.java.net/glassfish/4.1/release/glassfish-4.1.zip
+        $ unzip glassfish-4.1*zip
+        $ echo "export GLASSFISH_HOME=`pwd`/glassfish4" >> ~/.bashrc
+        $ ./glassfish4/glassfish/bin/asadmin add-resources {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/opw/src/main/setup/glassfish-resources.xml
+
+4. Zbuduj i uruchom projekt. Zastąp _{YOUR_PROJECTS_DIRECTORY}_ ścieżką do katalogu w którym znajduje się projekt.
+ 
+        $ cd {YOUR_PROJECTS_DIRECTORY}/OtwartaPlatformaWyborcza/opw
+        $ mvn clean install glassfish:deploy
 
 ##Wymagane oprogramowania
 * JDK7 (migracja na JDK8 ASAP)
@@ -116,18 +138,18 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 
 
 ## REST 
-Proces wgrywania protokołu z perspektywy.  
-1. GET Zalogowanie  
-2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny  
-3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów)  
-4. POST Upload liczb wyborczych  
-5. GET Wylogowanie  
+Proces wgrywania protokołu z perspektywy.
+1. GET Zalogowanie
+2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny
+3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów)
+4. POST Upload liczb wyborczych
+5. GET Wylogowanie
 
 ### Headers 
-Jako prefix `X-OPW`  
-* `X-OPW-login`  
-* `X-OPW-password`  
-* `X-OPW-token`  
+Jako prefix `X-OPW`
+* `X-OPW-login`
+* `X-OPW-password`
+* `X-OPW-token`
 
 
 ## Roadmap
@@ -189,7 +211,7 @@ Plan implementacji
 
 
 ### Wersja 0.8
-* tagowanie błędnych protokołów  
+* tagowanie błędnych protokołów
 * [WiP] Definicja infrastruktury na nadchodzące wybory
 
 ### Wersja 1.0
@@ -203,4 +225,5 @@ Plan implementacji
 * Podbieranie protokołów przesłanych na skrzynke pocztową
 * Automatyczne parsowanie protokołów ze skrzynki pocztowej
   * import poprawnych protokołów
-  * tagowanie błędnych protokołów  
+  * tagowanie błędnych protokołów
+

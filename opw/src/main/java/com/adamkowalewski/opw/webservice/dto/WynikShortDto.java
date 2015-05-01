@@ -40,8 +40,7 @@ public class WynikShortDto implements Serializable {
     private String uploadTimestamp;
     private int ratedPositiv, ratedNegativ;
 
-    public int getId() {
-        return id;
+    public WynikShortDto() {
     }
 
     public WynikShortDto(int id, String uploadTimestamp, int ratedPositiv, int ratedNegativ) {
@@ -49,6 +48,10 @@ public class WynikShortDto implements Serializable {
         this.uploadTimestamp = uploadTimestamp;
         this.ratedPositiv = ratedPositiv;
         this.ratedNegativ = ratedNegativ;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
@@ -77,6 +80,16 @@ public class WynikShortDto implements Serializable {
 
     public void setRatedNegativ(int ratedNegativ) {
         this.ratedNegativ = ratedNegativ;
+    }
+
+    @Override
+    public String toString() {
+        return "WynikShortDto{"
+                + "id=" + id
+                + ", uploadTimestamp=" + uploadTimestamp
+                + ", ratedPositiv=" + ratedPositiv
+                + ", ratedNegativ=" + ratedNegativ
+                + '}';
     }
 
 }

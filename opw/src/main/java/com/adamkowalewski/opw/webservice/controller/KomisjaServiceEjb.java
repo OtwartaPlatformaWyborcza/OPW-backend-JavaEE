@@ -114,10 +114,8 @@ public class KomisjaServiceEjb implements Serializable {
             };
             
             logger.trace("obwodowa {} found {} wynik records", pkwId, wynikShortList.size());
-
-            Response result = Response.ok().entity(resultList).build();
-
-            return result;
+            
+            return Response.ok().entity(resultList).build();
 
         }
 

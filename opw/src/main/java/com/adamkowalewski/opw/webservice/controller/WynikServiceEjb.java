@@ -80,7 +80,7 @@ public class WynikServiceEjb implements Serializable {
     public GResultDto<WynikDto> loadWynikSingle(int wynikId, String login, String token) {
 
         if (!securityHandler.checkUser(login, token)) {
-            return GResultDto.result(UNAUTHORIZED);
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
 
         OpwWynik wynik = wynikBean.find(wynikId);
@@ -96,17 +96,17 @@ public class WynikServiceEjb implements Serializable {
         result.setRatedPositiv(wynik.getRatedPositiv());
         result.setRatedNegativ(wynik.getRatedNegativ());
         result.setTimestampCreated(String.valueOf(wynik.getDateCreated().getTime()));
-        return GResultDto.result(OK, result);
+        return GResultDto.validResult(OK.getStatusCode(), result);
     }
 
     public GResultDto<Integer> ratePositive(int wynikId) {
         int c = wynikBean.ratePositive(wynikId);        
-        return GResultDto.result(OK, c);
+        return GResultDto.validResult(OK.getStatusCode(), c);
     }
     
     public GResultDto<Integer> rateNegative(int wynikId) {
         int c = wynikBean.rateNegative(wynikId);        
-        return GResultDto.result(OK, c);
+        return GResultDto.validResult(OK.getStatusCode(), c);
     }
 
     public List<OpwKandydat> kandydatFindAll() {

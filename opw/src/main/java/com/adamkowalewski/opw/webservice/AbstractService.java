@@ -25,6 +25,7 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.google.common.annotations.VisibleForTesting;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
@@ -51,26 +52,27 @@ public abstract class AbstractService {
     static final String LOG_DBG_500 = "REST 500 debug header active";
 
     /**
-     * MOCK for server error. 
-     * 
-     * @return Response 500. 
+     * MOCK for server error.
+     *
+     * @return Response 500.
      */
     Response mockServerError() {
         return Response.serverError().build();
     }
-    
+
     /**
-     * WiP 
+     * WiP
+     *
      * @param result
-     * @return 
+     * @return
      */
     @VisibleForTesting
-    Response buildResponse (GResultDto result){
+    Response buildResponse(GResultDto result) {
         ResponseBuilder response = Response.status(result.getStatus());
-        if(result.getEntity().isPresent()) {
-            response.entity(result.getEntity().get());
+        if (result.isValid() && result.getEntity() != null) {
+            response.entity(result.getEntity());
         }
-       return response.build();
+        return response.build();
     }
 
 }

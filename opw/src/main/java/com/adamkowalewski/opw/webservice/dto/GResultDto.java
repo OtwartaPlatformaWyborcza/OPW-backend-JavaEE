@@ -23,11 +23,6 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import com.google.common.base.Optional;
-
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -39,30 +34,38 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public final class GResultDto<T> {
 
-    private final Status status;
-    private final Optional<T> entity;
+    private final int status;
+    private final boolean valid;
+    private final T entity;
 
-    public static <T> GResultDto<T> result(Status status, T entity) {
-        checkNotNull(status);
-        checkNotNull(entity);
-        return new GResultDto<>(status, Optional.of(entity));
+    public static <T> GResultDto<T> validResult(int status) {
+        return new GResultDto<>(status, true, null);
     }
 
-    public static <T> GResultDto<T> result(Status status) {
-        checkNotNull(status);
-        return new GResultDto<>(status, Optional.<T>absent());
+    public static <T> GResultDto<T> validResult(int status, T entity) {
+        return new GResultDto<>(status, true, entity);
     }
 
-    private GResultDto(Status status, Optional<T> entity) {
+    public static <T> GResultDto<T> invalidResult(int status) {
+        checkNotNull(status);
+        return new GResultDto<>(status, false, null);
+    }
+
+    private GResultDto(int status, boolean valid, T entity) {
         this.status = status;
+        this.valid = valid;
         this.entity = entity;
     }
 
-    public Status getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public Optional<T> getEntity() {
+    public boolean isValid() {
+        return valid;
+    }
+
+    public T getEntity() {
         return entity;
     }
 }

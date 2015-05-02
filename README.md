@@ -151,6 +151,9 @@ Jako prefix `X-OPW`
 * `X-OPW-password`
 * `X-OPW-token`
 
+Dokumentacja Rest-api:
+https://github.com/OtwartaPlatformaWyborcza/OPW-backend-JavaEE/blob/master/opw/doc/rest-api.md
+
 
 ## Roadmap
 Plan implementacji

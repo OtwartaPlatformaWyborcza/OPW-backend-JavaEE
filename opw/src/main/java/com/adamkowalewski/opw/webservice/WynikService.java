@@ -28,6 +28,7 @@ import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_DEBUG_ERROR500;
 import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
+import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
 import com.adamkowalewski.opw.webservice.dto.WynikOkregowaDto;
 
@@ -58,7 +59,7 @@ import org.slf4j.LoggerFactory;
 @Path("/wynik")
 @RequestScoped
 public class WynikService extends AbstractService {
-    
+
     private final static Logger logger = LoggerFactory.getLogger(WynikService.class);
 
     @EJB
@@ -72,14 +73,48 @@ public class WynikService extends AbstractService {
             @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
             @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
             @NotNull @PathParam("wynikId") int wynikId) {
-        
+
         if (debug != null) {
             return mockServerError();
         }
         logger.trace("load wynik {}", wynikId);
-        
+
         return wynikEjb.loadWynikSingle(wynikId, login, token);
 
+    }
+
+    @GET
+    @Path("/{wynikId}/positive")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response ratePositive(
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+            @NotNull @PathParam("wynikId") int wynikId,
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
+
+        if (debug != null) {
+            return mockServerError();
+        }
+        logger.trace("rate positive for wynik {}", wynikId);
+        GResultDto<Integer> result = wynikEjb.ratePositive(wynikId);
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("/{wynikId}/negative")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response rateNegative(
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+            @NotNull @PathParam("wynikId") int wynikId,
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
+
+        if (debug != null) {
+            return mockServerError();
+        }
+        logger.trace("rate negative for wynik {}", wynikId);
+        GResultDto<Integer> result = wynikEjb.rateNegative(wynikId);
+        return Response.ok().build();
     }
 
     @GET
@@ -92,11 +127,11 @@ public class WynikService extends AbstractService {
         if (debug != null) {
             return mockServerError();
         }
-        if (!verifyAccess(apiToken)) {
-            Response response = Response.status(Response.Status.UNAUTHORIZED)
-                    .build();
-            return response;
-        }
+//        if (!verifyAccess(apiToken)) {
+//            Response response = Response.status(Response.Status.UNAUTHORIZED)
+//                    .build();
+//            return response;
+//        }
 
         DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
 

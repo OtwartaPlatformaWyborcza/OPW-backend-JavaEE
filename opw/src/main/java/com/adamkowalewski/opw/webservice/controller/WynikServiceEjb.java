@@ -29,6 +29,7 @@ import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.entity.OpwWynik;
+import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.WynikDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import java.io.Serializable;
@@ -49,7 +50,7 @@ import org.slf4j.LoggerFactory;
 public class WynikServiceEjb implements Serializable {
 
     private final static Logger logger = LoggerFactory.getLogger(WynikServiceEjb.class);
-    
+
     @Inject
     SecurityHandler securityHandler;
     @EJB
@@ -74,27 +75,39 @@ public class WynikServiceEjb implements Serializable {
      * @version 2015.05.01
      */
     public Response loadWynikSingle(int wynikId, String login, String token) {
-        
+
         if (!securityHandler.checkUser(login, token)) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
-        
+
         OpwWynik wynik = wynikBean.find(wynikId);
 
         WynikDto result = new WynikDto(
                 wynik.getVotersValid(), wynik.getVotersAmount(),
-                wynik.getCardsValid(), 
+                wynik.getCardsValid(),
                 wynik.getVotesInvalid(), wynik.getVotesValid(),
                 wynik.getK1(), wynik.getK2(), wynik.getK3(), wynik.getK4(),
                 wynik.getK5(), wynik.getK6(), wynik.getK7(), wynik.getK8(),
                 wynik.getK9(), wynik.getK10(), wynik.getK11());
-        
+
         result.setRatedPositiv(wynik.getRatedPositiv());
         result.setRatedNegativ(wynik.getRatedNegativ());
         result.setTimestampCreated(String.valueOf(wynik.getDateCreated().getTime()));
 
         return Response.ok().entity(result).build();
     }
+
+    public GResultDto<Integer> ratePositive(int wynikId) {
+        int c = wynikBean.ratePositive(wynikId);        
+        return new GResultDto<>(200, true, c);
+    }
+    
+    public GResultDto<Integer> rateNegative(int wynikId) {
+        int c = wynikBean.rateNegative(wynikId);        
+        return new GResultDto<>(200, true, c);
+    }
+    
+    
 
     public List<OpwKandydat> kandydatFindAll() {
         return kandydatBean.findAll();

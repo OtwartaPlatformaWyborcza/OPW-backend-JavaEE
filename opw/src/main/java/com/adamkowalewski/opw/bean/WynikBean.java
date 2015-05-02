@@ -57,6 +57,42 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
         return em;
     }
 
+    /**
+     * Increments positive rating by 1.
+     *
+     * @param wynikId ID of Wynik to increment.
+     * @return current counter.
+     * @author Adam Kowalewski
+     * @version 2015.05.02
+     */
+    public int ratePositive(int wynikId) {
+        OpwWynik wynik = find(wynikId);
+        int counter = wynik.getRatedPositiv();
+        counter++;
+        wynik.setRatedPositiv(counter);
+        edit(wynik);
+        logger.trace("rated pos wynik {} counter {}", wynikId, counter);
+        return counter;
+    }
+
+    /**
+     * Increments negative rating by 1.
+     *
+     * @param wynikId ID of Wynik to increment.
+     * @return current counter.
+     * @author Adam Kowalewski
+     * @version 2015.05.02
+     */
+    public int rateNegative(int wynikId) {
+        OpwWynik wynik = find(wynikId);
+        int counter = wynik.getRatedNegativ();
+        counter++;
+        wynik.setRatedNegativ(counter);
+        edit(wynik);
+        logger.trace("rated neg wynik {} counter {}", wynikId, counter);
+        return counter;
+    }
+
     public List<OpwWynik> find(OpwObwodowaKomisja obwodowa) {
         Query q = em.createQuery("SELECT o FROM OpwWynik o WHERE o.opwObwodowaKomisjaId = :obwodowa");
         q.setParameter("obwodowa", obwodowa);

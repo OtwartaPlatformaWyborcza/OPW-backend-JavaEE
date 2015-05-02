@@ -26,6 +26,7 @@ package com.adamkowalewski.opw.webservice;
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.google.common.annotations.VisibleForTesting;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 /**
  * Common logic for REST services.
@@ -63,11 +64,13 @@ public abstract class AbstractService {
      * @param result
      * @return 
      */
+    @VisibleForTesting
     Response buildResponse (GResultDto result){
-        if (result.isValid()){
-            return Response.ok().build();
+        ResponseBuilder response = Response.status(result.getStatus());
+        if(result.getEntity().isPresent()) {
+            response.entity(result.getEntity().get());
         }
-        return Response.serverError().build();
+       return response.build();
     }
 
 }

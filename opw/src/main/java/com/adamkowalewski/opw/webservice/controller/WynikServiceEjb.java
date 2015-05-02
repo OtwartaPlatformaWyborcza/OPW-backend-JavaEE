@@ -32,14 +32,17 @@ import com.adamkowalewski.opw.entity.OpwWynik;
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.WynikDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
-import java.io.Serializable;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.Serializable;
+import java.util.List;
+
+import static javax.ws.rs.core.Response.Status.OK;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 /**
  * Provides business logic for webservice around Wynik.
@@ -74,10 +77,10 @@ public class WynikServiceEjb implements Serializable {
      * @author Adam Kowalewski
      * @version 2015.05.01
      */
-    public Response loadWynikSingle(int wynikId, String login, String token) {
+    public GResultDto<WynikDto> loadWynikSingle(int wynikId, String login, String token) {
 
         if (!securityHandler.checkUser(login, token)) {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return GResultDto.result(UNAUTHORIZED);
         }
 
         OpwWynik wynik = wynikBean.find(wynikId);
@@ -93,21 +96,18 @@ public class WynikServiceEjb implements Serializable {
         result.setRatedPositiv(wynik.getRatedPositiv());
         result.setRatedNegativ(wynik.getRatedNegativ());
         result.setTimestampCreated(String.valueOf(wynik.getDateCreated().getTime()));
-
-        return Response.ok().entity(result).build();
+        return GResultDto.result(OK, result);
     }
 
     public GResultDto<Integer> ratePositive(int wynikId) {
         int c = wynikBean.ratePositive(wynikId);        
-        return new GResultDto<>(200, true, c);
+        return GResultDto.result(OK, c);
     }
     
     public GResultDto<Integer> rateNegative(int wynikId) {
         int c = wynikBean.rateNegative(wynikId);        
-        return new GResultDto<>(200, true, c);
+        return GResultDto.result(OK, c);
     }
-    
-    
 
     public List<OpwKandydat> kandydatFindAll() {
         return kandydatBean.findAll();

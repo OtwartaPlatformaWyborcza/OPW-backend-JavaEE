@@ -22,7 +22,7 @@
             </p:column>
             <p:column headerText="valid" styleClass="in150">
                 <h:outputText value="#{i.validTo}">
-                    <f:convertDateTime pattern="dd.MM.yy HH:mm"/>
+                    <f:convertDateTime pattern="dd.MM.yy HH:mm" timeZone="Europe/Warsaw"/>
                 </h:outputText>
             </p:column>
         </p:dataTable>

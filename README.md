@@ -138,21 +138,26 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 
 
 ## REST 
-Proces wgrywania protokołu z perspektywy.
-1. GET Zalogowanie
-2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny
-3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów)
-4. POST Upload liczb wyborczych
-5. GET Wylogowanie
+Proces wgrywania protokołu z perspektywy.  
+1. GET Zalogowanie  
+2. GET Lista komisji obwodowych za które użytkownik jest odpowiedzialny  
+3. GET Detale wybranej komisji obwodowej (dane podstawowe, lista kandydatów, lista protokołów)  
+4. POST Upload liczb wyborczych  
+5. GET Wylogowanie  
 
 ### Headers 
 Jako prefix `X-OPW`
 * `X-OPW-login`
 * `X-OPW-password`
 * `X-OPW-token`
+* `X-OPW-API-client`
+* `X-OPW-API-token`
+* `X-OPW-debug-500`
 
-Dokumentacja Rest-api:
-https://github.com/OtwartaPlatformaWyborcza/OPW-backend-JavaEE/blob/master/opw/doc/rest-api.md
+Dokumentacja API REST jest dostępna w następujących formatach:
+* [MD - ręcznie aktualizowana](https://github.com/OtwartaPlatformaWyborcza/OPW-backend-JavaEE/blob/master/doc/rest-api.md) 
+* [WADL - automatycznie generowana](http://91.250.114.134:8080/opw/service/application.wadl)
+
 
 
 ## Roadmap

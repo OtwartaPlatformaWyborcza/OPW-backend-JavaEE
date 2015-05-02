@@ -194,33 +194,36 @@ Plan implementacji
 * [DONE] Migracja repozytoriów do organizacji
 * [DONE] Wykonanie mockup serwisów REST dla klientów
 
-### Wersja 0.5 [wydana 2015.04.24]
+### Wersja 0.5.0 [wydana 2015.04.24]
 * [DONE] OPW-T-6 Autoryzacja i autentyfikacja użytkowników
 * [DONE] [OPW-A-2](https://trello.com/c/z6dxd86e/16-opw-a-2-import-komisji-obwodowych-z-pliku-csv) Import CSV dla Komisji Obwodowych
 * [DONE] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta 
 * [DONE] [OPW-T-2](https://trello.com/c/9LQ9Atld/11-opw-t-2-konfiguracja-sfl4j-jako-g-ownego-loggera-aplikacji) Integracja SFL4J
 
-### Wersja 0.6
-* [WiP] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
+### Wersja 0.6.0
 * [DONE] [OPW-A-9](https://trello.com/c/X87QydDf/18-opw-a-9-crud-dla-listy-komisji-obwodowych-przypisanych-do-u-ytkownika) CRUD listy Komisji Obwodowych przypisanych do użytkownika.
 * [DONE] [OPW-U-2](https://trello.com/c/XKxo35Mt/6-opw-u-2-jako-u-ytkownik-widze-po-zalogowaniu-sie-liste-moich-komisji-obwodowych) Lista moich Komisji Obwodowych.
 * [DONE] [OPW-U-5](https://trello.com/c/ckYiSIP8/4-opw-u-5-upload-liczb-wyborczych-do-serwera-opw) Upload liczb wyborczych.
 * [DONE] [OPW-U-7](https://trello.com/c/y2BVIfKq/21-opw-u-7-reczny-wybor-komisji-obwodowej) Ręczny wybór Komisji Obwodowej.
-* [WiP] [OPW-U-8](https://trello.com/c/AkqXvH35/22-opw-u-8-lista-protoko-ow-wgranych-dla-danej-komisji-obwodowej) Lista protokołów dla Komisji Obwodowej.
+* [DONE] [OPW-U-8](https://trello.com/c/AkqXvH35/22-opw-u-8-lista-protoko-ow-wgranych-dla-danej-komisji-obwodowej) Lista protokołów dla Komisji Obwodowej.
 * [DONE] [OPW-T-8](https://trello.com/c/gqeVIxnt/20-opw-t-8-serwis-rest-do-rejestracji) Serwis REST do rejestracji. 
 * [DONE] REST API dla klienta AngularJS 
 
 
-### Wersja 0.7
+### Wersja 0.7.0
+* [WiP] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
 * [OPW-G-3](https://trello.com/c/tQ6tM92J/19-opw-g-3-rejestracja-wolontariusza) Formularz rejestracji. 
 * [WiP] Pełna integracja z aplikacją OPW-client
 * [WiP] REST API dla klienta jQuery 
 * Pełna integracja z aplikacją OPW-dashboard
 
 
-### Wersja 0.8
+### Wersja 0.8.0
 * tagowanie błędnych protokołów
 * [WiP] Definicja infrastruktury na nadchodzące wybory
+
+### Wersja 0.9.0
+
 
 ### Wersja 1.0
 * Backend w Java EE

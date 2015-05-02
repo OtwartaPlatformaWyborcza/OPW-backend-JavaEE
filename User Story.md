@@ -25,6 +25,7 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-U-5 : Upload liczb wyborczych do serwera OPW
 * OPW-U-6 : Aktywacja konta
 * OPW-U-7 : Jako użytkownik, mogę wpisać ręcznie PKW ID Komisji Obwodowej, której liczby wyborcze chciałbym wgrać do systemu. 
+* OPW-U-8 : Jako użytkownik, mogę wyświetlić listę wszystkich protokołów wgranych dla danej Komisji Obwodowej.
 
 
 ### Gość

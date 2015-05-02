@@ -200,7 +200,7 @@ Plan implementacji
 * [DONE] [OPW-U-6](https://trello.com/c/7TqIlwrd/17-opw-u-6-aktywacja-konta) aktywacja konta 
 * [DONE] [OPW-T-2](https://trello.com/c/9LQ9Atld/11-opw-t-2-konfiguracja-sfl4j-jako-g-ownego-loggera-aplikacji) Integracja SFL4J
 
-### Wersja 0.6.0
+### Wersja 0.6.0 [wydana 2015.05.03]
 * [DONE] [OPW-A-9](https://trello.com/c/X87QydDf/18-opw-a-9-crud-dla-listy-komisji-obwodowych-przypisanych-do-u-ytkownika) CRUD listy Komisji Obwodowych przypisanych do użytkownika.
 * [DONE] [OPW-U-2](https://trello.com/c/XKxo35Mt/6-opw-u-2-jako-u-ytkownik-widze-po-zalogowaniu-sie-liste-moich-komisji-obwodowych) Lista moich Komisji Obwodowych.
 * [DONE] [OPW-U-5](https://trello.com/c/ckYiSIP8/4-opw-u-5-upload-liczb-wyborczych-do-serwera-opw) Upload liczb wyborczych.

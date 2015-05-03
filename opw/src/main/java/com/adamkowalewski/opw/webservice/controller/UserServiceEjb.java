@@ -29,25 +29,27 @@ import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.OpwConfigStatic;
+import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 import com.adamkowalewski.opw.webservice.dto.UserDto;
 import com.adamkowalewski.opw.webservice.dto.UserRegisterDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import com.adamkowalewski.opw.webservice.security.SecurityObject;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static javax.ws.rs.core.Response.Status.*;
 
 /**
- *
  * @author Adam Kowalewski
  */
 @Stateless
@@ -61,13 +63,13 @@ public class UserServiceEjb implements Serializable {
     UserBean userBean;
     @EJB
     WynikBean wynikBean;
-    @EJB 
+    @EJB
     MailBean mailBean;
 
     public UserServiceEjb() {
     }
 
-    public Response login(String login, String password) {
+    public GResultDto login(String login, String password) {
 
         if (securityHandler.getUserMap().containsKey(login)) {
             SecurityObject old = securityHandler.getUserMap().get(login);
@@ -80,9 +82,9 @@ public class UserServiceEjb implements Serializable {
         // if auth failed 
         if (user == null) {
             logger.error("REST Login failed for {}.", login);
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
-        // auth ok 
+        // auth ok
         String restToken = userBean.encryptSHA(userBean.generatePassword());
 
         Date timeout = new Date();
@@ -90,11 +92,16 @@ public class UserServiceEjb implements Serializable {
         SecurityObject so = new SecurityObject(user.getId(), login, restToken, timeout);
         securityHandler.getUserMap().put(login, so);
 
-        Response response = Response.ok()
-                .entity(new UserDto(user.getId(), user.getFirstname(), user.getLastname(), login, restToken, true, String.valueOf(timeout.getTime())))
-                .build();
-        return response;
-
+        UserDto userDto = new UserDto(
+                user.getId(),
+                user.getFirstname(),
+                user.getLastname(),
+                login,
+                restToken,
+                true,
+                String.valueOf(timeout.getTime())
+        );
+        return GResultDto.validResult(OK.getStatusCode(), userDto);
     }
 
     /**
@@ -106,25 +113,21 @@ public class UserServiceEjb implements Serializable {
      * @author Adam Kowalewski
      * @version 2015.04.26
      */
-    public Response logout(String login, String token) {
-
-        if (securityHandler.getUserMap().containsKey(login)) {
-            SecurityObject user = securityHandler.getUserMap().get(login);
-
-            if (user.getToken().equals(token)) {
-                securityHandler.getUserMap().remove(login);
-                return Response.ok().build();
-            }
+    public GResultDto logout(String login, String token) {
+        if (!securityHandler.getUserMap().containsKey(login)
+                || !securityHandler.getUserMap().get(login).getToken().equals(token)) {
+            logger.error("REST logout failed for {} - {}", login, token);
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
 
-        logger.error("REST logout failed for {} - {}", login, token);
-        return Response.status(Response.Status.UNAUTHORIZED).build();
+        securityHandler.getUserMap().remove(login);
+        return GResultDto.validResult(OK.getStatusCode());
     }
 
-    public Response loadObwodowaShortList(int userId, String login, String token) {
+    public GResultDto<GenericEntity<List<KomisjaShortDto>>> loadObwodowaShortList(int userId, String login, String token) {
 
         if (!securityHandler.checkUser(userId, login, token)) {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
 
         OpwUser user = userBean.findUser(userId);
@@ -142,8 +145,7 @@ public class UserServiceEjb implements Serializable {
         GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
         };
 
-        return Response.ok().entity(result).build();
-
+        return GResultDto.validResult(OK.getStatusCode(), result);
     }
 
     /**
@@ -154,42 +156,40 @@ public class UserServiceEjb implements Serializable {
      * @param newUser
      * @return
      */
-    public Response register(String apiClient, String apiToken, UserRegisterDto newUser) {
-
+    public GResultDto register(String apiClient, String apiToken, UserRegisterDto newUser) {
         if (securityHandler.checkClient(apiClient, apiToken)) {
-            logger.info("register " + newUser.toString());
-
-            OpwUser user = new OpwUser();
-
-            user.setFirstname(newUser.getFirstname());
-            user.setLastname(newUser.getLastname());
-            user.setEmail(newUser.getEmail());
-            user.setPhone(newUser.getPhone());
-
-            String passwordPlain = userBean.generatePassword();
-            String userSalt = userBean.generatePassword(8);
-            user.setSalt(userSalt);
-            user.setToken(userBean.generateToken());
-            user.setActive(false);
-            user.setDateCreated(new Date());
-            user.setType("U"); // TODO move to ENUM 
-            user.setOrigin(apiClient);
-
-            mailBean.sendMailWelcome(user, passwordPlain, false);
-            user.setPassword(userBean.saltPassword(OpwConfigStatic.APP_SALT, userSalt, passwordPlain));
-            try {
-                userBean.create(user);
-            } catch (Exception e){
-                logger.error("err {} ", e.getMessage() );
-                return Response.status(Response.Status.BAD_REQUEST).build();
-            }
-            
-
-            return Response.status(Response.Status.OK).build();
+            logger.error("invalid client: {} token: {}", apiClient, apiToken);
+            return GResultDto.validResult(UNAUTHORIZED.getStatusCode());
         }
 
-        logger.error("invalid client: {} token: {}", apiClient, apiToken);
-        return Response.status(Response.Status.UNAUTHORIZED).build();
+        logger.info("register " + newUser.toString());
+
+        OpwUser user = new OpwUser();
+
+        user.setFirstname(newUser.getFirstname());
+        user.setLastname(newUser.getLastname());
+        user.setEmail(newUser.getEmail());
+        user.setPhone(newUser.getPhone());
+
+        String passwordPlain = userBean.generatePassword();
+        String userSalt = userBean.generatePassword(8);
+        user.setSalt(userSalt);
+        user.setToken(userBean.generateToken());
+        user.setActive(false);
+        user.setDateCreated(new Date());
+        user.setType("U"); // TODO move to ENUM
+        user.setOrigin(apiClient);
+
+        mailBean.sendMailWelcome(user, passwordPlain, false);
+        user.setPassword(userBean.saltPassword(OpwConfigStatic.APP_SALT, userSalt, passwordPlain));
+        try {
+            userBean.create(user);
+        } catch (Exception e) {
+            logger.error("err {} ", e.getMessage());
+            return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
+        }
+
+        return GResultDto.validResult(OK.getStatusCode());
     }
 
 }

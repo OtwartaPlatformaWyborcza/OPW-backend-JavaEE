@@ -211,6 +211,8 @@ Plan implementacji
 
 
 ### Wersja 0.7.0
+* [DONE] [OPW-T-1](https://trello.com/c/Szj6RjPE/10-opw-t-1-dokumentacji-rest-api-w-swagger-io) Dokumentacji REST API
+* [DONE] [OPW-U-3](https://trello.com/c/pCCJ0Mjc/7-opw-u-3-jako-u-ytkownik-widze-po-wybraniu-komisji-podstawowe-informacje-liste-kandydatow-liste-protoko-ow-jak-i-formularz-liczb-) Podstawowe informacje dla wybranej Komisji Obwodowej.
 * [WiP] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
 * [OPW-G-3](https://trello.com/c/tQ6tM92J/19-opw-g-3-rejestracja-wolontariusza) Formularz rejestracji. 
 * [WiP] Pełna integracja z aplikacją OPW-client

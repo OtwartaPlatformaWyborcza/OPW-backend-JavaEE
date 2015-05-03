@@ -12,18 +12,17 @@
     </f:metadata>
 
     <ui:define name="content">
-                
+
         #{verifyHandler.verifyAccount()}
         <ui:fragment rendered="#{verifyHandler.actResult}">
             <h1>Aktywacja konta zakonczona powodzeniem.</h1>
+            <p>Mail: #{verifyHandler.email}</p>
+            <p>code: #{verifyHandler.code}</p>
         </ui:fragment>
-        
+
         <ui:fragment rendered="#{not verifyHandler.actResult}">
             <h1>Błąd aktywacji.</h1>
         </ui:fragment>
-        
-        <p>Mail: #{verifyHandler.email}</p>
-        <p>code: #{verifyHandler.code}</p>
 
     </ui:define>
 

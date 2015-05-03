@@ -38,10 +38,13 @@ public class CorsSharingFilter implements ContainerResponseFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext response) {
-        String allowHeaders = "Content-Type, Accept, "
-                + "X-OPW-login, X-OPW-password, "
-                + "X-OPW-token, "
-                + "X-OPW-API-token, X-OPW-API-client";
+        String allowHeaders = "Content-Type, " +
+                "Accept, " +
+                "X-OPW-login, " +
+                "X-OPW-password, " +
+                "X-OPW-token, " +
+                "X-OPW-API-token, " +
+                "X-OPW-API-client";
 
         // TODO remove for prod
         allowHeaders = allowHeaders + ", X-OPW-debug-500";

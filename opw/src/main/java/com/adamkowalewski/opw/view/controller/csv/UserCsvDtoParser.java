@@ -1,10 +1,11 @@
 package com.adamkowalewski.opw.view.controller.csv;
 
 import com.adamkowalewski.opw.view.dto.UserCsvDto;
-import com.google.common.base.Splitter;
 import com.googlecode.jcsv.reader.CSVEntryParser;
 
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * The UserCsvDtoParser receives a line of the csv file and converts it
@@ -20,10 +21,19 @@ class UserCsvDtoParser implements CSVEntryParser<UserCsvDto> {
         String lastname = data[1].trim();
         String email = data[2].trim();
         String type = data[3].trim();
-        List<String> obwodowaList = Splitter.on(',')
-                .trimResults()
-                .omitEmptyStrings()
-                .splitToList(data[4].trim());
+        List<String> obwodowaList = newArrayList(data[4].trim().split(","));
+        obwodowaList = trimElements(obwodowaList);
+
         return new UserCsvDto(firstname, lastname, email, type, obwodowaList);
+    }
+
+    private List<String> trimElements(List<String> elements) {
+        for (int i = 1; i < elements.size(); ++i) {
+            String element = elements.get(i).trim();
+            if (element.isEmpty()) {
+                elements.remove(i);
+            }
+        }
+        return elements;
     }
 }

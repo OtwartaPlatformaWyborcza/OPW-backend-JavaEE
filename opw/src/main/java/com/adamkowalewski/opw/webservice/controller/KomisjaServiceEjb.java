@@ -31,26 +31,25 @@ import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.entity.OpwWynik;
-import com.adamkowalewski.opw.webservice.dto.KandydatDto;
-import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
-import com.adamkowalewski.opw.webservice.dto.OkregowaDto;
-import com.adamkowalewski.opw.webservice.dto.WynikDto;
-import com.adamkowalewski.opw.webservice.dto.WynikShortDto;
+import com.adamkowalewski.opw.webservice.dto.*;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
+import static javax.ws.rs.core.Response.Status.OK;
 
 /**
- *
  * @author Adam Kowalewski
  */
 @Stateless
@@ -72,96 +71,92 @@ public class KomisjaServiceEjb implements Serializable {
     public KomisjaServiceEjb() {
     }
 
-    public Response loadObwodowa(String pkwId, String login, String token) {
-        if (securityHandler.checkUser(login, token)) {
-            OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
-
-            if (obw == null) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-
-            List<KandydatDto> kandydatList = findKandydatAllDto();
-
-            OkregowaDto okr = new OkregowaDto(obw.getOpwOkregowaKomisjaId().getPkwId().toString(), obw.getOpwOkregowaKomisjaId().getName(), obw.getOpwOkregowaKomisjaId().getAddress());
-
-            KomisjaDto komisja = new KomisjaDto(obw.getPkwId(), obw.getName(), obw.getAddress(), okr, kandydatList);
-            Response result = Response.ok().entity(komisja).build();
-
-            return result;
-
+    public GResultDto<KomisjaDto> loadObwodowa(String pkwId, String login, String token) {
+        if (!securityHandler.checkUser(login, token)) {
+            logger.error("unauthorized access  {} - {}", login, token);
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
-        logger.error("unauthorized access  {} - {}", login, token);
-        return Response.status(Response.Status.UNAUTHORIZED).build();
+        OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
+
+        if (obw == null) {
+            return GResultDto.invalidResult(NOT_FOUND.getStatusCode());
+        }
+
+        List<KandydatDto> kandydatList = findKandydatAllDto();
+
+        OkregowaDto okr = new OkregowaDto(obw.getOpwOkregowaKomisjaId().getPkwId().toString(), obw.getOpwOkregowaKomisjaId().getName(), obw.getOpwOkregowaKomisjaId().getAddress());
+
+        KomisjaDto komisja = new KomisjaDto(obw.getPkwId(), obw.getName(), obw.getAddress(), okr, kandydatList);
+
+        return GResultDto.validResult(OK.getStatusCode(), komisja);
     }
 
-    public Response loadWynik(String pkwId, String login, String token) {
-        if (securityHandler.checkUser(login, token)) {
-            OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
-
-            if (obw == null) {
-                return Response.status(Response.Status.NOT_FOUND).build();
-            }
-
-            List<WynikShortDto> wynikShortList = new ArrayList<>();
-            List<OpwWynik> wynikList = wynikBean.find(obw);
-
-            for (OpwWynik single : wynikList) {
-                WynikShortDto wynikShort = new WynikShortDto(single.getId(), String.valueOf(single.getDateCreated().getTime()), single.getRatedPositiv(), single.getRatedNegativ());
-                wynikShortList.add(wynikShort);
-            }
-
-            GenericEntity<List<WynikShortDto>> resultList = new GenericEntity<List<WynikShortDto>>(wynikShortList) {
-            };
-            
-            logger.trace("obwodowa {} found {} wynik records", pkwId, wynikShortList.size());
-            
-            return Response.ok().entity(resultList).build();
-
+    public GResultDto<GenericEntity<List<WynikShortDto>>> loadWynik(String pkwId, String login, String token) {
+        if (!securityHandler.checkUser(login, token)) {
+            logger.error("unauthorized access  {} - {}", login, token);
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
 
-        logger.error("unauthorized access  {} - {}", login, token);
-        return Response.status(Response.Status.UNAUTHORIZED).build();
+        OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
+
+        if (obw == null) {
+            return GResultDto.invalidResult(NOT_FOUND.getStatusCode());
+        }
+
+        List<WynikShortDto> wynikShortList = new ArrayList<>();
+        List<OpwWynik> wynikList = wynikBean.find(obw);
+
+        for (OpwWynik single : wynikList) {
+            WynikShortDto wynikShort = new WynikShortDto(single.getId(), String.valueOf(single.getDateCreated().getTime()), single.getRatedPositiv(), single.getRatedNegativ());
+            wynikShortList.add(wynikShort);
+        }
+
+        GenericEntity<List<WynikShortDto>> resultList = new GenericEntity<List<WynikShortDto>>(wynikShortList) {
+        };
+
+        logger.trace("obwodowa {} found {} wynik records", pkwId, wynikShortList.size());
+
+        return GResultDto.validResult(OK.getStatusCode(), resultList);
     }
 
-    public Response uploadWynik(String pkwId, String login, String token, WynikDto wynik) {
-
-        if (securityHandler.checkUser(login, token)) {
-            OpwUser user = userBean.find(securityHandler.getUserMap().get(login).getUserId());
-            OpwObwodowaKomisja obwodowa = obwodowaBean.findObwodowa(pkwId);
-
-            OpwWynik w = new OpwWynik();
-            w.setOpwUserId(user);
-            w.setOpwObwodowaKomisjaId(obwodowa);
-
-            w.setVotersValid(wynik.getUprawnionych());
-            w.setVotersAmount(wynik.getGlosujacych());
-            w.setCardsValid(wynik.getKartWaznych());
-            w.setVotesInvalid(wynik.getGlosowNieWaznych());
-            w.setVotesValid(wynik.getGlosowWaznych());
-            w.setActive(Boolean.TRUE);
-            w.setDateCreated(new Date());
-
-            w.setK1(wynik.getK1());
-            w.setK2(wynik.getK2());
-            w.setK3(wynik.getK3());
-            w.setK4(wynik.getK4());
-            w.setK5(wynik.getK5());
-            w.setK6(wynik.getK6());
-            w.setK7(wynik.getK7());
-            w.setK8(wynik.getK8());
-            w.setK9(wynik.getK9());
-            w.setK10(wynik.getK10());
-            w.setK11(wynik.getK11());
-            w.setRatedNegativ(0);
-            w.setRatedPositiv(0);
-
-            wynikBean.create(w);
-
-            return Response.status(Response.Status.OK).build();
+    public GResultDto uploadWynik(String pkwId, String login, String token, WynikDto wynik) {
+        if (!securityHandler.checkUser(login, token)) {
+            logger.error("unauthorized access  {} - {}", login, token);
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
-        logger.error("unauthorized access  {} - {}", login, token);
-        return Response.status(Response.Status.UNAUTHORIZED).build();
 
+        OpwUser user = userBean.find(securityHandler.getUserMap().get(login).getUserId());
+        OpwObwodowaKomisja obwodowa = obwodowaBean.findObwodowa(pkwId);
+
+        OpwWynik w = new OpwWynik();
+        w.setOpwUserId(user);
+        w.setOpwObwodowaKomisjaId(obwodowa);
+
+        w.setVotersValid(wynik.getUprawnionych());
+        w.setVotersAmount(wynik.getGlosujacych());
+        w.setCardsValid(wynik.getKartWaznych());
+        w.setVotesInvalid(wynik.getGlosowNieWaznych());
+        w.setVotesValid(wynik.getGlosowWaznych());
+        w.setActive(Boolean.TRUE);
+        w.setDateCreated(new Date());
+
+        w.setK1(wynik.getK1());
+        w.setK2(wynik.getK2());
+        w.setK3(wynik.getK3());
+        w.setK4(wynik.getK4());
+        w.setK5(wynik.getK5());
+        w.setK6(wynik.getK6());
+        w.setK7(wynik.getK7());
+        w.setK8(wynik.getK8());
+        w.setK9(wynik.getK9());
+        w.setK10(wynik.getK10());
+        w.setK11(wynik.getK11());
+        w.setRatedNegativ(0);
+        w.setRatedPositiv(0);
+
+        wynikBean.create(w);
+
+        return GResultDto.validResult(OK.getStatusCode());
     }
 
     public List<KandydatDto> findKandydatAllDto() {

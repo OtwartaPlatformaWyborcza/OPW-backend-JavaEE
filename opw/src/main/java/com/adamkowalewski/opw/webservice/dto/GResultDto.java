@@ -26,75 +26,43 @@ package com.adamkowalewski.opw.webservice.dto;
 /**
  * GDTO Generic Data Transfer Object for REST services.
  *
+ * @param <T> entity
  * @author Adam Kowalewski
  * @version 2015.05.02
- * @param <T> entity
  */
-public class GResultDto<T> {
+public final class GResultDto<T> {
 
-    private int statusCode;
-    private boolean valid;
-    private boolean entityAttached;
-    private T entity;
+    private final int status;
+    private final boolean valid;
+    private final T entity;
 
-    public GResultDto() {
+    public static <T> GResultDto<T> validResult(int status) {
+        return new GResultDto<>(status, true, null);
     }
 
-    public GResultDto(int statusCode, boolean valid, T entity) {
-        this.statusCode = statusCode;
+    public static <T> GResultDto<T> validResult(int status, T entity) {
+        return new GResultDto<>(status, true, entity);
+    }
+
+    public static <T> GResultDto<T> invalidResult(int status) {
+        return new GResultDto<>(status, false, null);
+    }
+
+    private GResultDto(int status, boolean valid, T entity) {
+        this.status = status;
         this.valid = valid;
         this.entity = entity;
     }
 
-    public GResultDto(int statusCode, boolean valid, boolean entityAttached, T entity) {
-        this.statusCode = statusCode;
-        this.valid = valid;
-        this.entityAttached = entityAttached;
-        this.entity = entity;
+    public int getStatus() {
+        return status;
     }
 
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    /**
-     * Verifies if result is valid.
-     *
-     * @return for valid response <code>true</code>, otherwise
-     * <code>false</code>.
-     */
     public boolean isValid() {
         return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
     }
 
     public T getEntity() {
         return entity;
     }
-
-    public void setEntity(T entity) {
-        this.entity = entity;
-    }
-
-    /**
-     * Shall this entity be attached as entity to <code>Response</code>.
-     *
-     * @return when to be attached <code>true</code>, otherwise
-     * <code>false</code>.
-     */
-    public boolean isEntityAttached() {
-        return entityAttached;
-    }
-
-    public void setEntityAttached(boolean entityAttached) {
-        this.entityAttached = entityAttached;
-    }
-
 }

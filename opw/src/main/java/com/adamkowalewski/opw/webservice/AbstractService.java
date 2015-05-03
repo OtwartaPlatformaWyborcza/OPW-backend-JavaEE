@@ -25,7 +25,9 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.google.common.annotations.VisibleForTesting;
+
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 /**
  * Common logic for REST services.
@@ -50,24 +52,27 @@ public abstract class AbstractService {
     static final String LOG_DBG_500 = "REST 500 debug header active";
 
     /**
-     * MOCK for server error. 
-     * 
-     * @return Response 500. 
+     * MOCK for server error.
+     *
+     * @return Response 500.
      */
     Response mockServerError() {
         return Response.serverError().build();
     }
-    
+
     /**
-     * WiP 
+     * WiP
+     *
      * @param result
-     * @return 
+     * @return
      */
-    Response buildResponse (GResultDto result){
-        if (result.isValid()){
-            return Response.ok().build();
+    @VisibleForTesting
+    Response buildResponse(GResultDto result) {
+        ResponseBuilder response = Response.status(result.getStatus());
+        if (result.isValid() && result.getEntity() != null) {
+            response.entity(result.getEntity());
         }
-        return Response.serverError().build();
+        return response.build();
     }
 
 }

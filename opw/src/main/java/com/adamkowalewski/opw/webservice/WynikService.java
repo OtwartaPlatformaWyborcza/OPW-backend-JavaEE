@@ -79,7 +79,7 @@ public class WynikService extends AbstractService {
         }
         logger.trace("load wynik {}", wynikId);
 
-        return wynikEjb.loadWynikSingle(wynikId, login, token);
+        return buildResponse(wynikEjb.loadWynikSingle(wynikId, login, token));
 
     }
 

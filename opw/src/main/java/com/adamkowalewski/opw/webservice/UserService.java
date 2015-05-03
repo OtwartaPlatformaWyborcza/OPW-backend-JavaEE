@@ -25,14 +25,14 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.webservice.controller.UserServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.UserRegisterDto;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.ejb.EJB;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ejb.EJB;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Represents user perspective.
@@ -61,7 +61,7 @@ public class UserService extends AbstractService {
         }
 
         logger.trace("Login {} ", login);
-        return userServiceEjb.login(login, password);
+        return buildResponse(userServiceEjb.login(login, password));
     }
 
     @GET
@@ -79,7 +79,7 @@ public class UserService extends AbstractService {
         }
 
         logger.trace("user {} ", login);
-        return userServiceEjb.loadObwodowaShortList(userId, login, token);
+        return buildResponse(userServiceEjb.loadObwodowaShortList(userId, login, token));
     }
 
     @GET
@@ -96,7 +96,7 @@ public class UserService extends AbstractService {
             return mockServerError();
         }
 
-        return userServiceEjb.logout(login, token);
+        return buildResponse(userServiceEjb.logout(login, token));
     }
 
     @POST
@@ -115,7 +115,7 @@ public class UserService extends AbstractService {
         }
 
         logger.trace("API client {} ", apiClient);
-        return userServiceEjb.register(apiClient, apiToken, newUser);
+        return buildResponse(userServiceEjb.register(apiClient, apiToken, newUser));
     }
 
 }

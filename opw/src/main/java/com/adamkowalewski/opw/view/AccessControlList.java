@@ -29,6 +29,8 @@ import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents Access Control List (ACL) for JSF views. It's a whitelist
@@ -39,6 +41,8 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class AccessControlList implements Serializable {
+    
+    private static final Logger logger = LoggerFactory.getLogger(AccessControlList.class);
 
     @Inject
     private Identity identity;
@@ -53,11 +57,17 @@ public class AccessControlList implements Serializable {
         populateLogin();
     }
 
-    public boolean accessView(String name) {
+    public boolean accessView(String name) {                
         if (accessAll.contains(name)) {
             return true;
         }
-        return accessLogin.contains(name) && identity.isLoggedin();
+        
+        if (accessLogin.contains(name) && identity.isLoggedin()){
+            return true; 
+        }
+        
+        logger.error("Rejected access to {} page", name);
+        return false;
     }
 
     private void populateLogin() {
@@ -90,6 +100,7 @@ public class AccessControlList implements Serializable {
         accessAll.add("/login.xhtml");
         accessAll.add("/logout.xhtml");
         accessAll.add("/verify.xhtml");
+        accessAll.add("/register.xhtml");
         accessAll.add("/errorSites/error404.xhtml");
         accessAll.add("/errorSites/error500.xhtml");
     }

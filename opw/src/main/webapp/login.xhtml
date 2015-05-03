@@ -7,24 +7,29 @@
     <ui:define name="content">
         <h1>#{messages.loginTitle}</h1>
 
-            <div class="box box400 box_blue left">
-                <h:form id="frmLogin">
-                    <br/>
-                    <h:panelGrid columns="2" cellspacing="7">
-                        <h:outputLabel id="labelLogin" for="login" value="#{messages.username}" />
-                        <p:inputText id="login" styleClass="in200" 
-                                     value="#{loginHandler.login}"/>
+        <div class="box box400 box_blue left">
+            <h:form id="frmLogin">
+                <br/>
+                <h:panelGrid columns="2" cellspacing="7">
+                    <h:outputLabel id="labelLogin" for="login" value="#{messages.username}" />
+                    <p:inputText id="login" styleClass="in200" 
+                                 value="#{loginHandler.login}"/>
 
-                        <h:outputLabel id="labelPassword" for="password" value="#{messages.password}" />
-                        <p:password id="password"  styleClass="in200"  
-                                    value="#{loginHandler.password}" />
-                    </h:panelGrid>
+                    <h:outputLabel id="labelPassword" for="password" value="#{messages.password}" />
+                    <p:password id="password"  styleClass="in200"  
+                                value="#{loginHandler.password}" />
 
+                    <h:outputText value=""/>
                     <h:commandButton id="submit" class="btn"
                                      value="#{messages.loginSubmit}" 
                                      action="#{loginHandler.authenticate()}" />
-                </h:form>
-            </div>
+                </h:panelGrid>
+                <p>
+                    <h:outputText value="#{messages.registerText} "/>
+                    <h:link id="register" value="#{messages.registerSubmit}" outcome="register" />
+                </p>
+            </h:form>
+        </div>
         <div class="clear"></div>
 
     </ui:define>

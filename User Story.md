@@ -44,12 +44,22 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-T-6 : Autoryzacja i autentykacja na bazie JAAS
 * OPW-T-7 : Logowanie dla REST i JSF
 * OPW-T-8 : Serwis REST pozwalający na rejestrację nowego użytkownika. 
-* OPW-T-9 : 
-* OPW-T-10
+* OPW-T-9 : Serwis REST pozwalający na sprawdzenie czy adres E-Mail jest dostępny. 
+* OPW-T-10 : 
+* OPW-T-11 : 
+* OPW-T-12 : 
+* OPW-T-10 : 
+* OPW-T-10 : 
 
 
-
-
+### Infrastruktura
+* OPW-I-1 Konfiguracja klastra GlassFish 4.1 (min. 3x Slave)
+* OPW-I-2 Konfiguracja klastra MySQL (min. 3x Slave)
+* OPW-I-3 Przygotowanie obrazów docker nginx dla client-dashboard (jQuery)
+* OPW-I-4 Przygotowanie obrazów docker nginx dla client-obwodowa (AngularJS)
+* OPW-I-5 
+* OPW-I-6
+* OPW-I-7
 
 
 

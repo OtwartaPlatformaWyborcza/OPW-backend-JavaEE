@@ -70,7 +70,7 @@ public class KomisjaService extends AbstractService {
         }
 
         logger.trace("Komisja {} user {} ", pkwId, login);
-        return komisjaServiceEjb.loadObwodowa(pkwId, login, token);
+        return buildResponse(komisjaServiceEjb.loadObwodowa(pkwId, login, token));
     }
 
     @GET
@@ -87,7 +87,7 @@ public class KomisjaService extends AbstractService {
             return mockServerError();
         }
         logger.trace("Komisja {} user {} ", pkwId, login);
-        return komisjaServiceEjb.loadWynik(pkwId, login, token);
+        return buildResponse(komisjaServiceEjb.loadWynik(pkwId, login, token));
     }
 
     @POST
@@ -106,7 +106,6 @@ public class KomisjaService extends AbstractService {
             return mockServerError();
         }
         logger.trace("Komisja {} user {} ", pkwId, login);
-        return komisjaServiceEjb.uploadWynik(pkwId, login, token, wynik);
+        return buildResponse(komisjaServiceEjb.uploadWynik(pkwId, login, token, wynik));
     }
-
 }

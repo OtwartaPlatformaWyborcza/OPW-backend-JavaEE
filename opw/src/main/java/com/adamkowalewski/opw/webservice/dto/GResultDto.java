@@ -23,8 +23,6 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * GDTO Generic Data Transfer Object for REST services.
  *
@@ -47,7 +45,6 @@ public final class GResultDto<T> {
     }
 
     public static <T> GResultDto<T> invalidResult(int status) {
-        checkNotNull(status);
         return new GResultDto<>(status, false, null);
     }
 

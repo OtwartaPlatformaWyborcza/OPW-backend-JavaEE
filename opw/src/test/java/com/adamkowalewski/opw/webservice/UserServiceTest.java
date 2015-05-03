@@ -1,12 +1,14 @@
 package com.adamkowalewski.opw.webservice;
 
+import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
-import com.adamkowalewski.opw.webservice.dto.UserDto;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTestNg;
+import com.adamkowalewski.opw.webservice.dto.UserRegisterDto;
+import com.google.gson.Gson;
+import org.mockito.Mockito;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import javax.ws.rs.core.Application;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -15,97 +17,103 @@ import java.util.List;
 import static com.adamkowalewski.opw.webservice.AbstractService.*;
 import static com.cedarsoftware.util.DeepEquals.deepEquals;
 import static java.lang.String.format;
+import static javax.ws.rs.client.Entity.entity;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.eclipse.jetty.http.HttpStatus.OK_200;
-import static org.eclipse.jetty.http.HttpStatus.UNAUTHORIZED_401;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.testng.Assert.*;
 
 
-public class UserServiceTest extends JerseyTestNg.ContainerPerMethodTest {
+public class UserServiceTest extends BaseUserServiceTest {
 
-    @Override
-    protected Application configure() {
-        return new ResourceConfig(UserService.class);
+    @AfterMethod
+    public void resetMocks() {
+        Mockito.reset(userServiceEjb);
     }
 
-//    @Test(enabled = false)
-//    public void shouldLoadObwodowaShortList() throws Exception {
-//        // given
-//        int userId = 1234;
-//        String login = "login";
-//        String token = "token1234";
-//
-//        List<KomisjaShortDto> expectedResult = new ArrayList<>();
-//        for (int i = 1; i < 30; i++) {
-//            expectedResult.add(new KomisjaShortDto(i, "1212-" + i, "Komisja " + i, "adres " + i));
-//        }
-//
-//        // when
-//        Response response = target(format("user/%s/obwodowa", userId)).request()
-//                .header(OPW_HEADER_LOGIN, login)
-//                .header(OPW_HEADER_TOKEN, token)
-//                .get();
-//        List<KomisjaShortDto> actualResult = response.readEntity(new GenericType<List<KomisjaShortDto>>() {
-//        });
-//
-//        // then
-//        assertEquals(response.getStatus(), OK_200);
-//        assertTrue(deepEquals(expectedResult, actualResult));
-//    }
-
-//    @Test(enabled = false)
-//    public void shouldLogin() throws Exception {
-//        // given
-//        String login = "admin";
-//        String password = "admin";
-//        UserDto expectedResponse = new UserDto(1, "OPW Administrator", mockTokenId, true);
-//
-//        // when
-//        Response response = target("user/login").request()
-//                .header(OPW_HEADER_LOGIN, login)
-//                .header(OPW_HEADER_PASSWORD, password)
-//                .get();
-//        UserDto actualResponse = response.readEntity(UserDto.class);
-//
-//        // then
-//        assertEquals(response.getStatus(), OK_200);
-//        assertTrue(deepEquals(expectedResponse, actualResponse));
-//    }
-
-    @Test(enabled = false)
-    public void shouldNotLogin() throws Exception {
+    @Test
+    public void shouldLoadObwodowaShortList() throws Exception {
         // given
-        String login = "unknown";
-        String password = "incorrect";
+        int userId = 1234;
+        String login = "login";
+        String token = "token1234";
+
+        List<KomisjaShortDto> expectedResult = new ArrayList<>();
+        GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(expectedResult) {
+        };
+        when(userServiceEjb.loadObwodowaShortList(anyInt(), anyString(), anyString()))
+                .thenReturn(GResultDto.validResult(OK_200, result));
+
+        // when
+        Response response = target(format("user/%s/obwodowa", userId)).request()
+                .header(OPW_HEADER_LOGIN, login)
+                .header(OPW_HEADER_TOKEN, token)
+                .get();
+
+        // then
+        assertEquals(response.getStatus(), OK_200);
+        assertNotNull(response.getEntity());
+        assertTrue(deepEquals(expectedResult, response.readEntity(new GenericType<List<KomisjaShortDto>>() {
+        })));
+    }
+
+
+    @Test
+    public void shoulLogin() throws Exception {
+        // given
+        String login = "user";
+        String password = "password";
+        when(userServiceEjb.login(anyString(), anyString()))
+                .thenReturn(GResultDto.validResult(OK_200));
 
         // when
         Response response = target("user/login").request()
                 .header(OPW_HEADER_LOGIN, login)
                 .header(OPW_HEADER_PASSWORD, password)
                 .get();
-        String content = response.readEntity(String.class);
 
         // then
-        assertEquals(response.getStatus(), UNAUTHORIZED_401);
-        assertTrue(content.isEmpty());
+        assertEquals(response.getStatus(), OK_200);
+        assertTrue(response.readEntity(String.class).isEmpty());
     }
 
-//    @Test(enabled = false)
-//    public void shouldLogout() throws Exception {
-//        // given
-//        String login = "admin";
-//        String token = "token1234";
-//        UserDto expectedResponse = new UserDto(false);
-//
-//        // when
-//        Response response = target("user/logout").request()
-//                .header(OPW_HEADER_LOGIN, login)
-//                .header(OPW_HEADER_TOKEN, token)
-//                .get();
-//        UserDto actualResponse = response.readEntity(UserDto.class);
-//
-//        // then
-//        assertEquals(response.getStatus(), OK_200);
-//        assertTrue(deepEquals(expectedResponse, actualResponse));
-//    }
+    @Test
+    public void shouldLogout() throws Exception {
+        // given
+        String login = "user";
+        String token = "token1234";
+        when(userServiceEjb.logout(anyString(), anyString()))
+                .thenReturn(GResultDto.validResult(OK_200));
+
+        // when
+        Response response = target("user/logout").request()
+                .header(OPW_HEADER_LOGIN, login)
+                .header(OPW_HEADER_TOKEN, token)
+                .get();
+
+        // then
+        assertEquals(response.getStatus(), OK_200);
+    }
+
+    @Test
+    public void shouldRegister() throws Exception {
+        // given
+        UserRegisterDto userRegisterDto = new UserRegisterDto();
+        Gson gson = new Gson();
+        String userRegisterDtoJson = gson.toJson(userRegisterDto);
+        when(userServiceEjb.register(anyString(), anyString(), Mockito.<UserRegisterDto>anyObject()))
+                .thenReturn(GResultDto.validResult(OK_200));
+
+        // when
+        Response response = target("user/register").request()
+                .header(OPW_HEADER_API_CLIENT, "apiClient")
+                .header(OPW_HEADER_API_TOKEN, "apiToken1234")
+                .post(entity(userRegisterDtoJson, APPLICATION_JSON));
+
+        // then
+        assertEquals(response.getStatus(), OK_200);
+    }
 }

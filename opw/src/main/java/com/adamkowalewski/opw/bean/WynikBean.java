@@ -32,6 +32,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,6 +67,7 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
      * @author Adam Kowalewski
      * @version 2015.05.02
      */
+    @Transactional
     public int ratePositive(int wynikId) {
         OpwWynik wynik = find(wynikId);
         int counter = wynik.getRatedPositiv();
@@ -83,10 +86,11 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
      * @author Adam Kowalewski
      * @version 2015.05.02
      */
+    @Transactional
     public int rateNegative(int wynikId) {
         OpwWynik wynik = find(wynikId);
         int counter = wynik.getRatedNegativ();
-        counter++;
+        counter--;
         wynik.setRatedNegativ(counter);
         edit(wynik);
         logger.trace("rated neg wynik {} counter {}", wynikId, counter);

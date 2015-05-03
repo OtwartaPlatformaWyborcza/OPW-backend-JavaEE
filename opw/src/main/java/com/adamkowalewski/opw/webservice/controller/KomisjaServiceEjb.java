@@ -77,10 +77,13 @@ public class KomisjaServiceEjb implements Serializable {
             return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
         OpwObwodowaKomisja obw = obwodowaBean.findObwodowa(pkwId);
+        OpwUser user = userBean.findUser(login);
 
         if (obw == null) {
             return GResultDto.invalidResult(NOT_FOUND.getStatusCode());
         }
+
+        updateRelation(obw, user);
 
         List<KandydatDto> kandydatList = findKandydatAllDto();
 
@@ -168,6 +171,29 @@ public class KomisjaServiceEjb implements Serializable {
             result.add(k);
         }
         return result;
+    }
+
+    /**
+     * Creates, only if missing, a persistent relation between user and Komisja
+     * Obwodowa.
+     *
+     * @param obwodowa instance of Komisja Obwodowa.
+     * @param user instance of user.
+     * @author Adam Kowalewski
+     * @version 2015.04.03
+     */
+    public void updateRelation(OpwObwodowaKomisja obwodowa, OpwUser user) {
+
+        if (!user.getOpwObwodowaKomisjaList().contains(obwodowa)) {
+            // TODO transaction & reconsider this combo
+            user.getOpwObwodowaKomisjaList().add(obwodowa);
+            obwodowa.getOpwUserList().add(user);
+
+            logger.trace("add Obwodowa {} to user {}", obwodowa.getPkwId(), user.getEmail());
+            userBean.edit(user);
+            obwodowaBean.edit(obwodowa);
+        }
+
     }
 
 }

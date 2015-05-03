@@ -1,9 +1,6 @@
 package com.adamkowalewski.opw.webservice;
 
-import com.adamkowalewski.opw.webservice.dto.GResultDto;
-import com.adamkowalewski.opw.webservice.dto.KomisjaDto;
-import com.adamkowalewski.opw.webservice.dto.WynikDto;
-import com.adamkowalewski.opw.webservice.dto.WynikShortDto;
+import com.adamkowalewski.opw.webservice.dto.*;
 import com.google.gson.Gson;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
@@ -11,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,10 +60,11 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         String pkwId = "1212-1";
         String login = "admin";
         String token = "token";
-        GenericEntity<List<WynikShortDto>> expectedWynikList = new GenericEntity<List<WynikShortDto>>(new ArrayList<WynikShortDto>(0)) {
+        List<WynikShortDto> expectedWynikList = new ArrayList<>(0);
+        GenericEntity<List<WynikShortDto>> expectedWynik = new GenericEntity<List<WynikShortDto>>(expectedWynikList) {
         };
         when(komisjaServiceEjb.loadWynik(anyString(), anyString(), anyString()))
-                .thenReturn(GResultDto.validResult(OK.getStatusCode(), expectedWynikList));
+                .thenReturn(GResultDto.validResult(OK.getStatusCode(), expectedWynik));
 
         // when
         Response response = target(format("komisja/%s/protokol", pkwId)).request()
@@ -76,6 +75,8 @@ public class KomisjaServiceTest extends BaseKomisjaServiceTest {
         // then
         assertEquals(response.getStatus(), OK_200);
         assertNotNull(response.getEntity());
+        assertTrue(deepEquals(expectedWynikList, response.readEntity(new GenericType<List<WynikShortDto>>() {
+        })));
     }
 
     @Test

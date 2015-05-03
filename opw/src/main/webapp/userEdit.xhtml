@@ -96,13 +96,18 @@
             <h:form id="obwDel">
 
                 <p:dataTable id="tblObw" emptyMessage="#{messages.obwodowaListEmpty}" 
-                             value="#{userHandler.instance.opwObwodowaKomisjaList}" var="i" >
+                             value="#{userHandler.instance.opwObwodowaKomisjaList}" var="i" 
+                             rowIndexVar="rowIndex" >
 
-                    <p:column headerText="#{messages.pkwId}" >
+                    <p:column headerText="#" styleClass="in80">
+                        #{rowIndex+1}
+                    </p:column>
+
+                    <p:column headerText="#{messages.pkwId}" styleClass="in80">
                         <h:outputText value="#{i.pkwId}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.obwodNr}" >
+                    <p:column headerText="#{messages.obwod}" styleClass="in80">
                         <h:outputText value="#{i.obwodNr}"/>
                     </p:column>    
 
@@ -113,8 +118,8 @@
                     <p:column headerText="#{messages.address}">
                         <h:outputText value="#{i.address}"/>
                     </p:column>                    
-                    
-                    <p:column headerText="#{messages.action}" >
+
+                    <p:column headerText="#{messages.action}" styleClass="in80">
                         <h:commandLink value="#{messages.delete}" action="#{userHandler.delObwodowa(i.pkwId)}"/>
                     </p:column>
 

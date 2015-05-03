@@ -22,14 +22,18 @@ class UserCsvDtoParser implements CSVEntryParser<UserCsvDto> {
         String email = data[2].trim();
         String type = data[3].trim();
         List<String> obwodowaList = newArrayList(data[4].trim().split(","));
-        for (int i = 1; i < obwodowaList.size(); ++i) {
-            if (obwodowaList.get(i).isEmpty()) {
-                obwodowaList.remove(i);
-            } else {
-                obwodowaList.set(i, obwodowaList.get(i).trim());
-            }
-        }
+        obwodowaList = trimElements(obwodowaList);
 
         return new UserCsvDto(firstname, lastname, email, type, obwodowaList);
+    }
+
+    private List<String> trimElements(List<String> elements) {
+        for (int i = 1; i < elements.size(); ++i) {
+            String element = elements.get(i).trim();
+            if (element.isEmpty()) {
+                elements.remove(i);
+            }
+        }
+        return elements;
     }
 }

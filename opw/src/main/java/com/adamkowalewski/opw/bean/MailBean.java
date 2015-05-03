@@ -156,7 +156,7 @@ public class MailBean {
     }
 
     private String prepareActivationLink(OpwUser user, String hostname) {
-        String result = hostname + "/userVerify.xhtml"
+        String result = hostname + "/verify.xhtml"
                 + "?login=" + user.getEmail()
                 + "&code=" + user.getToken();
         return result;

@@ -65,7 +65,7 @@ public class RegisterHandler implements Serializable {
         user.setOrigin("RegisterHandler");
         user.setEmail(email);
         userController.create(user);
-        logger.trace("Registration done");
+        logger.trace("Registration done {}", user.getEmail());
         return "index";
     }
 

@@ -23,12 +23,16 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.bean.ConfigBean;
 import com.adamkowalewski.opw.view.OpwConfigStatic;
 import com.adamkowalewski.opw.view.dto.ConfigMailDto;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Unified configuration. TODO load from database TODO load from properties
@@ -38,8 +42,10 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class ConfigController implements Serializable {
+    
+    private static final Logger logger = LoggerFactory.getLogger(ConfigController.class);
 
-    private String applicationSalt;
+    private String applicationSalt;    
 
     private ConfigMailDto configMail;
 
@@ -49,6 +55,9 @@ public class ConfigController implements Serializable {
 
     private boolean listKandydatOpen;
     private boolean listOkregowaOpen;
+    
+    @EJB
+    ConfigBean configBean;
 
     public ConfigController() {
 
@@ -56,9 +65,10 @@ public class ConfigController implements Serializable {
 
     @PostConstruct
     public void initConfigController() {
-        configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", "opw@adamkowalewski.com", "http://91.250.114.134:8080/opw");
-        // ToDo enable when JAAS active 
-        configMailOutboundActive = false;
+        
+        configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", "opw@adamkowalewski.com", 
+                configBean.readConfigValue(OpwConfigStatic.CFG_KEY_BASE_URL));                
+        configMailOutboundActive = Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_EMAIL_OUTBOUND));
         configImportDuplicatesAllowed = false;
         listKandydatOpen = false;
         listOkregowaOpen = false;

@@ -7,7 +7,7 @@
 
 
     <f:metadata>
-        <f:viewParam name="email" value="#{verifyHandler.email}" />            
+        <f:viewParam name="login" value="#{verifyHandler.email}" />            
         <f:viewParam name="code" value="#{verifyHandler.code}" />            
     </f:metadata>
 
@@ -15,11 +15,11 @@
                 
         #{verifyHandler.verifyAccount()}
         <ui:fragment rendered="#{verifyHandler.actResult}">
-            <h1>ToDo activ ok</h1>
+            <h1>Aktywacja konta zakonczona powodzeniem.</h1>
         </ui:fragment>
         
         <ui:fragment rendered="#{not verifyHandler.actResult}">
-            <h1>ToDo activ failed</h1>
+            <h1>Błąd aktywacji.</h1>
         </ui:fragment>
         
         <p>Mail: #{verifyHandler.email}</p>

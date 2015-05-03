@@ -32,6 +32,8 @@ class UserCsvDtoParser implements CSVEntryParser<UserCsvDto> {
             String element = elements.get(i).trim();
             if (element.isEmpty()) {
                 elements.remove(i);
+            } else {
+                elements.set(i, element);
             }
         }
         return elements;

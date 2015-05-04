@@ -11,7 +11,7 @@ import static org.testng.Assert.assertEquals;
 
 public class OkregowaCsvDtoReaderTest  {
 
-    @Test
+    @Test(enabled=false)
     public void shouldReadAllEntries() throws Exception {
         // given
         InputStream inputStream = this.getClass().getResourceAsStream("/komisje_okregowe_test.csv");

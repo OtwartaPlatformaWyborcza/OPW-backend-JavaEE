@@ -96,12 +96,9 @@ public class SecurityHandler implements Serializable {
             SecurityObject user = userMap.get(login);
 
             if (userId == user.getUserId()
-                    && token.equals(user.getToken())) {
-
-                if (token.equals(user.getToken())) {
-                    return !isSessionExpired(user);
-                }
-
+                    && token.equals(user.getToken())
+                    && !isSessionExpired(user)) {
+                return true;
             }
         }
         logger.error("failed checkUser for userId: {} login: {} token: {}", userId, login, token);

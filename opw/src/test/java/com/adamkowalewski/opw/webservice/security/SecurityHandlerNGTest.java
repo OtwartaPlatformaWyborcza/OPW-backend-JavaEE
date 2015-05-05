@@ -24,9 +24,7 @@
 package com.adamkowalewski.opw.webservice.security;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -104,21 +102,23 @@ public class SecurityHandlerNGTest {
     }
 
     /**
-     * Test of checkTimeout method, of class SecurityHandler.
+     * Test of isSessionExpired method, of class SecurityHandler.
      */
-    @Test(enabled = false)
-    public void testCheckTimeout() {
-        System.out.println("checkTimeout");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        
-        SecurityObject user = null;
-        SecurityHandler instance = new SecurityHandler();
-        boolean expResult = false;
-        boolean result = instance.checkTimeout(user);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @Test
+    public void testIsSessionExpired() {
+        // given
+        SecurityObject user = new SecurityObject();
+        Calendar expireDate = Calendar.getInstance();
+        expireDate.add(Calendar.MINUTE, -1);
+        user.setValidTo(expireDate.getTime());
+        SecurityHandler securityHandler = new SecurityHandler();
+        boolean expectedResult = true;
+
+        // when
+        boolean actualResult = securityHandler.isSessionExpired(user);
+
+        // then
+        assertEquals(actualResult, expectedResult);
     }
 
     /**

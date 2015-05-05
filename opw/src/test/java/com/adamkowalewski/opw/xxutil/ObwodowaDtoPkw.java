@@ -47,6 +47,8 @@ public class ObwodowaDtoPkw {
 //c15   |
 //c16   Nazwa lokalu|
 //c17   Uprawnionych 
-    private String c1teryt, c2nazwa, c3powiat, c4wojewodztwo, c5obwod, c6typObwodu, c7obszar;
+    private String c1teryt, c2nazwa, c3powiat, c4wojewodztwo, c5obwod, c6typObwodu, c7ulice;
+    private String c8korespondencyjny, c9kraj, c10miasto, c11kodPocztowy, c12miasto;
+    private String c13ulica, c14nrDomu, c15empty, c16nazwa, c17uprawnionych;
     
 }

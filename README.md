@@ -7,9 +7,14 @@ Sortowanie alfabetyczne po imieniu.
 | Członek  | Rola  |
 | ------------- | ------------- |
 | AdamK | Architektura, Java  |
+| KacperJ | Media, jQuery |
+| KarolF | AngularJS |
+| MaciekS | DevOps |
+| MagdaB | Media |
+| MarcinT | AngularJS |
 | PawełP | Architektura, Java |
 | PrzemekJ | Analiza |
-| RafałR | Analiza i Organizacja |
+| RafałR | Analiza |
 | RobertP | Analiza |
 
 **Jak do nas dołączyć?**  

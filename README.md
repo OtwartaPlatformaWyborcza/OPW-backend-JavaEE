@@ -7,9 +7,14 @@ Sortowanie alfabetyczne po imieniu.
 | Członek  | Rola  |
 | ------------- | ------------- |
 | AdamK | Architektura, Java  |
+| KacperJ | Media, jQuery |
+| KarolF | AngularJS |
+| MaciekS | DevOps |
+| MagdaB | Media |
+| MarcinT | AngularJS |
 | PawełP | Architektura, Java |
 | PrzemekJ | Analiza |
-| RafałR | Analiza i Organizacja |
+| RafałR | Analiza |
 | RobertP | Analiza |
 
 **Jak do nas dołączyć?**  
@@ -213,11 +218,11 @@ Plan implementacji
 ### Wersja 0.7.0
 * [DONE] [OPW-T-1](https://trello.com/c/Szj6RjPE/10-opw-t-1-dokumentacji-rest-api-w-swagger-io) Dokumentacji REST API
 * [DONE] [OPW-U-3](https://trello.com/c/pCCJ0Mjc/7-opw-u-3-jako-u-ytkownik-widze-po-wybraniu-komisji-podstawowe-informacje-liste-kandydatow-liste-protoko-ow-jak-i-formularz-liczb-) Podstawowe informacje dla wybranej Komisji Obwodowej.
-* [WiP] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
-* [OPW-G-3](https://trello.com/c/tQ6tM92J/19-opw-g-3-rejestracja-wolontariusza) Formularz rejestracji. 
-* [WiP] Pełna integracja z aplikacją OPW-client
+* [DONE] [OPW-U-9](https://trello.com/c/dCbGaKmM/23-opw-u-9-jako-u-ytkownik-moge-oddac-g-os-dla-protoko-u) Jako użytkownik, mogę oddać głos +/- dla protokołu
+* [DONE] [OPW-A-6](https://trello.com/c/z00oQvGg/15-opw-a-6-import-kont-u-ytkownikow-z-pliku-csv) Import kont użytkowników z pliku CSV
+* [WiP] [OPW-G-3](https://trello.com/c/tQ6tM92J/19-opw-g-3-rejestracja-wolontariusza) Formularz rejestracji. 
 * [WiP] REST API dla klienta jQuery 
-* Pełna integracja z aplikacją OPW-dashboard
+* [WiP] Pełna integracja z aplikacją OPW-client
 
 
 ### Wersja 0.8.0

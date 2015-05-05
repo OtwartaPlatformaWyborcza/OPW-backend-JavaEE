@@ -29,7 +29,7 @@ package com.adamkowalewski.opw.view;
  * @author Adam Kowalewski
  * @version 2015.03.15
  */
-public class OpwConfigStatic {
+public final class OpwConfigStatic {
 
     /**
      * Persistance unit name.
@@ -50,4 +50,9 @@ public class OpwConfigStatic {
     public static final String CFG_KEY_BASE_URL = "OPW_BASE_URL";
     public static final String CFG_KEY_EMAIL_OUTBOUND = "EMAIL_OUTBOUND";
     public static final String CFG_KEY_CLIENT_REGISTRATION = "CLIENT_REGISTRATION";
+    public static final String REST_SESSION_TIMEOUT_IN_SECONDS = "REST_SESSION_TIMEOUT";
+
+    private OpwConfigStatic() {
+        throw new UnsupportedOperationException();
+    }
 }

@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.webservice.controller;
 
+import com.adamkowalewski.opw.bean.ConfigBean;
 import com.adamkowalewski.opw.bean.MailBean;
 import com.adamkowalewski.opw.bean.UserBean;
 import com.adamkowalewski.opw.bean.WynikBean;
@@ -44,6 +45,7 @@ import javax.inject.Inject;
 import javax.ws.rs.core.GenericEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -65,6 +67,8 @@ public class UserServiceEjb implements Serializable {
     WynikBean wynikBean;
     @EJB
     MailBean mailBean;
+    @EJB
+    ConfigBean configBean;
 
     public UserServiceEjb() {
     }
@@ -87,8 +91,7 @@ public class UserServiceEjb implements Serializable {
         // auth ok
         String restToken = userBean.encryptSHA(userBean.generatePassword());
 
-        Date timeout = new Date();
-
+        Date timeout = fetchExpireDate();
         SecurityObject so = new SecurityObject(user.getId(), login, restToken, timeout);
         securityHandler.getUserMap().put(login, so);
 
@@ -102,6 +105,13 @@ public class UserServiceEjb implements Serializable {
                 String.valueOf(timeout.getTime())
         );
         return GResultDto.validResult(OK.getStatusCode(), userDto);
+    }
+
+    private Date fetchExpireDate() {
+        int timeoutInSeconds = Integer.valueOf(configBean.readConfigValue(OpwConfigStatic.REST_SESSION_TIMEOUT_IN_SECONDS));
+        Calendar timeout = Calendar.getInstance();
+        timeout.add(Calendar.SECOND, timeoutInSeconds);
+        return timeout.getTime();
     }
 
     /**

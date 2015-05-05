@@ -33,6 +33,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +78,7 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
         OpwUser user = this.findUser(login);
         if (user != null) {
             String pwd = saltPassword(appSalt, user.getSalt(), password);
-            
+
             if (pwd.equals(user.getPassword()) && user.getActive()) {
                 return user;
             }
@@ -110,18 +111,10 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @return <code>true</code> if an account exists, otherwise
      * <code>false</code>.
      * @author Adam Kowalewski
-     * @version 2015.04.09
+     * @version 2015.05.05
      */
     public boolean isDuplicate(String email) {
-        boolean result = true;
-        try {
-            findUser(email);
-        } catch (NoResultException ex) {
-            result = false;
-        } catch (NonUniqueResultException ex) {
-            result = true;
-        }
-        return result;
+        return findUser(email) != null;
     }
 
     /**
@@ -130,14 +123,16 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @param login E-Mail address to look for.
      * @return full instance of OpwUser or null if no record was found.
      * @author Adam Kowalewski
-     * @version 2015.03.15
+     * @version 2015.05.05
      */
     public OpwUser findUser(String login) {
         Query q = em.createNamedQuery("OpwUser.findByEmail");
         q.setParameter("email", login);
-        try { // TODO !
+
+        try {
             return (OpwUser) q.getSingleResult();
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
+            logger.error("Ex {} for email {}", e.getMessage(), login);
             return null;
         }
     }

@@ -54,6 +54,10 @@ public class UserController implements Serializable {
     public UserController() {
     }
 
+    public boolean isDuplicate(String email) {
+        return bean.isDuplicate(email);
+    }
+
     public UserController(UserBean bean, MailBean mailController) {
         this.bean = bean;
         this.mailBean = mailController;
@@ -65,6 +69,12 @@ public class UserController implements Serializable {
 
     public OpwUser authenticate(String login, String password) {
         return bean.verifyCredentials(login, password, configController.getApplicationSalt());
+    }
+
+    public void create(List<OpwUser> userList) {
+        for (OpwUser user : userList) {
+            create(user);
+        }
     }
 
     /**
@@ -84,7 +94,10 @@ public class UserController implements Serializable {
         }
         user.setActive(false);
         user.setDateCreated(new Date());
-        mailBean.sendMailWelcome(user, passwordPlain, true);
+        if (configController.isConfigMailOutboundActive()){
+            mailBean.sendMailWelcome(user, passwordPlain, true);
+        }
+        
         user.setPassword(bean.saltPassword(configController.getApplicationSalt(), userSalt, passwordPlain));
         bean.create(user);
     }

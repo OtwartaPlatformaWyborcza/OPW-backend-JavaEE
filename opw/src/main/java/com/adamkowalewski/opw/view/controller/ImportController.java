@@ -25,6 +25,7 @@ package com.adamkowalewski.opw.view.controller;
 
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.dto.ObwodowaCsvDto;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 import com.adamkowalewski.opw.view.dto.UserCsvDto;
@@ -60,6 +61,8 @@ public class ImportController implements Serializable {
     OkregowaController okregowaController;
     @Inject
     ObwodowaController obwodowaController;
+    @Inject
+    UserController userController;
 
     public void performImportOkregowa(List<OkregowaCsvDto> okregowaList) {
         List<OpwOkregowaKomisja> resultList = new ArrayList<>();
@@ -91,44 +94,49 @@ public class ImportController implements Serializable {
      */
     public List<OkregowaCsvDto> parseOkregowa(InputStream content)
             throws IOException, IndexOutOfBoundsException, NumberFormatException, PatternSyntaxException {
-        
+
         List<OkregowaCsvDto> okregowaList = okregowaCsvDtoReader().readAllFrom(content);
 
         for (OkregowaCsvDto okregowa : okregowaList) {
             okregowa.setDuplicate(okregowaController.isDuplicate(okregowa.getPkwId()));
         }
-        logger.info("lista {}.", okregowaList.size());
-        logger.error("error {}.", okregowaList.size());
+        logger.trace("Okregowa Import size {}.", okregowaList.size());
+
         return okregowaList;
     }
 
-    /**
-     * TODO OPW-A-6
-     *
-     * @MOCK
-     * @param userList
-     */
     public void performImportUser(List<UserCsvDto> userList) {
-        System.out.println("MOCK!");
+
+        List<OpwUser> userImportList = new ArrayList<>();
+
+        for (UserCsvDto userDto : userList) {
+            if (userDto.isDuplicate()) {
+                MsgController.addWarningMessage("Skipped " + userDto.getEmail());
+                continue;
+            }
+            OpwUser u = new OpwUser();
+            u.setEmail(userDto.getEmail());
+            u.setLastname(userDto.getLastname());
+            u.setFirstname(userDto.getFirstname());
+            u.setType(userDto.getType());
+
+            userImportList.add(u);
+        }
+        logger.trace("User import start for {} records", userImportList.size());
+        userController.create(userImportList);
     }
 
-    /**
-     * TODO OPW-A-6
-     *
-     * @MOCK!
-     * @param content
-     * @return
-     */
     public List<UserCsvDto> parseUser(InputStream content) throws IOException {
-        return userCsvDtoReader().readAllFrom(content);
+
+        List<UserCsvDto> userDtoList = userCsvDtoReader().readAllFrom(content);
+
+        for (UserCsvDto user : userDtoList) {
+            user.setDuplicate(userController.isDuplicate(user.getEmail()));
+        }
+        logger.trace("User import size {}", userDtoList.size());
+        return userDtoList;
     }
 
-    /**
-     * TODO OPW-A-2
-     *
-     * @MOCK
-     * @param obwodowaList
-     */
     public void performImportObwodowa(List<ObwodowaCsvDto> obwodowaList) {
         List<OpwObwodowaKomisja> resultList = new ArrayList<>();
 
@@ -148,17 +156,16 @@ public class ImportController implements Serializable {
             single.setAllowedToVote(csvDto.getAllowedToVote());
             resultList.add(single);
         }
-        obwodowaController.create(resultList);        
+        obwodowaController.create(resultList);
     }
 
-
     public List<ObwodowaCsvDto> parseObwodowa(InputStream content) throws IOException {
-        
+
         List<ObwodowaCsvDto> obwodowaList = obwodowaCsvDtoReader().readAllFrom(content);
-        
+
         for (ObwodowaCsvDto obwodowa : obwodowaList) {
             obwodowa.setDuplicate(obwodowaController.isDuplicate(obwodowa.getPkwId()));
-        }        
+        }
         return obwodowaList;
     }
 }

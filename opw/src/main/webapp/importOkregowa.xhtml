@@ -33,7 +33,7 @@
         <div class="clear"></div>
 
         <ui:fragment rendered="#{not empty importOkregowaHandler.uploadList}">
-            <p:dataTable id="tblOkrImp" rowIndexVar="rowIndex" resizableColumns="true"
+            <p:dataTable id="tblOkrImp" rowIndexVar="rowIndex" 
                          rendered="#{not empty importOkregowaHandler.uploadList}"
                          value="#{importOkregowaHandler.uploadList}" var="i" tableStyle="width:auto" >
                 <p:column headerText="#">
@@ -44,6 +44,9 @@
                 </p:column>
                 <p:column headerText="#{messages.name}">
                     <h:outputText value="#{i.name}"/>
+                </p:column>
+                <p:column headerText="#{messages.state}">                    
+                    <h:outputText value="#{wojewodztwoController.getName(i.wojewodztwoId)}"/>
                 </p:column>
                 <p:column headerText="#{messages.entityStatus}">                    
                     <h:outputText value="#{messages.entityNew}" rendered="#{not i.duplicate}"/>

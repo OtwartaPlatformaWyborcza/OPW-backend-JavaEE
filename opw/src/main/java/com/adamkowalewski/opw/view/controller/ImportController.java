@@ -63,6 +63,8 @@ public class ImportController implements Serializable {
     ObwodowaController obwodowaController;
     @Inject
     UserController userController;
+    @Inject
+    WojewodztwoController wojewodztwoController;
 
     public void performImportOkregowa(List<OkregowaCsvDto> okregowaList) {
         List<OpwOkregowaKomisja> resultList = new ArrayList<>();
@@ -75,6 +77,7 @@ public class ImportController implements Serializable {
             OpwOkregowaKomisja single = new OpwOkregowaKomisja();
             single.setPkwId(csvDto.getPkwId());
             single.setName(csvDto.getName());
+            single.setOpwWojewodztwoId(wojewodztwoController.find(csvDto.getWojewodztwoId()));
             resultList.add(single);
         }
         okregowaController.create(resultList);
@@ -146,8 +149,9 @@ public class ImportController implements Serializable {
             }
             //14;106101-2;2;P;Studio Consulting Sp. z o.o.; ul. Romanowska 55E, 91-174 Łódź;1234
             OpwObwodowaKomisja single = new OpwObwodowaKomisja();
-            single.setOpwOkregowaKomisjaId(okregowaController.find(csvDto.getOkregowaPkwId()));
+//            single.setOpwOkregowaKomisjaId(okregowaController.find(csvDto.getWojewodztwoId()));
 
+            single.setOpwWojewodztwoId(wojewodztwoController.find(csvDto.getWojewodztwoId()));
             single.setPkwId(csvDto.getPkwId());
             single.setObwodNr(csvDto.getObwodNr());
             single.setType(csvDto.getType());

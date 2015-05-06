@@ -42,36 +42,10 @@
 
             </h:form>
         </div>
+        <div class="clear"></div>
         <div class="left box box_green">
             <h2>Komisje obwodowe</h2>
-            <h:form id="frmObwList">
-                <p:dataTable id="tblOkr" emptyMessage="#{messages.obwodowaListEmpty}" 
-                             value="#{okregowaHandler.instance.opwObwodowaKomisjaList}" var="i" 
-                             sortBy="#{i.pkwId}">
-
-                    <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
-                        <h:outputText value="#{i.pkwId}"/>
-                    </p:column>
-
-                    <p:column headerText="#{messages.name}" sortBy="#{i.name}">
-                        <h:outputText value="#{i.name}"/>
-                    </p:column>
-
-                    <p:column headerText="#{messages.address}" sortBy="#{i.address}">
-                        <h:outputText value="#{i.address}"/>
-                    </p:column>
-
-                    <p:column headerText="#{messages.okregowaEditTitle}" sortBy="#{i.opwOkregowaKomisjaId.name}">
-                        <h:outputText value="#{i.opwOkregowaKomisjaId.pkwId}"/>
-                    </p:column>
-
-                    <p:column headerText="#{messages.action}">
-                        <h:commandLink id="btnView" value="#{messages.display}"
-                                       action="#{obwodowaHandler.prepareView(i)}"/>
-                    </p:column>
-
-                </p:dataTable>
-            </h:form>
+            
         </div>
     </ui:define>
 

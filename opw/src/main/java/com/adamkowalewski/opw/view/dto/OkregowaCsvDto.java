@@ -38,6 +38,7 @@ public class OkregowaCsvDto {
     private String powiaty;
     private String miasta;
     private boolean duplicate;
+    private int wojewodztwoId;
 
     public OkregowaCsvDto() {
     }
@@ -47,6 +48,23 @@ public class OkregowaCsvDto {
         this.name = name;
         this.powiaty = powiaty;
         this.miasta = miasta;
+    }
+
+    public OkregowaCsvDto(int pkwId, String name, String powiaty, String miasta, int wojewodztwoId) {
+        this.pkwId = pkwId;
+        this.name = name;
+        this.powiaty = powiaty;
+        this.miasta = miasta;
+        this.wojewodztwoId = wojewodztwoId;
+    }
+
+    public OkregowaCsvDto(int pkwId, String name, String powiaty, String miasta, boolean duplicate, int wojewodztwoId) {
+        this.pkwId = pkwId;
+        this.name = name;
+        this.powiaty = powiaty;
+        this.miasta = miasta;
+        this.duplicate = duplicate;
+        this.wojewodztwoId = wojewodztwoId;
     }
 
     public int getPkwId() {
@@ -89,10 +107,22 @@ public class OkregowaCsvDto {
         this.duplicate = duplicate;
     }
 
+    public int getWojewodztwoId() {
+        return wojewodztwoId;
+    }
+
+    public void setWojewodztwoId(int wojewodztwoId) {
+        this.wojewodztwoId = wojewodztwoId;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         OkregowaCsvDto that = (OkregowaCsvDto) o;
 
@@ -100,7 +130,8 @@ public class OkregowaCsvDto {
                 && Objects.equal(pkwId, that.pkwId)
                 && Objects.equal(miasta, that.miasta)
                 && Objects.equal(name, that.name)
-                && Objects.equal(powiaty, that.powiaty);
+                && Objects.equal(powiaty, that.powiaty)
+                && Objects.equal(wojewodztwoId, that.wojewodztwoId);
     }
 
     @Override

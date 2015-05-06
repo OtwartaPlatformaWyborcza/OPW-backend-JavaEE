@@ -61,7 +61,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwObwodowaKomisja.findByName", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.name = :name"),
     @NamedQuery(name = "OpwObwodowaKomisja.findByAddress", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.address = :address"),
     @NamedQuery(name = "OpwObwodowaKomisja.findByType", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.type = :type"),
-    @NamedQuery(name = "OpwObwodowaKomisja.findByAllowedToVote", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.allowedToVote = :allowedToVote")})
+    @NamedQuery(name = "OpwObwodowaKomisja.findByAllowedToVote", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.allowedToVote = :allowedToVote"),
+    @NamedQuery(name = "OpwObwodowaKomisja.findByStatus", query = "SELECT o FROM OpwObwodowaKomisja o WHERE o.status = :status")})
 public class OpwObwodowaKomisja implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -85,6 +86,8 @@ public class OpwObwodowaKomisja implements Serializable {
     private String type;
     @Column(name = "allowedToVote")
     private Integer allowedToVote;
+    @Column(name = "status")
+    private Integer status;
     @JoinTable(name = "opw_user_has_opw_obwodowa_komisja", joinColumns = {
         @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
         @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)})
@@ -92,9 +95,9 @@ public class OpwObwodowaKomisja implements Serializable {
     private List<OpwUser> opwUserList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwObwodowaKomisjaId")
     private List<OpwWynik> opwWynikList;
-    @JoinColumn(name = "opw_okregowa_komisja_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "opw_wojewodztwo_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
-    private OpwOkregowaKomisja opwOkregowaKomisjaId;
+    private OpwWojewodztwo opwWojewodztwoId;
 
     public OpwObwodowaKomisja() {
     }
@@ -159,6 +162,14 @@ public class OpwObwodowaKomisja implements Serializable {
         this.allowedToVote = allowedToVote;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @XmlTransient
     public List<OpwUser> getOpwUserList() {
         return opwUserList;
@@ -177,12 +188,12 @@ public class OpwObwodowaKomisja implements Serializable {
         this.opwWynikList = opwWynikList;
     }
 
-    public OpwOkregowaKomisja getOpwOkregowaKomisjaId() {
-        return opwOkregowaKomisjaId;
+    public OpwWojewodztwo getOpwWojewodztwoId() {
+        return opwWojewodztwoId;
     }
 
-    public void setOpwOkregowaKomisjaId(OpwOkregowaKomisja opwOkregowaKomisjaId) {
-        this.opwOkregowaKomisjaId = opwOkregowaKomisjaId;
+    public void setOpwWojewodztwoId(OpwWojewodztwo opwWojewodztwoId) {
+        this.opwWojewodztwoId = opwWojewodztwoId;
     }
 
     @Override

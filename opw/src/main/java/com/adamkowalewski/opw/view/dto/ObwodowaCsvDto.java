@@ -34,7 +34,7 @@ import com.google.common.base.Objects;
  */
 public class ObwodowaCsvDto {
 
-    private int okregowaPkwId;
+    private int wojewodztwoId;  // refactoring needed since we use here wojewodztwoId
     private String pkwId;
     private int obwodNr;
     private String name;
@@ -46,8 +46,8 @@ public class ObwodowaCsvDto {
     public ObwodowaCsvDto() {
     }
 
-    public ObwodowaCsvDto(int okregowaPkwId, String pkwId, int obwodNr, String name, String address, String type, int allowedToVote) {
-        this.okregowaPkwId = okregowaPkwId;
+    public ObwodowaCsvDto(int wojewodztwoId, String pkwId, int obwodNr, String name, String address, String type, int allowedToVote) {
+        this.wojewodztwoId = wojewodztwoId;
         this.pkwId = pkwId;
         this.obwodNr = obwodNr;
         this.name = name;
@@ -56,8 +56,8 @@ public class ObwodowaCsvDto {
         this.allowedToVote = allowedToVote;
     }
 
-    public ObwodowaCsvDto(int okregowaPkwId, String pkwId, int obwodNr, String name, String address, String type, int allowedToVote, boolean duplicate) {
-        this.okregowaPkwId = okregowaPkwId;
+    public ObwodowaCsvDto(int wojewodztwoId, String pkwId, int obwodNr, String name, String address, String type, int allowedToVote, boolean duplicate) {
+        this.wojewodztwoId = wojewodztwoId;
         this.pkwId = pkwId;
         this.obwodNr = obwodNr;
         this.name = name;
@@ -67,12 +67,12 @@ public class ObwodowaCsvDto {
         this.duplicate = duplicate;
     }
 
-    public int getOkregowaPkwId() {
-        return okregowaPkwId;
+    public int getWojewodztwoId() {
+        return wojewodztwoId;
     }
 
-    public void setOkregowaPkwId(int okregowaPkwId) {
-        this.okregowaPkwId = okregowaPkwId;
+    public void setWojewodztwoId(int okregowaPkwId) {
+        this.wojewodztwoId = okregowaPkwId;
     }
 
     public String getPkwId() {
@@ -138,7 +138,7 @@ public class ObwodowaCsvDto {
 
         ObwodowaCsvDto that = (ObwodowaCsvDto) o;
 
-        return Objects.equal(okregowaPkwId, that.okregowaPkwId)
+        return Objects.equal(wojewodztwoId, that.wojewodztwoId)
                 && Objects.equal(pkwId, that.pkwId)
                 && Objects.equal(obwodNr, that.obwodNr)
                 && Objects.equal(name, that.name)
@@ -149,8 +149,7 @@ public class ObwodowaCsvDto {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(
-                okregowaPkwId,
+        return Objects.hashCode(wojewodztwoId,
                 pkwId,
                 obwodNr,
                 name,
@@ -164,7 +163,7 @@ public class ObwodowaCsvDto {
     @Override
     public String toString() {
         return MoreObjects.toStringHelper(this)
-                .add("okregowaPkwId", okregowaPkwId)
+                .add("wojewodztwoId", wojewodztwoId)
                 .add("pkwId", pkwId)
                 .add("obwodNr", obwodNr)
                 .add("name", name)

@@ -87,7 +87,8 @@ public class KomisjaServiceEjb implements Serializable {
 
         List<KandydatDto> kandydatList = findKandydatAllDto();
 
-        OkregowaDto okr = new OkregowaDto(obw.getOpwOkregowaKomisjaId().getPkwId().toString(), obw.getOpwOkregowaKomisjaId().getName(), obw.getOpwOkregowaKomisjaId().getAddress());
+        // TODO ADAM 
+        OkregowaDto okr = new OkregowaDto("obw.getOpwOkregowaKomisjaId().getPkwId().toString()", "obw.getOpwOkregowaKomisjaId().getName()", "obw.getOpwOkregowaKomisjaId().getAddress()");
 
         KomisjaDto komisja = new KomisjaDto(obw.getPkwId(), obw.getName(), obw.getAddress(), okr, kandydatList);
 

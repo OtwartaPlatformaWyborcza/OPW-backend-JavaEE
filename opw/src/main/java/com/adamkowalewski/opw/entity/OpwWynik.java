@@ -74,7 +74,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwWynik.findByK10", query = "SELECT o FROM OpwWynik o WHERE o.k10 = :k10"),
     @NamedQuery(name = "OpwWynik.findByK11", query = "SELECT o FROM OpwWynik o WHERE o.k11 = :k11"),
     @NamedQuery(name = "OpwWynik.findByRatedPositiv", query = "SELECT o FROM OpwWynik o WHERE o.ratedPositiv = :ratedPositiv"),
-    @NamedQuery(name = "OpwWynik.findByRatedNegativ", query = "SELECT o FROM OpwWynik o WHERE o.ratedNegativ = :ratedNegativ")})
+    @NamedQuery(name = "OpwWynik.findByRatedNegativ", query = "SELECT o FROM OpwWynik o WHERE o.ratedNegativ = :ratedNegativ"),
+    @NamedQuery(name = "OpwWynik.findByStatus", query = "SELECT o FROM OpwWynik o WHERE o.status = :status")})
 public class OpwWynik implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -126,6 +127,8 @@ public class OpwWynik implements Serializable {
     private Integer ratedPositiv;
     @Column(name = "ratedNegativ")
     private Integer ratedNegativ;
+    @Column(name = "status")
+    private Integer status;
     @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private OpwUser opwUserId;
@@ -319,6 +322,14 @@ public class OpwWynik implements Serializable {
 
     public void setRatedNegativ(Integer ratedNegativ) {
         this.ratedNegativ = ratedNegativ;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public OpwUser getOpwUserId() {

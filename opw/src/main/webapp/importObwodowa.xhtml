@@ -36,9 +36,12 @@
                          value="#{importObwodowaHandler.uploadList}" var="i">
                 <p:column headerText="#" styleClass="in80">
                     #{rowIndex+1}
-                </p:column>
+                </p:column>                
                 <p:column headerText="#{messages.pkwId}" styleClass="in120" >
                     <h:outputText value="#{i.pkwId}"/>
+                </p:column>
+                <p:column headerText="#{messages.state}" styleClass="in120" >
+                    <h:outputText value="#{i.wojewodztwoId}"/>
                 </p:column>
                 <p:column headerText="#{messages.name}">
                     <h:outputText value="#{i.name}"/>

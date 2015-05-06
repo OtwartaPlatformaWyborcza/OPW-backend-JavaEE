@@ -24,66 +24,56 @@
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Adam Kowalewski
  */
 @Entity
-@Table(name = "opw_okregowa_komisja", catalog = "opw", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"pkwId"})})
+@Table(name = "opw_wojewodztwo", catalog = "opw", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OpwOkregowaKomisja.findAll", query = "SELECT o FROM OpwOkregowaKomisja o"),
-    @NamedQuery(name = "OpwOkregowaKomisja.findById", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.id = :id"),
-    @NamedQuery(name = "OpwOkregowaKomisja.findByPkwId", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.pkwId = :pkwId"),
-    @NamedQuery(name = "OpwOkregowaKomisja.findByName", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.name = :name"),
-    @NamedQuery(name = "OpwOkregowaKomisja.findByAddress", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.address = :address"),
-    @NamedQuery(name = "OpwOkregowaKomisja.findByPowiaty", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.powiaty = :powiaty"),
-    @NamedQuery(name = "OpwOkregowaKomisja.findByMiasta", query = "SELECT o FROM OpwOkregowaKomisja o WHERE o.miasta = :miasta")})
-public class OpwOkregowaKomisja implements Serializable {
+    @NamedQuery(name = "OpwWojewodztwo.findAll", query = "SELECT o FROM OpwWojewodztwo o"),
+    @NamedQuery(name = "OpwWojewodztwo.findById", query = "SELECT o FROM OpwWojewodztwo o WHERE o.id = :id"),
+    @NamedQuery(name = "OpwWojewodztwo.findByName", query = "SELECT o FROM OpwWojewodztwo o WHERE o.name = :name"),
+    @NamedQuery(name = "OpwWojewodztwo.findByTeryt", query = "SELECT o FROM OpwWojewodztwo o WHERE o.teryt = :teryt")})
+public class OpwWojewodztwo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "pkwId")
-    private Integer pkwId;
-    @Size(max = 128)
-    @Column(name = "name", length = 128)
+    @Size(max = 64)
+    @Column(name = "name", length = 64)
     private String name;
-    @Size(max = 128)
-    @Column(name = "address", length = 128)
-    private String address;
-    @Size(max = 128)
-    @Column(name = "powiaty", length = 128)
-    private String powiaty;
-    @Size(max = 128)
-    @Column(name = "miasta", length = 128)
-    private String miasta;
-    @JoinColumn(name = "opw_wojewodztwo_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private OpwWojewodztwo opwWojewodztwoId;
+    @Size(max = 2)
+    @Column(name = "teryt", length = 2)
+    private String teryt;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwWojewodztwoId")
+    private List<OpwOkregowaKomisja> opwOkregowaKomisjaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwWojewodztwoId")
+    private List<OpwObwodowaKomisja> opwObwodowaKomisjaList;
 
-    public OpwOkregowaKomisja() {
+    public OpwWojewodztwo() {
     }
 
-    public OpwOkregowaKomisja(Integer id) {
+    public OpwWojewodztwo(Integer id) {
         this.id = id;
     }
 
@@ -95,14 +85,6 @@ public class OpwOkregowaKomisja implements Serializable {
         this.id = id;
     }
 
-    public Integer getPkwId() {
-        return pkwId;
-    }
-
-    public void setPkwId(Integer pkwId) {
-        this.pkwId = pkwId;
-    }
-
     public String getName() {
         return name;
     }
@@ -111,36 +93,30 @@ public class OpwOkregowaKomisja implements Serializable {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getTeryt() {
+        return teryt;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setTeryt(String teryt) {
+        this.teryt = teryt;
     }
 
-    public String getPowiaty() {
-        return powiaty;
+    @XmlTransient
+    public List<OpwOkregowaKomisja> getOpwOkregowaKomisjaList() {
+        return opwOkregowaKomisjaList;
     }
 
-    public void setPowiaty(String powiaty) {
-        this.powiaty = powiaty;
+    public void setOpwOkregowaKomisjaList(List<OpwOkregowaKomisja> opwOkregowaKomisjaList) {
+        this.opwOkregowaKomisjaList = opwOkregowaKomisjaList;
     }
 
-    public String getMiasta() {
-        return miasta;
+    @XmlTransient
+    public List<OpwObwodowaKomisja> getOpwObwodowaKomisjaList() {
+        return opwObwodowaKomisjaList;
     }
 
-    public void setMiasta(String miasta) {
-        this.miasta = miasta;
-    }
-
-    public OpwWojewodztwo getOpwWojewodztwoId() {
-        return opwWojewodztwoId;
-    }
-
-    public void setOpwWojewodztwoId(OpwWojewodztwo opwWojewodztwoId) {
-        this.opwWojewodztwoId = opwWojewodztwoId;
+    public void setOpwObwodowaKomisjaList(List<OpwObwodowaKomisja> opwObwodowaKomisjaList) {
+        this.opwObwodowaKomisjaList = opwObwodowaKomisjaList;
     }
 
     @Override
@@ -153,10 +129,10 @@ public class OpwOkregowaKomisja implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OpwOkregowaKomisja)) {
+        if (!(object instanceof OpwWojewodztwo)) {
             return false;
         }
-        OpwOkregowaKomisja other = (OpwOkregowaKomisja) object;
+        OpwWojewodztwo other = (OpwWojewodztwo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -165,7 +141,7 @@ public class OpwOkregowaKomisja implements Serializable {
 
     @Override
     public String toString() {
-        return "com.adamkowalewski.opw.entity.OpwOkregowaKomisja[ id=" + id + " ]";
+        return "com.adamkowalewski.opw.entity.OpwWojewodztwo[ id=" + id + " ]";
     }
     
 }

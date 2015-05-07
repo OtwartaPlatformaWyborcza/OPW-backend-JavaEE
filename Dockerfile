@@ -32,5 +32,3 @@ WORKDIR		/opt/glassfish4
 RUN		chmod +x /entrypoint.sh
 
 
-# verbose causes the process to remain in the foreground so that docker can track it
-# CMD         asadmin start-domain --verbose

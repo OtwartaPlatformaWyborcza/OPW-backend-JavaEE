@@ -25,15 +25,15 @@ package com.adamkowalewski.opw.view.handler;
 
 import com.adamkowalewski.opw.view.controller.MsgController;
 import com.adamkowalewski.opw.view.dto.UserCsvDto;
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Import handler for user accounts.
@@ -54,8 +54,8 @@ public class ImportUserHandler extends AbstractImportHandler<UserCsvDto> impleme
             try {
                 is = file.getInputstream();
                 uploadList = importController.parseUser(is);
-            } catch (IOException ex) {
-                logger.error("File upload",ex);                
+            } catch (Exception ex) {
+                logger.error("File upload",ex);
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
             }
             MsgController.addSuccessMessage(MsgController.getLocalizedMessage("importFileParseSuccess"));

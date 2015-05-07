@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.bean.MailBean;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.bean.UserBean;
@@ -54,7 +55,7 @@ public class UserController implements Serializable {
     public UserController() {
     }
 
-    public boolean isDuplicate(String email) {
+    public boolean isDuplicate(String email) throws OpwException {
         return bean.isDuplicate(email);
     }
 

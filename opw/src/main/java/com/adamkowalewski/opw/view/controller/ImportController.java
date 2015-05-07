@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
@@ -129,7 +130,7 @@ public class ImportController implements Serializable {
         userController.create(userImportList);
     }
 
-    public List<UserCsvDto> parseUser(InputStream content) throws IOException {
+    public List<UserCsvDto> parseUser(InputStream content) throws IOException, OpwException {
 
         List<UserCsvDto> userDtoList = userCsvDtoReader().readAllFrom(content);
 

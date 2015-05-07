@@ -23,20 +23,17 @@
  */
 package com.adamkowalewski.opw.bean;
 
+import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.entity.OpwUser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.ejb.Stateless;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Provides access to user.
@@ -113,8 +110,8 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @author Adam Kowalewski
      * @version 2015.05.05
      */
-    public boolean isDuplicate(String email) {
-        return findUser(email) != null;
+    public boolean isDuplicate(String email) throws OpwException {
+        return countUserBy(email) > 0;
     }
 
     /**
@@ -134,6 +131,24 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
         } catch (PersistenceException e) {
             logger.error("Ex {} for email {}", e.getMessage(), login);
             return null;
+        }
+    }
+
+    /**
+     * Returns number of users counted by given login / E-Mail address.
+     *
+     * @param email E-Mail address to look for.
+     * @return number of found users
+     */
+    public Long countUserBy(String email) throws OpwException {
+        TypedQuery<Long> query = em.createNamedQuery("OpwUser.countByEmail", Long.class);
+        query.setParameter("email", email);
+
+        try {
+            return query.getSingleResult();
+        } catch (PersistenceException e) {
+            logger.error("Ex {} for email {}", e.getMessage(), email);
+            throw new OpwException("Error occurred", e);
         }
     }
 
@@ -201,7 +216,7 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
 
     private String getPassword(int length) {
         SecureRandom random = new SecureRandom();
-        String result = new BigInteger(130, random).toString(32);;
+        String result = new BigInteger(130, random).toString(32);
         result = result.substring(0, Math.min(result.length(), length));
         return result;
     }

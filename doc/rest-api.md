@@ -137,7 +137,7 @@ X-OPW-token:fdf84e7bdbc4c22e5c0faae34d0819e9066bbcd02ff2f95561476f3ca32fb
 ### POST /user/register
 
 
-### GET /wynik/available/{email}
+### GET /user/available/{email}
 
 Response:
 - 200 if {email} is unique

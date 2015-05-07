@@ -25,6 +25,8 @@ COPY		./opw/target/xconfig/*	/opt/glassfish4/glassfish/domains/domain1/config/
 COPY		./opw/target/xlib/*	/opt/glassfish4/glassfish/domains/domain1/lib/
 COPY		./opw/target/opw.war 	/opt/glassfish4/glassfish/domains/domain1/autodeploy/
 
+COPY 		./docker/entrypoint.sh /
+
 WORKDIR		/opt/glassfish4
 
 RUN		chmod +x /entrypoint.sh

@@ -24,10 +24,14 @@
 package com.adamkowalewski.opw.bean;
 
 import com.adamkowalewski.opw.entity.OpwSession;
+import com.adamkowalewski.opw.entity.OpwUser;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,10 +56,35 @@ public class SessionBean extends AbstractOpwFacade<OpwSession> implements Serial
         return em;
     }
     
-    
-    public OpwSession find(String token){
-        
-        return new OpwSession();
+    public List<OpwSession> find(Boolean status){
+        Query q = em.createNamedQuery("OpwSession.findByActive");
+        q.setParameter("active", status);
+        return q.getResultList();
     }
-    
+
+    public OpwSession find(OpwUser user, String token) {
+        Query q = em.createQuery("SELECT o FROM OpwSession o WHERE o.token = :token AND o.opwUserId = :user");
+        q.setParameter("token", token);
+        q.setParameter("user", user);
+
+        try {
+            return (OpwSession) q.getSingleResult();
+        } catch (PersistenceException e) {
+            logger.error("Ex {} for user {} and session token {}", e.getMessage(), user.getEmail(), token);
+            return null;
+        }
+    }
+
+    public OpwSession find(String token) {
+        Query q = em.createNamedQuery("OpwSession.findByToken");
+        q.setParameter("token", token);
+
+        try {
+            return (OpwSession) q.getSingleResult();
+        } catch (PersistenceException e) {
+            logger.error("Ex {} for session token {}", e.getMessage(), token);
+            return null;
+        }
+    }
+
 }

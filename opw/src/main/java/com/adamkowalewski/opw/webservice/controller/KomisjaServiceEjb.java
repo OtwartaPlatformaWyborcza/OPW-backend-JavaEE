@@ -57,7 +57,7 @@ public class KomisjaServiceEjb implements Serializable {
 
     private final static Logger logger = LoggerFactory.getLogger(KomisjaServiceEjb.class);
 
-    @Inject
+    @EJB
     SecurityHandler securityHandler;
     @EJB
     UserBean userBean;
@@ -129,7 +129,7 @@ public class KomisjaServiceEjb implements Serializable {
             return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
 
-        OpwUser user = userBean.find(securityHandler.getUserMap().get(login).getUserId());
+        OpwUser user = userBean.findUser(login);
         OpwObwodowaKomisja obwodowa = obwodowaBean.findObwodowa(pkwId);
 
         OpwWynik w = new OpwWynik();

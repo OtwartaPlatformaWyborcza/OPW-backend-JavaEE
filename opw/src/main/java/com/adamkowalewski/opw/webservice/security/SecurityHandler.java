@@ -24,18 +24,21 @@
 package com.adamkowalewski.opw.webservice.security;
 
 import com.adamkowalewski.opw.bean.ConfigBean;
+import com.adamkowalewski.opw.bean.SessionBean;
+import com.adamkowalewski.opw.bean.UserBean;
+import com.adamkowalewski.opw.entity.OpwSession;
+import com.adamkowalewski.opw.entity.OpwUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.*;
-import java.util.Map.Entry;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import javax.ejb.Stateless;
 
 /**
  * Handles REST security.
@@ -43,39 +46,21 @@ import static com.google.common.base.Preconditions.checkState;
  * @author Adam Kowalewski
  */
 @Named
-@ApplicationScoped
+@Stateless
 public class SecurityHandler implements Serializable {
 
     private final static Logger logger = LoggerFactory.getLogger(SecurityHandler.class);
 
-    Map<String, SecurityObject> userMap;
-    List<SecurityObject> userList;
-    Map<String, String> clientMap;  // Todo reconsider how to auth client apps
-
     @EJB
     ConfigBean configBean;
+    @EJB
+    UserBean userBean;
+    @EJB
+    SessionBean sessionBean;
 
     public SecurityHandler() {
-        logger.info("SecurityHandler()");
-        userMap = new HashMap<>();
-        userList = new ArrayList<>();
-        clientMap = new HashMap<>();
     }
 
-    public void refreshUserList() {
-        userList = new ArrayList<>();
-        for (Entry<String, SecurityObject> entry : userMap.entrySet()) {
-            userList.add(entry.getValue());
-        }
-    }
-
-    /**
-     * MOCK
-     *
-     * @param apiClient
-     * @param apiToken
-     * @return
-     */
     public boolean checkClient(String apiClient, String apiToken) {
         // TODO extract properly
         String client = configBean.readConfigValue("CLIENT_REG_ID");
@@ -91,73 +76,65 @@ public class SecurityHandler implements Serializable {
     }
 
     public boolean checkUser(int userId, String login, String token) {
-        if (userMap.containsKey(login)) {
+        OpwUser user = userBean.find(userId);
 
-            SecurityObject user = userMap.get(login);
-
-            if (userId == user.getUserId()
-                    && token.equals(user.getToken())
-                    && !isSessionExpired(user)) {
-                return true;
-            }
+        if (user == null) {
+            return false;
         }
-        logger.error("failed checkUser for userId: {} login: {} token: {}", userId, login, token);
-        return false;
+
+        if (!user.getEmail().equals(login)) {
+            return false;
+        }
+        OpwSession session = sessionBean.find(user, token);
+        return validSession(session);
     }
 
-    /**
-     * @param login
-     * @param token
-     * @return
-     */
     public boolean checkUser(String login, String token) {
-        if (userMap.containsKey(login)) {
-            SecurityObject user = userMap.get(login);
-            if (token.equals(user.getToken()) && !isSessionExpired(user)) {
-                return true;
-            }
+        // TODO reconsider 
+        OpwUser user = userBean.findUser(login);
+
+        if (user == null) {
+            logger.error("unknown login: {}", login);
+            return false;
         }
-        logger.error("failed checkUser for login: {} token: {}", login, token);
-        return false;
+        OpwSession session = sessionBean.find(user, token);
+        return validSession(session);
+    }
+
+    public boolean validSession(OpwSession session) {
+        // unknown
+        if (session == null) {
+            return false;
+        }
+        // inactive
+        if (!session.getActive()) {
+            return false;
+        }
+        return !isSessionExpired(session);
     }
 
     /**
      * Checks if session is timed out.
      *
-     * @param user instance representing REST user.
+     * @param session instance representing REST user.
      * @return <code>true</code> if session timed out, otherwise
      * <code>false</code>
      * @author Adam Kowalewski
+     * @version 2015.05.08
      */
-    public boolean isSessionExpired(SecurityObject user) {
-        checkArgument(user != null, "Expected non-null user argument");
-        checkState(user.getValidTo() != null, "Expected non-null validTo");
+    public boolean isSessionExpired(OpwSession session) {
+        checkArgument(session != null, "Expected non-null user argument");
+        checkState(session.getDateValidTo() != null, "Expected non-null validTo");
         Date now = new Date();
-        if (now.after(user.getValidTo())) {
-            logger.error("Session timeout for login: {} token: {}", user.getLogin(), user.getToken());
+        if (now.after(session.getDateValidTo())) {
+            logger.error("Session timeout for login: {} token: {}", session.getOpwUserId().getEmail(), session.getToken());
             return true;
         }
         return false;
     }
 
-    public void clear() {
-        userMap = new HashMap<>();
-    }
-
-    public Map<String, SecurityObject> getUserMap() {
-        return userMap;
-    }
-
-    public void setUserMap(Map<String, SecurityObject> userMap) {
-        this.userMap = userMap;
-    }
-
-    public List<SecurityObject> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<SecurityObject> userList) {
-        this.userList = userList;
+    public List<OpwSession> loadActiveSessionList() {
+        return sessionBean.find(Boolean.TRUE);
     }
 
 }

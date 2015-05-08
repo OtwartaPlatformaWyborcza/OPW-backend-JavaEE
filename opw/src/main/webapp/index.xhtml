@@ -7,9 +7,8 @@
 
     <ui:define name="content">
         <h1>Strona glowna</h1>
-        <p>Sec: #{securityHandler.loadActiveSessionList().size()}</p>
-
-        
+        <p>Sec: #{securityHandler.loadActiveSessionList().size()}</p>        
+                
         <p:dataTable value="#{securityHandler.loadActiveSessionList()}" var="i">
             <p:column headerText="sessionId" styleClass="in80">
                 #{i.id}

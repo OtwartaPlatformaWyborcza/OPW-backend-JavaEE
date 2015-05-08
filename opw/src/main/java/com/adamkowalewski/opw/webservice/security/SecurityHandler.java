@@ -28,6 +28,7 @@ import com.adamkowalewski.opw.bean.SessionBean;
 import com.adamkowalewski.opw.bean.UserBean;
 import com.adamkowalewski.opw.entity.OpwSession;
 import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.view.controller.MsgController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,13 +112,13 @@ public class SecurityHandler implements Serializable {
             return false;
         }
         // expired
-        if (isSessionExpired(session)){
+        if (isSessionExpired(session)) {
             logger.trace("session expired user {} token {}", session.getOpwUserId().getEmail(), session.getToken());
             session.setActive(Boolean.FALSE);
             sessionBean.edit(session);
             return false;
         }
-            
+
         return true;
     }
 
@@ -135,14 +136,28 @@ public class SecurityHandler implements Serializable {
         checkState(session.getDateValidTo() != null, "Expected non-null validTo");
         Date now = new Date();
         if (now.after(session.getDateValidTo())) {
-            logger.error("Session timeout for login: {} token: {}", session.getOpwUserId().getEmail(), session.getToken());
+            logger.trace("Session timeout for login: {} token: {}", session.getOpwUserId().getEmail(), session.getToken());
             return true;
         }
         return false;
     }
 
-    public List<OpwSession> loadActiveSessionList() {
-        return sessionBean.find(Boolean.TRUE);
+    public void cleanActiveSessionList() {
+        
+        
+    }
+
+    public List<OpwSession> loadActiveSessionList() {        
+        List<OpwSession> activeList = new ArrayList<>();        
+        for (OpwSession session : sessionBean.find(Boolean.TRUE)) {
+            if (isSessionExpired(session)) {                
+                session.setActive(Boolean.FALSE);
+                sessionBean.edit(session);
+                continue;
+            }           
+            activeList.add(session);
+        }                
+        return activeList;
     }
 
 }

@@ -22,7 +22,7 @@ INSERT INTO opw.opw_user (id, firstname, lastname, email, password, type, salt, 
 INSERT INTO opw.opw_user (id, firstname, lastname, email, password, type, salt, active, token, phone, origin, dateCreated) VALUES (4, 'Przemek', 'Jodkowski', 'przemek', '96fcdfeee84a04bec18ae69c97921e7fdad13fe9a9abf556b932ced7794bd7', 'U', 'q019u1a4', true, NULL, NULL, 'SQL', '2015-01-01');
 INSERT INTO opw.opw_user (id, firstname, lastname, email, password, type, salt, active, token, phone, origin, dateCreated) VALUES (5, 'Jacek', 'Placek', 'angularjs', 'c76135017216b93a1619e4b922a2dfe75ae1d647d33c0174d79e084614bf7', 'U', 'e353uotk', true, NULL, NULL, 'SQL', '2015-01-01');
 INSERT INTO opw.opw_user (id, firstname, lastname, email, password, type, salt, active, token, phone, origin, dateCreated) VALUES (6, 'Diego', 'Małysz', 'openpkw', 'ba588b17ff6d3ba09bb851f549a4132fc42c5f73b66295ee8d54e79d6f2cb', 'U', 'ksp018t4', true, NULL, NULL, 'SQL', '2015-01-01');
-
+INSERT INTO opw.opw_user (id, firstname, lastname, email, password, type, salt, active, token, phone, origin, dateCreated) VALUES (7, 'Jan', 'Kowalski FMD', 'fmd', 'fe3995745ca2e83bf9d8472c5a9a3b2ac58a1889155a8ef534ae7dba26ed9e', 'U', '9ipnlffl', true, NULL, NULL, 'SQL', '2015-01-01');
 
 INSERT INTO opw.opw_kandydat (id, pkwId, firstname, lastname) VALUES (1, 1, 'Janusz Ryszard', 'Korwin-Mikke');
 INSERT INTO opw.opw_kandydat (id, pkwId, firstname, lastname) VALUES (2, 2, 'Bronisław Maria', 'Komorowski');

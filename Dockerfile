@@ -20,14 +20,15 @@ RUN         curl -L -o /tmp/glassfish-4.1.zip http://download.java.net/glassfish
             unzip /tmp/glassfish-4.1.zip -d /opt && \
             rm -f /tmp/glassfish-4.1.zip
 
+RUN		mkdir /opt/glassfish4/x_deploy
 
 COPY		./opw/target/xconfig/*	/opt/glassfish4/glassfish/domains/domain1/config/
 COPY		./opw/target/xlib/*	/opt/glassfish4/glassfish/domains/domain1/lib/
-COPY		./opw/target/opw.war 	/opt/glassfish4/glassfish/domains/domain1/autodeploy/
+COPY		./opw/target/opw.war 	/opt/glassfish4/x_deploy/
 
 COPY 		./docker/entrypoint.sh /
 
-WORKDIR		/opt/glassfish4
+WORKDIR		/opt/glassfish4/x_deploy
 
 RUN		chmod +x /entrypoint.sh
 

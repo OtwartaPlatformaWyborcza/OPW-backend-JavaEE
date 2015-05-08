@@ -25,9 +25,11 @@ package com.adamkowalewski.opw.webservice.controller;
 
 import com.adamkowalewski.opw.bean.ConfigBean;
 import com.adamkowalewski.opw.bean.MailBean;
+import com.adamkowalewski.opw.bean.SessionBean;
 import com.adamkowalewski.opw.bean.UserBean;
 import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
+import com.adamkowalewski.opw.entity.OpwSession;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.OpwConfigStatic;
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
@@ -41,7 +43,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.core.GenericEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,10 +57,10 @@ import static javax.ws.rs.core.Response.Status.*;
  */
 @Stateless
 public class UserServiceEjb implements Serializable {
-
+    
     private final static Logger logger = LoggerFactory.getLogger(UserServiceEjb.class);
-
-    @Inject
+    
+    @EJB
     SecurityHandler securityHandler;
     @EJB
     UserBean userBean;
@@ -69,18 +70,14 @@ public class UserServiceEjb implements Serializable {
     MailBean mailBean;
     @EJB
     ConfigBean configBean;
-
+    @EJB
+    SessionBean sessionBean;
+    
     public UserServiceEjb() {
     }
-
+    
     public GResultDto login(String login, String password) {
-
-        if (securityHandler.getUserMap().containsKey(login)) {
-            SecurityObject old = securityHandler.getUserMap().get(login);
-            // todo time check and logger
-            securityHandler.getUserMap().remove(login);
-        }
-
+        
         OpwUser user = userBean.verifyCredentials(login, password, OpwConfigStatic.APP_SALT);
 
         // if auth failed 
@@ -90,11 +87,16 @@ public class UserServiceEjb implements Serializable {
         }
         // auth ok
         String restToken = userBean.encryptSHA(userBean.generatePassword());
-
+        
         Date timeout = fetchExpireDate();
-        SecurityObject so = new SecurityObject(user.getId(), login, restToken, timeout);
-        securityHandler.getUserMap().put(login, so);
-
+        
+        OpwSession session = new OpwSession();
+        session.setToken(restToken);
+        session.setOpwUserId(user);
+        session.setDateValidTo(timeout);
+        session.setActive(true);
+        sessionBean.create(session);
+        
         UserDto userDto = new UserDto(
                 user.getId(),
                 user.getFirstname(),
@@ -106,7 +108,7 @@ public class UserServiceEjb implements Serializable {
         );
         return GResultDto.validResult(OK.getStatusCode(), userDto);
     }
-
+    
     private Date fetchExpireDate() {
         int timeoutInSeconds = Integer.valueOf(configBean.readConfigValue(OpwConfigStatic.REST_SESSION_TIMEOUT_IN_SECONDS));
         Calendar timeout = Calendar.getInstance();
@@ -121,40 +123,42 @@ public class UserServiceEjb implements Serializable {
      * @param token used for authentication.
      * @return <code>200</code> when logged out, otherwise <code>401</code>.
      * @author Adam Kowalewski
-     * @version 2015.04.26
+     * @version 2015.05.08
      */
     public GResultDto logout(String login, String token) {
-        if (!securityHandler.getUserMap().containsKey(login)
-                || !securityHandler.getUserMap().get(login).getToken().equals(token)) {
-            logger.error("REST logout failed for {} - {}", login, token);
+        if (!securityHandler.checkUser(login, token)) {            
             return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
-
-        securityHandler.getUserMap().remove(login);
+        logger.trace("logout user {} token {}", login, token);
+        OpwUser user = userBean.findUser(login);
+        OpwSession session = sessionBean.find(user, token);
+        session.setActive(false);
+        sessionBean.edit(session);
+        
         return GResultDto.validResult(OK.getStatusCode());
     }
-
+    
     public GResultDto<GenericEntity<List<KomisjaShortDto>>> loadObwodowaShortList(int userId, String login, String token) {
-
+        
         if (!securityHandler.checkUser(userId, login, token)) {
             return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
-
+        
         OpwUser user = userBean.findUser(userId);
-        logger.trace("userId: {} user: {} obwodowa: {} wynik: {} ", user.getId(), user.getEmail(), user.getOpwObwodowaKomisjaList().size(), user.getOpwWynikList().size());
-
+        logger.trace("userId {} user {} obwodowa {} wynik {} ", user.getId(), user.getEmail(), user.getOpwObwodowaKomisjaList().size(), user.getOpwWynikList().size());
+        
         List<KomisjaShortDto> resultList = new ArrayList<>();
-
+        
         for (OpwObwodowaKomisja obwodowa : user.getOpwObwodowaKomisjaList()) {
             int countWynik = wynikBean.countWynik(obwodowa);
             KomisjaShortDto komisja = new KomisjaShortDto(obwodowa.getId(), obwodowa.getPkwId(), obwodowa.getName(), obwodowa.getAddress(), countWynik);
             logger.trace(komisja.toString());
             resultList.add(komisja);
         }
-
+        
         GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
         };
-
+        
         return GResultDto.validResult(OK.getStatusCode(), result);
     }
 
@@ -167,20 +171,19 @@ public class UserServiceEjb implements Serializable {
      * @return
      */
     public GResultDto register(String apiClient, String apiToken, UserRegisterDto newUser) {
-        if (securityHandler.checkClient(apiClient, apiToken)) {
-            logger.error("invalid client: {} token: {}", apiClient, apiToken);
+        if (securityHandler.checkClient(apiClient, apiToken)) {            
             return GResultDto.validResult(UNAUTHORIZED.getStatusCode());
         }
-
+        
         logger.info("register " + newUser.toString());
-
+        
         OpwUser user = new OpwUser();
-
+        
         user.setFirstname(newUser.getFirstname());
         user.setLastname(newUser.getLastname());
         user.setEmail(newUser.getEmail());
         user.setPhone(newUser.getPhone());
-
+        
         String passwordPlain = userBean.generatePassword();
         String userSalt = userBean.generatePassword(8);
         user.setSalt(userSalt);
@@ -189,7 +192,7 @@ public class UserServiceEjb implements Serializable {
         user.setDateCreated(new Date());
         user.setType("U"); // TODO move to ENUM
         user.setOrigin(apiClient);
-
+        
         mailBean.sendMailWelcome(user, passwordPlain, false);
         user.setPassword(userBean.saltPassword(OpwConfigStatic.APP_SALT, userSalt, passwordPlain));
         try {
@@ -198,8 +201,8 @@ public class UserServiceEjb implements Serializable {
             logger.error("err {} ", e.getMessage());
             return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
         }
-
+        
         return GResultDto.validResult(OK.getStatusCode());
     }
-
+    
 }

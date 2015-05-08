@@ -23,14 +23,10 @@
  */
 package com.adamkowalewski.opw.webservice.security;
 
-import java.util.Calendar;
-
-import static org.testng.Assert.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 /**
  *
@@ -57,79 +53,5 @@ public class SecurityHandlerNGTest {
     public void tearDownMethod() throws Exception {
     }
 
-    /**
-     * List userList is expected to be empty after refresh.
-     */
-    @Test
-    public void testRefreshUserList() {
-        System.out.println("refreshUserList");
-        SecurityHandler instance = new SecurityHandler();
-        instance.refreshUserList();
-        assertEquals(instance.getUserList().size(), 0);
-    }
-
-    /**
-     * Test of checkUser method, of class SecurityHandler.
-     */
-    @Test(enabled = false)
-    public void testCheckUser_3args() {
-        System.out.println("checkUser");
-        int userId = 0;
-        String login = "";
-        String token = "";
-        SecurityHandler instance = new SecurityHandler();
-        boolean expResult = false;
-        boolean result = instance.checkUser(userId, login, token);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of checkUser method, of class SecurityHandler.
-     */
-    @Test(enabled = false)
-    public void testCheckUser_String_String() {
-        System.out.println("checkUser");
-        String login = "";
-        String token = "";
-        SecurityHandler instance = new SecurityHandler();
-        boolean expResult = false;
-        boolean result = instance.checkUser(login, token);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of isSessionExpired method, of class SecurityHandler.
-     */
-    @Test
-    public void testIsSessionExpired() {
-        // given
-        SecurityObject user = new SecurityObject();
-        Calendar expireDate = Calendar.getInstance();
-        expireDate.add(Calendar.MINUTE, -1);
-        user.setValidTo(expireDate.getTime());
-        SecurityHandler securityHandler = new SecurityHandler();
-        boolean expectedResult = true;
-
-        // when
-        boolean actualResult = securityHandler.isSessionExpired(user);
-
-        // then
-        assertEquals(actualResult, expectedResult);
-    }
-
-    /**
-     * Map userMap is expected to be empty after clear.
-     */
-    @Test
-    public void testClear() {
-        System.out.println("clear");
-        SecurityHandler instance = new SecurityHandler();
-        instance.clear();
-        assertEquals(instance.userMap.size(), 0);
-    }
 
 }

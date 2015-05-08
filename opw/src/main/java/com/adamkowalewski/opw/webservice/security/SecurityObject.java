@@ -33,6 +33,7 @@ import java.util.Objects;
  * @author Adam Kowalewski
  * @version 2015.04.28
  */
+@Deprecated
 public class SecurityObject implements Serializable {
 
     private int userId;

@@ -112,6 +112,8 @@ public class OpwUser implements Serializable {
     private List<OpwObwodowaKomisja> opwObwodowaKomisjaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
     private List<OpwWynik> opwWynikList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
+    private List<OpwSession> opwSessionList;
 
     public OpwUser() {
     }
@@ -232,6 +234,15 @@ public class OpwUser implements Serializable {
 
     public void setOpwWynikList(List<OpwWynik> opwWynikList) {
         this.opwWynikList = opwWynikList;
+    }
+
+    @XmlTransient
+    public List<OpwSession> getOpwSessionList() {
+        return opwSessionList;
+    }
+
+    public void setOpwSessionList(List<OpwSession> opwSessionList) {
+        this.opwSessionList = opwSessionList;
     }
 
     @Override

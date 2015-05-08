@@ -94,7 +94,7 @@ public class SecurityHandler implements Serializable {
         OpwUser user = userBean.findUser(login);
 
         if (user == null) {
-            logger.error("unknown login: {}", login);
+            logger.error("unknown login {}", login);
             return false;
         }
         OpwSession session = sessionBean.find(user, token);
@@ -110,7 +110,15 @@ public class SecurityHandler implements Serializable {
         if (!session.getActive()) {
             return false;
         }
-        return !isSessionExpired(session);
+        // expired
+        if (isSessionExpired(session)){
+            logger.trace("session expired user {} token {}", session.getOpwUserId().getEmail(), session.getToken());
+            session.setActive(Boolean.FALSE);
+            sessionBean.edit(session);
+            return false;
+        }
+            
+        return true;
     }
 
     /**

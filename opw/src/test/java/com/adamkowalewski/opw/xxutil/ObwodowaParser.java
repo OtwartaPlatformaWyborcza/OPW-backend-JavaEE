@@ -23,6 +23,20 @@
  */
 package com.adamkowalewski.opw.xxutil;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.junit.runner.Runner;
+
 /**
  *
  * @author Adam Kowalewski
@@ -30,6 +44,54 @@ package com.adamkowalewski.opw.xxutil;
 public class ObwodowaParser {
 
     public static void main(String[] args) {
-        String x = "142009|gm. Płońsk|płoński|mazowieckie|8|COMM|Miejscowości: Szerominek, |f|Polska|Szerominek|09-100|Płońsk|ul. Płońska|53||Świetlica w Szerominku|519";
+        String fileInput = "/home/adam/Downloads/pollstations.csv";
+        String fileOutput = "/home/adam/Downloads/obwodowa_2015_final.sql";
+        List<String> csvList = readCsvFile(fileInput);
+        List<String> exportList = new ArrayList<>();
+        
+        for (String line : csvList) {
+            exportList.add(new ObwodowaDtoPkw(line, ";").toStringSql());                        
+        }
+        saveCsvFile(fileOutput, exportList);
     }
+
+    private static List<String> readCsvFile(String filename) {
+        List<String> result = new ArrayList<>();
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream(filename);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader bf = new BufferedReader(isr);
+            String line;
+            while (bf.ready()) {
+                line = bf.readLine();
+                result.add(line);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Runner.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Runner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public static void saveCsvFile(String filename, List<String> csvLines) {
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(filename);
+            OutputStreamWriter osw = new OutputStreamWriter(fos);
+            try (BufferedWriter bw = new BufferedWriter(osw)) {
+                for (String csvLine : csvLines) {
+                    bw.write(csvLine);
+                    bw.newLine();
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Runner.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Runner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class ImportUserHandler extends AbstractImportHandler<UserCsvDto> impleme
             try {
                 is = file.getInputstream();
                 uploadList = importController.parseUser(is);
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 logger.error("File upload",ex);
                 MsgController.addErrorMessage(MsgController.getLocalizedMessage("importFileParseError"));
             }

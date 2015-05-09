@@ -130,7 +130,7 @@ public class ImportController implements Serializable {
         userController.create(userImportList);
     }
 
-    public List<UserCsvDto> parseUser(InputStream content) throws IOException, OpwException {
+    public List<UserCsvDto> parseUser(InputStream content) throws IOException {
 
         List<UserCsvDto> userDtoList = userCsvDtoReader().readAllFrom(content);
 

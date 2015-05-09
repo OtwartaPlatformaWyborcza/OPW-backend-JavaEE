@@ -110,8 +110,14 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
      * @author Adam Kowalewski
      * @version 2015.05.05
      */
-    public boolean isDuplicate(String email) throws OpwException {
-        return countUserBy(email) > 0;
+    public boolean isDuplicate(String email) {
+        try {
+            return countUserBy(email) > 0;
+        } catch (Exception e) {
+            //TODO Error flow for thrown exceptions
+            logger.error("Error while checking if '{}' email is unique caused by", email, e.getMessage());
+        }
+        return true;
     }
 
     /**
@@ -129,7 +135,7 @@ public class UserBean extends AbstractOpwFacade<OpwUser> {
         try {
             return (OpwUser) q.getSingleResult();
         } catch (PersistenceException e) {
-            logger.error("Ex {} for email {}", e.getMessage(), login);
+            logger.error("Ex {} for email {}", e, login);
             return null;
         }
     }

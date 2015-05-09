@@ -207,8 +207,8 @@ public class UserServiceEjb implements Serializable {
 
     public GResultDto checkEmail(String email) {
         try {
-            boolean duplicate = userBean.isDuplicate(email);
-            if (!duplicate) {
+            boolean duplicates = userBean.isDuplicate(email);
+            if (!duplicates) {
                 return GResultDto.validResult(OK.getStatusCode());
             }
             return GResultDto.invalidResult(CONFLICT.getStatusCode());

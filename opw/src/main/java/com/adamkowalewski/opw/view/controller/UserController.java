@@ -55,7 +55,7 @@ public class UserController implements Serializable {
     public UserController() {
     }
 
-    public boolean isDuplicate(String email) throws OpwException {
+    public boolean isDuplicate(String email) {
         return bean.isDuplicate(email);
     }
 

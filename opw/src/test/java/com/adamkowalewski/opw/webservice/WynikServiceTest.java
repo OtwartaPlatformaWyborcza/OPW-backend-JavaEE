@@ -17,7 +17,7 @@ import static org.testng.Assert.*;
 
 public class WynikServiceTest extends BaseWynikServiceTest {
 
-    @Test
+    @Test(enabled = false)
     public void shouldFetchWynik() {
         // given
         OpwKandydat k = new OpwKandydat();

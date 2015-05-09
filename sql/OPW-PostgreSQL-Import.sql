@@ -43,5 +43,6 @@ INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_DASH_ID', 'clien
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_DASH_TOKEN', 'd171794c5c1f7a50aeb8f7056ab84a4fbcd6fbd594b1999bddaefdd03efc0591');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('EMAIL_OUTBOUND', 'true');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_REGISTRATION', 'true');
-INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('OPW_BASE_URL', 'http://91.250.114.134:8080/opw');
+INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('OPW_BASE_URL', 'https://otwartapw.pl/opw');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('REST_SESSION_TIMEOUT', '300');
+INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('EMAIL_OUTBOUND_FROM', 'kontakt@otwartapw.pl');

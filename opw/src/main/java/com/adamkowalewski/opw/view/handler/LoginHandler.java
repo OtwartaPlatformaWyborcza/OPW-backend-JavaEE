@@ -53,9 +53,7 @@ public class LoginHandler implements Serializable {
     @Inject
     Identity identity;
     @Inject
-    UserController userController;
-    @Inject
-    private ConfigController configController;
+    UserController userController;    
 
     public LoginHandler() {
     }

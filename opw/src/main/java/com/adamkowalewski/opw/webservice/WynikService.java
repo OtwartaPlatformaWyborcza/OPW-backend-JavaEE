@@ -23,8 +23,10 @@
  */
 package com.adamkowalewski.opw.webservice;
 
+import com.adamkowalewski.opw.bean.ConfigBean;
 import com.adamkowalewski.opw.entity.OpwKandydat;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import com.adamkowalewski.opw.view.OpwConfigStatic;
 import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_DEBUG_ERROR500;
 import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
@@ -64,6 +66,8 @@ public class WynikService extends AbstractService {
 
     @EJB
     WynikServiceEjb wynikEjb;
+    @EJB
+    ConfigBean configBean;
 
     @GET
     @Path("/{wynikId}")
@@ -127,12 +131,27 @@ public class WynikService extends AbstractService {
         if (debug != null) {
             return mockServerError();
         }
+
+        // TODO refactoring konieczny 
+        // aktualne liczby dostepne na http://prezydent2015.pkw.gov.pl/
+        if (Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_CISZA_WYBORCZA))) {
+            DashboardDto result = new DashboardDto(new Date(), 27817, 0, 30768394, 0);
+
+            List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
+
+            for (OpwKandydat kandydat : kandydatList) {
+                KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getFirstname(), kandydat.getLastname());
+                k.setGlosow(0);
+                result.getKandydatList().add(k);
+            }
+            return Response.ok().entity(result).build();
+        }
+
 //        if (!verifyAccess(apiToken)) {
 //            Response response = Response.status(Response.Status.UNAUTHORIZED)
 //                    .build();
 //            return response;
 //        }
-
         DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
 
         List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();

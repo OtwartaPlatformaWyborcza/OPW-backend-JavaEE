@@ -91,6 +91,10 @@ public class AccessControlList implements Serializable {
         accessLogin.add("/user.xhtml");
         accessLogin.add("/userCreate.xhtml");
         accessLogin.add("/userEdit.xhtml");
+        
+        accessLogin.add("/config.xhtml");
+        accessLogin.add("/configCreate.xhtml");
+        accessLogin.add("/configEdit.xhtml");
 
         accessLogin.add("/profileEdit.xhtml");
     }

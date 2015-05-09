@@ -66,14 +66,15 @@ public class ConfigController implements Serializable {
     @PostConstruct
     public void initConfigController() {
         
-        configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", "opw@adamkowalewski.com", 
+        configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", 
+                configBean.readConfigValue(OpwConfigStatic.CFG_KEY_EMAIL_FROM), 
                 configBean.readConfigValue(OpwConfigStatic.CFG_KEY_BASE_URL));                
         configMailOutboundActive = Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_EMAIL_OUTBOUND));
         configImportDuplicatesAllowed = false;
         listKandydatOpen = false;
         listOkregowaOpen = false;
         applicationSalt = OpwConfigStatic.APP_SALT;
-    }
+    }        
 
     public String getApplicationSalt() {
         return applicationSalt;

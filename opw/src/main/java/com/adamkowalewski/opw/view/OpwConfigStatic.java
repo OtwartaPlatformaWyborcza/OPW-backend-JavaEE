@@ -47,8 +47,10 @@ public final class OpwConfigStatic {
     public static final String APP_SALT = "Søägüąź.29";
 
     // const for config in database     
+    public static final String CFG_KEY_CISZA_WYBORCZA = "CISZA_WYBORCZA";
     public static final String CFG_KEY_BASE_URL = "OPW_BASE_URL";
     public static final String CFG_KEY_EMAIL_OUTBOUND = "EMAIL_OUTBOUND";
+    public static final String CFG_KEY_EMAIL_FROM = "EMAIL_OUTBOUND_FROM";
     public static final String CFG_KEY_CLIENT_REGISTRATION = "CLIENT_REGISTRATION";
     public static final String REST_SESSION_TIMEOUT_IN_SECONDS = "REST_SESSION_TIMEOUT";
 

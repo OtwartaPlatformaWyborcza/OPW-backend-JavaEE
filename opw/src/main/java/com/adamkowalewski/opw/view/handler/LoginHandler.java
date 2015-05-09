@@ -25,7 +25,6 @@ package com.adamkowalewski.opw.view.handler;
 
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.view.Identity;
-import com.adamkowalewski.opw.view.controller.ConfigController;
 import com.adamkowalewski.opw.view.controller.MsgController;
 import com.adamkowalewski.opw.view.controller.UserController;
 import java.io.Serializable;
@@ -53,7 +52,7 @@ public class LoginHandler implements Serializable {
     @Inject
     Identity identity;
     @Inject
-    UserController userController;    
+    UserController userController;
 
     public LoginHandler() {
     }
@@ -62,6 +61,11 @@ public class LoginHandler implements Serializable {
         OpwUser u = userController.authenticate(login, password);
 
         if (u != null) {
+
+            if (u.getType().equals("RU")) {                
+                MsgController.addWarningMessage(MsgController.getLocalizedMessage("loginFailedNoAccess"));
+                return "index";
+            }
             identity.setLoggedin(true);
             identity.setFullname(u.getFirstname() + " " + u.getLastname());
             identity.setUserId(u.getId());

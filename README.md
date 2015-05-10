@@ -32,7 +32,7 @@ Aby do nas dołączyć otwórz proszę nowy issue w repozytorium. Komunikacja od
 | ------------- | ------------- |
 | Tablica Trello   | https://trello.com/b/hKes4OCP/otwarta-platforma-wyborcza  |
 | Backend (Java EE) daily | http://dev.otwartapw.pl/opw/  |
-| Frontend komisja (AngularJS) daily | http://.dev.otwartapw.pl/ |
+| Frontend komisja (AngularJS) daily | http://k.dev.otwartapw.pl/ |
 | Frontend wyniki (jQuery) daily | http://dev.otwartapw.pl/ |
 
 # Quickstart

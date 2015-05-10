@@ -18,6 +18,9 @@
             <h1>Aktywacja konta zakonczona powodzeniem.</h1>
             <p>Mail: #{verifyHandler.email}</p>
             <p>code: #{verifyHandler.code}</p>
+            <br/>
+            <a href="https://k.otwartapw.pl/">Logowanie</a>
+            
         </ui:fragment>
 
         <ui:fragment rendered="#{not verifyHandler.actResult}">

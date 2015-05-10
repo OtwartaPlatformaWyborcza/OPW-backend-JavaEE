@@ -137,32 +137,45 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
     }
 
     public List<OpwWynik> fetchCurrentElectionResults() {
-        String jpqlQuery = "" +
-                "SELECT new com.adamkowalewski.opw.entity.OpwWynik" +
-                "(" +
-                "   o.opwObwodowaKomisjaId,\n" +
-                "   cast(func('round', avg(o.votersValid)) INT)," +
-                "   cast(func('round', avg(o.votersAmount)) INT)," +
-                "   cast(func('round', avg(o.votesInvalid)) INT)," +
-                "   cast(func('round', avg(o.votesValid)) INT)," +
-                "   null," +
-                "   true," +
-                "   null," +
-                "   cast(func('round', avg(o.k1)) INT)," +
-                "   cast(func('round', avg(o.k2)) INT)," +
-                "   cast(func('round', avg(o.k3)) INT)," +
-                "   cast(func('round', avg(o.k4)) INT)," +
-                "   cast(func('round', avg(o.k5)) INT)," +
-                "   cast(func('round', avg(o.k6)) INT)," +
-                "   cast(func('round', avg(o.k7)) INT)," +
-                "   cast(func('round', avg(o.k8)) INT)," +
-                "   cast(func('round', avg(o.k9)) INT)," +
-                "   cast(func('round', avg(o.k10)) INT)" +
-                "   cast(func('round', avg(o.k11)) INT)" +
-                ") " +
-                "FROM OpwWynik o GROUP BY o.opwObwodowaKomisjaId";
-        Query q = em.createNativeQuery(jpqlQuery, OpwWynik.class);
-        return q.getResultList();
+
+        List<OpwWynik> wynikList = findAll();
+
+        for (OpwWynik wynik : wynikList) {
+
+            if (!wynik.getActive()
+                    && wynik.getRatedPositiv() < wynik.getRatedNegativ()) {
+                wynikList.remove(wynik);
+            }
+        }
+        
+        
+
+//        String jpqlQuery = ""
+//                + "SELECT new com.adamkowalewski.opw.entity.OpwWynik"
+//                + "("
+//                + "   o.opwObwodowaKomisjaId,\n"
+//                + "   cast(func('round', avg(o.votersValid)) INT),"
+//                + "   cast(func('round', avg(o.votersAmount)) INT),"
+//                + "   cast(func('round', avg(o.votesInvalid)) INT),"
+//                + "   cast(func('round', avg(o.votesValid)) INT),"
+//                + "   null,"
+//                + "   true,"
+//                + "   null,"
+//                + "   cast(func('round', avg(o.k1)) INT),"
+//                + "   cast(func('round', avg(o.k2)) INT),"
+//                + "   cast(func('round', avg(o.k3)) INT),"
+//                + "   cast(func('round', avg(o.k4)) INT),"
+//                + "   cast(func('round', avg(o.k5)) INT),"
+//                + "   cast(func('round', avg(o.k6)) INT),"
+//                + "   cast(func('round', avg(o.k7)) INT),"
+//                + "   cast(func('round', avg(o.k8)) INT),"
+//                + "   cast(func('round', avg(o.k9)) INT),"
+//                + "   cast(func('round', avg(o.k10)) INT)"
+//                + "   cast(func('round', avg(o.k11)) INT)"
+//                + ") "
+//                + "FROM OpwWynik o GROUP BY o.opwObwodowaKomisjaId";
+//        Query q = em.createNativeQuery(jpqlQuery, OpwWynik.class);
+        return wynikList;
     }
 
 }

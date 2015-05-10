@@ -25,14 +25,12 @@ package com.adamkowalewski.opw.webservice;
 
 import com.adamkowalewski.opw.bean.ConfigBean;
 import com.adamkowalewski.opw.entity.OpwKandydat;
-import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.view.OpwConfigStatic;
 import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_DEBUG_ERROR500;
 import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
-import com.adamkowalewski.opw.webservice.dto.WynikOkregowaDto;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -44,8 +42,6 @@ import javax.ws.rs.core.Response;
 import java.util.Date;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkState;
-import java.util.Random;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
@@ -147,11 +143,6 @@ public class WynikService extends AbstractService {
             return Response.ok().entity(result).build();
         }
 
-//        if (!verifyAccess(apiToken)) {
-//            Response response = Response.status(Response.Status.UNAUTHORIZED)
-//                    .build();
-//            return response;
-//        }
         return buildResponse(wynikEjb.wynik());
     }
 

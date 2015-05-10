@@ -42,10 +42,10 @@ import org.slf4j.LoggerFactory;
 @Named
 @SessionScoped
 public class ConfigController implements Serializable {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(ConfigController.class);
 
-    private String applicationSalt;    
+    private String applicationSalt;
 
     private ConfigMailDto configMail;
 
@@ -55,7 +55,7 @@ public class ConfigController implements Serializable {
 
     private boolean listKandydatOpen;
     private boolean listOkregowaOpen;
-    
+
     @EJB
     ConfigBean configBean;
 
@@ -65,16 +65,17 @@ public class ConfigController implements Serializable {
 
     @PostConstruct
     public void initConfigController() {
-        
-        configMail = new ConfigMailDto("Otwarta Platforma Wyborcza", 
-                configBean.readConfigValue(OpwConfigStatic.CFG_KEY_EMAIL_FROM), 
-                configBean.readConfigValue(OpwConfigStatic.CFG_KEY_BASE_URL));                
+
+        configMail = new ConfigMailDto(
+                configBean.readConfigValue(OpwConfigStatic.CFG_KEY_EMAIL_FROM_LABEL),
+                configBean.readConfigValue(OpwConfigStatic.CFG_KEY_EMAIL_FROM),
+                configBean.readConfigValue(OpwConfigStatic.CFG_KEY_BASE_URL));
         configMailOutboundActive = Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_EMAIL_OUTBOUND));
         configImportDuplicatesAllowed = false;
         listKandydatOpen = false;
         listOkregowaOpen = false;
         applicationSalt = OpwConfigStatic.APP_SALT;
-    }        
+    }
 
     public String getApplicationSalt() {
         return applicationSalt;

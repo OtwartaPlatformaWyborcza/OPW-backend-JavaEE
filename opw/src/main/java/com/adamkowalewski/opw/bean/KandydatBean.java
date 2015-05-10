@@ -24,9 +24,11 @@
 package com.adamkowalewski.opw.bean;
 
 import com.adamkowalewski.opw.entity.OpwKandydat;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * Provides access to Kandydat.
@@ -61,4 +63,7 @@ public class KandydatBean extends AbstractOpwFacade<OpwKandydat> {
         return kandydat.getLastname() + " " + kandydat.getFirstname();
     }
 
+    public List<OpwKandydat> findAll() {
+        return em.createNamedQuery("OpwKandydat.findAllOrderByPkwId", OpwKandydat.class).getResultList();
+    }
 }

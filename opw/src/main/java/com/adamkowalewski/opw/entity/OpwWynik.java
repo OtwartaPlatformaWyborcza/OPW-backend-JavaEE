@@ -144,6 +144,35 @@ public class OpwWynik implements Serializable {
     public OpwWynik() {
     }
 
+    public OpwWynik(Short votersValid, Short votersAmount, Short cardsValid, Short votesInvalid, Short votesValid, String fileOriginal, Boolean active, Date dateCreated, Short k1, Short k2, Short k3, Short k4, Short k5, Short k6, Short k7, Short k8, Short k9, Short k10, Short k11, Integer ratedPositiv, Integer ratedNegativ, Integer status, OpwUser opwUserId, List<OpwWynik> opwWynikList, OpwWynik parentId, OpwObwodowaKomisja opwObwodowaKomisjaId) {
+        this.votersValid = votersValid;
+        this.votersAmount = votersAmount;
+        this.cardsValid = cardsValid;
+        this.votesInvalid = votesInvalid;
+        this.votesValid = votesValid;
+        this.fileOriginal = fileOriginal;
+        this.active = active;
+        this.dateCreated = dateCreated;
+        this.k1 = k1;
+        this.k2 = k2;
+        this.k3 = k3;
+        this.k4 = k4;
+        this.k5 = k5;
+        this.k6 = k6;
+        this.k7 = k7;
+        this.k8 = k8;
+        this.k9 = k9;
+        this.k10 = k10;
+        this.k11 = k11;
+        this.ratedPositiv = ratedPositiv;
+        this.ratedNegativ = ratedNegativ;
+        this.status = status;
+        this.opwUserId = opwUserId;
+        this.opwWynikList = opwWynikList;
+        this.parentId = parentId;
+        this.opwObwodowaKomisjaId = opwObwodowaKomisjaId;
+    }
+
     public OpwWynik(Integer id) {
         this.id = id;
     }

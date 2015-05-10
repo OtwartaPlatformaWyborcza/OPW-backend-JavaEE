@@ -41,8 +41,10 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DashboardDto {
 
-    private int obwodowa, obwodowaAll;
-    private int frekwencja, frekwencjaAll;
+    private int obwodowa; //liczba komisji z ktorych mamy protokoły
+    private int obwodowaAll; //wsztstkie dostepne komisje
+    private int frekwencja; //wszystkich nadesłanych votersAmount
+    private int frekwencjaAll; //wsztstkich allowedToVote
     private Date exportDate;
 
     private List<KandydatDto> kandydatList;
@@ -57,8 +59,8 @@ public class DashboardDto {
         this.obwodowa = obwodowa;
         this.frekwencja = frekwencja;
         this.frekwencjaAll = frekwencjaAll;
-        kandydatList = new ArrayList<>();
-        okregowaList = new ArrayList<>();
+        this.kandydatList = new ArrayList<>();
+        this.okregowaList = new ArrayList<>();
     }
 
     public int getObwodowaAll() {

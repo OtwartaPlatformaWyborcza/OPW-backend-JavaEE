@@ -152,30 +152,7 @@ public class WynikService extends AbstractService {
 //                    .build();
 //            return response;
 //        }
-        DashboardDto result = new DashboardDto(new Date(), 24500, new Random().nextInt(20000), 40000000, 20000000);
-
-        List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
-
-        for (OpwKandydat kandydat : kandydatList) {
-            checkState(kandydat.getPkwId() != null, "Expected non-null pkwId field");
-            checkState(kandydat.getFirstname() != null, "Expected non-null firstname field");
-            checkState(kandydat.getLastname() != null, "Expected non-null lastname field");
-
-            KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getFirstname(), kandydat.getLastname());
-            k.setGlosow(new Random().nextInt(1000));
-            result.getKandydatList().add(k);
-        }
-
-        List<OpwOkregowaKomisja> okregowaList = wynikEjb.obwodowaFindAll();
-        for (OpwOkregowaKomisja okregowa : okregowaList) {
-            WynikOkregowaDto o = new WynikOkregowaDto(
-                    okregowa.getName(),
-                    new Random().nextInt(750000), 750000,
-                    new Random().nextInt(800), 800);
-            result.getOkregowaList().add(o);
-        }
-
-        return Response.ok().entity(result).build();
+        return buildResponse(wynikEjb.wynik());
     }
 
 }

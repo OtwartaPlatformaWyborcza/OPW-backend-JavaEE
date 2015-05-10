@@ -59,6 +59,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OpwUser.findByFirstname", query = "SELECT o FROM OpwUser o WHERE o.firstname = :firstname"),
     @NamedQuery(name = "OpwUser.findByLastname", query = "SELECT o FROM OpwUser o WHERE o.lastname = :lastname"),
     @NamedQuery(name = "OpwUser.findByEmail", query = "SELECT o FROM OpwUser o WHERE o.email = :email"),
+    @NamedQuery(name = "OpwUser.countByEmail", query = "SELECT COUNT(o) FROM OpwUser o WHERE o.email = :email"),
     @NamedQuery(name = "OpwUser.findByPassword", query = "SELECT o FROM OpwUser o WHERE o.password = :password"),
     @NamedQuery(name = "OpwUser.findByType", query = "SELECT o FROM OpwUser o WHERE o.type = :type"),
     @NamedQuery(name = "OpwUser.findBySalt", query = "SELECT o FROM OpwUser o WHERE o.salt = :salt"),

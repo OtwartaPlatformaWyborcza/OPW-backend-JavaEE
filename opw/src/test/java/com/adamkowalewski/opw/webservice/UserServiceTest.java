@@ -116,4 +116,18 @@ public class UserServiceTest extends BaseUserServiceTest {
         // then
         assertEquals(response.getStatus(), OK_200);
     }
+
+    @Test
+    public void shouldCheckEmail() throws Exception {
+        // given
+        String email = "testuser@example.com";
+        when(userServiceEjb.checkEmail(email))
+                .thenReturn(GResultDto.validResult(OK_200));
+
+        // when
+        Response response = target(format("user/available/%s", email)).request().get();
+
+        // then
+        assertEquals(response.getStatus(), OK_200);
+    }
 }

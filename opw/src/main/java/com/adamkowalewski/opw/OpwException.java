@@ -35,4 +35,7 @@ public class OpwException extends Exception {
         super("OPW Exception: " + message);
     }
 
+    public OpwException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

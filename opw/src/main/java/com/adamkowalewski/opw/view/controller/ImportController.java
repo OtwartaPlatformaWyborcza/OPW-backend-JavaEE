@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;

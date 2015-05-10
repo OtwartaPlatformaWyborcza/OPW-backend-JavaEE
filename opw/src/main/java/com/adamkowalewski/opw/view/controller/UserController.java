@@ -23,6 +23,7 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
+import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.bean.MailBean;
 import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.bean.UserBean;

@@ -137,9 +137,9 @@ public class WynikServiceEjb implements Serializable {
             List<OpwKandydat> kandydatList = kandydatBean.findAll();
 
             DashboardDto dashboard = new DashboardDto();
-            for (OpwKandydat opwKandydat : kandydatList) {
+            for (OpwKandydat opwKandydat : kandydatList) {                
                 dashboard.getKandydatList().add(new KandydatDto(
-                                opwKandydat.getPkwId(), opwKandydat.getFirstname(), opwKandydat.getFirstname(), -1)
+                                opwKandydat.getPkwId(), opwKandydat.getFirstname(), opwKandydat.getFirstname(), 1)
                 );
             }
 
@@ -162,6 +162,7 @@ public class WynikServiceEjb implements Serializable {
             //TODO Dodac komisje okregowe
             return GResultDto.validResult(OK.getStatusCode(), dashboard);
         } catch (Exception e) {
+            logger.error("test ", e);
             return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
         }
     }

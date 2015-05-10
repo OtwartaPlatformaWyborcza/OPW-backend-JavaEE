@@ -126,7 +126,7 @@ public class WynikService extends AbstractService {
 
         if (debug != null) {
             return mockServerError();
-        }
+        }        
 
         // TODO refactoring konieczny 
         // aktualne liczby dostepne na http://prezydent2015.pkw.gov.pl/

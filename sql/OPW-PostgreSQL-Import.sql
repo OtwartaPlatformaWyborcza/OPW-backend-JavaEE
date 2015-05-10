@@ -46,3 +46,8 @@ INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_REGISTRATION', '
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('OPW_BASE_URL', 'https://otwartapw.pl/opw');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('REST_SESSION_TIMEOUT', '300');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('EMAIL_OUTBOUND_FROM', 'kontakt@otwartapw.pl');
+INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('EMAIL_OUTBOUND_FROM_LABEL', 'Otwarta Platforma Wyborcza');
+INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CISZA_WYBORCZA', 'true');
+
+
+

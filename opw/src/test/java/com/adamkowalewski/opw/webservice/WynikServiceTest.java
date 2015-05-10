@@ -6,14 +6,13 @@ import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import org.testng.annotations.Test;
 
 import javax.ws.rs.core.Response;
-
 import java.util.List;
 
 import static com.adamkowalewski.opw.webservice.AbstractService.OPW_HEADER_API_TOKEN;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.eclipse.jetty.http.HttpStatus.OK_200;
-import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class WynikServiceTest extends BaseWynikServiceTest {
 
@@ -25,14 +24,10 @@ public class WynikServiceTest extends BaseWynikServiceTest {
         k.setFirstname("John");
         k.setLastname("Doe");
         List<OpwKandydat> opwKandydats = newArrayList(k);
-        when(wynikEjb.kandydatFindAll())
-                .thenReturn(opwKandydats);
         OpwOkregowaKomisja okr = new OpwOkregowaKomisja();
         okr.setName("Komisja 22");
         okr.setPkwId(22);
         List<OpwOkregowaKomisja> opwOkregowaKomisjas = newArrayList(okr);
-        when(wynikEjb.obwodowaFindAll())
-                .thenReturn(opwOkregowaKomisjas);
 
         // when
         Response response = target("wynik/complete").request()                

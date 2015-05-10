@@ -41,8 +41,10 @@ import java.io.Serializable;
 public class WynikOkregowaDto implements Serializable {
 
     private String okregowaName;
-    private int frekwencja, frekwencjaAll;
-    private int obwodowa, obwodowaAll;
+    private int frekwencja;
+    private int frekwencjaAll;
+    private int obwodowa;
+    private int obwodowaAll;
 
     public WynikOkregowaDto() {
     }

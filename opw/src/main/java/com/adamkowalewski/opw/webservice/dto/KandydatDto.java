@@ -23,8 +23,6 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
-import com.google.common.base.MoreObjects;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,7 +38,9 @@ import java.io.Serializable;
 public class KandydatDto implements Serializable {
 
     private int pkwId;
-    private String firstname, lastname;
+    private String firstname;
+    private String lastname;
+    // TODO Change to long type
     private int glosow;
 
     public KandydatDto() {

@@ -138,7 +138,7 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
 
     public List<OpwWynik> fetchCurrentElectionResults() {
         String jpqlQuery = "" +
-                "SELECT new com.adamkowalewski.opw.entity." +
+                "SELECT new com.adamkowalewski.opw.entity.OpwWynik" +
                 "(" +
                 "   o.opwObwodowaKomisjaId,\n" +
                 "   cast(func('round', avg(o.votersValid)) INT)," +

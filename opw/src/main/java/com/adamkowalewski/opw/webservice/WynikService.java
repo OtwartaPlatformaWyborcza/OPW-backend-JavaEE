@@ -131,7 +131,7 @@ public class WynikService extends AbstractService {
         // TODO refactoring konieczny 
         // aktualne liczby dostepne na http://prezydent2015.pkw.gov.pl/
         if (Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_CISZA_WYBORCZA))) {
-            DashboardDto result = new DashboardDto(new Date(), 27817, 0, 30768394, 0);
+            DashboardDto result = new DashboardDto(String.valueOf(new Date().getTime()), 27817, 0, 30768394, 0);
 
             List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
 

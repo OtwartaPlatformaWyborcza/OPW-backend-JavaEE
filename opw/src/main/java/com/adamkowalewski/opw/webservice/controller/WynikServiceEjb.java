@@ -143,7 +143,7 @@ public class WynikServiceEjb implements Serializable {
                 );
             }
 
-            dashboard.setExportDate(new Date());
+            dashboard.setExportDate(String.valueOf(new Date().getTime()));
             dashboard.setObwodowa(currentElectionResults.size());
             dashboard.setObwodowaAll(OBWODOWA_ALL);
             dashboard.setFrekwencja(votersValid);

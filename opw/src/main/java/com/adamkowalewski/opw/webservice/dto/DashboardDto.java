@@ -45,7 +45,7 @@ public class DashboardDto {
     private int obwodowaAll;    //wsztstkie dostepne komisje
     private int frekwencja;     //wszystkich nadeslanych votersAmount
     private int frekwencjaAll;  //wsztstkich allowedToVote
-    private Date exportDate;
+    private String exportDate;
 
     private List<KandydatDto> kandydatList;
     private List<WynikOkregowaDto> okregowaList;
@@ -55,8 +55,8 @@ public class DashboardDto {
         this.okregowaList = new ArrayList<>();
     }
 
-    public DashboardDto(Date exportDate, int obwodowaAll, int obwodowa, int frekwencjaAll, int frekwencja) {
-        this.exportDate = exportDate;
+    public DashboardDto(String exportDateTimestamp, int obwodowaAll, int obwodowa, int frekwencjaAll, int frekwencja) {
+        this.exportDate = exportDateTimestamp;
         this.obwodowaAll = obwodowaAll;
         this.obwodowa = obwodowa;
         this.frekwencja = frekwencja;
@@ -105,11 +105,11 @@ public class DashboardDto {
         this.frekwencjaAll = frekwencjaAll;
     }
 
-    public Date getExportDate() {
+    public String getExportDate() {
         return exportDate;
     }
 
-    public void setExportDate(Date exportDate) {
+    public void setExportDate(String exportDate) {
         this.exportDate = exportDate;
     }
 

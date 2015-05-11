@@ -57,6 +57,7 @@ public class WynikServiceEjb implements Serializable {
     private final static Logger logger = LoggerFactory.getLogger(WynikServiceEjb.class);
 
     private final static int OBWODOWA_ALL = 27816;
+    private final static int FREKWENCJA_ALL = 30229501;
 
     @Inject
     SecurityHandler securityHandler;
@@ -115,22 +116,21 @@ public class WynikServiceEjb implements Serializable {
     public GResultDto<DashboardDto> wynik() {
         try {
             int k1 = 0, k2 = 0, k3 = 0, k4 = 0, k5 = 0, k6 = 0, k7 = 0, k8 = 0, k9 = 0, k10 = 0, k11 = 0,
-                    votersAmount = 0, votersValid = 0;
+                    votersValid = 0;
 
             List<OpwWynik> currentElectionResults = wynikBean.fetchCurrentElectionResults();
             for (OpwWynik wynik : currentElectionResults) {
                 k1 += wynik.getK1();
-                k2 += wynik.getK1();
-                k3 += wynik.getK1();
-                k4 += wynik.getK1();
-                k5 += wynik.getK1();
-                k6 += wynik.getK1();
-                k7 += wynik.getK1();
-                k8 += wynik.getK1();
-                k9 += wynik.getK1();
-                k10 += wynik.getK1();
-                k11 += wynik.getK1();
-                votersAmount += wynik.getVotersAmount();
+                k2 += wynik.getK2();
+                k3 += wynik.getK3();
+                k4 += wynik.getK4();
+                k5 += wynik.getK5();
+                k6 += wynik.getK6();
+                k7 += wynik.getK7();
+                k8 += wynik.getK8();
+                k9 += wynik.getK9();
+                k10 += wynik.getK10();
+                k11 += wynik.getK11();                
                 votersValid += wynik.getVotersValid();
             }
 
@@ -139,15 +139,15 @@ public class WynikServiceEjb implements Serializable {
             DashboardDto dashboard = new DashboardDto();
             for (OpwKandydat opwKandydat : kandydatList) {                
                 dashboard.getKandydatList().add(new KandydatDto(
-                                opwKandydat.getPkwId(), opwKandydat.getFirstname(), opwKandydat.getFirstname(), 1)
+                                opwKandydat.getPkwId(), opwKandydat.getFirstname(), opwKandydat.getLastname(), 0)
                 );
             }
 
             dashboard.setExportDate(new Date());
             dashboard.setObwodowa(currentElectionResults.size());
             dashboard.setObwodowaAll(OBWODOWA_ALL);
-            dashboard.setFrekwencja(votersAmount);
             dashboard.setFrekwencja(votersValid);
+            dashboard.setFrekwencjaAll(FREKWENCJA_ALL);
             dashboard.getKandydatList().get(0).setGlosow(k1);
             dashboard.getKandydatList().get(1).setGlosow(k2);
             dashboard.getKandydatList().get(2).setGlosow(k3);
@@ -162,7 +162,7 @@ public class WynikServiceEjb implements Serializable {
             //TODO Dodac komisje okregowe
             return GResultDto.validResult(OK.getStatusCode(), dashboard);
         } catch (Exception e) {
-            logger.error("test ", e);
+            logger.error("Ex ", e);
             return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
         }
     }

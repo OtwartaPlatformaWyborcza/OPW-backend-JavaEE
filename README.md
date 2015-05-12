@@ -222,17 +222,16 @@ Plan implementacji
 * [DONE] [OPW-G-3](https://trello.com/c/tQ6tM92J/19-opw-g-3-rejestracja-wolontariusza) Formularz rejestracji. 
 * [DONE] [OPW-I-1](https://trello.com/c/RttZFZUP/25-opw-i-1-konfiguracja-klastra-glassfish-4-1-min-3x-slave) Konfiguracja klastra GlassFish 4.1 (min. 3x Slave)
 
-### Wersja 0.8.0
-* [WiP] REST API dla klienta jQuery 
-* [WiP] Pełna integracja z aplikacją OPW-client
-* tagowanie błędnych protokołów
-* [WiP] Definicja infrastruktury na nadchodzące wybory
+### Wersja 0.8.0 [wydana 2015.05.11]
+* [DONE] Definicja infrastruktury na nadchodzące wybory
+* [DONE] [OPW-U-4](https://trello.com/c/Rql38wcg/9-opw-u-4-bezposrednia-walidacja-b-edow-twardych-w-przegladarce) Walidacja błędów twardych. 
+* [DONE] [OPW-I-2](https://trello.com/c/M5O47bcK/26-opw-i-2-konfiguracja-klastra-postgresql-2x-master) Klaster PostgreSQL
+* [DONE] [OPW-I-3](https://trello.com/c/VE59xfTf/27-opw-i-3-przygotowanie-obrazow-docker-nginx-dla-client-dashboard-jquery) Docker dashboard 
+* [DONE] [OPW-I-4](https://trello.com/c/GlnNQj80/28-opw-i-4-przygotowanie-obrazow-docker-nginx-dla-client-obwodowa-angularjs) Docker client
+* [DONE] [OPW-I-5](https://trello.com/c/0YimObYR/29-opw-i-5-przygotowanie-obrazu-glassfish-4-1-dla-dockera) Docker backend
 
 ### Wersja 0.9.0
-
-OPW-I-2 Konfiguracja klastra MySQL (min. 3x Slave)
-OPW-I-3 Przygotowanie obrazów docker nginx dla client-dashboard (jQuery)
-OPW-I-4 Przygotowanie obrazów docker nginx dla client-obwodowa (AngularJS)
+* tagowanie błędnych protokołów
 
 ### Wersja 1.0
 * Backend w Java EE

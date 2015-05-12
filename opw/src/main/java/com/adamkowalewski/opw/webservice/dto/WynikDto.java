@@ -216,4 +216,9 @@ public class WynikDto {
         this.ratedNegativ = ratedNegativ;
     }
 
+    @Override
+    public String toString() {
+        return "WynikDto{" + "uprawnionych=" + uprawnionych + ", glosujacych=" + glosujacych + ", kartWaznych=" + kartWaznych + ", glosowNieWaznych=" + glosowNieWaznych + ", glosowWaznych=" + glosowWaznych + ", k1=" + k1 + ", k2=" + k2 + ", k3=" + k3 + ", k4=" + k4 + ", k5=" + k5 + ", k6=" + k6 + ", k7=" + k7 + ", k8=" + k8 + ", k9=" + k9 + ", k10=" + k10 + ", k11=" + k11 + ", timestampCreated=" + timestampCreated + ", ratedPositiv=" + ratedPositiv + ", ratedNegativ=" + ratedNegativ + '}';
+    }
+
 }

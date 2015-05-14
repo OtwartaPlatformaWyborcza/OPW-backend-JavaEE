@@ -169,6 +169,7 @@ public class UserServiceEjb implements Serializable {
      * @param apiToken
      * @param newUser
      * @return
+     * @TODO add email availbe check and proper result type 
      */
     public GResultDto register(String apiClient, String apiToken, UserRegisterDto newUser) {
         if (securityHandler.checkClient(apiClient, apiToken)) {            
@@ -184,6 +185,8 @@ public class UserServiceEjb implements Serializable {
         user.setEmail(newUser.getEmail());
         user.setPhone(newUser.getPhone());
         
+        
+        
         String passwordPlain = userBean.generatePassword();
         String userSalt = userBean.generatePassword(8);
         user.setSalt(userSalt);
@@ -193,10 +196,11 @@ public class UserServiceEjb implements Serializable {
         user.setType("U"); // TODO move to ENUM
         user.setOrigin(apiClient);
         
-        mailBean.sendMailWelcome(user, passwordPlain, false);
+        
         user.setPassword(userBean.saltPassword(OpwConfigStatic.APP_SALT, userSalt, passwordPlain));
         try {
             userBean.create(user);
+            mailBean.sendMailWelcome(user, passwordPlain, false);
         } catch (Exception e) {
             logger.error("err {} ", e.getMessage());
             return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());

@@ -53,7 +53,8 @@ public final class OpwConfigStatic {
     public static final String CFG_KEY_EMAIL_FROM = "EMAIL_OUTBOUND_FROM";
     public static final String CFG_KEY_EMAIL_FROM_LABEL = "EMAIL_OUTBOUND_FROM_LABEL";
     public static final String CFG_KEY_CLIENT_REGISTRATION = "CLIENT_REGISTRATION";
-    public static final String REST_SESSION_TIMEOUT_IN_SECONDS = "REST_SESSION_TIMEOUT";
+    public static final String CFG_KEY_REST_SESSION_TIMEOUT = "REST_SESSION_TIMEOUT";
+    public static final String CFG_KEY_REGISTER = "CLIENT_REGISTER";
 
     private OpwConfigStatic() {
         throw new UnsupportedOperationException();

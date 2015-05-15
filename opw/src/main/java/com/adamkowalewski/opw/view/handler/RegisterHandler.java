@@ -23,9 +23,13 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
+import com.adamkowalewski.opw.bean.ConfigBean;
 import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.view.OpwConfigStatic;
+import com.adamkowalewski.opw.view.controller.MsgController;
 import com.adamkowalewski.opw.view.controller.UserController;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -54,6 +58,8 @@ public class RegisterHandler implements Serializable {
 
     @Inject
     UserController userController;
+    @EJB
+    ConfigBean configBean;
 
     public RegisterHandler() {
         logger.trace("Registration started.");
@@ -61,6 +67,12 @@ public class RegisterHandler implements Serializable {
     }
 
     public String performRegister() {
+
+        if (!Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_REGISTER))) {
+            MsgController.addErrorMessage(MsgController.getLocalizedMessage("registerDisabled"));
+            return "index";
+        }
+
         user.setType("RU");
         user.setOrigin("RegisterHandler");
         user.setEmail(email);

@@ -110,7 +110,7 @@ public class UserServiceEjb implements Serializable {
     }
     
     private Date fetchExpireDate() {
-        int timeoutInSeconds = Integer.valueOf(configBean.readConfigValue(OpwConfigStatic.REST_SESSION_TIMEOUT_IN_SECONDS));
+        int timeoutInSeconds = Integer.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_REST_SESSION_TIMEOUT));
         Calendar timeout = Calendar.getInstance();
         timeout.add(Calendar.SECOND, timeoutInSeconds);
         return timeout.getTime();

@@ -45,11 +45,12 @@ Jest to lista minimalnych wymagań by obsłużyć nadchodzące wybory.
 * OPW-T-7 : Logowanie dla REST i JSF
 * OPW-T-8 : Serwis REST pozwalający na rejestrację nowego użytkownika. 
 * OPW-T-9 : Serwis REST pozwalający na sprawdzenie czy adres E-Mail jest dostępny. 
-* OPW-T-10 : 
-* OPW-T-11 : 
-* OPW-T-12 : 
-* OPW-T-10 : 
-* OPW-T-10 : 
+* OPW-T-10 DB możliwość zapisania dowolnej liczby linków do wybranego protokołu.
+* OPW-T-11 DB Odwzorowanie koncepcji 'group' i 'permission'.
+* OPW-T-12 Oddzielenie masek administracyjnych OPW od serwisów API.
+* OPW-T-13 Dodanie do systemu koncepcji grup użytkowników. Definicja następujących grupy wolontariusz, koordynator, administrator.  
+* OPW-T-14 Rozbudowa serwisu REST dla klienta obwodowego
+* OPW-T-15 Rozbudowa serwisu REST dla klienta dashboard 
 
 
 ### Infrastruktura

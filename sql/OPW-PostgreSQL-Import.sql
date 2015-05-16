@@ -24,30 +24,23 @@ INSERT INTO opw.opw_user (firstname, lastname, email, password, type, salt, acti
 INSERT INTO opw.opw_user (firstname, lastname, email, password, type, salt, active, token, phone, origin, dateCreated) VALUES ('Diego', 'Małysz', 'openpkw', 'ba588b17ff6d3ba09bb851f549a4132fc42c5f73b66295ee8d54e79d6f2cb', 'U', 'ksp018t4', true, NULL, NULL, 'SQL', '2015-01-01');
 INSERT INTO opw.opw_user (firstname, lastname, email, password, type, salt, active, token, phone, origin, dateCreated) VALUES ('Jan', 'Kowalski FMD', 'fmd', 'fe3995745ca2e83bf9d8472c5a9a3b2ac58a1889155a8ef534ae7dba26ed9e', 'U', '9ipnlffl', true, NULL, NULL, 'SQL', '2015-01-01');
 
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (1, 'Janusz Ryszard', 'Korwin-Mikke');
+
+INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (1, 'Andrzej Sebastian', 'Duda');
 INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (2, 'Bronisław Maria', 'Komorowski');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (3, 'Adam Sebastian', 'Jarubas');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (4, 'Paweł Piotr', 'Kukiz');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (5, 'Marian Janusz', 'Kowalski');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (6, 'Jacek', 'Wilk');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (7, 'Andrzej Sebastian', 'Duda');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (8, 'Janusz Marian', 'Palikot');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (9, 'Magdalena Agnieszka', 'Ogórek');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (10, 'Paweł Jan', 'Tanajno');
-INSERT INTO opw.opw_kandydat (pkwId, firstname, lastname) VALUES (11, 'Grzegorz Michał', 'Braun');
 
 
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_REG_ID', 'client.register.php');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_REG_TOKEN', 'b516f01b18cc4144ef39d5c1b039a250fd318cdd15aff4fd746bde9ac9aacd51');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_DASH_ID', 'client.dashboard.jquery');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_DASH_TOKEN', 'd171794c5c1f7a50aeb8f7056ab84a4fbcd6fbd594b1999bddaefdd03efc0591');
+INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_REGISTER', 'true');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('EMAIL_OUTBOUND', 'true');
-INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CLIENT_REGISTRATION', 'true');
-INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('OPW_BASE_URL', 'https://otwartapw.pl/opw');
-INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('REST_SESSION_TIMEOUT', '300');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('EMAIL_OUTBOUND_FROM', 'kontakt@otwartapw.pl');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('EMAIL_OUTBOUND_FROM_LABEL', 'Otwarta Platforma Wyborcza');
+INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('OPW_BASE_URL', 'https://otwartapw.pl/opw');
+INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('REST_SESSION_TIMEOUT', '3600');
 INSERT INTO opw.opw_config (cfg_key, cfg_value) VALUES ('CISZA_WYBORCZA', 'true');
+
 
 
 

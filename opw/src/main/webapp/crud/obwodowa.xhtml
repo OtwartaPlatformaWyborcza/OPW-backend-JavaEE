@@ -26,11 +26,11 @@
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="50,100,300,500">
 
-                    <p:column headerText="#{messages.pkwId}" sortBy="#{i.pkwId}" styleClass="in120" >
+                    <p:column headerText="#{messages.pkwId}" sortBy="#{i.pkwId}" styleClass="in120" filterBy="#{i.pkwId}" >
                         <h:outputText value="#{i.pkwId}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.obwod}" sortBy="#{i.obwodNr}" styleClass="in80">
+                    <p:column headerText="#{messages.obwod}" sortBy="#{i.obwodNr}" styleClass="in80" filterBy="#{i.obwodNr}">
                         <h:outputText value="#{i.obwodNr}"/>
                     </p:column>
 
@@ -38,11 +38,11 @@
                         <h:outputText value="#{i.opwWojewodztwoId.name}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.name}" sortBy="#{i.name}">
+                    <p:column headerText="#{messages.name}" sortBy="#{i.name}" filterBy="#{i.name}">
                         <h:outputText value="#{i.name}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.address}" sortBy="#{i.address}">
+                    <p:column headerText="#{messages.address}" sortBy="#{i.address}" filterBy="#{i.address}">
                         <h:outputText value="#{i.address}"/>
                     </p:column>
 

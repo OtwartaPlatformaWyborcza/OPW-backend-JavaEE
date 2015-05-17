@@ -21,26 +21,25 @@
             <h:form id="frmList">
                 <p:dataTable id="tblUser" emptyMessage="#{messages.userListEmpty}" 
                              value="#{userHandler.instanceList}" var="i" 
-                             sortBy="#{i.id}">
+                             sortBy="#{i.id}" filteredValue="#{userHandler.instanceListFiltered}">
                     
-                    <p:column headerText="#{messages.nr}" sortBy="#{i.id}" >
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.id}" filterBy="#{i.id}" >
                         <h:outputText value="#{i.id}"/>
                     </p:column>
-                    <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}" >
+                    <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}" filterBy="#{i.firstname}" >
                         <h:outputText value="#{i.firstname}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.lastname}" sortBy="#{i.lastname}">
+                    <p:column headerText="#{messages.lastname}" sortBy="#{i.lastname}" filterBy="#{i.lastname}">
                         <h:outputText value="#{i.lastname}"/>
                     </p:column>
-                    <p:column headerText="#{messages.userType}" sortBy="#{i.type}">
+                    <p:column headerText="#{messages.userType}" sortBy="#{i.type}" filterBy="#{i.type}">
                         <h:outputText value="#{i.type}"/>
                     </p:column>
-                    <p:column headerText="#{messages.email}" sortBy="#{i.email}">
+                    <p:column headerText="#{messages.email}" sortBy="#{i.email}" filterBy="#{i.email}">
                         <h:outputText value="#{i.email}"/>
                     </p:column>
                     <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}">
-
                         <h:outputText value="#{messages.active}" rendered="#{i.active}"/>
                         <h:outputText value="#{messages.inactive}" rendered="#{not i.active}"/>
                     </p:column>

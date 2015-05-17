@@ -38,6 +38,7 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
     boolean viewMode = true;
     T instance;
     List<T> instanceList;
+    List<T> instanceListFiltered;
 
     String VIEW_ID;
     String VIEW_ID_EDIT;
@@ -101,8 +102,16 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
     public void setInstanceList(List<T> instanceList) {
         this.instanceList = instanceList;
     }
-    
-    public String getCreateLink(){
+
+    public List<T> getInstanceListFiltered() {
+        return instanceListFiltered;
+    }
+
+    public void setInstanceListFiltered(List<T> instanceListFiltered) {
+        this.instanceListFiltered = instanceListFiltered;
+    }
+
+    public String getCreateLink() {
         return VIEW_ID_CREATE;
     }
 

@@ -101,5 +101,9 @@ public abstract class AbstractCrudHandler<T> implements CrudHandler {
     public void setInstanceList(List<T> instanceList) {
         this.instanceList = instanceList;
     }
+    
+    public String getCreateLink(){
+        return VIEW_ID_CREATE;
+    }
 
 }

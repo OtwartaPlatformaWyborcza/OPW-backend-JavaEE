@@ -90,9 +90,9 @@ public class WynikServiceEjb implements Serializable {
         OpwWynik wynik = wynikBean.find(wynikId);
 
         WynikDto result = new WynikDto(
-                wynik.getVotersValid(), wynik.getVotersAmount(),
-                wynik.getCardsValid(),
-                wynik.getVotesInvalid(), wynik.getVotesValid(),
+                wynik.getLUprawnionych(), wynik.getLKartWydanych(),
+                wynik.getLKartWaznych(),
+                wynik.getLGlosowNiewaznych(), wynik.getLGlosowWaznych(),
                 wynik.getK1(), wynik.getK2(), wynik.getK3(), wynik.getK4(),
                 wynik.getK5(), wynik.getK6(), wynik.getK7(), wynik.getK8(),
                 wynik.getK9(), wynik.getK10(), wynik.getK11());
@@ -131,7 +131,7 @@ public class WynikServiceEjb implements Serializable {
                 k9 += wynik.getK9();
                 k10 += wynik.getK10();
                 k11 += wynik.getK11();                
-                votersValid += wynik.getVotersValid();
+                votersValid += wynik.getLKartWydanych();
             }
 
             List<OpwKandydat> kandydatList = kandydatBean.findAll();

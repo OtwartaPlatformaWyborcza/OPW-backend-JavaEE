@@ -136,11 +136,11 @@ public class KomisjaServiceEjb implements Serializable {
         w.setOpwUserId(user);
         w.setOpwObwodowaKomisjaId(obwodowa);
 
-        w.setVotersValid(wynik.getUprawnionych());
-        w.setVotersAmount(wynik.getGlosujacych());
-        w.setCardsValid(wynik.getKartWaznych());
-        w.setVotesInvalid(wynik.getGlosowNieWaznych());
-        w.setVotesValid(wynik.getGlosowWaznych());
+        w.setLUprawnionych(wynik.getUprawnionych());
+        w.setLKartWydanych(wynik.getGlosujacych());
+        w.setLKartWaznych(wynik.getKartWaznych());
+        w.setLGlosowNiewaznych(wynik.getGlosowNieWaznych());
+        w.setLGlosowWaznych(wynik.getGlosowWaznych());
         w.setActive(Boolean.TRUE);
         w.setDateCreated(new Date());
 

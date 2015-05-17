@@ -46,6 +46,7 @@ public class KandydatHandler extends AbstractCrudHandler<OpwKandydat> implements
     public KandydatHandler() {
         VIEW_ID = "kandydat";
         VIEW_ID_EDIT = "kandydatEdit";
+        VIEW_ID_CREATE = "kandydatCreate";
     }
 
     @Override

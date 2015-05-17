@@ -77,24 +77,24 @@ public class AccessControlList implements Serializable {
         accessLogin.add("/importOkregowa.xhtml");
         accessLogin.add("/importUser.xhtml");
 
-        accessLogin.add("/kandydat.xhtml");
-        accessLogin.add("/kandydatCreate.xhtml");
-        accessLogin.add("/kandydatEdit.xhtml");
+        accessLogin.add("/crud/kandydat.xhtml");
+        accessLogin.add("/crud/kandydatCreate.xhtml");
+        accessLogin.add("/crud/kandydatEdit.xhtml");
 
-        accessLogin.add("/obwodowaEdit.xhtml");
-        accessLogin.add("/obwodowaCreate.xhtml");
-        accessLogin.add("/obwodowa.xhtml");
+        accessLogin.add("/crud/obwodowaEdit.xhtml");
+        accessLogin.add("/crud/obwodowaCreate.xhtml");
+        accessLogin.add("/crud/obwodowa.xhtml");
 
-        accessLogin.add("/okregowa.xhtml");
-        accessLogin.add("/okregowaCreate.xhtml");
-        accessLogin.add("/okregowaEdit.xhtml");
-        accessLogin.add("/user.xhtml");
-        accessLogin.add("/userCreate.xhtml");
-        accessLogin.add("/userEdit.xhtml");
+        accessLogin.add("/crud/okregowa.xhtml");
+        accessLogin.add("/crud/okregowaCreate.xhtml");
+        accessLogin.add("/crud/okregowaEdit.xhtml");
+        accessLogin.add("/crud/user.xhtml");
+        accessLogin.add("/crud/userCreate.xhtml");
+        accessLogin.add("/crud/userEdit.xhtml");
         
-        accessLogin.add("/config.xhtml");
-        accessLogin.add("/configCreate.xhtml");
-        accessLogin.add("/configEdit.xhtml");
+        accessLogin.add("/crud/config.xhtml");
+        accessLogin.add("/crud/configCreate.xhtml");
+        accessLogin.add("/crud/configEdit.xhtml");
 
         accessLogin.add("/profileEdit.xhtml");
     }

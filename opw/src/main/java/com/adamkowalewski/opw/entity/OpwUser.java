@@ -113,6 +113,8 @@ public class OpwUser implements Serializable {
     @ManyToMany(mappedBy = "opwUserList")
     private List<OpwGroup> opwGroupList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
+    private List<OpwLink> opwLinkList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
     private List<OpwWynik> opwWynikList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwUserId")
     private List<OpwSession> opwSessionList;
@@ -236,6 +238,15 @@ public class OpwUser implements Serializable {
 
     public void setOpwGroupList(List<OpwGroup> opwGroupList) {
         this.opwGroupList = opwGroupList;
+    }
+
+    @XmlTransient
+    public List<OpwLink> getOpwLinkList() {
+        return opwLinkList;
+    }
+
+    public void setOpwLinkList(List<OpwLink> opwLinkList) {
+        this.opwLinkList = opwLinkList;
     }
 
     @XmlTransient

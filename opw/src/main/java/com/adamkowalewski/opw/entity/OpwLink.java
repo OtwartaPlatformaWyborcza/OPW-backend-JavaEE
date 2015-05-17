@@ -74,6 +74,9 @@ public class OpwLink implements Serializable {
     @Size(max = 64)
     @Column(name = "dateCreated", length = 64)
     private String dateCreated;
+    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private OpwUser opwUserId;
     @JoinColumn(name = "opw_wynik_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private OpwWynik opwWynikId;
@@ -131,6 +134,14 @@ public class OpwLink implements Serializable {
 
     public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public OpwUser getOpwUserId() {
+        return opwUserId;
+    }
+
+    public void setOpwUserId(OpwUser opwUserId) {
+        this.opwUserId = opwUserId;
     }
 
     public OpwWynik getOpwWynikId() {

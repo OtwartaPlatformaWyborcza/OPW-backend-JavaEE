@@ -10,7 +10,7 @@ CREATE TABLE opw.opw_wojewodztwo (id  SERIAL NOT NULL, name VARCHAR(64), teryt V
 CREATE TABLE opw.opw_obwodowa_komisja (id  SERIAL NOT NULL, address VARCHAR(256), allowedToVote INTEGER, name VARCHAR(256), obwodNr INTEGER, pkwId VARCHAR(64), status INTEGER, type VARCHAR(4), opw_wojewodztwo_id INTEGER NOT NULL, PRIMARY KEY (id))
 CREATE TABLE opw.opw_user (id  SERIAL NOT NULL, active BOOLEAN, dateCreated TIMESTAMP, email VARCHAR(64), firstname VARCHAR(64), lastname VARCHAR(64), origin VARCHAR(64), password VARCHAR(64), phone VARCHAR(32), salt VARCHAR(32), token VARCHAR(32), type VARCHAR(64), PRIMARY KEY (id))
 CREATE TABLE opw.opw_session (id  SERIAL NOT NULL, active BOOLEAN, dateValidTo TIMESTAMP, token VARCHAR(64), opw_user_id INTEGER NOT NULL, PRIMARY KEY (id))
-CREATE TABLE opw.opw_link (id  SERIAL NOT NULL, active BOOLEAN, comment VARCHAR(256), dateCreated VARCHAR(64), label VARCHAR(128), url VARCHAR(256), opw_user_id INTEGER NOT NULL, opw_wynik_id INTEGER NOT NULL, PRIMARY KEY (id))
+CREATE TABLE opw.opw_link (id  SERIAL NOT NULL, active BOOLEAN, comment VARCHAR(256), dateCreated TIMESTAMP, label VARCHAR(128), url VARCHAR(256), opw_user_id INTEGER NOT NULL, opw_wynik_id INTEGER NOT NULL, PRIMARY KEY (id))
 CREATE TABLE opw.opw_group (id  SERIAL NOT NULL, description VARCHAR(64), name VARCHAR(64), PRIMARY KEY (id))
 CREATE TABLE opw.opw_okregowa_komisja (id  SERIAL NOT NULL, address VARCHAR(128), miasta VARCHAR(128), name VARCHAR(128), pkwId INTEGER, powiaty VARCHAR(128), opw_wojewodztwo_id INTEGER NOT NULL, PRIMARY KEY (id))
 CREATE TABLE opw.opw_kandydat (id  SERIAL NOT NULL, firstname VARCHAR(128), lastname VARCHAR(64), pkwId INTEGER, PRIMARY KEY (id))

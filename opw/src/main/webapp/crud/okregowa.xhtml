@@ -21,9 +21,9 @@
             <h:form id="frmList">
                 <p:dataTable id="tblOkr" emptyMessage="#{messages.okregowaListEmpty}" 
                              value="#{okregowaHandler.instanceList}" var="i" 
-                             sortBy="#{i.pkwId}" tableStyle="width:auto">
+                             sortBy="#{i.pkwId}">
 
-                    <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" >
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.pkwId}" styleClass="in80" >
                         <h:outputText value="#{i.pkwId}"/>
                     </p:column>
 
@@ -31,11 +31,11 @@
                         <h:outputText value="#{i.name}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.address}" sortBy="#{i.address}">
-                        <h:outputText value="#{i.address}"/>
+                    <p:column headerText="#{messages.state}" styleClass="in200">
+                        <h:outputText value="#{i.opwWojewodztwoId.name}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.action}">
+                    <p:column headerText="#{messages.action}" styleClass="in80">
                         <h:commandLink id="btnView" value="#{messages.display}"
                                        action="#{okregowaHandler.prepareView(i)}"/>
                     </p:column>

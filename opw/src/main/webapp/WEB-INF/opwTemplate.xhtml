@@ -42,10 +42,11 @@
 
                 <div id="main-nav">
                     <h:link outcome="/index" value="Start" />
-                    <h:link outcome="/obwodowa" value="#{messages.obwodowaEditTitle}"  rendered="#{identity.loggedin}" />
-                    <h:link outcome="/okregowa" value="#{messages.okregowaEditTitle}"  rendered="#{identity.loggedin}" />
-                    <h:link outcome="/user" value="#{messages.userEditTitle}"  rendered="#{identity.loggedin}" />
-                    <h:link outcome="/config" value="#{messages.configTitle}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/crud/obwodowa" value="#{messages.obwodowaEditTitle}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/crud/okregowa" value="#{messages.okregowaEditTitle}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/crud/user" value="#{messages.userEditTitle}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/crud/kandydat" value="#{messages.kandydatEditTitle}"  rendered="#{identity.loggedin}" />
+                    <h:link outcome="/crud/config" value="#{messages.configTitle}"  rendered="#{identity.loggedin}" />
                 </div>
 
             </div>

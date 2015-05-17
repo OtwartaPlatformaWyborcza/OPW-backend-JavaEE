@@ -23,10 +23,8 @@
  */
 package com.adamkowalewski.opw.view.handler;
 
-import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
-import com.adamkowalewski.opw.entity.OpwWynik;
-import com.adamkowalewski.opw.view.Identity;
-import com.adamkowalewski.opw.view.controller.ObwodowaController;
+import com.adamkowalewski.opw.entity.OpwLink;
+import com.adamkowalewski.opw.view.controller.LinkController;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -34,62 +32,54 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- * CRUD backing bean / handler for all CRUD related JSF sites.
  *
  * @author Adam Kowalewski
  */
 @Named
 @SessionScoped
-public class ObwodowaHandler extends AbstractCrudHandler<OpwObwodowaKomisja> implements Serializable {
+public class LinkHandler extends AbstractCrudHandler<OpwLink> implements Serializable {
 
     @Inject
-    Identity identity;
+    LinkController linkController;
 
-    @Inject
-    ObwodowaController obwodowaController;
-
-    public ObwodowaHandler() {
-        VIEW_ID = "obwodowa";
-        VIEW_ID_EDIT = "obwodowaEdit";
-        VIEW_ID_CREATE = "obwodowaCreate";
-    }
-    
-    public List<OpwWynik> loadWynikList(){
-        return instance.getOpwWynikList();
+    public LinkHandler() {
+        VIEW_ID = "link";
+        VIEW_ID_EDIT = "linkEdit";
+        VIEW_ID_CREATE = "linkCreate";
     }
 
-    public String delete() {
-        obwodowaController.delete(instance);
-        return VIEW_ID;
+    @Override
+    public void prepareList() {
+        instanceList = linkController.findAll();
+    }
+
+    @Override
+    public void prepareCreate() {
+        instance = new OpwLink();
     }
 
     @Override
     public String create() {
-        obwodowaController.create(instance);
+        linkController.create(instance);
         return VIEW_ID;
     }
 
     @Override
     public String edit() {
-        obwodowaController.edit(instance);
+        linkController.edit(instance);
         return VIEW_ID;
     }
 
     @Override
-    public void prepareList() {
-        instanceList = obwodowaController.findAll();
+    public List<OpwLink> getInstanceList() {
+        return super.getInstanceList(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void prepareCreate() {
-        instance = new OpwObwodowaKomisja();
+    public OpwLink getInstance() {
+        return super.getInstance(); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public List<OpwObwodowaKomisja> getInstanceList() {
-        return instanceList;
-    }
-
+        
     @Override
     public void prepareView() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

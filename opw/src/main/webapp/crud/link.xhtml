@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="../WEB-INF/opwTemplate.xhtml">
+
+    <ui:define name="content">
+        <h1>#{messages.linkTitle}</h1>
+        #{userHandler.prepareList()}
+
+        <div class="left box box_blue">
+            <br/>
+
+            <h:form id="frmList">
+                <p:dataTable id="tblLink" emptyMessage="#{messages.listEmpty}" 
+                             value="#{linkHandler.instanceList}" var="i" 
+                             sortBy="#{i.id}" filteredValue="#{linkHandler.instanceListFiltered}">
+                    
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.id}" filterBy="#{i.id}" >
+                        <h:outputText value="#{i.id}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{messages.obwodowaEditTitle}" styleClass="in80"
+                              sortBy="#{i.opwWynikId.opwObwodowaKomisjaId.pkwId}" 
+                              filterBy="#{i.opwWynikId.opwObwodowaKomisjaId.pkwId}" >
+                        <h:outputText value="#{i.opwWynikId.opwObwodowaKomisjaId.pkwId}"/>
+                    </p:column>
+                    
+                    <p:column headerText="#{messages.linkLabel}" sortBy="#{i.label}" filterBy="#{i.label}">
+                        <a href="#{i.url}" target="_blank">#{i.label}</a>
+                    </p:column>
+                    
+                    <p:column headerText="#{messages.dateCreated}" sortBy="#{i.dateCreated}">
+                        <h:outputText value="#{i.dateCreated}">
+                            <f:convertDateTime pattern="yyyy.MM.dd hh:mm" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}">
+                        <h:outputText value="#{messages.active}" rendered="#{i.active}"/>
+                        <h:outputText value="#{messages.inactive}" rendered="#{not i.active}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.action}">
+                        <h:commandLink id="btnView" value="#{messages.display}"
+                                       action="#{linkHandler.prepareView(i)}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

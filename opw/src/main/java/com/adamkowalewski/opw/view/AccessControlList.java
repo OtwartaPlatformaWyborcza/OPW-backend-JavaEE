@@ -84,6 +84,10 @@ public class AccessControlList implements Serializable {
         accessLogin.add("/crud/obwodowaEdit.xhtml");
         accessLogin.add("/crud/obwodowaCreate.xhtml");
         accessLogin.add("/crud/obwodowa.xhtml");
+        
+        accessLogin.add("/crud/linkEdit.xhtml");
+        accessLogin.add("/crud/linkCreate.xhtml");
+        accessLogin.add("/crud/link.xhtml");
 
         accessLogin.add("/crud/okregowa.xhtml");
         accessLogin.add("/crud/okregowaCreate.xhtml");

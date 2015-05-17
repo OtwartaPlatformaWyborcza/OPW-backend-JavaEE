@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../WEB-INF/opwTemplate.xhtml">
+
+    <ui:define name="content">
+        <h1>#{messages.linkCreateTitle}</h1>
+        #{linkHandler.prepareCreate()}
+
+        <div class="left box box_blue box550">
+
+            <h:form id="frmUserCreate">
+                <h:panelGrid columns="2" cellspacing="7">
+                    <h:outputLabel for="fn" id="fnL" value="#{messages.firstname}*" />
+                    <p:inputText id="fn" value="#{userHandler.instance.firstname}"
+                                 required="true" requiredMessage="#{messages.firstname}"/>
+
+                    <h:outputLabel for="ln" id="lnL" value="#{messages.lastname}*" />
+                    <p:inputText id="ln" value="#{userHandler.instance.lastname}"
+                                 required="true" requiredMessage="#{messages.lastname}"/>
+
+                    <h:outputLabel for="mail" id="mailL" value="#{messages.email}*" />
+                    <p:inputText id="mail" value="#{userHandler.instance.email}"
+                                 required="true" requiredMessage="#{messages.validEmail}"/>
+                    
+                    <h:outputLabel for="tel" id="telL" value="#{messages.phone}" />
+                    <p:inputText id="tel" value="#{userHandler.instance.phone}"
+                                 requiredMessage="#{messages.validPhone}"/>
+
+                    <h:outputLabel for="pwd" id="pwdL" value="#{messages.password}" />
+                    <p:inputText id="pwd" value="#{messages.generated}" disabled="true" />
+                </h:panelGrid>
+
+                <h:commandLink id="btnSave" class="btn" 
+                               value="#{messages.submit}" 
+                               action="#{userHandler.create()}"/>
+
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

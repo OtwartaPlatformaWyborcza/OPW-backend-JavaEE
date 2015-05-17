@@ -24,14 +24,19 @@
 package com.adamkowalewski.opw.webservice.controller;
 
 import com.adamkowalewski.opw.bean.KandydatBean;
+import com.adamkowalewski.opw.bean.LinkBean;
 import com.adamkowalewski.opw.bean.OkregowaBean;
+import com.adamkowalewski.opw.bean.UserBean;
 import com.adamkowalewski.opw.bean.WynikBean;
 import com.adamkowalewski.opw.entity.OpwKandydat;
+import com.adamkowalewski.opw.entity.OpwLink;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
+import com.adamkowalewski.opw.entity.OpwUser;
 import com.adamkowalewski.opw.entity.OpwWynik;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
+import com.adamkowalewski.opw.webservice.dto.LinkDto;
 import com.adamkowalewski.opw.webservice.dto.WynikDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
 import org.slf4j.Logger;
@@ -41,6 +46,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -67,20 +73,50 @@ public class WynikServiceEjb implements Serializable {
     OkregowaBean okregowaBean;
     @EJB
     WynikBean wynikBean;
+    @EJB
+    UserBean userBean;
+    @EJB
+    LinkBean linkBean;
 
     public WynikServiceEjb() {
     }
 
-    /**
-     * todo comment
-     *
-     * @param wynikId
-     * @param login
-     * @param token
-     * @return
-     * @author Adam Kowalewski
-     * @version 2015.05.01
-     */
+    public GResultDto disableLink(int wynikId, int linkId, String login, String token) {
+        if (!securityHandler.checkUser(login, token)) {
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
+        }
+        
+        OpwLink link = linkBean.find(linkId);
+        
+        if (link.getActive()
+                && link.getOpwWynikId().getId() == wynikId){
+            link.setActive(Boolean.FALSE);
+            linkBean.edit(link);
+            return GResultDto.validResult(OK.getStatusCode());
+        }
+        return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
+    }
+
+    public GResultDto uploadLink(int wynikId, String login, String token, LinkDto linkDto) {
+        if (!securityHandler.checkUser(login, token)) {
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
+        }
+        OpwWynik wynik = wynikBean.find(wynikId);
+        OpwUser user = userBean.findUser(login);
+
+        OpwLink link = new OpwLink();
+        link.setLabel(linkDto.getLabel());
+        link.setUrl(linkDto.getUrl());
+        link.setActive(Boolean.TRUE);
+        link.setDateCreated(new Date());
+        link.setOpwUserId(user);
+        link.setOpwWynikId(wynik);
+
+        linkBean.create(link);
+
+        return GResultDto.validResult(OK.getStatusCode());
+    }
+
     public GResultDto<WynikDto> loadWynikSingle(int wynikId, String login, String token) {
 
         if (!securityHandler.checkUser(login, token)) {
@@ -96,6 +132,16 @@ public class WynikServiceEjb implements Serializable {
                 wynik.getK1(), wynik.getK2(), wynik.getK3(), wynik.getK4(),
                 wynik.getK5(), wynik.getK6(), wynik.getK7(), wynik.getK8(),
                 wynik.getK9(), wynik.getK10(), wynik.getK11());
+
+        List<LinkDto> linkList = new ArrayList<>();
+        for (OpwLink link : linkBean.findAll(wynik, true)) {
+            if (link.getActive()) {
+                LinkDto l = new LinkDto(link.getId(), link.getLabel(), link.getUrl(), link.getComment(), String.valueOf(link.getDateCreated().getTime()));
+                linkList.add(l);
+            }
+        }
+
+        result.setLinkList(linkList);
 
         result.setRatedPositiv(wynik.getRatedPositiv());
         result.setRatedNegativ(wynik.getRatedNegativ());
@@ -130,16 +176,16 @@ public class WynikServiceEjb implements Serializable {
                 k8 += wynik.getK8();
                 k9 += wynik.getK9();
                 k10 += wynik.getK10();
-                k11 += wynik.getK11();                
+                k11 += wynik.getK11();
                 votersValid += wynik.getLKartWydanych();
             }
 
             List<OpwKandydat> kandydatList = kandydatBean.findAll();
 
             DashboardDto dashboard = new DashboardDto();
-            for (OpwKandydat opwKandydat : kandydatList) {                
+            for (OpwKandydat opwKandydat : kandydatList) {
                 dashboard.getKandydatList().add(new KandydatDto(
-                                opwKandydat.getPkwId(), opwKandydat.getFirstname(), opwKandydat.getLastname(), 0)
+                        opwKandydat.getPkwId(), opwKandydat.getFirstname(), opwKandydat.getLastname(), 0)
                 );
             }
 

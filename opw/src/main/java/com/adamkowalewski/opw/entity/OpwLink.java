@@ -24,6 +24,7 @@
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +36,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -54,6 +57,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "OpwLink.findByActive", query = "SELECT o FROM OpwLink o WHERE o.active = :active"),
     @NamedQuery(name = "OpwLink.findByDateCreated", query = "SELECT o FROM OpwLink o WHERE o.dateCreated = :dateCreated")})
 public class OpwLink implements Serializable {
+    @Column(name = "dateCreated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateCreated;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,9 +77,6 @@ public class OpwLink implements Serializable {
     private String comment;
     @Column(name = "active")
     private Boolean active;
-    @Size(max = 64)
-    @Column(name = "dateCreated", length = 64)
-    private String dateCreated;
     @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private OpwUser opwUserId;
@@ -128,13 +131,6 @@ public class OpwLink implements Serializable {
         this.active = active;
     }
 
-    public String getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
-    }
 
     public OpwUser getOpwUserId() {
         return opwUserId;
@@ -175,6 +171,14 @@ public class OpwLink implements Serializable {
     @Override
     public String toString() {
         return "com.adamkowalewski.opw.entity.OpwLink[ id=" + id + " ]";
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
     
 }

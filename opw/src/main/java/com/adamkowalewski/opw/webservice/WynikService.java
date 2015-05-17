@@ -31,6 +31,7 @@ import com.adamkowalewski.opw.webservice.controller.WynikServiceEjb;
 import com.adamkowalewski.opw.webservice.dto.DashboardDto;
 import com.adamkowalewski.opw.webservice.dto.GResultDto;
 import com.adamkowalewski.opw.webservice.dto.KandydatDto;
+import com.adamkowalewski.opw.webservice.dto.LinkDto;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -43,7 +44,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +85,42 @@ public class WynikService extends AbstractService {
 
         return buildResponse(wynikEjb.loadWynikSingle(wynikId, login, token));
 
+    }
+
+    @POST
+    @Path("/{wynikId}/link")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response uploadLink(
+            @NotNull @PathParam("wynikId") int wynikId,
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+            LinkDto linkDto) {
+        if (debug != null) {
+            return mockServerError();
+        }
+        
+        logger.trace("upload link to wynik {}", wynikId);
+        return buildResponse(wynikEjb.uploadLink(wynikId, login, token, linkDto));
+    }
+    
+    @DELETE
+    @Path("/{wynikId}/link/{linkId}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Response disableLink(
+            @NotNull @PathParam("wynikId") int wynikId,
+            @NotNull @PathParam("linkId") int linkId,
+            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token            
+            ) {
+        if (debug != null) {
+            return mockServerError();
+        }
+        
+        logger.trace("upload link to wynik {}", wynikId);
+        return buildResponse(wynikEjb.disableLink(wynikId, linkId, login, token));
     }
 
     @GET
@@ -126,7 +166,7 @@ public class WynikService extends AbstractService {
 
         if (debug != null) {
             return mockServerError();
-        }        
+        }
 
         // TODO refactoring konieczny 
         // aktualne liczby dostepne na http://prezydent2015.pkw.gov.pl/

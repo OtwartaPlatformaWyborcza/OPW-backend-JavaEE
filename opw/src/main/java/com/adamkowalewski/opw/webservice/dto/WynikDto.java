@@ -23,6 +23,8 @@
  */
 package com.adamkowalewski.opw.webservice.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,7 +44,10 @@ public class WynikDto {
     private String timestampCreated;
     private int ratedPositiv, ratedNegativ;
 
+    private List<LinkDto> linkList;
+
     public WynikDto() {
+        linkList = new ArrayList<>();
     }
 
     public WynikDto(short uprawnionych, short glosujacych, short kartWaznych, short glosowNieWaznych, short glosowWaznych, Short k1, Short k2, Short k3, Short k4, Short k5, Short k6, Short k7, Short k8, Short k9, Short k10, Short k11) {
@@ -62,6 +67,7 @@ public class WynikDto {
         this.k9 = k9;
         this.k10 = k10;
         this.k11 = k11;
+        linkList = new ArrayList<>();
     }
 
     public short getUprawnionych() {
@@ -214,6 +220,14 @@ public class WynikDto {
 
     public void setRatedNegativ(int ratedNegativ) {
         this.ratedNegativ = ratedNegativ;
+    }
+
+    public List<LinkDto> getLinkList() {
+        return linkList;
+    }
+
+    public void setLinkList(List<LinkDto> linkList) {
+        this.linkList = linkList;
     }
 
     @Override

@@ -24,9 +24,12 @@
 package com.adamkowalewski.opw.bean;
 
 import com.adamkowalewski.opw.entity.OpwLink;
+import com.adamkowalewski.opw.entity.OpwWynik;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -45,6 +48,15 @@ public class LinkBean extends AbstractOpwFacade<OpwLink> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    public List<OpwLink> findAll(OpwWynik wynik, boolean active){
+        Query q = em.createQuery("SELECT o FROM OpwLink o WHERE o.opwWynikId = :wynik AND o.active = :active");
+        q.setParameter("wynik", wynik);
+        q.setParameter("active", active);
+        List<OpwLink> result = q.getResultList();
+        
+        return result;
     }
     
 }

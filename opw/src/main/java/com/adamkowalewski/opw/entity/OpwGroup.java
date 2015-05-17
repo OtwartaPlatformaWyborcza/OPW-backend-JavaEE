@@ -24,51 +24,63 @@
 package com.adamkowalewski.opw.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Adam Kowalewski
  */
 @Entity
-@Table(name = "opw_kandydat", catalog = "opw", schema = "")
+@Table(name = "opw_group", catalog = "opw", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OpwKandydat.findAll", query = "SELECT o FROM OpwKandydat o"),
-    @NamedQuery(name = "OpwKandydat.findById", query = "SELECT o FROM OpwKandydat o WHERE o.id = :id"),
-    @NamedQuery(name = "OpwKandydat.findByPkwId", query = "SELECT o FROM OpwKandydat o WHERE o.pkwId = :pkwId"),
-    @NamedQuery(name = "OpwKandydat.findByFirstname", query = "SELECT o FROM OpwKandydat o WHERE o.firstname = :firstname"),
-    @NamedQuery(name = "OpwKandydat.findByLastname", query = "SELECT o FROM OpwKandydat o WHERE o.lastname = :lastname")})
-public class OpwKandydat implements Serializable {
+    @NamedQuery(name = "OpwGroup.findAll", query = "SELECT o FROM OpwGroup o"),
+    @NamedQuery(name = "OpwGroup.findById", query = "SELECT o FROM OpwGroup o WHERE o.id = :id"),
+    @NamedQuery(name = "OpwGroup.findByName", query = "SELECT o FROM OpwGroup o WHERE o.name = :name"),
+    @NamedQuery(name = "OpwGroup.findByDescription", query = "SELECT o FROM OpwGroup o WHERE o.description = :description")})
+public class OpwGroup implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "pkwId")
-    private Integer pkwId;
-    @Size(max = 128)
-    @Column(name = "firstname", length = 128)
-    private String firstname;
     @Size(max = 64)
-    @Column(name = "lastname", length = 64)
-    private String lastname;
+    @Column(name = "name", length = 64)
+    private String name;
+    @Size(max = 64)
+    @Column(name = "description", length = 64)
+    private String description;
+    @JoinTable(name = "opw_group_has_opw_permission", joinColumns = {
+        @JoinColumn(name = "opw_group_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+        @JoinColumn(name = "opw_permission_id", referencedColumnName = "id", nullable = false)})
+    @ManyToMany
+    private List<OpwPermission> opwPermissionList;
+    @JoinTable(name = "opw_user_has_opw_group", joinColumns = {
+        @JoinColumn(name = "opw_group_id", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
+        @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)})
+    @ManyToMany
+    private List<OpwUser> opwUserList;
 
-    public OpwKandydat() {
+    public OpwGroup() {
     }
 
-    public OpwKandydat(Integer id) {
+    public OpwGroup(Integer id) {
         this.id = id;
     }
 
@@ -80,28 +92,38 @@ public class OpwKandydat implements Serializable {
         this.id = id;
     }
 
-    public Integer getPkwId() {
-        return pkwId;
+    public String getName() {
+        return name;
     }
 
-    public void setPkwId(Integer pkwId) {
-        this.pkwId = pkwId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getLastname() {
-        return lastname;
+    @XmlTransient
+    public List<OpwPermission> getOpwPermissionList() {
+        return opwPermissionList;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setOpwPermissionList(List<OpwPermission> opwPermissionList) {
+        this.opwPermissionList = opwPermissionList;
+    }
+
+    @XmlTransient
+    public List<OpwUser> getOpwUserList() {
+        return opwUserList;
+    }
+
+    public void setOpwUserList(List<OpwUser> opwUserList) {
+        this.opwUserList = opwUserList;
     }
 
     @Override
@@ -114,10 +136,10 @@ public class OpwKandydat implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OpwKandydat)) {
+        if (!(object instanceof OpwGroup)) {
             return false;
         }
-        OpwKandydat other = (OpwKandydat) object;
+        OpwGroup other = (OpwGroup) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,7 +148,7 @@ public class OpwKandydat implements Serializable {
 
     @Override
     public String toString() {
-        return "com.adamkowalewski.opw.entity.OpwKandydat[ id=" + id + " ]";
+        return "com.adamkowalewski.opw.entity.OpwGroup[ id=" + id + " ]";
     }
     
 }

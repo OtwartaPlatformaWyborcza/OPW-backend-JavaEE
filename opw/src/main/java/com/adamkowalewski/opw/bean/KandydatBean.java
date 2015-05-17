@@ -28,7 +28,6 @@ import com.adamkowalewski.opw.entity.OpwKandydat;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 /**
  * Provides access to Kandydat.
@@ -54,6 +53,7 @@ public class KandydatBean extends AbstractOpwFacade<OpwKandydat> {
      * Returns fullname for a Kandydat.
      *
      * TODO reconsider usage of patterns as well as UPPERCASE
+     *
      * @param kandydat instance of entity.
      * @return String representation of fullname.
      * @author Adam Kowalewski
@@ -63,7 +63,4 @@ public class KandydatBean extends AbstractOpwFacade<OpwKandydat> {
         return kandydat.getLastname() + " " + kandydat.getFirstname();
     }
 
-    public List<OpwKandydat> findAll() {
-        return em.createNamedQuery("OpwKandydat.findAllOrderByPkwId", OpwKandydat.class).getResultList();
-    }
 }

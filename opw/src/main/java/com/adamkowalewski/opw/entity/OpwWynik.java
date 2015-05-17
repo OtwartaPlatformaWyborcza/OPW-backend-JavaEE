@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,11 +55,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "OpwWynik.findAll", query = "SELECT o FROM OpwWynik o"),
     @NamedQuery(name = "OpwWynik.findById", query = "SELECT o FROM OpwWynik o WHERE o.id = :id"),
-    @NamedQuery(name = "OpwWynik.findByVotersValid", query = "SELECT o FROM OpwWynik o WHERE o.votersValid = :votersValid"),
-    @NamedQuery(name = "OpwWynik.findByVotersAmount", query = "SELECT o FROM OpwWynik o WHERE o.votersAmount = :votersAmount"),
-    @NamedQuery(name = "OpwWynik.findByCardsValid", query = "SELECT o FROM OpwWynik o WHERE o.cardsValid = :cardsValid"),
-    @NamedQuery(name = "OpwWynik.findByVotesInvalid", query = "SELECT o FROM OpwWynik o WHERE o.votesInvalid = :votesInvalid"),
-    @NamedQuery(name = "OpwWynik.findByVotesValid", query = "SELECT o FROM OpwWynik o WHERE o.votesValid = :votesValid"),
+    @NamedQuery(name = "OpwWynik.findByLUprawnionych", query = "SELECT o FROM OpwWynik o WHERE o.lUprawnionych = :lUprawnionych"),
+    @NamedQuery(name = "OpwWynik.findByLKartWydanych", query = "SELECT o FROM OpwWynik o WHERE o.lKartWydanych = :lKartWydanych"),
+    @NamedQuery(name = "OpwWynik.findByLKartWaznych", query = "SELECT o FROM OpwWynik o WHERE o.lKartWaznych = :lKartWaznych"),
+    @NamedQuery(name = "OpwWynik.findByLGlosowNiewaznych", query = "SELECT o FROM OpwWynik o WHERE o.lGlosowNiewaznych = :lGlosowNiewaznych"),
+    @NamedQuery(name = "OpwWynik.findByLGlosowWaznych", query = "SELECT o FROM OpwWynik o WHERE o.lGlosowWaznych = :lGlosowWaznych"),
     @NamedQuery(name = "OpwWynik.findByFileOriginal", query = "SELECT o FROM OpwWynik o WHERE o.fileOriginal = :fileOriginal"),
     @NamedQuery(name = "OpwWynik.findByActive", query = "SELECT o FROM OpwWynik o WHERE o.active = :active"),
     @NamedQuery(name = "OpwWynik.findByDateCreated", query = "SELECT o FROM OpwWynik o WHERE o.dateCreated = :dateCreated"),
@@ -83,16 +84,16 @@ public class OpwWynik implements Serializable {
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "votersValid")
-    private Short votersValid;
-    @Column(name = "votersAmount")
-    private Short votersAmount;
-    @Column(name = "cardsValid")
-    private Short cardsValid;
-    @Column(name = "votesInvalid")
-    private Short votesInvalid;
-    @Column(name = "votesValid")
-    private Short votesValid;
+    @Column(name = "lUprawnionych")
+    private Short lUprawnionych;
+    @Column(name = "lKartWydanych")
+    private Short lKartWydanych;
+    @Column(name = "lKartWaznych")
+    private Short lKartWaznych;
+    @Column(name = "lGlosowNiewaznych")
+    private Short lGlosowNiewaznych;
+    @Column(name = "lGlosowWaznych")
+    private Short lGlosowWaznych;
     @Size(max = 128)
     @Column(name = "fileOriginal", length = 128)
     private String fileOriginal;
@@ -129,48 +130,21 @@ public class OpwWynik implements Serializable {
     private Integer ratedNegativ;
     @Column(name = "status")
     private Integer status;
-    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
-    @ManyToOne(optional = false)
-    private OpwUser opwUserId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "opwWynikId")
+    private List<OpwLink> opwLinkList;
     @OneToMany(mappedBy = "parentId")
     private List<OpwWynik> opwWynikList;
     @JoinColumn(name = "parentId", referencedColumnName = "id")
     @ManyToOne
     private OpwWynik parentId;
+    @JoinColumn(name = "opw_user_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private OpwUser opwUserId;
     @JoinColumn(name = "opw_obwodowa_komisja_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false)
     private OpwObwodowaKomisja opwObwodowaKomisjaId;
 
     public OpwWynik() {
-    }
-
-    public OpwWynik(Short votersValid, Short votersAmount, Short cardsValid, Short votesInvalid, Short votesValid, String fileOriginal, Boolean active, Date dateCreated, Short k1, Short k2, Short k3, Short k4, Short k5, Short k6, Short k7, Short k8, Short k9, Short k10, Short k11, Integer ratedPositiv, Integer ratedNegativ, Integer status, OpwUser opwUserId, List<OpwWynik> opwWynikList, OpwWynik parentId, OpwObwodowaKomisja opwObwodowaKomisjaId) {
-        this.votersValid = votersValid;
-        this.votersAmount = votersAmount;
-        this.cardsValid = cardsValid;
-        this.votesInvalid = votesInvalid;
-        this.votesValid = votesValid;
-        this.fileOriginal = fileOriginal;
-        this.active = active;
-        this.dateCreated = dateCreated;
-        this.k1 = k1;
-        this.k2 = k2;
-        this.k3 = k3;
-        this.k4 = k4;
-        this.k5 = k5;
-        this.k6 = k6;
-        this.k7 = k7;
-        this.k8 = k8;
-        this.k9 = k9;
-        this.k10 = k10;
-        this.k11 = k11;
-        this.ratedPositiv = ratedPositiv;
-        this.ratedNegativ = ratedNegativ;
-        this.status = status;
-        this.opwUserId = opwUserId;
-        this.opwWynikList = opwWynikList;
-        this.parentId = parentId;
-        this.opwObwodowaKomisjaId = opwObwodowaKomisjaId;
     }
 
     public OpwWynik(Integer id) {
@@ -185,44 +159,44 @@ public class OpwWynik implements Serializable {
         this.id = id;
     }
 
-    public Short getVotersValid() {
-        return votersValid;
+    public Short getLUprawnionych() {
+        return lUprawnionych;
     }
 
-    public void setVotersValid(Short votersValid) {
-        this.votersValid = votersValid;
+    public void setLUprawnionych(Short lUprawnionych) {
+        this.lUprawnionych = lUprawnionych;
     }
 
-    public Short getVotersAmount() {
-        return votersAmount;
+    public Short getLKartWydanych() {
+        return lKartWydanych;
     }
 
-    public void setVotersAmount(Short votersAmount) {
-        this.votersAmount = votersAmount;
+    public void setLKartWydanych(Short lKartWydanych) {
+        this.lKartWydanych = lKartWydanych;
     }
 
-    public Short getCardsValid() {
-        return cardsValid;
+    public Short getLKartWaznych() {
+        return lKartWaznych;
     }
 
-    public void setCardsValid(Short cardsValid) {
-        this.cardsValid = cardsValid;
+    public void setLKartWaznych(Short lKartWaznych) {
+        this.lKartWaznych = lKartWaznych;
     }
 
-    public Short getVotesInvalid() {
-        return votesInvalid;
+    public Short getLGlosowNiewaznych() {
+        return lGlosowNiewaznych;
     }
 
-    public void setVotesInvalid(Short votesInvalid) {
-        this.votesInvalid = votesInvalid;
+    public void setLGlosowNiewaznych(Short lGlosowNiewaznych) {
+        this.lGlosowNiewaznych = lGlosowNiewaznych;
     }
 
-    public Short getVotesValid() {
-        return votesValid;
+    public Short getLGlosowWaznych() {
+        return lGlosowWaznych;
     }
 
-    public void setVotesValid(Short votesValid) {
-        this.votesValid = votesValid;
+    public void setLGlosowWaznych(Short lGlosowWaznych) {
+        this.lGlosowWaznych = lGlosowWaznych;
     }
 
     public String getFileOriginal() {
@@ -361,12 +335,13 @@ public class OpwWynik implements Serializable {
         this.status = status;
     }
 
-    public OpwUser getOpwUserId() {
-        return opwUserId;
+    @XmlTransient
+    public List<OpwLink> getOpwLinkList() {
+        return opwLinkList;
     }
 
-    public void setOpwUserId(OpwUser opwUserId) {
-        this.opwUserId = opwUserId;
+    public void setOpwLinkList(List<OpwLink> opwLinkList) {
+        this.opwLinkList = opwLinkList;
     }
 
     @XmlTransient
@@ -384,6 +359,14 @@ public class OpwWynik implements Serializable {
 
     public void setParentId(OpwWynik parentId) {
         this.parentId = parentId;
+    }
+
+    public OpwUser getOpwUserId() {
+        return opwUserId;
+    }
+
+    public void setOpwUserId(OpwUser opwUserId) {
+        this.opwUserId = opwUserId;
     }
 
     public OpwObwodowaKomisja getOpwObwodowaKomisjaId() {

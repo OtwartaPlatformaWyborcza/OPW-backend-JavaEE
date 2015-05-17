@@ -30,6 +30,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,34 +43,45 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Adam Kowalewski
  */
 @Entity
-@Table(name = "opw_kandydat", catalog = "opw", schema = "")
+@Table(name = "opw_link", catalog = "opw", schema = "")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "OpwKandydat.findAll", query = "SELECT o FROM OpwKandydat o"),
-    @NamedQuery(name = "OpwKandydat.findById", query = "SELECT o FROM OpwKandydat o WHERE o.id = :id"),
-    @NamedQuery(name = "OpwKandydat.findByPkwId", query = "SELECT o FROM OpwKandydat o WHERE o.pkwId = :pkwId"),
-    @NamedQuery(name = "OpwKandydat.findByFirstname", query = "SELECT o FROM OpwKandydat o WHERE o.firstname = :firstname"),
-    @NamedQuery(name = "OpwKandydat.findByLastname", query = "SELECT o FROM OpwKandydat o WHERE o.lastname = :lastname")})
-public class OpwKandydat implements Serializable {
+    @NamedQuery(name = "OpwLink.findAll", query = "SELECT o FROM OpwLink o"),
+    @NamedQuery(name = "OpwLink.findById", query = "SELECT o FROM OpwLink o WHERE o.id = :id"),
+    @NamedQuery(name = "OpwLink.findByLabel", query = "SELECT o FROM OpwLink o WHERE o.label = :label"),
+    @NamedQuery(name = "OpwLink.findByUrl", query = "SELECT o FROM OpwLink o WHERE o.url = :url"),
+    @NamedQuery(name = "OpwLink.findByComment", query = "SELECT o FROM OpwLink o WHERE o.comment = :comment"),
+    @NamedQuery(name = "OpwLink.findByActive", query = "SELECT o FROM OpwLink o WHERE o.active = :active"),
+    @NamedQuery(name = "OpwLink.findByDateCreated", query = "SELECT o FROM OpwLink o WHERE o.dateCreated = :dateCreated")})
+public class OpwLink implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "pkwId")
-    private Integer pkwId;
     @Size(max = 128)
-    @Column(name = "firstname", length = 128)
-    private String firstname;
+    @Column(name = "label", length = 128)
+    private String label;
+    @Size(max = 256)
+    @Column(name = "url", length = 256)
+    private String url;
+    @Size(max = 256)
+    @Column(name = "comment", length = 256)
+    private String comment;
+    @Column(name = "active")
+    private Boolean active;
     @Size(max = 64)
-    @Column(name = "lastname", length = 64)
-    private String lastname;
+    @Column(name = "dateCreated", length = 64)
+    private String dateCreated;
+    @JoinColumn(name = "opw_wynik_id", referencedColumnName = "id", nullable = false)
+    @ManyToOne(optional = false)
+    private OpwWynik opwWynikId;
 
-    public OpwKandydat() {
+    public OpwLink() {
     }
 
-    public OpwKandydat(Integer id) {
+    public OpwLink(Integer id) {
         this.id = id;
     }
 
@@ -80,28 +93,52 @@ public class OpwKandydat implements Serializable {
         this.id = id;
     }
 
-    public Integer getPkwId() {
-        return pkwId;
+    public String getLabel() {
+        return label;
     }
 
-    public void setPkwId(Integer pkwId) {
-        this.pkwId = pkwId;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getUrl() {
+        return url;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getComment() {
+        return comment;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public OpwWynik getOpwWynikId() {
+        return opwWynikId;
+    }
+
+    public void setOpwWynikId(OpwWynik opwWynikId) {
+        this.opwWynikId = opwWynikId;
     }
 
     @Override
@@ -114,10 +151,10 @@ public class OpwKandydat implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OpwKandydat)) {
+        if (!(object instanceof OpwLink)) {
             return false;
         }
-        OpwKandydat other = (OpwKandydat) object;
+        OpwLink other = (OpwLink) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,7 +163,7 @@ public class OpwKandydat implements Serializable {
 
     @Override
     public String toString() {
-        return "com.adamkowalewski.opw.entity.OpwKandydat[ id=" + id + " ]";
+        return "com.adamkowalewski.opw.entity.OpwLink[ id=" + id + " ]";
     }
     
 }

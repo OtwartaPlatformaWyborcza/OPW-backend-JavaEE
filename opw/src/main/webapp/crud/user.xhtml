@@ -23,28 +23,29 @@
                              value="#{userHandler.instanceList}" var="i" 
                              sortBy="#{i.id}" filteredValue="#{userHandler.instanceListFiltered}">
                     
-                    <p:column headerText="#{messages.nr}" sortBy="#{i.id}" filterBy="#{i.id}" >
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.id}" styleClass="in80">
                         <h:outputText value="#{i.id}"/>
                     </p:column>
-                    <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}" filterBy="#{i.firstname}" >
+                    <p:column headerText="#{messages.firstname}" sortBy="#{i.firstname}" filterBy="#{i.firstname}" styleClass="in120">
                         <h:outputText value="#{i.firstname}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.lastname}" sortBy="#{i.lastname}" filterBy="#{i.lastname}">
+                    <p:column headerText="#{messages.lastname}" sortBy="#{i.lastname}" filterBy="#{i.lastname}" styleClass="in200">
                         <h:outputText value="#{i.lastname}"/>
                     </p:column>
-                    <p:column headerText="#{messages.userType}" sortBy="#{i.type}" filterBy="#{i.type}">
+                    <p:column headerText="#{messages.userType}" sortBy="#{i.type}" styleClass="in80">
                         <h:outputText value="#{i.type}"/>
                     </p:column>
                     <p:column headerText="#{messages.email}" sortBy="#{i.email}" filterBy="#{i.email}">
                         <h:outputText value="#{i.email}"/>
                     </p:column>
-                    <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}">
+                    <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}" styleClass="in120">
+                        
                         <h:outputText value="#{messages.active}" rendered="#{i.active}"/>
                         <h:outputText value="#{messages.inactive}" rendered="#{not i.active}"/>
                     </p:column>
 
-                    <p:column headerText="#{messages.action}">
+                    <p:column headerText="#{messages.action}" styleClass="in80">
                         <h:commandLink id="btnView" value="#{messages.display}"
                                        action="#{userHandler.prepareView(i)}"/>
                     </p:column>

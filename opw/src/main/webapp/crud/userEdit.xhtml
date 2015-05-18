@@ -129,11 +129,10 @@
         <div class="right box box_blue">
             <h2>#{messages.linkTitle}</h2>
             <h:form id="myLinks">
-
                 <p:dataTable id="tblLink" emptyMessage="#{messages.listEmpty}" 
                              value="#{userHandler.instance.opwLinkList}" var="i" 
                              rowIndexVar="rowIndex" >
-                    
+
                     <p:column headerText="#" styleClass="in80">
                         #{rowIndex+1}
                     </p:column>
@@ -141,14 +140,15 @@
                     <p:column headerText="#{messages.linkEditTitle}">
                         aaa                        
                     </p:column>
-                    
-                    
-                    
+
+
+
                     <p:column headerText="#{messages.action}" styleClass="in80">
                         <h:commandLink value="#{messages.delete}" action="#{userHandler.delObwodowa(i.pkwId)}"/>
                     </p:column>
 
                 </p:dataTable>
+            </h:form>
 
         </div>
 

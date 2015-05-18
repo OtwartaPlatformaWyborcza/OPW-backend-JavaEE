@@ -25,6 +25,7 @@ package com.adamkowalewski.opw.webservice.controller;
 
 import com.adamkowalewski.opw.bean.ConfigBean;
 import com.adamkowalewski.opw.bean.MailBean;
+import com.adamkowalewski.opw.bean.ObwodowaBean;
 import com.adamkowalewski.opw.bean.SessionBean;
 import com.adamkowalewski.opw.bean.UserBean;
 import com.adamkowalewski.opw.bean.WynikBean;
@@ -37,7 +38,6 @@ import com.adamkowalewski.opw.webservice.dto.KomisjaShortDto;
 import com.adamkowalewski.opw.webservice.dto.UserDto;
 import com.adamkowalewski.opw.webservice.dto.UserRegisterDto;
 import com.adamkowalewski.opw.webservice.security.SecurityHandler;
-import com.adamkowalewski.opw.webservice.security.SecurityObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,9 +57,9 @@ import static javax.ws.rs.core.Response.Status.*;
  */
 @Stateless
 public class UserServiceEjb implements Serializable {
-    
+
     private final static Logger logger = LoggerFactory.getLogger(UserServiceEjb.class);
-    
+
     @EJB
     SecurityHandler securityHandler;
     @EJB
@@ -72,12 +72,67 @@ public class UserServiceEjb implements Serializable {
     ConfigBean configBean;
     @EJB
     SessionBean sessionBean;
-    
+    @EJB
+    ObwodowaBean obwodowaBean;
+
     public UserServiceEjb() {
     }
-    
+
+    public GResultDto addObwodowa(int userId, String pkwId, String login, String token) {
+
+        if (!securityHandler.checkUser(login, token)) {
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
+        }
+
+        OpwUser user = userBean.find(userId);
+        OpwObwodowaKomisja obwodowa = obwodowaBean.findObwodowa(pkwId);
+
+        if (user == null || obwodowa == null) {
+            return GResultDto.invalidResult(NOT_FOUND.getStatusCode());
+        }
+
+        if (!user.getOpwObwodowaKomisjaList().contains(obwodowa)) {
+            // TODO transaction & reconsider this combo
+            user.getOpwObwodowaKomisjaList().add(obwodowa);
+            obwodowa.getOpwUserList().add(user);
+
+            logger.trace("add Obwodowa {} to user {}", obwodowa.getPkwId(), user.getEmail());
+            userBean.edit(user);
+            obwodowaBean.edit(obwodowa);
+
+            return GResultDto.validResult(OK.getStatusCode());
+        }
+
+        return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
+    }
+
+    public GResultDto delObwodowa(int userId, String pkwId, String login, String token) {
+        if (!securityHandler.checkUser(login, token)) {
+            return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
+        }
+
+        OpwUser user = userBean.find(userId);
+        OpwObwodowaKomisja obwodowa = obwodowaBean.findObwodowa(pkwId);
+
+        if (user == null || obwodowa == null) {
+            return GResultDto.invalidResult(NOT_FOUND.getStatusCode());
+        }
+
+        if (user.getOpwObwodowaKomisjaList().contains(obwodowa)) {
+            user.getOpwObwodowaKomisjaList().remove(obwodowa);
+            obwodowa.getOpwUserList().remove(user);
+
+            logger.trace("del Obwodowa {} from user {}", obwodowa.getPkwId(), user.getEmail());
+            userBean.edit(user);
+            obwodowaBean.edit(obwodowa);
+
+            return GResultDto.validResult(OK.getStatusCode());
+        }
+        return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
+    }
+
     public GResultDto login(String login, String password) {
-        
+
         OpwUser user = userBean.verifyCredentials(login, password, OpwConfigStatic.APP_SALT);
 
         // if auth failed 
@@ -87,16 +142,16 @@ public class UserServiceEjb implements Serializable {
         }
         // auth ok
         String restToken = userBean.encryptSHA(userBean.generatePassword());
-        
+
         Date timeout = fetchExpireDate();
-        
+
         OpwSession session = new OpwSession();
         session.setToken(restToken);
         session.setOpwUserId(user);
         session.setDateValidTo(timeout);
         session.setActive(true);
         sessionBean.create(session);
-        
+
         UserDto userDto = new UserDto(
                 user.getId(),
                 user.getFirstname(),
@@ -108,7 +163,7 @@ public class UserServiceEjb implements Serializable {
         );
         return GResultDto.validResult(OK.getStatusCode(), userDto);
     }
-    
+
     private Date fetchExpireDate() {
         int timeoutInSeconds = Integer.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_REST_SESSION_TIMEOUT));
         Calendar timeout = Calendar.getInstance();
@@ -126,7 +181,7 @@ public class UserServiceEjb implements Serializable {
      * @version 2015.05.08
      */
     public GResultDto logout(String login, String token) {
-        if (!securityHandler.checkUser(login, token)) {            
+        if (!securityHandler.checkUser(login, token)) {
             return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
         logger.trace("logout user {} token {}", login, token);
@@ -134,31 +189,31 @@ public class UserServiceEjb implements Serializable {
         OpwSession session = sessionBean.find(user, token);
         session.setActive(false);
         sessionBean.edit(session);
-        
+
         return GResultDto.validResult(OK.getStatusCode());
     }
-    
+
     public GResultDto<GenericEntity<List<KomisjaShortDto>>> loadObwodowaShortList(int userId, String login, String token) {
-        
+
         if (!securityHandler.checkUser(userId, login, token)) {
             return GResultDto.invalidResult(UNAUTHORIZED.getStatusCode());
         }
-        
+
         OpwUser user = userBean.findUser(userId);
         logger.trace("userId {} user {} obwodowa {} wynik {} ", user.getId(), user.getEmail(), user.getOpwObwodowaKomisjaList().size(), user.getOpwWynikList().size());
-        
+
         List<KomisjaShortDto> resultList = new ArrayList<>();
-        
+
         for (OpwObwodowaKomisja obwodowa : user.getOpwObwodowaKomisjaList()) {
             int countWynik = wynikBean.countWynik(obwodowa);
             KomisjaShortDto komisja = new KomisjaShortDto(obwodowa.getId(), obwodowa.getPkwId(), obwodowa.getName(), obwodowa.getAddress(), countWynik);
             logger.trace(komisja.toString());
             resultList.add(komisja);
         }
-        
+
         GenericEntity<List<KomisjaShortDto>> result = new GenericEntity<List<KomisjaShortDto>>(resultList) {
         };
-        
+
         return GResultDto.validResult(OK.getStatusCode(), result);
     }
 
@@ -169,24 +224,22 @@ public class UserServiceEjb implements Serializable {
      * @param apiToken
      * @param newUser
      * @return
-     * @TODO add email availbe check and proper result type 
+     * @TODO add email availbe check and proper result type
      */
     public GResultDto register(String apiClient, String apiToken, UserRegisterDto newUser) {
-        if (securityHandler.checkClient(apiClient, apiToken)) {            
+        if (securityHandler.checkClient(apiClient, apiToken)) {
             return GResultDto.validResult(UNAUTHORIZED.getStatusCode());
         }
-        
+
         logger.info("register " + newUser.toString());
-        
+
         OpwUser user = new OpwUser();
-        
+
         user.setFirstname(newUser.getFirstname());
         user.setLastname(newUser.getLastname());
         user.setEmail(newUser.getEmail());
         user.setPhone(newUser.getPhone());
-        
-        
-        
+
         String passwordPlain = userBean.generatePassword();
         String userSalt = userBean.generatePassword(8);
         user.setSalt(userSalt);
@@ -195,8 +248,7 @@ public class UserServiceEjb implements Serializable {
         user.setDateCreated(new Date());
         user.setType("U"); // TODO move to ENUM
         user.setOrigin(apiClient);
-        
-        
+
         user.setPassword(userBean.saltPassword(OpwConfigStatic.APP_SALT, userSalt, passwordPlain));
         try {
             userBean.create(user);
@@ -205,7 +257,7 @@ public class UserServiceEjb implements Serializable {
             logger.error("err {} ", e.getMessage());
             return GResultDto.invalidResult(BAD_REQUEST.getStatusCode());
         }
-        
+
         return GResultDto.validResult(OK.getStatusCode());
     }
 

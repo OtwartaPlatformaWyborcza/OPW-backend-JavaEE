@@ -172,7 +172,7 @@ public class UserServiceEjb implements Serializable {
      * @TODO add email availbe check and proper result type 
      */
     public GResultDto register(String apiClient, String apiToken, UserRegisterDto newUser) {
-        if (securityHandler.checkClient(apiClient, apiToken)) {            
+        if (!securityHandler.checkClient(apiClient, apiToken)) {            
             return GResultDto.validResult(UNAUTHORIZED.getStatusCode());
         }
         

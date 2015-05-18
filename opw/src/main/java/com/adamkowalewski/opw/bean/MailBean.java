@@ -67,13 +67,15 @@ public class MailBean {
     private ConfigController configController;
 
     public boolean sendMailWelcome(OpwUser user, String passwordPlain, boolean useFacesMsg) {
-        String subject = MsgController.getLocalizedMessage("mailWelcomeTitle");
+        String subject = "Otwarta Platforma Wyborcza - rejestracja";
         String actLink = prepareActivationLink(user, configController.getConfigMail().getHostname());
         MailContentDto payload = new MailContentDto(user.getEmail(), passwordPlain, actLink);
         try {
             String content = getMailContent(payload, "welcome_plain.ftl");
             sendMail(user, subject, content, configController.getConfigMail());
-            MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdNewMailSend") + " [" + user.getEmail() + "]");
+            if (useFacesMsg) {
+                MsgController.addSuccessMessage(MsgController.getLocalizedMessage("userPwdNewMailSend") + " [" + user.getEmail() + "]");
+            }
             return true;
         } catch (IOException | TemplateException | MessagingException ex) {
             logger.error(null, ex);

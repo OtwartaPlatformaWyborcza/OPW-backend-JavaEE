@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Adam Kowalewski
  */
-@Path("/komisja")
+@Path("/k")
 @RequestScoped
 public class KomisjaService extends AbstractService {
 

@@ -39,7 +39,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Adam Kowalewski
  */
-@Path("/user")
+@Path("/u")
 public class UserService extends AbstractService {
 
     private final static Logger logger = LoggerFactory.getLogger(UserService.class);

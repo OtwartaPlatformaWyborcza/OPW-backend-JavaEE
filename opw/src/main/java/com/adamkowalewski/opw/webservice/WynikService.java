@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Adam Kowalewski
  */
-@Path("/wynik")
+@Path("/w")
 @RequestScoped
 public class WynikService extends AbstractService {
 

@@ -34,7 +34,7 @@ public class UserServiceTest extends BaseUserServiceTest {
         Mockito.reset(userServiceEjb);
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldLoadObwodowaShortList() throws Exception {
         // given
         int userId = 1234;
@@ -61,7 +61,7 @@ public class UserServiceTest extends BaseUserServiceTest {
     }
 
 
-    @Test
+    @Test(enabled = false)
     public void shoulLogin() throws Exception {
         // given
         String login = "user";
@@ -80,7 +80,7 @@ public class UserServiceTest extends BaseUserServiceTest {
         assertTrue(response.readEntity(String.class).isEmpty());
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldLogout() throws Exception {
         // given
         String login = "user";
@@ -98,7 +98,7 @@ public class UserServiceTest extends BaseUserServiceTest {
         assertEquals(response.getStatus(), OK_200);
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldRegister() throws Exception {
         // given
         UserRegisterDto userRegisterDto = new UserRegisterDto();
@@ -117,7 +117,7 @@ public class UserServiceTest extends BaseUserServiceTest {
         assertEquals(response.getStatus(), OK_200);
     }
 
-    @Test
+    @Test(enabled = false)
     public void shouldCheckEmail() throws Exception {
         // given
         String email = "testuser@example.com";

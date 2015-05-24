@@ -73,6 +73,11 @@ public class RegisterHandler implements Serializable {
             return "register";
         }
 
+        if (userController.isDuplicate(email)) {
+            MsgController.addErrorMessage(MsgController.getLocalizedMessage("validEmail"));
+            return "register";
+        }
+
         user.setType("RU");
         user.setOrigin("RegisterHandler");
         user.setEmail(email);

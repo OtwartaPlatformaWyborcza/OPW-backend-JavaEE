@@ -27,6 +27,9 @@
                     <h:outputLabel for="pwd" id="pwdL" value="#{messages.password}" />
                     <p:inputText id="pwd" value="#{messages.generated}" disabled="true" />
                     
+                    <h:outputLabel for="c" id="cL" value="Captcha*" />
+                    <p:captcha id="c" label="Captcha" />
+
                 </h:panelGrid>
 
                 <h:commandLink id="btnSave" class="btn" 

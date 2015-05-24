@@ -68,122 +68,122 @@ public class WynikService extends AbstractService {
     WynikServiceEjb wynikEjb;
     @EJB
     ConfigBean configBean;
-
-    @GET
-    @Path("/{wynikId}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response loadWynikSingle(
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
-            @NotNull @PathParam("wynikId") int wynikId) {
-
-        if (debug != null) {
-            return mockServerError();
-        }
-        logger.trace("load wynik {}", wynikId);
-
-        return buildResponse(wynikEjb.loadWynikSingle(wynikId, login, token));
-
-    }
-
-    @POST
-    @Path("/{wynikId}/link")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response uploadLink(
-            @NotNull @PathParam("wynikId") int wynikId,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
-            LinkDto linkDto) {
-        if (debug != null) {
-            return mockServerError();
-        }
-        
-        logger.trace("upload link to wynik {}", wynikId);
-        return buildResponse(wynikEjb.uploadLink(wynikId, login, token, linkDto));
-    }
-    
-    @DELETE
-    @Path("/{wynikId}/link/{linkId}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response disableLink(
-            @NotNull @PathParam("wynikId") int wynikId,
-            @NotNull @PathParam("linkId") int linkId,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token            
-            ) {
-        if (debug != null) {
-            return mockServerError();
-        }
-        
-        logger.trace("upload link to wynik {}", wynikId);
-        return buildResponse(wynikEjb.disableLink(wynikId, linkId, login, token));
-    }
-
-    @GET
-    @Path("/{wynikId}/positive")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response ratePositive(
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
-            @NotNull @PathParam("wynikId") int wynikId,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
-
-        if (debug != null) {
-            return mockServerError();
-        }
-        logger.trace("rate positive for wynik {}", wynikId);
-        GResultDto<Integer> result = wynikEjb.ratePositive(wynikId);
-        return Response.ok().build();
-    }
-
-    @GET
-    @Path("/{wynikId}/negative")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response rateNegative(
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
-            @NotNull @PathParam("wynikId") int wynikId,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
-
-        if (debug != null) {
-            return mockServerError();
-        }
-        logger.trace("rate negative for wynik {}", wynikId);
-        GResultDto<Integer> result = wynikEjb.rateNegative(wynikId);
-        return Response.ok().build();
-    }
-
-    @GET
-    @Path("/complete")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response wynik(
-            @NotNull @HeaderParam(OPW_HEADER_API_TOKEN) String apiToken,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
-
-        if (debug != null) {
-            return mockServerError();
-        }
-
-        // TODO refactoring konieczny 
-        // aktualne liczby dostepne na http://prezydent2015.pkw.gov.pl/
-        if (Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_CISZA_WYBORCZA))) {
-            DashboardDto result = new DashboardDto(String.valueOf(new Date().getTime()), 27817, 0, 30768394, 0);
-
-            List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
-
-            for (OpwKandydat kandydat : kandydatList) {
-                KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getFirstname(), kandydat.getLastname());
-                k.setGlosow(0);
-                result.getKandydatList().add(k);
-            }
-            return Response.ok().entity(result).build();
-        }
-
-        return buildResponse(wynikEjb.wynik());
-    }
+//
+//    @GET
+//    @Path("/{wynikId}")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response loadWynikSingle(
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+//            @NotNull @PathParam("wynikId") int wynikId) {
+//
+//        if (debug != null) {
+//            return mockServerError();
+//        }
+//        logger.trace("load wynik {}", wynikId);
+//
+//        return buildResponse(wynikEjb.loadWynikSingle(wynikId, login, token));
+//
+//    }
+//
+//    @POST
+//    @Path("/{wynikId}/link")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response uploadLink(
+//            @NotNull @PathParam("wynikId") int wynikId,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+//            LinkDto linkDto) {
+//        if (debug != null) {
+//            return mockServerError();
+//        }
+//        
+//        logger.trace("upload link to wynik {}", wynikId);
+//        return buildResponse(wynikEjb.uploadLink(wynikId, login, token, linkDto));
+//    }
+//    
+//    @DELETE
+//    @Path("/{wynikId}/link/{linkId}")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response disableLink(
+//            @NotNull @PathParam("wynikId") int wynikId,
+//            @NotNull @PathParam("linkId") int linkId,
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token            
+//            ) {
+//        if (debug != null) {
+//            return mockServerError();
+//        }
+//        
+//        logger.trace("upload link to wynik {}", wynikId);
+//        return buildResponse(wynikEjb.disableLink(wynikId, linkId, login, token));
+//    }
+//
+//    @GET
+//    @Path("/{wynikId}/positive")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response ratePositive(
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+//            @NotNull @PathParam("wynikId") int wynikId,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
+//
+//        if (debug != null) {
+//            return mockServerError();
+//        }
+//        logger.trace("rate positive for wynik {}", wynikId);
+//        GResultDto<Integer> result = wynikEjb.ratePositive(wynikId);
+//        return Response.ok().build();
+//    }
+//
+//    @GET
+//    @Path("/{wynikId}/negative")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response rateNegative(
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+//            @NotNull @PathParam("wynikId") int wynikId,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
+//
+//        if (debug != null) {
+//            return mockServerError();
+//        }
+//        logger.trace("rate negative for wynik {}", wynikId);
+//        GResultDto<Integer> result = wynikEjb.rateNegative(wynikId);
+//        return Response.ok().build();
+//    }
+//
+//    @GET
+//    @Path("/complete")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response wynik(
+//            @NotNull @HeaderParam(OPW_HEADER_API_TOKEN) String apiToken,
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+//
+//        if (debug != null) {
+//            return mockServerError();
+//        }
+//
+//        // TODO refactoring konieczny 
+//        // aktualne liczby dostepne na http://prezydent2015.pkw.gov.pl/
+//        if (Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_CISZA_WYBORCZA))) {
+//            DashboardDto result = new DashboardDto(String.valueOf(new Date().getTime()), 27817, 0, 30768394, 0);
+//
+//            List<OpwKandydat> kandydatList = wynikEjb.kandydatFindAll();
+//
+//            for (OpwKandydat kandydat : kandydatList) {
+//                KandydatDto k = new KandydatDto(kandydat.getPkwId(), kandydat.getFirstname(), kandydat.getLastname());
+//                k.setGlosow(0);
+//                result.getKandydatList().add(k);
+//            }
+//            return Response.ok().entity(result).build();
+//        }
+//
+//        return buildResponse(wynikEjb.wynik());
+//    }
 
 }

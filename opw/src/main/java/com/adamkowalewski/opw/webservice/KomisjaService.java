@@ -55,57 +55,57 @@ public class KomisjaService extends AbstractService {
     @EJB
     KomisjaServiceEjb komisjaServiceEjb;
 
-    @GET
-    @Path("/{pkwId}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response loadObwodowa(
-            @NotNull @PathParam("pkwId") String pkwId,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+//    @GET
+//    @Path("/{pkwId}")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response loadObwodowa(
+//            @NotNull @PathParam("pkwId") String pkwId,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug) {
+//
+//        if (debug != null) {
+//            logger.debug(LOG_DBG_500);
+//            return mockServerError();
+//        }
+//
+//        logger.trace("Komisja {} user {} ", pkwId, login);
+//        return buildResponse(komisjaServiceEjb.loadObwodowa(pkwId, login, token));
+//    }
 
-        if (debug != null) {
-            logger.debug(LOG_DBG_500);
-            return mockServerError();
-        }
+//    @GET
+//    @Path("/{pkwId}/protokol")
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response loadWynik(
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+//            @NotNull @PathParam("pkwId") String pkwId,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
+//
+//        if (debug != null) {
+//            logger.debug(LOG_DBG_500);
+//            return mockServerError();
+//        }
+//        logger.trace("Komisja {} user {} ", pkwId, login);
+//        return buildResponse(komisjaServiceEjb.loadWynik(pkwId, login, token));
+//    }
 
-        logger.trace("Komisja {} user {} ", pkwId, login);
-        return buildResponse(komisjaServiceEjb.loadObwodowa(pkwId, login, token));
-    }
-
-    @GET
-    @Path("/{pkwId}/protokol")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response loadWynik(
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
-            @NotNull @PathParam("pkwId") String pkwId,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token) {
-
-        if (debug != null) {
-            logger.debug(LOG_DBG_500);
-            return mockServerError();
-        }
-        logger.trace("Komisja {} user {} ", pkwId, login);
-        return buildResponse(komisjaServiceEjb.loadWynik(pkwId, login, token));
-    }
-
-    @POST
-    @Path("/{pkwId}/protokol")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response uploadWynik(
-            @NotNull @PathParam("pkwId") String pkwId,
-            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
-            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
-            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
-            WynikDto wynik) {
-
-        if (debug != null) {
-            logger.debug(LOG_DBG_500);
-            return mockServerError();
-        }
-        logger.trace("Komisja {} user {} ", pkwId, login);
-        return buildResponse(komisjaServiceEjb.uploadWynik(pkwId, login, token, wynik));
-    }
+//    @POST
+//    @Path("/{pkwId}/protokol")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+//    public Response uploadWynik(
+//            @NotNull @PathParam("pkwId") String pkwId,
+//            @NotNull @HeaderParam(OPW_HEADER_LOGIN) String login,
+//            @NotNull @HeaderParam(OPW_HEADER_TOKEN) String token,
+//            @HeaderParam(OPW_HEADER_DEBUG_ERROR500) String debug,
+//            WynikDto wynik) {
+//
+//        if (debug != null) {
+//            logger.debug(LOG_DBG_500);
+//            return mockServerError();
+//        }
+//        logger.trace("Komisja {} user {} ", pkwId, login);
+//        return buildResponse(komisjaServiceEjb.uploadWynik(pkwId, login, token, wynik));
+//    }
 }

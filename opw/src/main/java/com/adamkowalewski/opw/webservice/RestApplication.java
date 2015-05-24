@@ -28,8 +28,8 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 /**
- * REST configuration. 
- * 
+ * REST configuration.
+ *
  * @author Adam Kowalewski
  */
 @ApplicationPath("service")
@@ -43,10 +43,10 @@ public class RestApplication extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.adamkowalewski.opw.webservice.CorsSharingFilter.class);        
-        resources.add(com.adamkowalewski.opw.webservice.KomisjaService.class);        
-        resources.add(com.adamkowalewski.opw.webservice.UserService.class);        
-        resources.add(com.adamkowalewski.opw.webservice.WynikService.class);        
+        resources.add(com.adamkowalewski.opw.webservice.CorsSharingFilter.class);
+        resources.add(com.adamkowalewski.opw.webservice.KomisjaService.class);
+        resources.add(com.adamkowalewski.opw.webservice.UserService.class);
+        resources.add(com.adamkowalewski.opw.webservice.WynikService.class);
         resources.add(com.fasterxml.jackson.jaxrs.base.JsonMappingExceptionMapper.class);
         resources.add(com.fasterxml.jackson.jaxrs.base.JsonParseExceptionMapper.class);
         resources.add(com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider.class);

@@ -70,7 +70,7 @@ public class RegisterHandler implements Serializable {
 
         if (!Boolean.valueOf(configBean.readConfigValue(OpwConfigStatic.CFG_KEY_REGISTER))) {
             MsgController.addErrorMessage(MsgController.getLocalizedMessage("registerDisabled"));
-            return "index";
+            return "register";
         }
 
         user.setType("RU");
@@ -78,7 +78,7 @@ public class RegisterHandler implements Serializable {
         user.setEmail(email);
         userController.create(user);
         logger.trace("Registration done {}", user.getEmail());
-        return "index";
+        return "register";
     }
 
     public OpwUser getUser() {

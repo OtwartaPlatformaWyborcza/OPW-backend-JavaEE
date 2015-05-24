@@ -2,7 +2,7 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                template="./WEB-INF/opwTemplate.xhtml">
+                template="./WEB-INF/opwTemplate2.xhtml">
 
     <ui:define name="content">
         <h1>#{messages.registerTitle}</h1>        
@@ -13,11 +13,11 @@
                 <h:panelGrid columns="2" cellspacing="7">
                     <h:outputLabel for="fn" id="fnL" value="#{messages.firstname}*" />
                     <p:inputText id="fn" value="#{registerHandler.user.firstname}"
-                                 required="true" requiredMessage="#{messages.firstname}"/>
+                                 required="true" requiredMessage="#{messages.validFirstname}"/>
 
                     <h:outputLabel for="ln" id="lnL" value="#{messages.lastname}*" />
                     <p:inputText id="ln" value="#{registerHandler.user.lastname}"
-                                 required="true" requiredMessage="#{messages.lastname}"/>
+                                 required="true" requiredMessage="#{messages.validLastname}"/>
 
                     <h:outputLabel for="mail" id="mailL" value="#{messages.email}*" />
                     <p:inputText id="mail" value="#{registerHandler.email}"

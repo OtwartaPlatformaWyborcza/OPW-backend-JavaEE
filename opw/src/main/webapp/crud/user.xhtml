@@ -39,6 +39,10 @@
                     <p:column headerText="#{messages.email}" sortBy="#{i.email}" filterBy="#{i.email}">
                         <h:outputText value="#{i.email}"/>
                     </p:column>
+                    <p:column headerText="#{messages.wynikEditTitle}" sortBy="#{i.opwWynikList.size()}" styleClass="in80">
+                        <h:outputText value="#{i.opwWynikList.size()}"/>
+                    </p:column>
+
                     <p:column headerText="#{messages.userActiveLabel}" sortBy="#{i.active}" styleClass="in120">
                         
                         <h:outputText value="#{messages.active}" rendered="#{i.active}"/>

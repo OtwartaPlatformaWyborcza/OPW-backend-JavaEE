@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../WEB-INF/opwTemplate.xhtml">
+
+    <ui:define name="content">
+        <h1>#{messages.wynikCreateTitle}</h1>
+        #{wynikHandler.prepareCreate()}
+
+        <div class="left box box_blue box550">
+
+            <h:form id="frmUserCreate">
+                <h:panelGrid columns="2" cellspacing="7">
+                    
+                    <h:outputLabel for="obw" id="obwL" value="Komisja obwodowa*" />
+                    <p:inputText id="obw" value="#{wynikHandler.obwodowaPkwId}"
+                                 required="true" requiredMessage="#{messages.firstname}"/>
+                    
+                    <h:outputLabel for="u" id="uL" value="User" />
+                    <p:inputText id="u" value="[#{identity.userId}] #{identity.fullname}" disabled="true"/>
+                    
+                    <h:outputLabel for="fn" id="fnL" value="uprawnionych*" />
+                    <p:inputText id="fn" value="#{wynikHandler.instance.LUprawnionych}"
+                                 required="true" requiredMessage="#{messages.firstname}"/>
+
+                    <h:outputLabel for="ln" id="lnL" value="wydanych kart*" />
+                    <p:inputText id="ln" value="#{wynikHandler.instance.LKartWydanych}"
+                                 required="true" requiredMessage="#{messages.lastname}"/>
+
+                    <h:outputLabel for="mail" id="mailL" value="kart waznych*" />
+                    <p:inputText id="mail" value="#{wynikHandler.instance.LKartWaznych}"
+                                 required="true" requiredMessage="#{messages.validEmail}"/>
+
+                    <h:outputLabel for="gn" id="gnL" value="glosow nie waznych" />
+                    <p:inputText id="gn" value="#{wynikHandler.instance.LGlosowNiewaznych}"
+                                 required="true" requiredMessage="#{messages.validPhone}"/>
+
+                    <h:outputLabel for="tel" id="telL" value="glosow waznych" />
+                    <p:inputText id="tel" value="#{wynikHandler.instance.LGlosowWaznych}"
+                                 required="true" requiredMessage="#{messages.validPhone}"/>
+                    
+                    <h:outputLabel for="k1" id="k1L" value="duda" />
+                    <p:inputText id="k1" value="#{wynikHandler.instance.k1}"
+                                 required="true" requiredMessage="#{messages.validPhone}"/>
+                    <h:outputLabel for="k2" id="k2L" value="bronek" />
+                    <p:inputText id="k2" value="#{wynikHandler.instance.k2}"
+                                 required="true" requiredMessage="#{messages.validPhone}"/>
+
+                </h:panelGrid>
+
+                <h:commandLink id="btnSave" class="btn" 
+                               value="#{messages.submit}" 
+                               action="#{wynikHandler.create()}"/>
+
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

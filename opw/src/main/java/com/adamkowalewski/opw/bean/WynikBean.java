@@ -136,9 +136,15 @@ public class WynikBean extends AbstractOpwFacade<OpwWynik> implements Serializab
         return result;
     }
 
+    public List<OpwWynik> findAll(boolean active) {
+        Query q = em.createNamedQuery("OpwWynik.findByActive");
+        q.setParameter("active", active);
+        return q.getResultList();
+    }
+
     public List<OpwWynik> fetchCurrentElectionResults() {
 
-        List<OpwWynik> wynikList = findAll();
+        List<OpwWynik> wynikList = findAll(true);
 
         for (OpwWynik wynik : wynikList) {
 

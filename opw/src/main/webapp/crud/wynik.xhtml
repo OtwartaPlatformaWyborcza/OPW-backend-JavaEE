@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="../WEB-INF/opwTemplate.xhtml">
+
+    <ui:define name="content">
+        <h1>#{messages.wynikTitle}</h1>
+        #{wynikHandler.prepareList()}
+
+        <div class="left box box_blue">
+            <div class="left"></div>
+            <div class="right">
+                <h:link outcome="#{wynikHandler.createLink}" value="#{messages.wynikCreateTitle}"/>
+                <h:outputText value=" | "/>
+                <h:link outcome="/importWynik" value="#{messages.importFile}"/>
+            </div>
+            <div class="clear"></div>
+            <br/>
+            <h:form id="frmList">
+                <p:dataTable id="tblResultList" emptyMessage="#{messages.listEmpty}" 
+                             value="#{wynikHandler.instanceList}" var="i" 
+                             sortBy="#{i.id}" filteredValue="#{wynikHandler.instanceListFiltered}"
+                             rows="100" paginator="true"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="50,100,300,500">
+
+                    <p:column headerText="#{messages.nr}" sortBy="#{i.id}" 
+                              filterBy="#{i.id}" styleClass="in120">
+                        <h:outputText value="#{i.id}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.obwodowaEditTitle}" styleClass="in120"
+                              sortBy="#{i.opwObwodowaKomisjaId.pkwId}" 
+                              filterBy="#{i.opwObwodowaKomisjaId.pkwId}" >
+                        <h:outputText value="#{i.opwObwodowaKomisjaId.pkwId}"/>
+                    </p:column>
+
+                    <p:column headerText="Uprawn." styleClass="in80">
+                        <h:outputText value="#{i.LUprawnionych}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Waznych" styleClass="in80">
+                        <h:outputText value="#{i.LGlosowWaznych}"/>
+                    </p:column>
+                    
+                    <p:column headerText="K1" styleClass="in80">
+                        <h:outputText value="#{i.k1}"/>
+                    </p:column>
+                    <p:column headerText="K2" styleClass="in80">
+                        <h:outputText value="#{i.k2}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.dateCreated}" sortBy="#{i.dateCreated}">
+                        <h:outputText value="#{i.dateCreated}">
+                            <f:convertDateTime pattern="yyyy.MM.dd hh:mm" timeZone="Europe/Berlin" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column headerText="#{messages.active}" sortBy="#{i.active}">
+                        <h:outputText value="#{messages.active}" rendered="#{i.active}"/>
+                        <h:outputText value="#{messages.inactive}" rendered="#{not i.active}"/>
+                    </p:column>
+
+                    <p:column headerText="#{messages.action}">
+                        <h:commandLink id="btnView" value="#{messages.display}"
+                                       action="#{wynikHandler.prepareView(i)}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

@@ -76,6 +76,7 @@ public class AccessControlList implements Serializable {
         accessLogin.add("/importObwodowa.xhtml");
         accessLogin.add("/importOkregowa.xhtml");
         accessLogin.add("/importUser.xhtml");
+        accessLogin.add("/importWynik.xhtml");
 
         accessLogin.add("/crud/kandydat.xhtml");
         accessLogin.add("/crud/kandydatCreate.xhtml");
@@ -88,6 +89,10 @@ public class AccessControlList implements Serializable {
         accessLogin.add("/crud/linkEdit.xhtml");
         accessLogin.add("/crud/linkCreate.xhtml");
         accessLogin.add("/crud/link.xhtml");
+        
+        accessLogin.add("/crud/wynikEdit.xhtml");
+        accessLogin.add("/crud/wynikCreate.xhtml");
+        accessLogin.add("/crud/wynik.xhtml");
 
         accessLogin.add("/crud/okregowa.xhtml");
         accessLogin.add("/crud/okregowaCreate.xhtml");

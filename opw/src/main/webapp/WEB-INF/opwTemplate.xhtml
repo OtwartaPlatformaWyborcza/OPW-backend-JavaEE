@@ -42,6 +42,7 @@
 
                 <div id="main-nav">
                     <h:link outcome="/index" value="Start" />
+                    <h:link outcome="/crud/wynik" value="#{messages.wynikTitle}"  rendered="#{identity.loggedin}" />
                     <h:link outcome="/crud/obwodowa" value="#{messages.obwodowaEditTitle}"  rendered="#{identity.loggedin}" />
                     <h:link outcome="/crud/link" value="#{messages.linkEditTitle}"  rendered="#{identity.loggedin}" />
                     <h:link outcome="/crud/okregowa" value="#{messages.okregowaEditTitle}"  rendered="#{identity.loggedin}" />

@@ -33,7 +33,7 @@
                     
                     <p:column headerText="#{messages.dateCreated}" sortBy="#{i.dateCreated}">
                         <h:outputText value="#{i.dateCreated}">
-                            <f:convertDateTime pattern="yyyy.MM.dd hh:mm" />
+                            <f:convertDateTime pattern="yyyy.MM.dd hh:mm" timeZone="Europe/Berlin" />
                         </h:outputText>
                     </p:column>
                     

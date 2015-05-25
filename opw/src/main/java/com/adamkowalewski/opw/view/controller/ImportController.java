@@ -23,10 +23,11 @@
  */
 package com.adamkowalewski.opw.view.controller;
 
-import com.adamkowalewski.opw.OpwException;
 import com.adamkowalewski.opw.entity.OpwObwodowaKomisja;
 import com.adamkowalewski.opw.entity.OpwOkregowaKomisja;
 import com.adamkowalewski.opw.entity.OpwUser;
+import com.adamkowalewski.opw.entity.OpwWynik;
+import com.adamkowalewski.opw.view.Identity;
 import com.adamkowalewski.opw.view.dto.ObwodowaCsvDto;
 import com.adamkowalewski.opw.view.dto.OkregowaCsvDto;
 import com.adamkowalewski.opw.view.dto.UserCsvDto;
@@ -46,6 +47,9 @@ import java.util.regex.PatternSyntaxException;
 import static com.adamkowalewski.opw.view.controller.csv.ObwodowaCsvDtoReader.obwodowaCsvDtoReader;
 import static com.adamkowalewski.opw.view.controller.csv.OkregowaCsvDtoReader.okregowaCsvDtoReader;
 import static com.adamkowalewski.opw.view.controller.csv.UserCsvDtoReader.userCsvDtoReader;
+import com.adamkowalewski.opw.view.controller.csv.WynikCsvDto;
+import com.adamkowalewski.opw.view.controller.csv.WynikCsvDtoReader;
+import java.util.Date;
 
 /**
  * Provides reusable logic for file import.
@@ -65,7 +69,11 @@ public class ImportController implements Serializable {
     @Inject
     UserController userController;
     @Inject
+    WynikController wynikController;
+    @Inject
     WojewodztwoController wojewodztwoController;
+    @Inject 
+    Identity identity;
 
     public void performImportOkregowa(List<OkregowaCsvDto> okregowaList) {
         List<OpwOkregowaKomisja> resultList = new ArrayList<>();
@@ -139,6 +147,42 @@ public class ImportController implements Serializable {
         }
         logger.trace("User import size {}", userDtoList.size());
         return userDtoList;
+    }
+    
+    public List<WynikCsvDto> parseWynik(InputStream content) throws IOException {
+
+        List<WynikCsvDto> wynikDtoList = WynikCsvDtoReader.wynikCsvDtoReader().readAllFrom(content);
+                       
+        logger.trace("wynik import size {}", wynikDtoList.size());
+        return wynikDtoList;
+    }
+    
+        public void performImportWynik(List<WynikCsvDto> wynikList) {
+
+        List<OpwWynik> wynikImportList = new ArrayList<>();
+
+        for (WynikCsvDto wynikDto : wynikList) {
+//            if (userDto.isDuplicate()) {
+//                MsgController.addWarningMessage("Skipped " + userDto.getEmail());
+//                continue;
+//            }
+            OpwWynik w = new OpwWynik();
+            
+            w.setLUprawnionych(wynikDto.getUprawnionych());
+            w.setLKartWydanych(wynikDto.getGlosujacych());
+            w.setLKartWaznych(wynikDto.getKartWaznych());
+            w.setLGlosowNiewaznych(wynikDto.getGlosowNieWaznych());
+            w.setLGlosowWaznych(wynikDto.getGlosowWaznych());
+            w.setK1(wynikDto.getK1());
+            w.setK2(wynikDto.getK2());
+            w.setDateCreated(new Date());
+            w.setOpwObwodowaKomisjaId(obwodowaController.findByPkwId(wynikDto.getPkwId()));
+            w.setOpwUserId(userController.find(identity.getUserId()));
+            
+            wynikImportList.add(w);
+        }
+        logger.trace("Wynik import start for {} records", wynikImportList.size());
+        wynikController.create(wynikImportList);
     }
 
     public void performImportObwodowa(List<ObwodowaCsvDto> obwodowaList) {

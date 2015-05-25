@@ -51,12 +51,18 @@ public class WynikController implements Serializable {
     UserBean userBean;
     
     public WynikController() {
-    }
+    }    
     
     public void create(OpwWynik wynik, String obwodowaPkwId, int userId) {
         wynik.setOpwObwodowaKomisjaId(obwodowaBean.findObwodowa(obwodowaPkwId));
         wynik.setOpwUserId(userBean.find(userId));
         create(wynik);
+    }
+    
+    public void create(List<OpwWynik> wynikList) {
+        for (OpwWynik wynik : wynikList) {
+            create(wynik);
+        }
     }
     
     public void create(OpwWynik wynik) {

@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="./WEB-INF/opwTemplate.xhtml">
+
+    <ui:define name="content">
+
+        <h1>#{messages.importFile}</h1>
+        <div class="left box box520 box_blue">
+            <h2>#{messages.importFileTitle}</h2>
+
+            <h:form id="frmImpConf" enctype="multipart/form-data"   >
+                <h:panelGrid columns="2" cellspacing="7">
+                    <h:outputText value="#{messages.importFileType}"/>
+                    <h:outputText value=""/>
+                    <p:fileUpload value="#{importWynikHandler.file}" mode="simple"
+                                  multiple="false" />
+
+                    <p:commandLink id="btnUpload" styleClass="btn"
+                                   value="#{messages.upload}" ajax="false"  
+                                   actionListener="#{importWynikHandler.upload()}"/>  
+                </h:panelGrid>
+            </h:form>
+        </div>
+
+        <div class="right box box520 box_orange_dark">
+            <h2>#{messages.importFileStatusTitle}</h2>
+
+        </div>
+        <div class="clear"></div>
+
+        <ui:fragment rendered="#{not empty importWynikHandler.uploadList}">
+            <p:dataTable id="tblOkrImp" rowIndexVar="rowIndex" resizableColumns="true"
+                         rendered="#{not empty importWynikHandler.uploadList}"
+                         value="#{importWynikHandler.uploadList}" var="i">
+                <p:column headerText="#">
+                    #{rowIndex+1}
+                </p:column>
+                <p:column headerText="pkwid">
+                    <h:outputText value="#{i.pkwId}"/>
+                </p:column>
+                <p:column headerText="upraw">
+                    <h:outputText value="#{i.uprawnionych}"/>
+                </p:column>
+                <p:column headerText="glosujacych">
+                    <h:outputText value="#{i.glosujacych}"/>
+                </p:column>
+                <p:column headerText="kart w ">
+                    <h:outputText value="#{i.kartWaznych}"/>
+                </p:column>
+                <p:column headerText="g nie wa">
+                    <h:outputText value="#{i.glosowNieWaznych}"/>
+                </p:column>
+                <p:column headerText="g wa">
+                    <h:outputText value="#{i.glosowWaznych}"/>
+                </p:column>
+                <p:column headerText="duda">
+                    <h:outputText value="#{i.k1}"/>
+                </p:column>
+                <p:column headerText="komo">
+                    <h:outputText value="#{i.k2}"/>
+                </p:column>
+                
+            </p:dataTable>
+
+            <h:form id="frmImp">
+                <h:commandLink id="btnImport" styleClass="btn"
+                               value="#{messages.importSubmit}"
+                               action="#{importWynikHandler.performImport()}"/>
+            </h:form> 
+
+        </ui:fragment>
+
+    </ui:define>
+
+</ui:composition>

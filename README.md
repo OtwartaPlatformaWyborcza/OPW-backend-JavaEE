@@ -213,13 +213,20 @@ Plan implementacji
 * [DONE] [OPW-I-5](https://trello.com/c/0YimObYR/29-opw-i-5-przygotowanie-obrazu-glassfish-4-1-dla-dockera) Docker backend
 
 ### Wersja 0.9.0
-* tagowanie błędnych protokołów
+* [DONE] [OPW-T-10](https://trello.com/c/n0jKlEmU/35-opw-t-10-db-linki-dla-wybranego-protoko-u) DB Linki dla wybranego protokołu
+* [DONE] [OPW-T-11](https://trello.com/c/ftLhfoRF/36-opw-t-11-db-odwzorowanie-koncepcji-group-i-permission) DB Odwzorowanie koncepcji 'group' i 'permission'
+* [DONE] [OPW-T-12](https://trello.com/c/lPiBsA9c/37-opw-t-12-oddzielenie-masek-administracyjnych-opw-od-serwisow-api) Oddzielenie masek administracyjnych
+* [DONE] [OPW-U-10](https://trello.com/c/dkS3osBC/30-opw-u-10-lista-linkow-dla-protoko-u) Lista linków dla protokołu
+* [DONE] [OPW-T-12](https://trello.com/c/mhyx6Bdj/31-opw-u-12-dodawanie-i-usuwanie-linkow-dla-wybranego-protoko-u) Dodawanie i usuwanie linków dla wybranego protokołu
+* [DONE] [OPW-T-13](https://trello.com/c/2EyiikLF/32-opw-u-13-lista-przypisanych-komisji-obwodowych) Lista przypisanych komisji obwodowych
+
 
 ### Wersja 1.0
-* Backend w Java EE
-* Maski administratora w JSF
-* Maski użytkowników w HTML - AngularJS + REST 
-* Wyniki wyborów w HTML - jQuery + REST
+* [DONE] Backend w Java EE
+* [DONE] Maski administratora w JSF
+* [DONE] Maski użytkowników w HTML - AngularJS + REST 
+* [DONE] Wyniki wyborów w HTML - jQuery + REST
+
 
 ### Wersja 1.1
 * [WiP] Definicja szablonu SMS
@@ -227,4 +234,4 @@ Plan implementacji
 * Automatyczne parsowanie protokołów ze skrzynki pocztowej
   * import poprawnych protokołów
   * tagowanie błędnych protokołów
-
+* tagowanie błędnych protokołów

@@ -5,7 +5,7 @@
 
 
 # Otwarta Platforma Wyborcza - backend
-Nasz monolityczny backend. 
+Nasz monolityczny backend / maski administracyjne
 
 
 # Linki
